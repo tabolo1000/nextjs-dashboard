@@ -1,6 +1,13 @@
 import '@/app/ui/global.css';
 import { inriaSans } from './ui/fonts';
 
+export const metadata = {
+  title: "Учебное пособие",
+  authors: [
+      { name: "Nik Tabala", url: "https://tabolo1000.github.io/portfolio/" }
+  ],
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -8,10 +15,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-    <head>
-      <title>Учебное пособие</title>
-      <meta name="Nik Tabala" content="https://tabolo1000.github.io/portfolio/"/>
-    </head>
     <body className={`${inriaSans.className} subpixel-antialiased`}>{children}</body>
     </html>
   );

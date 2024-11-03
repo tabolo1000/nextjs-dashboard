@@ -1,4 +1,7 @@
+"use client"
 import React from 'react';
+//import {useSelectedLayoutSegment} from "next/navigation";
+
 
 
 interface LayoutProps {
@@ -6,6 +9,8 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+    //let access = useSelectedLayoutSegment()
+
     return (
         <div className="layout">
             {/* Header */}
@@ -13,7 +18,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <h1 className="header-title">Header</h1>
             </header>
 
-            <div className="layout-body " >
+            <div className="layout-body ">
                 {/* Sidebar */}
                 <aside className="sidebar w-1/5">
                     <nav className="sidebar-nav">
@@ -27,13 +32,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 </aside>
 
                 {/* Main Content */}
-                <div className="w-4/5">
-                    <main className="main-content">
-                        {children} {/* Отображение дочерних элементов */}
-                    </main>
+                <div className="w-5/5">
 
 
                 </div>
+                <main className="main-content">
+                    {children} {/* Отображение дочерних элементов */}
+                </main>
 
             </div>
 

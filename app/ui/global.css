@@ -54,3 +54,48 @@ input[type='number']::-webkit-outer-spin-button {
 .footer {
   @apply bg-blue-600 text-white p-4 text-center;
 }
+
+.link {
+  @apply block text-white font-bold py-4 px-6 rounded-lg shadow-md transition duration-300;
+}
+
+
+/* ------------------------Lesson's Links---------------------------------------- */
+
+.link-base {
+  @apply block font-bold py-4 px-6 rounded-lg shadow-md transition duration-300 text-white;
+}
+
+.link-blue {
+  @apply bg-lesson-blue hover:bg-lesson-blue-hover;
+}
+
+.link-green {
+  @apply bg-lesson-green hover:bg-lesson-green-hover;
+}
+
+.link-red {
+  @apply bg-lesson-red hover:bg-lesson-red-hover;
+}
+
+.link-purple {
+  @apply bg-lesson-purple hover:bg-lesson-purple-hover;
+}
+
+.link-yellow {
+  @apply bg-lesson-yellow hover:bg-lesson-yellow-hover;
+}
+
+.link-pink {
+  @apply bg-lesson-pink hover:bg-lesson-pink-hover;
+}
+
+.link-teal {
+  @apply bg-lesson-teal hover:bg-lesson-teal-hover;
+}
+
+/*----------------Article------------------------------------------------------------*/
+
+.header_h1 {
+  @apply text-3xl font-semibold mb-4 text-blue-600 text-center;
+}
