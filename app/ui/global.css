@@ -16,3 +16,41 @@ input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+
+
+.layout {
+  @apply flex flex-col h-screen;
+}
+
+.layout-body {
+  @apply flex flex-1;
+}
+
+.header {
+  @apply bg-blue-600 text-white p-4;
+}
+
+.header-title {
+  @apply text-2xl font-bold;
+}
+
+.sidebar {
+  @apply w-64 bg-gray-800 text-white p-6;
+}
+
+.sidebar-nav ul {
+  @apply space-y-4;
+}
+
+.sidebar-link {
+  @apply block py-2 px-4 rounded hover:bg-gray-700;
+}
+
+.main-content {
+  @apply flex-1 bg-gray-100 p-6;
+}
+
+.footer {
+  @apply bg-blue-600 text-white p-4 text-center;
+}

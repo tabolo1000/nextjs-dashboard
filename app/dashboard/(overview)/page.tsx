@@ -6,10 +6,11 @@ import { lusitana } from '@/app/ui/fonts';
 
 import { Suspense } from 'react';
 import { CardSkeleton, LatestInvoicesSkeleton, RevenueChartSkeleton } from '@/app/ui/skeletons';
+import {useSelectedLayoutSegment} from "next/navigation";
 
 export default async function Page() {
     //const latestInvoices = await fetchLatestInvoices();
-    
+    useSelectedLayoutSegment()
     console.log("dasd")
 
     return (
