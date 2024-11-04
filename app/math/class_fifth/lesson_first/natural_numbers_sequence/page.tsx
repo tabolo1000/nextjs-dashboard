@@ -1,9 +1,10 @@
 import NavigateButton from "@/app/ui/math/components/Navigate_button";
+import {Audio_button} from "@/app/ui/math/components/Audio_button";
 
 
 export default function Natural_numbers_sequence () {
     return <div className="mb-8">
-        <h1 className="header_h1">Натуральный ряд</h1>
+        <Audio_button path={"/math/class_fifth/lesson_first/natural_numbers_sequence/natural_numbers_sequence_record"}/><h1 className="header_h1">Натуральный ряд</h1>
         <p className="mb-2">
             <strong>Натуральный ряд</strong> — это последовательность всех натуральных чисел, начиная с единицы:
         </p>
@@ -16,7 +17,10 @@ export default function Natural_numbers_sequence () {
             <li>Каждое следующее число в ряду больше предыдущего на <strong>1</strong>.</li>
             <li>Натуральный ряд не имеет конца — можно продолжать добавлять числа бесконечно.</li>
         </ul>
-        <NavigateButton to = {"./zero"}/>
+        <NavigateButton to = {{
+            nextTask: "./zero",
+            nextExercise: "./natural_numbers/exercise",
+        }}/>
     </div>
 
 }

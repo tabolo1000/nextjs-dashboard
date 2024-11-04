@@ -11,6 +11,16 @@ const config: Config = {
       gridTemplateColumns: {
         '13': 'repeat(13, minmax(0, 1fr))',
       },
+      animation: {
+        'custom-bounce': 'customBounce 2s ease-in-out infinite',
+      },
+      keyframes: {
+        customBounce: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateX(-2px)' },
+          '90%': { transform: 'translateX(2px)' },
+        },
+      },
       colors: {
         'lesson-blue': '#3b82f6',       // Синий цвет для урока первого
         'lesson-blue-hover': '#2563eb', // Темнее на два тона

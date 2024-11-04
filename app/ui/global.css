@@ -99,3 +99,9 @@ input[type='number']::-webkit-outer-spin-button {
 .header_h1 {
   @apply text-3xl font-semibold mb-4 text-blue-600 text-center;
 }
+
+/*-----------------Button---------------------------------------------------------------*/
+
+.button_to {
+  @apply flex w-1/2 items-center justify-center text-white font-bold py-4 px-6 rounded-lg cursor-pointer;
+}

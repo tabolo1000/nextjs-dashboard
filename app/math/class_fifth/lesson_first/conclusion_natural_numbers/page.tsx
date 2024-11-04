@@ -1,11 +1,11 @@
-
+import {Audio_button} from "@/app/ui/math/components/Audio_button";
 
 
 
 
 export default function Conclusion_natural_numbers() {
     return <div className="mb-8">
-        <h1 className="header_h1">Заключение</h1>
+        <Audio_button path={"/math/class_fifth/lesson_first/conclusion_natural_numbers/conclusion_natural_numbers_record"}/><h1 className="header_h1">Заключение</h1>
         <p className="mb-4">
             Натуральные числа и десятичная система счисления — это основа всей математической науки.
             Понимание таких понятий как <strong>разряды</strong>, <strong>классы</strong>, <strong>однозначные и

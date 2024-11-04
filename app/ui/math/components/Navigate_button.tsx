@@ -6,22 +6,22 @@ import {useCallback} from "react";
 export default function NavigateButton({to}: Props) {
     const router = useRouter()
 
-    const routerHandler = useCallback(()=>{
-        router.push(to)
-    },[router])
+    const routerHandler = useCallback((nextPage: string)=>{
+        router.push(nextPage)
+    }, [router])
 
     return <div className="right-sidebar  bg-gray-100 p-4 border-l">
         <h2 className="text-xl font-bold mb-4 opacity-0 absolute">Навигация</h2>
         <div className="flex">
             {/* Карточка 2: Перейти к следующей теме */}
             <div
-                className="flex w-1/2 items-center justify-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-lg cursor-pointer">
-                <button onClick={routerHandler} className="text-lg w-full">Перейти к следующей теме</button>
+                className="button_to bg-blue-500 hover:bg-blue-700 mr-5">
+                <button onClick={(() => routerHandler(to.nextTask))} className="text-lg w-full">Перейти к следующей теме</button>
             </div>
             {/* Карточка 1: Пройти практическое занятие */}
             <div
-                className="flex w-1/2 items-center justify-center bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-6 rounded-lg cursor-pointer">
-                <button onClick={routerHandler}  className="text-lg w-full">Пройти практическое занятие</button>
+                className="button_to bg-green-500 hover:bg-green-600">
+                <button onClick={(() => routerHandler(to.nextExercise))}  className="text-lg w-full">Пройти практическое занятие</button>
             </div>
         </div>
     </div>
@@ -31,5 +31,8 @@ export default function NavigateButton({to}: Props) {
 
 //--------------------------------------
 interface Props {
-    to: string;
+    to: {
+        nextTask: string,
+        nextExercise: string,
+    }
 }

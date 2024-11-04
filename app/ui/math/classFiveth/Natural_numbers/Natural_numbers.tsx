@@ -30,9 +30,7 @@ export const metadata = {
 };
 
 
-export const Natural_numbers = ({
-    setTopic,
-                                }: Props) => {
+export const Natural_numbers = () => {
     return (
         <div className="p-6 font-sans bg-gray-50 text-gray-800">
             <h1 className="text-4xl font-bold mb-6 text-center text-blue-700 absolute opacity-0">
@@ -61,7 +59,7 @@ export const Natural_numbers = ({
                 <p className="mb-4">Число <strong>7</strong> — это натуральное число, которое можно использовать для
                     подсчёта объектов: «У меня 7 книг».</p>
             </section>
-            <NavigateButton setTopic = {setTopic} />
+            <NavigateButton to = {""} />
         </div>
     );
 }
