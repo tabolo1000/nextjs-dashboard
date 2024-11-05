@@ -1,5 +1,5 @@
 import NavigateButton from "@/app/ui/math/components/Navigate_button";
-import {Audio_button} from "@/app/ui/math/components/Audio_button";
+import {Audio_button} from "@/app/ui/math/components/audio_player/Audio_button";
 
 
 export const metadata = {
@@ -36,7 +36,7 @@ export default function Natural_numbers() {
     return (
         <div className="p-6 font-sans bg-gray-50 text-gray-800">
             <section className="mb-8">
-                <Audio_button path={"/math/class_fifth/lesson_first/natural_numbers/natural_numbers_record"}/> <h1 className="header_h1">Натуральные числа</h1>
+                <h1 className="header_h1">Натуральные числа</h1>
                 <p className="mb-2">
                     <strong>Натуральные числа</strong> — это числа, которые мы используем для счёта предметов и
                     обозначения порядковых номеров. Они начинаются с <strong>единицы</strong> и продолжаются бесконечно.
@@ -58,6 +58,7 @@ export default function Natural_numbers() {
                 <p className="mb-4">Число <strong>7</strong> — это натуральное число, которое можно использовать для
                     подсчёта объектов: «У меня 7 книг».</p>
             </section>
+            <Audio_button path={"/math/class_fifth/lesson_first/natural_numbers/natural_numbers_record"}/>
             <NavigateButton to = {{
                 nextTask: "./decimal_system",
                 nextExercise: "./natural_numbers/exercise",

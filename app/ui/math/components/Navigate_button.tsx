@@ -2,6 +2,7 @@
 
 import {useRouter} from "next/navigation";
 import {useCallback} from "react";
+import {Base_button} from "@/app/ui/math/components/Base_button";
 
 export default function NavigateButton({to}: Props) {
     const router = useRouter()
@@ -10,19 +11,20 @@ export default function NavigateButton({to}: Props) {
         router.push(nextPage)
     }, [router])
 
+    const onClickNextTask = useCallback(function () {
+        routerHandler(to.nextTask)
+    }, [to.nextTask, routerHandler]);
+
+    const onClickNextExercise = useCallback(function () {
+        routerHandler(to.nextExercise)
+    }, [to.nextExercise, routerHandler]);
+
+
     return <div className="right-sidebar  bg-gray-100 p-4 border-l">
         <h2 className="text-xl font-bold mb-4 opacity-0 absolute">Навигация</h2>
         <div className="flex">
-            {/* Карточка 2: Перейти к следующей теме */}
-            <div
-                className="button_to bg-blue-500 hover:bg-blue-700 mr-5">
-                <button onClick={(() => routerHandler(to.nextTask))} className="text-lg w-full">Перейти к следующей теме</button>
-            </div>
-            {/* Карточка 1: Пройти практическое занятие */}
-            <div
-                className="button_to bg-green-500 hover:bg-green-600">
-                <button onClick={(() => routerHandler(to.nextExercise))}  className="text-lg w-full">Пройти практическое занятие</button>
-            </div>
+            <Base_button onClick={onClickNextTask} name={"Перейти к следующей теме"} classStyle={"w-1/2 button_to bg-blue-500 hover:bg-blue-700 mr-5"}/>
+            <Base_button onClick={onClickNextExercise} name={"Пройти практическое занятие"} classStyle={"w-1/2 button_to bg-green-500 hover:bg-green-600"}/>
         </div>
     </div>
 }

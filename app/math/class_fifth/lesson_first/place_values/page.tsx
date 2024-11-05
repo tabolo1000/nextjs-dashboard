@@ -1,10 +1,10 @@
 import NavigateButton from "@/app/ui/math/components/Navigate_button";
-import {Audio_button} from "@/app/ui/math/components/Audio_button";
+import {Audio_button} from "@/app/ui/math/components/audio_player/Audio_button";
 
 
 export default function Place_values() {
     return <div className="mb-8">
-        <Audio_button path={"/math/class_fifth/lesson_first/place_values/place_values_record"}/><h1 className="header_h1">Разряды и классы</h1>
+        <h1 className="header_h1">Разряды и классы</h1>
         <p className="mb-4">
             <strong>Разряд</strong> — это позиция, которую занимает каждая цифра в числе. Разряды позволяют записывать
             большие числа, разделяя их на <strong>единицы</strong>, <strong>десятки</strong>, <strong>сотни</strong> и
@@ -26,7 +26,7 @@ export default function Place_values() {
             <li>Класс <strong>единиц</strong>: 567</li>
             <li>Класс <strong>тысяч</strong>: 234</li>
         </ul>
-
+        <Audio_button path={"/math/class_fifth/lesson_first/place_values/place_values_record"}/>
         <NavigateButton to = {{
             nextTask: "./single_and_Two_and_Multi_digit_numbers",
             nextExercise: "./natural_numbers/exercise",

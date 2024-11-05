@@ -1,10 +1,10 @@
 import NavigateButton from "@/app/ui/math/components/Navigate_button";
-import {Audio_button} from "@/app/ui/math/components/Audio_button";
+import {Audio_button} from "@/app/ui/math/components/audio_player/Audio_button";
 
 
 export default function DecimalSystem () {
     return <div className="mb-8">
-        <Audio_button path={"/math/class_fifth/lesson_first/decimal_system/decimal_system_record"}/><h1 className="header_h1">Десятичная система счисления</h1>
+        <h1 className="header_h1">Десятичная система счисления</h1>
         <p className="mb-2">
             <strong>Десятичная система счисления</strong> — это основная система, которую мы используем для записи
             чисел.
@@ -26,6 +26,7 @@ export default function DecimalSystem () {
             десятков, а <strong>5</strong> — разряд единиц, то есть:
         </p>
         <p className="italic mb-4">345 = (3 × 100) + (4 × 10) + (5 × 1)</p>
+        <Audio_button path={"/math/class_fifth/lesson_first/decimal_system/decimal_system_record"}/>
         <NavigateButton to = {{
             nextTask: "./natural_numbers_sequence",
             nextExercise: "./natural_numbers/exercise",

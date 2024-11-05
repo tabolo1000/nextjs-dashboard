@@ -69,3 +69,15 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
 };
 
 
+
+//------------------------My_utils----------------------------------------------
+
+export function formatTime(seconds: number) {
+  const time = new Date(seconds * 1000);
+
+  const hours = time.getUTCHours().toString().padStart(2, '0');
+  const minutes = time.getUTCMinutes().toString().padStart(2, '0');
+  const sec = time.getUTCSeconds().toString().padStart(2, '0');
+
+  return `${hours}:${minutes}:${sec}`;
+}

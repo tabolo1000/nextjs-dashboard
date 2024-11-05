@@ -1,11 +1,11 @@
 import NavigateButton from "@/app/ui/math/components/Navigate_button";
-import {Audio_button} from "@/app/ui/math/components/Audio_button";
+import {Audio_button} from "@/app/ui/math/components/audio_player/Audio_button";
 
 
 export default function Single_and_Two_and_Multi_digit_numbers() {
     return <div>
         <section className="mb-8">
-            <Audio_button path={"/math/class_fifth/lesson_first/single_and_Two_and_Multi_digit_numbers/single_and_Two_and_Multi_digit_numbers_record"}/><h1 className="header_h1">Однозначные и двузначные числа</h1>
+            <h1 className="header_h1">Однозначные и двузначные числа</h1>
             <p className="mb-4">
                 <strong>Однозначные числа</strong> — это числа, состоящие из одной цифры:
             </p>
@@ -45,6 +45,7 @@ export default function Single_and_Two_and_Multi_digit_numbers() {
                 <li>Класс тысяч: 123.</li>
             </ul>
         </section>
+        <Audio_button path={"/math/class_fifth/lesson_first/single_and_Two_and_Multi_digit_numbers/single_and_Two_and_Multi_digit_numbers_record"}/>
         <NavigateButton to = {{
             nextTask: "./conclusion_natural_numbers",
             nextExercise: "./natural_numbers/exercise",
