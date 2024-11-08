@@ -25,7 +25,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                     <nav className="sidebar-nav">
                         <ul className="space-y-4">
                             <li><Link href="/math" className="sidebar-link">Math</Link></li>
-                            <li><Link href="#" className="sidebar-link">Biology</Link></li>
+                            <li><Link href="/math/biology/vitamins/vitamin_k/introduction_vitamin_k" className="sidebar-link">Biology</Link></li>
                             <li><Link href="#" className="sidebar-link">Settings</Link></li>
                             <li><Link href="#" className="sidebar-link">Logout</Link></li>
                         </ul>

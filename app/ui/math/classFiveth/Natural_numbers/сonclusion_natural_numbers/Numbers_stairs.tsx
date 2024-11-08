@@ -1,49 +1,44 @@
 "use client"
 
-import { useState } from 'react';
-import Link from 'next/link';
+import {Base_form} from "@/app/ui/math/components/Base_form";
+import NavigateButton from "@/app/ui/math/components/Navigate_button";
+import {Audio_button} from "@/app/ui/math/components/audio_player/Audio_button";
+import {number} from "yup";
 
-export function Number_stairs() {
-    const [inputValue, setInputValue] = useState('');
-    const [isCorrect, setIsCorrect] = useState(false);
+export function Number_stairs({
+                                  nextExercise,
+                              }: Props) {
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        const number = parseInt(inputValue, 10);
-        if (number === 4) {
-            setIsCorrect(true);
-        } else {
-            setIsCorrect(false);
-        }
+
+    const validationSchema = {
+        itemCount:
+            number()
+                .typeError('Количество предметов должно быть числом!')
+                .required("Количество предметов обязательно!")
+                .positive("Количество предметов должно быть положительным числом!")
+                .integer("Количество предметов должно быть целым числом!")
+                .min(2, "Ваше число слишком маленькое!")
+                .max(2, "Ваше число слишком большое!")
     };
 
     return (
-        <div className="container mx-auto p-8">
-            <h1 className="text-2xl font-bold mb-4">Задание 2: Числовая лестница</h1>
-            <p>Заполните пропущенное число в последовательности: 2, __, 6, 8</p>
+        <div className="main_block_task">
+            <h1 className="header_h1">Задание 2: Числовая лестница</h1>
+            <p className="condition_task">Заполните пропущенное число в последовательности: 2, __ , 6, 8</p>
 
-            <form onSubmit={handleSubmit} className="mt-4">
-                <input
-                    type="text"
-                    value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
-                    className="border p-2 mr-2"
-                    placeholder="Введите пропущенное число"
-                />
-                <button type="submit" className="bg-blue-500 text-white px-4 py-2">
-                    Подтвердить
-                </button>
-            </form>
-
-            {isCorrect ? (
-                <p className="mt-4 text-green-500">Правильно! Пропущенное число — 4.</p>
-            ) : inputValue && (
-                <p className="mt-4 text-red-500">Неправильно! Попробуйте снова.</p>
-            )}
-
-            <Link href="/" className="mt-4 block text-blue-500 underline">
-                Вернуться на главную
-            </Link>
+            <Base_form validate={validationSchema}/>
+            <Audio_button path="/math/class_fifth/lesson_first/natural_numbers/numbers_stairs_1.1.1"/>
+            <NavigateButton to={{
+                nextTask: "./",
+                localNavigationSecondButton: nextExercise,
+            }}
+            />
         </div>
     );
+
+
+}
+
+interface Props {
+    nextExercise: ()=> void
 }

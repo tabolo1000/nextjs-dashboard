@@ -97,11 +97,56 @@ input[type='number']::-webkit-outer-spin-button {
 /*----------------Article------------------------------------------------------------*/
 
 .header_h1 {
-  @apply text-3xl font-semibold mb-4 text-blue-600 text-center;
+  @apply text-center text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 mb-1 p-2;
+}
+.term {
+ @apply bg-red-100 text-red-800 font-semibold px-6 py-3 rounded-lg shadow-md text-xl border-l-4 border-red-500 pt-1 pb-1
+}
+.header_h2_even{
+  @apply text-3xl font-bold text-green-600 mb-4 border-b-4 border-green-400 pb-2 leading-10 m-10
+}
+.header_h2_odd{
+  @apply text-3xl font-bold text-green-600 mb-4 bg-green-100 p-3 rounded-lg shadow-md leading-5 m-10;
+}
+.header_h3{
+  @apply text-2xl font-bold text-pink-700 mb-4
+}
+.paragraph{
+  @apply text-lg leading-relaxed text-gray-800 mx-auto my-6 first:mt-0;
+}
+.paragraph_example{
+  @apply text-lg leading-relaxed text-gray-700 max-w-2xl mx-auto mb-6;
+}
+.table_info{
+  @apply table-auto w-full border-collapse border border-gray-300;
+}
+.table_header{
+  @apply border border-gray-300 px-4 py-2 bg-blue-200 text-blue-900
+}
+.table_data_cell{
+  @apply border border-gray-300 p-4
+}
+.table_row{
+  @apply even:bg-gray-50
+}
+.unordered_list{
+  @apply list-disc list-inside mb-6 paragraph
+}
+.order_list{
+  @apply list-decimal list-inside mb-6 paragraph
 }
 
-/*-----------------Button---------------------------------------------------------------*/
+  /*-----------------Button---------------------------------------------------------------*/
 
 .button_to {
   @apply flex items-center justify-center text-white font-bold py-4 px-6 rounded-lg cursor-pointer;
+}
+
+/*-----------------Tasks---------------------------------------------------------------*/
+.condition_task {
+  @apply p-2.5 text-xl;
+}
+
+.main_block_task {
+  @apply container p-8 flex flex-col justify-center place-items-center;
 }

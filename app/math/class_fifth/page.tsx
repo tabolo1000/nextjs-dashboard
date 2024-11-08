@@ -8,6 +8,12 @@ export default function Math () {
             <Link href = {"/math/class_fifth/lesson_first"}>
                 Урок первый.
             </Link>
+            <Link href = {"/math/class_fifth/lesson_second"}>
+                Урок второй.
+            </Link>
+            <Link href = {"/math/class_fifth/lesson_third"}>
+                Урок третий.
+            </Link>
         </li>
     </ul>
 }

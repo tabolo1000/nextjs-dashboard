@@ -1,28 +1,41 @@
 "use client"
 
-import { useState } from 'react';
-import Link from 'next/link';
+/*import { useState } from 'react';
+import Link from 'next/link';*/
 
-export default function Numbers_in_nature() {
-    const [objects, setObjects] = useState('');
+import {number} from "yup";
+import {Base_form} from "@/app/ui/math/components/Base_form";
+import {Audio_button} from "@/app/ui/math/components/audio_player/Audio_button";
+import NavigateButton from "@/app/ui/math/components/Navigate_button";
+
+export default function Numbers_in_nature({nextExercise} : Props) {
+    /*const [objects, setObjects] = useState('');
     const [number, setNumber] = useState('');
-    const [message, setMessage] = useState('');
+    const [message, setMessage] = useState('');*/
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        if (objects && number) {
-            setMessage(`Вы видите ${number} ${objects}.`);
-        } else {
-            setMessage('Пожалуйста, введите название объекта и количество.');
-        }
+
+    const validationSchema = {
+        itemCount:
+            number()
+                .typeError('Количество предметов должно быть числом!')
+                .required("Количество предметов обязательно!")
+                .positive("Количество предметов должно быть положительным числом!")
+                .integer("Количество предметов должно быть целым числом!")
     };
 
     return (
-        <div className="container mx-auto p-8">
-            <h1 className="text-2xl font-bold mb-4">Задание 3: Натуральные числа в природе</h1>
-            <p>Введите название объекта (например, деревья) и количество:</p>
+        <div className="main_block_task">
+            <h1 className="header_h1">Задание 3: Натуральные числа в природе</h1>
+            <p className={"condition_task"}>Введите название объекта (например, деревья) и количество:</p>
 
-            <form onSubmit={handleSubmit} className="mt-4">
+
+            <Base_form validate = {validationSchema} nextExercise = {nextExercise} />
+            <Audio_button path={"/math/class_fifth/lesson_first/natural_numbers/hunter_1.1.1"}/>
+            <NavigateButton to={{
+                nextTask: "./",
+                localNavigationSecondButton: nextExercise,
+            }}/>
+            {/*<form onSubmit={handleSubmit} className="mt-4">
                 <input
                     type="text"
                     value={objects}
@@ -40,13 +53,17 @@ export default function Numbers_in_nature() {
                 <button type="submit" className="bg-blue-500 text-white px-4 py-2">
                     Подтвердить
                 </button>
-            </form>
+            </form>*/}
 
-            {message && <p className="mt-4">{message}</p>}
+          {/*  {message && <p className="mt-4">{message}</p>}*/}
 
-            <Link href="/" className="mt-4 block text-blue-500 underline">
+           {/* <Link href="/" className="mt-4 block text-blue-500 underline">
                 Вернуться на главную
-            </Link>
+            </Link>*/}
         </div>
     );
+}
+
+interface Props {
+    nextExercise: ()=> void
 }

@@ -1,4 +1,4 @@
-
+"use client"
 
 
 
@@ -9,14 +9,14 @@ export const Base_button = ({
     return (
         <div
             className={classStyle}>
-            <button type={type || "button"} onClick={onClick} className={"text-lg w-full"}>{name}
+            <button type={type || "button"} onClick={onClick || undefined} className={"text-lg w-full"}>{name}
             </button>
         </div>
     )
 }
 
 interface Props {
-    onClick: ()=> void,
+    onClick?: ()=> void,
     classStyle: string,
     name: string,
     type?: "button" | "submit" | "reset",

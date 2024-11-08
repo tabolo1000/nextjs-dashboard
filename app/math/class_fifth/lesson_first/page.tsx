@@ -1,15 +1,48 @@
-import Link from 'next/link';
+import Link_list from "@/app/ui/math/components/Link_list";
+
 
 export default function Math() {
+    const link_of_list = [
+        {
+            baseUrl: "./lesson_first",
+            paths: "/natural_numbers",
+            name: "Урок первый: Натуральные числа",
+        },
+        {
+            baseUrl: "./lesson_first",
+            paths: "/decimal_system",
+            name: "Урок второй: Десятичная система",
+        },
+        {
+            baseUrl: "./lesson_first",
+            paths: "/natural_numbers_sequence",
+            name: "Урок третий: Последовательность натуральных чисел",
+        },
+        {
+            baseUrl: "./lesson_first",
+            paths: "/zero",
+            name: "Урок четвертый: Число 0",
+        },
+        {
+            baseUrl: "./lesson_first",
+            paths: "/place_values",
+            name: "Урок пятый: Разряды",
+        },
+        {
+            baseUrl: "./lesson_first",
+            paths: "/single_and_Two_and_Multi_digit_numbers",
+            name: "Урок шестой: Однозначные, двузначные и многозначные числа",
+        },
+        {
+            baseUrl: "./lesson_first",
+            paths: "/conclusion_natural_numbers",
+            name: "Урок седьмой: Заключение по натуральным числам",
+        },
+    ]
     return (
         <div className="flex justify-center items-center min-w-full min-h-">
-            <ul className="space-y-6 w-full max-w-lg ">
-                <li className="text-center">
-                    <Link href="./lesson_first/natural_numbers"
-                          className="link-base link-blue">
-                        Урок первый: Натуральные числа
-                    </Link>
-                </li>
+                    <Link_list list_of_link={link_of_list} />
+                {/*
                 <li className="text-center">
                     <Link href="./lesson_first/decimal_system"
                           className="link-base link-green">
@@ -47,8 +80,8 @@ export default function Math() {
                         Урок седьмой: Заключение по натуральным числам
                     </Link>
                 </li>
+*/}
 
-            </ul>
         </div>
     );
 }
