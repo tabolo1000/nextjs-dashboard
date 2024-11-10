@@ -86,7 +86,7 @@ export default function Scales () {
                     весах или термометре, — это ключ к точности нашего восприятия мира.
                 </p>
             </section>
-            <Audio_Navigate path={""} to={{
+            <Audio_Navigate path={"/math/class_fifth/lesson_third/scales/scales"} to={{
                 nextTask: "/math/class_fifth/lesson_third/thermometer_scales_masses",
                 nextExercise: "/math/class_fifth/lesson_third/beam/beam",
             }}/>

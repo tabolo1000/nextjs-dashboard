@@ -111,9 +111,15 @@ input[type='number']::-webkit-outer-spin-button {
 .header_h3{
   @apply text-2xl font-bold text-pink-700 mb-4
 }
-.paragraph{
+/*.paragraph{
   @apply text-lg leading-relaxed text-gray-800 mx-auto my-6 first:mt-0;
+}*/
+
+.paragraph{
+  @apply text-lg leading-relaxed bg-white p-6 rounded-lg shadow-lg border-l-4 border-indigo-500;
 }
+
+
 .paragraph_example{
   @apply text-lg leading-relaxed text-gray-700 max-w-2xl mx-auto mb-6;
 }
@@ -149,4 +155,13 @@ input[type='number']::-webkit-outer-spin-button {
 
 .main_block_task {
   @apply container p-8 flex flex-col justify-center place-items-center;
+}
+
+/* Общие стили для карточек */
+.card-base {
+  @apply p-6 rounded-lg shadow-lg transform transition duration-300 ease-in-out;
+}
+
+.card-hover {
+  @apply hover:shadow-2xl hover:scale-105;
 }

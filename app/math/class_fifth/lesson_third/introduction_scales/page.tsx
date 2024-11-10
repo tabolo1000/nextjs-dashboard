@@ -19,7 +19,7 @@ export default function Scale () {
             величин и как шкалы, будь то на линейке или термометре, помогают нам
             ориентироваться в мире чисел и величин.
         </p>
-        <Audio_Navigate path={""} to={{
+        <Audio_Navigate path={"/math/class_fifth/lesson_third/introduction_scales/introduction_scales.record"} to={{
             nextTask: "/math/class_fifth/lesson_third/scales",
             nextExercise: "/math/class_fifth/lesson_third/beam/beam",
         }}/>
