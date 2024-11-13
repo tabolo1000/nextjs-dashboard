@@ -1,9 +1,12 @@
 "use client"
 import {Link, usePathname} from "@/i18n/routing";
 import {useLocale} from "next-intl";
-import {useCallback, useState} from "react"; // Для получения текущей локали
+import {useCallback, useState} from "react";
 
-const LanguageSwitcher = () => {
+export default function Language_switcher({
+    name,
+    locales,
+                                                }: Language_switcher_props){
 
     const asPath = usePathname();
     const locale = useLocale();
@@ -14,7 +17,7 @@ const LanguageSwitcher = () => {
     },[isOpen])
 
     return (
-        <div className="relative inline-block text-left">
+        <div className="w-20 relative inline-block text-left">
             {/* Кнопка для открытия меню */}
             <div>
                 <button
@@ -25,7 +28,7 @@ const LanguageSwitcher = () => {
                     aria-expanded="true"
                     onClick={ handlerWindow }
                 >
-                    Language
+                    {name}
                     {/* Иконка стрелки вниз */}
                     <svg
                         className="-mr-1 ml-2 h-5 w-5"
@@ -54,28 +57,21 @@ const LanguageSwitcher = () => {
                 >
                     <div className="py-1" role="none">
                         {/* Пункт меню для английского */}
-                        <Link href={asPath} locale="en" onClick={handlerWindow}>
-            <span
-                className={`block px-4 py-2 text-sm ${
-                    locale === "en" ? "bg-gray-100 text-gray-900" : "text-gray-700"
-                } hover:bg-gray-100 hover:text-gray-900`}
-                role="menuitem"
-            >
-              English
-            </span>
-                        </Link>
+                            {
+                                locales.map((item, index) => (
+                                    <Link key={index} href={asPath} locale={item.locale} onClick={handlerWindow}>
+                                        <span
+                                            className={` block px-4 py-2 text-sm ${
+                                                locale === "en" ? "bg-gray-100 text-gray-900" : "text-gray-700"
+                                            } hover:bg-gray-100 hover:text-gray-900`}
+                                            role="menuitem"
+                                        >
+                                            {item.content}
+                                        </span>
+                                    </Link>
 
-                        {/* Пункт меню для русского */}
-                        <Link href={asPath} locale="ru" onClick={handlerWindow}>
-            <span
-                className={`block px-4 py-2 text-sm ${
-                    locale === "ru" ? "bg-gray-100 text-gray-900" : "text-gray-700"
-                } hover:bg-gray-100 hover:text-gray-900`}
-                role="menuitem"
-            >
-              Русский
-            </span>
-                        </Link>
+                                ))
+                            }
                     </div>
                 </div>
                 )}
@@ -83,4 +79,16 @@ const LanguageSwitcher = () => {
     );
 };
 
-export default LanguageSwitcher;
+
+
+//------------------------Types----------------------------------------
+
+interface Language_switcher_props {
+    name: string;
+    locales: Array<Locale>;
+}
+
+interface Locale {
+        locale: string;
+        content: string;
+}

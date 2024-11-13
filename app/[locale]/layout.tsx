@@ -3,10 +3,11 @@ import {getMessages, setRequestLocale} from 'next-intl/server';
 import {notFound} from 'next/navigation';
 import { routing} from '@/i18n/routing';
 
+/*
 export function generateStaticParams() {
     return routing.locales.map((locale) => ({locale}));
 }
-
+*/
 
 export default async function LocaleLayout({
                                                children,
@@ -19,6 +20,7 @@ export default async function LocaleLayout({
     if (!routing.locales.includes(locale as any)) {
         notFound();
     }
+
     //debugger
     setRequestLocale(locale);
     // Providing all messages to the client
