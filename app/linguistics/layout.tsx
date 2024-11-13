@@ -2,7 +2,9 @@
 import React from 'react';
 import Link from "next/link";
 //import {useSelectedLayoutSegment} from "next/navigation";
-
+import {setRequestLocale} from 'next-intl/server';
+import {notFound} from 'next/navigation';
+import {routing} from '@/i18n/routing';
 
 
 interface LayoutProps {
@@ -11,7 +13,10 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
     //let access = useSelectedLayoutSegment()
-
+    if (!routing.locales.includes(locale as any)) {
+        notFound();
+    }
+    setRequestLocale(locale);
     return (
         <div className="layout">
             {/* Header */}

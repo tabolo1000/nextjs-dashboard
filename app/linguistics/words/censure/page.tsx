@@ -5,6 +5,12 @@ import {Audio_Navigate} from "@/app/ui/math/components/Audio_Navigate";
 import {Highlight} from "@/app/ui/math/components/Highlight";
 import {Interactive_Image} from "@/app/ui/math/components/Interactive_Image";
 
+import {routing} from '@/i18n/routing';
+
+export function generateStaticParams() {
+    return routing.locales.map((locale) => ({locale}));
+}
+
 export default function Censure() {
     return (
         <div className="main_block_task">
