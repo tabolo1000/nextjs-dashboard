@@ -1,27 +1,20 @@
-//"use client"
-import React from 'react';
-import Link from "next/link";
-//import {useSelectedLayoutSegment} from "next/navigation";
-//import {setRequestLocale} from 'next-intl/server';
-import {notFound} from 'next/navigation';
-import {routing} from '@/i18n/routing';
-
+import {Link} from "@/i18n/routing";
+import Language_switcher from "@/app/ui/math/components/Language_switcher";
 
 interface LayoutProps {
     children: React.ReactNode;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
-    //let access = useSelectedLayoutSegment()
-    if (!routing.locales.includes(locale as any)) {
-        notFound();
-    }
-   // setRequestLocale(locale);
+
+
+const Layout: React.FC<LayoutProps> = ({ children, }) => {
+
     return (
         <div className="layout">
             {/* Header */}
-            <header className="header fixed w-full max-h-20 z-10">
+            <header className="header flex justify-between fixed w-full max-h-20 z-10">
                 <h1 className="header-title text-center">Welcome to the World Knowledge!!!</h1>
+                <Language_switcher/>
             </header>
 
             <div className="layout-body flex flex-1 pt-16">

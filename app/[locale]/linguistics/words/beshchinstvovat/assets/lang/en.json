@@ -1,0 +1,133 @@
+{
+  "title": "Etymology of the word 'Rampage'",
+  "sections": [
+    {
+      "title": "Etymology",
+      "content": "The word 'rampage' comes from the root 'chin,' denoting order or service, and the prefix 'bes-,' which indicates the negation or absence of something. Thus, to go on a rampage literally means to act without order, to violate the established order."
+    },
+    {
+      "title": "Morphemic Parsing",
+      "parity": true,
+      "content": [
+        {
+          "part": "Prefix 'bes-'",
+          "description": "Negation, indicates the absence of order or something positive."
+        },
+        {
+          "part": "Root 'chin'",
+          "description": "Associated with the concept of order, organization, or position."
+        },
+        {
+          "part": "Suffix '-stva'",
+          "description": "Indicates an action in progress."
+        },
+        {
+          "part": "Ending '-t'",
+          "description": "Indicates the verb form."
+        }
+      ]
+    },
+    {
+      "title": "Historical Context",
+      "parity": true,
+      "content": [
+        "The word 'rampage' indicates a disturbance of public or social order. In ancient and medieval times, 'chin' was associated with an established hierarchy, official duties, and order in society. Those who violated this order could be called 'disorderly' because their actions went against the law, tradition, or established rules.",
+        "Historically, rioting has often accompanied periods of social unrest or political turmoil. At such times, people, feeling free from the control of the authorities, could start to disrupt public order, engage in pogroms, destruction, and other acts of vandalism. In literature and historical chronicles, the word 'riot' was often used to describe such situations."
+      ]
+    },
+    {
+      "title": "Modern Meaning",
+      "content": "In modern parlance, to go on a rampage means to commit disorderly, hooligan, or vandalistic acts. It indicates a violation of established norms and rules, both social and legal. Most often, the word is used in the context of riots, street hooliganism, or vandalism, where people's actions go beyond the limits of what is allowed and lead to chaos and destruction."
+    },
+    {
+      "title": "Interesting Fact",
+      "parity": true,
+      "content": "The word 'rampage' has a close connection with the concept of 'chin,' which is still used today in the meaning of position, status, or order. Interestingly, in Russian, the word 'official' refers to a person who holds a certain position in the civil service, which is also associated with the concept of order and organization. Thus, to go on a rampage is the exact opposite behavior, where established laws and norms are violated."
+    },
+    {
+      "title": "Quotes",
+      "quotes": [
+        {
+          "quote": "Where disorderliness reigns, chaos rules.",
+          "annotation": "This quote emphasizes that disorderliness leads to the disruption of order and the establishment of chaos."
+        },
+        {
+          "quote": "To be disorderly is to ignore not only the law, but also the moral standards that keep society from destruction.",
+          "annotation": "The quote suggests that rioting destroys not only the legal but also the moral foundations of society."
+        },
+        {
+          "quote": "When a mob goes on a rampage, reason and order recede before the power of destruction.",
+          "annotation": "This quote emphasizes the danger of riots when emotion and aggression overwhelm common sense."
+        },
+        {
+          "quote": "Rioting always occurs where the power of law is weakened.",
+          "annotation": "The importance of strong legal rules to prevent riots is emphasized here."
+        },
+        {
+          "quote": "People riot when they feel impunity.",
+          "annotation": "The quote indicates that disorderly conduct is more likely to occur where the perpetrators are not afraid of the consequences."
+        }
+      ]
+    },
+    {
+      "title": "Examples of Uses of the Word 'Rampage'",
+      "examples": [
+        {
+          "title": "Mass Riots",
+          "description": "The crowd started rioting after the rally - the rally participants turned disorderly and disruptive.",
+          "icon": "🚨"
+        },
+        {
+          "title": "Breaking the Law",
+          "description": "To riot is to disrespect the law and societal norms - rioting goes against the legal and moral norms of society.",
+          "icon": "⚖️"
+        },
+        {
+          "title": "Teenage Hooliganism",
+          "description": "Teenagers were disorderly on the streets of the city - teenagers behaved rudely and violated public order.",
+          "icon": "👟"
+        },
+        {
+          "title": "Vandalism",
+          "description": "Vandals went on a rampage destroying monuments - hooligans engaged in destroying public or cultural objects.",
+          "icon": "🛠️"
+        },
+        {
+          "title": "Disorderly Conduct",
+          "description": "Rioting in public places is gross disorderly conduct - in public places, such actions are considered a particularly serious offense.",
+          "icon": "🏛️"
+        },
+        {
+          "title": "Rioting During Rallies",
+          "description": "During the riots, people went on a rampage, setting cars on fire - disorderly conduct led to arson and destruction.",
+          "icon": "🔥"
+        },
+        {
+          "title": "Disturbing the Peace",
+          "description": "They went on a rampage all night, keeping neighbors awake - the rowdy behavior disturbed the peace of others.",
+          "icon": "😴"
+        },
+        {
+          "title": "Theft",
+          "description": "Thieves rampaged through the house, throwing things everywhere - the thieves behaved chaotically, not only stealing but also destroying the order of the house.",
+          "icon": "🏚️"
+        },
+        {
+          "title": "Rioting for Fun",
+          "description": "Rioting for fun is disrespectful to others - actions done for fun violate the rights and peace of others.",
+          "icon": "🎉"
+        },
+        {
+          "title": "Mass Rioting",
+          "description": "An angry mob rampaged in the square - the crowd behaved aggressively and destructively in a public place.",
+          "icon": "👥"
+        }
+      ]
+    }
+  ],
+  "audio_navigation": {
+    "path": "/words/rampage/rampage.record",
+    "nextTask": "./cohort",
+    "nextExercise": ""
+  }
+}

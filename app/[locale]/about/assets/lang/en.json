@@ -1,14 +1,133 @@
 {
-  "HomePage": {
-    "title": "Hello world!",
-    "about": "Go to the about page"
-  },
-  "AboutPage": {
-    "title": "About Us",
-    "content": "This is the about page content."
-  },
-  "ServerComponent": {
-    "title": "This is a server-side component",
-    "description": "Content rendered on the server."
+  "title": "Etymology of the word \"Beshchinstvovat\"",
+  "sections": [
+    {
+      "title": "Etymology",
+      "content": "The word \"beshchinstvovat\" comes from the root \"chin,\" meaning order or service, and the prefix \"bes-\", which indicates negation or the absence of something. Thus, \"beshchinstvovat\" literally means to act without order, to disrupt established order."
+    },
+    {
+      "title": "Morphological Analysis",
+      "parity": true,
+      "content": [
+        {
+          "part": "Prefix \"bes-\"",
+          "description": "negation, indicates the absence of order or something positive."
+        },
+        {
+          "part": "Root \"chin\"",
+          "description": "related to the concept of order, organization, or rank."
+        },
+        {
+          "part": "Suffix \"-stvova\"",
+          "description": "indicates an action in progress."
+        },
+        {
+          "part": "Ending \"-t\"",
+          "description": "marks the verb form."
+        }
+      ]
+    },
+    {
+      "title": "Historical Context",
+      "parity": true,
+      "content": [
+        "The word \"beshchinstvovat\" refers to the violation of public or social order. In ancient and medieval times, \"chin\" was associated with established hierarchy, official duties, and societal order. Those who disrupted this order were called \"beshchinstvuyushchie\" because their actions were contrary to the law, traditions, or established rules.",
+        "Historically, \"beshchinstva\" often accompanied periods of social unrest or political upheaval. In such times, people, feeling free from control, might begin to violate public order, participate in riots, destruction, and other acts of vandalism. In literature and historical chronicles, the word \"beshchinstvovat\" was often used to describe such situations."
+      ]
+    },
+    {
+      "title": "Modern Meaning",
+      "content": "In modern language, \"beshchinstvovat\" means to commit disorderly, hooligan, or vandalistic actions. It refers to the violation of established norms and rules, both social and legal. The word is most often used in the context of mass riots, street hooliganism, or vandalism, where people's actions go beyond the permissible and lead to chaos and destruction."
+    },
+    {
+      "title": "Interesting Fact",
+      "parity": true,
+      "content": "The word \"beshchinstvovat\" is closely related to the concept of \"chin,\" which is still used today to mean rank, status, or order. Interestingly, in Russian, the word \"chinovnik\" refers to a person holding a specific position in the civil service, which is also related to the concept of order and organization. Thus, \"beshchinstvovat\" is the exact opposite behavior, where established laws and norms are violated."
+    },
+    {
+      "title": "Quotes",
+      "quotes": [
+        {
+          "quote": "Where there is lawlessness, chaos reigns.",
+          "annotation": "This quote emphasizes that lawlessness leads to the disruption of order and the establishment of chaos."
+        },
+        {
+          "quote": "To be lawless means to ignore not only the law but also the moral norms that hold society together.",
+          "annotation": "The quote suggests that lawlessness destroys not only legal but also moral foundations of society."
+        },
+        {
+          "quote": "When the crowd begins to be lawless, reason and order retreat before the force of destruction.",
+          "annotation": "This quote highlights the danger of mass unrest, where emotions and aggression suppress common sense."
+        },
+        {
+          "quote": "Lawlessness always occurs where the power of law weakens.",
+          "annotation": "This emphasizes the importance of strong legal norms to prevent disorder."
+        },
+        {
+          "quote": "People act lawlessly when they feel impunity.",
+          "annotation": "The quote indicates that lawlessness happens more frequently where offenders do not fear consequences."
+        }
+      ]
+    },
+    {
+      "title": "Examples of Using the Word 'Beshchinstvovat'",
+      "examples": [
+        {
+          "title": "Mass Riots",
+          "description": "The crowd began to act lawlessly after the rally — participants of the rally shifted to disorderly and destructive actions.",
+          "icon": "🚨"
+        },
+        {
+          "title": "Violation of the Law",
+          "description": "To act lawlessly means to disrespect the law and social norms — lawless acts contradict the legal and moral norms of society.",
+          "icon": "⚖️"
+        },
+        {
+          "title": "Teenage Hooliganism",
+          "description": "Teenagers acted lawlessly in the streets of the city — they behaved rudely and disrupted public order.",
+          "icon": "👟"
+        },
+        {
+          "title": "Vandalism",
+          "description": "Vandals acted lawlessly, destroying monuments — hooligans engaged in the destruction of public or cultural objects.",
+          "icon": "🛠️"
+        },
+        {
+          "title": "Public Disorder",
+          "description": "Acting lawlessly in public places is a gross violation of order — such actions are considered especially serious in public spaces.",
+          "icon": "🏛️"
+        },
+        {
+          "title": "Riots During Protests",
+          "description": "During the riots, people began to act lawlessly, setting cars on fire — disorderly actions led to arson and destruction.",
+          "icon": "🔥"
+        },
+        {
+          "title": "Disturbance of the Peace",
+          "description": "They acted lawlessly all night, keeping the neighbors awake — their noisy behavior disturbed the peace of others.",
+          "icon": "😴"
+        },
+        {
+          "title": "Theft",
+          "description": "Thieves acted lawlessly in the house, scattering things everywhere — they behaved chaotically, not only stealing but also disrupting order in the house.",
+          "icon": "🏚️"
+        },
+        {
+          "title": "Lawlessness for Fun",
+          "description": "Acting lawlessly for fun is disrespectful to others — actions done for amusement violate the rights and peace of others.",
+          "icon": "🎉"
+        },
+        {
+          "title": "Mass Riots",
+          "description": "The angry crowd acted lawlessly in the square — the crowd behaved aggressively and destructively in a public place.",
+          "icon": "👥"
+        }
+      ]
+    }
+  ],
+  "audio_navigation": {
+    "path": "/words/beshchinstvovat/beshchinstvovat.record",
+    "nextTask": "./cohort",
+    "nextExercise": ""
   }
 }
