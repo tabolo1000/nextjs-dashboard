@@ -2,6 +2,7 @@ import {NextIntlClientProvider} from 'next-intl';
 import {getMessages, setRequestLocale} from 'next-intl/server';
 import {notFound} from 'next/navigation';
 import { routing} from '@/i18n/routing';
+//import {param} from "ts-interface-checker";
 
 /*
 export function generateStaticParams() {
@@ -14,7 +15,7 @@ export default async function LocaleLayout({
                                                params: {locale}
                                            }: {
     children: React.ReactNode;
-    params: {locale: string};
+    params: {locale: string}
 }) {
     // Ensure that the incoming `locale` is valid
     if (!routing.locales.includes(locale as any)) {

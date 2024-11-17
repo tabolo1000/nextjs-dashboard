@@ -97,7 +97,7 @@ input[type='number']::-webkit-outer-spin-button {
 /*----------------Article------------------------------------------------------------*/
 
 .header_h1 {
-  @apply text-center text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 mb-1 p-2;
+  @apply text-center text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 mb-3 p-2;
 }
 .term {
  @apply bg-red-100 text-red-800 font-semibold px-6 py-3 rounded-lg shadow-md text-xl border-l-4 border-red-500 pt-1 pb-1
@@ -136,10 +136,10 @@ input[type='number']::-webkit-outer-spin-button {
   @apply even:bg-gray-50
 }
 .unordered_list{
-  @apply list-disc list-inside mb-6 paragraph
+  @apply list-disc list-inside mb-6 paragraph w-full
 }
 .order_list{
-  @apply list-decimal list-inside mb-6 paragraph
+  @apply list-decimal list-inside mb-6 paragraph w-full
 }
 
   /*-----------------Button---------------------------------------------------------------*/
@@ -154,7 +154,7 @@ input[type='number']::-webkit-outer-spin-button {
 }
 
 .main_block_task {
-  @apply container p-8 flex flex-col justify-center place-items-center;
+  @apply container pt-0 p-8 flex flex-col justify-center place-items-center;
 }
 
 /* Общие стили для карточек */

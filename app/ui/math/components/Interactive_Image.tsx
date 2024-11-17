@@ -7,21 +7,21 @@ export function Interactive_Image({
     width,
 }: Interactive_Image_Props) {
     return (
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center ">
             <Image
-                className={"rounded-lg"}
-                src={`${src}`}
+                className={"rounded-lg object-cover object-center"}
+                src={(typeof src === "string")? `${src}` : src}
                 alt={alt}
-                width={width}
-                height={height}
+                width={width && width }
+                height={height && height}
             />
         </div>
     );
 }
 
 interface Interactive_Image_Props {
-    src: string;
+    src: string | any;
     alt: string;
-    width: number;
-    height: number;
+    width?: number;
+    height?: number;
 }

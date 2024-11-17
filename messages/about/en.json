@@ -1,0 +1,14 @@
+{
+  "HomePage": {
+    "title": "Hello world!",
+    "about": "Go to the about page"
+  },
+  "AboutPage": {
+    "title": "About Us",
+    "content": "This is the about page content."
+  },
+  "ServerComponent": {
+    "title": "This is a server-side component",
+    "description": "Content rendered on the server."
+  }
+}

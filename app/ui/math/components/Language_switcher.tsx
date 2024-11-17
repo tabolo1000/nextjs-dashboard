@@ -1,23 +1,79 @@
-"use client"
-import {Link, usePathname} from "@/i18n/routing";
-import {useLocale} from "next-intl";
-import {useCallback, useState} from "react";
+"use client";
+import { Link, usePathname } from "@/i18n/routing";
+import { useLocale } from "next-intl";
+import { useCallback, useState } from "react";
 
-export default function Language_switcher({
-    name,
-    locales,
-                                                }: Language_switcher_props){
+// Пример props для компонента
+type LanguageSwitcherProps = {
+    name: string;
+    locales: { locale: string; content: string }[];
+};
 
+export default function LanguageSwitcher({
+                                             name,
+                                             locales,
+                                         }: LanguageSwitcherProps) {
     const asPath = usePathname();
     const locale = useLocale();
     const [isOpen, setOpen] = useState(false);
 
     const handlerWindow = useCallback(() => {
         setOpen(!isOpen);
-    },[isOpen])
+    }, [isOpen]);
+
+    // Функция для рендеринга соответствующей иконки флага
+    const renderFlagIcon = (locale: string) => {
+        switch (locale) {
+            case "en":
+                return (
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5 mr-2"
+                        viewBox="0 0 48 48"
+                    >
+                        <path
+                            fill="#f44336"
+                            d="M48 36c0 6.6-5.4 12-12 12H12C5.4 48 0 42.6 0 36v-2h48v2z"
+                        />
+                        <path fill="#3f51b5" d="M0 14h48v8H0z" />
+                        <path fill="#fff" d="M0 22h48v8H0z" />
+                        <path
+                            fill="#3f51b5"
+                            d="M48 12V2c0-1.1-.9-2-2-2H2C.9 0 0 .9 0 2v10h48z"
+                        />
+                    </svg>
+                );
+            case "ru":
+                return (
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5 mr-2"
+                        viewBox="0 0 48 48"
+                    >
+                        <path fill="#fff" d="M0 14h48v20H0z" />
+                        <path fill="#0052b4" d="M0 14h48v10H0z" />
+                        <path fill="#d80027" d="M0 24h48v10H0z" />
+                    </svg>
+                );
+            case "es":
+                return (
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5 mr-2"
+                        viewBox="0 0 48 48"
+                    >
+                        <path fill="#ffda44" d="M0 16h48v16H0z" />
+                        <path fill="#d80027" d="M0 32h48v16H0z" />
+                        <path fill="#d80027" d="M0 0h48v16H0z" />
+                    </svg>
+                );
+            default:
+                return null;
+        }
+    };
 
     return (
-        <div className="w-20 relative inline-block text-left">
+        <div className="w-36 relative inline-block text-left">
             {/* Кнопка для открытия меню */}
             <div>
                 <button
@@ -26,8 +82,9 @@ export default function Language_switcher({
                     id="options-menu"
                     aria-haspopup="true"
                     aria-expanded="true"
-                    onClick={ handlerWindow }
+                    onClick={handlerWindow}
                 >
+                    {renderFlagIcon(locale)}
                     {name}
                     {/* Иконка стрелки вниз */}
                     <svg
@@ -47,48 +104,39 @@ export default function Language_switcher({
             </div>
 
             {/* Выпадающее меню */}
-            {isOpen &&
-                (
-                    <div
+            {isOpen && (
+                <div
                     className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
                     role="menu"
                     aria-orientation="vertical"
                     aria-labelledby="options-menu"
                 >
                     <div className="py-1" role="none">
-                        {/* Пункт меню для английского */}
-                            {
-                                locales.map((item, index) => (
-                                    <Link key={index} href={asPath} locale={item.locale} onClick={handlerWindow}>
-                                        <span
-                                            className={` block px-4 py-2 text-sm ${
-                                                locale === "en" ? "bg-gray-100 text-gray-900" : "text-gray-700"
-                                            } hover:bg-gray-100 hover:text-gray-900`}
-                                            role="menuitem"
-                                        >
-                                            {item.content}
-                                        </span>
-                                    </Link>
-
-                                ))
-                            }
+                        {/* Пункты меню с флагами */}
+                        {locales.map((item, index) => (
+                            <Link
+                                key={index}
+                                href={asPath}
+                                locale={item.locale}
+                                onClick={handlerWindow}
+                            >
+                <span
+                    className={`flex items-center px-4 py-2 text-sm ${
+                        locale === item.locale
+                            ? "bg-gray-100 text-gray-900"
+                            : "text-gray-700"
+                    } hover:bg-gray-100 hover:text-gray-900`}
+                    role="menuitem"
+                >
+                  {/* Иконка флага */}
+                    {renderFlagIcon(item.locale)}
+                    {item.content}
+                </span>
+                            </Link>
+                        ))}
                     </div>
                 </div>
-                )}
+            )}
         </div>
     );
-};
-
-
-
-//------------------------Types----------------------------------------
-
-interface Language_switcher_props {
-    name: string;
-    locales: Array<Locale>;
-}
-
-interface Locale {
-        locale: string;
-        content: string;
 }
