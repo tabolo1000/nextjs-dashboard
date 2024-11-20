@@ -10,10 +10,7 @@ export const Audio_Navigate = ({
     return (
         <>
             <Audio_button path={path}/>
-            <NavigateButton to = {{
-                nextTask: `${to.nextTask}`,
-                nextExercise: `${to.nextExercise}`,
-            }}/>
+            <NavigateButton to = {to}/>
         </>
     )
 }
