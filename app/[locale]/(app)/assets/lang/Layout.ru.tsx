@@ -4,6 +4,7 @@ import {Aside_panel} from "@/app/[locale]/(app)/Aside_panel";
 import {Logo} from "@/app/ui/math/components/Logo";
 import ThemeToggle from "@/app/ui/math/components/ThemeToggle";
 import {Base_button} from "@/app/ui/math/components/Base_button";
+import { Button } from "@mui/material";
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -32,6 +33,7 @@ const Layout: React.FC<LayoutProps> = ({children}:LayoutProps ) => {
                         <Language_switcher name="Русский" locales={language}/>
                     </div>
                         <ThemeToggle/>
+                        <Link href = "/login">Login</Link>
                 </div>
             </header>
 

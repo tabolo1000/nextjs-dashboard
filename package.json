@@ -5,7 +5,9 @@
     "dev": "next dev",
     "devw": "cross-env NODE_OPTIONS='--inspect-brk' next dev -p 4000",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
@@ -38,13 +40,23 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "3.2.2",
+    "@storybook/addon-essentials": "8.4.7",
+    "@storybook/addon-interactions": "8.4.7",
+    "@storybook/addon-onboarding": "8.4.7",
+    "@storybook/blocks": "8.4.7",
+    "@storybook/nextjs": "8.4.7",
+    "@storybook/react": "8.4.7",
+    "@storybook/test": "8.4.7",
     "@types/bcrypt": "^5.0.2",
     "@types/node": "20.14.8",
     "@types/react": "18.3.3",
     "@types/react-dom": "18.3.0",
     "cross-env": "^7.0.3",
     "eslint": "^8",
-    "eslint-config-next": "14.2.14"
+    "eslint-config-next": "14.2.14",
+    "eslint-plugin-storybook": "^0.11.1",
+    "storybook": "8.4.7"
   },
   "engines": {
     "node": ">=20.12.0"

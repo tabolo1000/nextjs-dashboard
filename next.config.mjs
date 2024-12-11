@@ -7,6 +7,13 @@ const nextConfig = {
     experimental: {
         ppr: 'incremental',
       },
+    //  webpack: (config, { isServer }) => {
+    //    // Исключаем файлы историй из сборки
+    //    config.module.rules.push({
+    //      test: /\.stories\.(js|jsx|ts|tsx)$/,
+    //      loader: "ignore-loader",
+    //    });
+    //  }
 
 };
 
