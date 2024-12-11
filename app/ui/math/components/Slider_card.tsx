@@ -1,13 +1,22 @@
 "use client"
 
-import {Box, CardContent, Typography} from "@mui/material";
-import {Morpheme} from "@/app/ui/math/components/Morpheme";
+import { Box, CardContent, Typography } from "@mui/material";
+import { Morpheme } from "@/app/ui/math/components/Morpheme";
 
-export function Slider_card({morpheme, title, description, icon, quote, annotation }: {morpheme: any, title: string, description: string, icon: string, quote: string, annotation: string }) {
+export function Slider_card({
+    morpheme,
+    title,
+    description,
+    icon,
+    quote,
+    annotation,
+    joke,
+    derivatives
+}: CardProps) {
     return (
         <Box
             sx={{ display: 'flex', alignItems: 'center', gap: 2 }}
-            className="relative p-6 border-gray-200 rounded-lg border-2 shadow-lg"
+            className="dark:border-gray-600 relative p-6 border-gray-200 rounded-lg border-2 shadow-lg"
         >
             {/* Card Content */}
             <CardContent className="space-y-4">
@@ -15,11 +24,11 @@ export function Slider_card({morpheme, title, description, icon, quote, annotati
                 <Typography variant="h5" component="div" className=" indent-4 header_h3">
                     {icon}
                     {title}
-                    <Morpheme {...morpheme}/>
+                    <Morpheme {...morpheme} />
                 </Typography>
 
                 {/* Description */}
-                <Typography  variant="body1" color="text.secondary" className="paragraph indent-4">
+                <Typography variant="body1" color="text.secondary" className="paragraph indent-4">
                     {description}
                 </Typography>
 
@@ -32,12 +41,52 @@ export function Slider_card({morpheme, title, description, icon, quote, annotati
                 </Typography>
 
                 {/* Annotation */}
-                <div className="text-gray-700 text-base bg-indigo-50 p-4 rounded-lg shadow-inner">
+                <div className="annotation_card">
                     <p className="italic">
                         <span className="font-bold text-purple-600">Аннотация:</span> {annotation}
                     </p>
                 </div>
+
+
+                {/* Derivatives */}
+                <div className="annotation_card">
+                <span className="font-bold text-purple-600">Производные слова:</span>
+                    {(derivatives && derivatives.map((e, i) => {
+                        return <p className="italic" key={i}>
+                            <span className="font-bold text-purple-600">{i + 1}.</span> {
+                                e
+                            }
+                        </p>
+                    }))}
+
+                </div>
+
+                {/* Joke */}
+                <div className="annotation_card">
+                    <p className="italic">
+                        <span className="font-bold text-purple-600">Joke:</span> {joke}
+                    </p>
+                </div>
+
+
             </CardContent>
         </Box>
     );
+}
+
+
+interface CardProps {
+    morpheme: any,
+    title: string,
+    description: string,
+    icon: string,
+    quote: string,
+    annotation?: string,
+    joke?: string,
+    derivatives?: Array<string>
+}
+
+
+
+function getFirstWord() {
 }

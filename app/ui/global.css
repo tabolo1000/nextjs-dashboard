@@ -17,7 +17,20 @@ input[type='number']::-webkit-outer-spin-button {
   margin: 0;
 }
 
+/* animation */
 
+.base-animation-all{
+  @apply transition-all duration-1000 ease-in-out
+}
+
+
+
+
+/* main */
+
+.dark .main{
+  @apply base-animation-all bg-background h-min min-h-screen;
+}
 
 .layout {
   @apply flex flex-col h-screen;
@@ -28,7 +41,10 @@ input[type='number']::-webkit-outer-spin-button {
 }
 
 .header {
-  @apply bg-blue-600 text-white p-4;
+  @apply base-animation-all bg-blue-600 text-white p-4;
+}
+.dark .header {
+  @apply bg-gray-800 text-gray-200 border-gray-950 border rounded-b-xl;
 }
 
 .header-title {
@@ -36,7 +52,10 @@ input[type='number']::-webkit-outer-spin-button {
 }
 
 .sidebar {
-  @apply w-64 bg-gray-800 text-white p-6;
+  @apply w-64 bg-gray-800 text-white p-6 base-animation-all;
+}
+.dark .sidebar {
+  @apply bg-gray-900 text-gray-300 border-gray-950 border rounded-l-sm;
 }
 
 .sidebar-nav ul {
@@ -46,19 +65,27 @@ input[type='number']::-webkit-outer-spin-button {
 .sidebar-link {
   @apply block py-2 px-4 rounded hover:bg-gray-700;
 }
+.dark .sidebar-link {
+  @apply hover:bg-gray-600;
+}
 
 .main-content {
-  @apply flex-1 bg-gray-100 p-6;
+  @apply flex-1 bg-gray-100 p-6 base-animation-all;
+}
+.dark .main-content {
+  @apply bg-gray-900 text-gray-300 border-gray-900 border-8 rounded-xl;
 }
 
 .footer {
-  @apply bg-blue-600 text-white p-4 text-center;
+  @apply base-animation-all bg-blue-600 text-white p-4 text-center ;
+}
+.dark .footer {
+  @apply bg-gray-800 text-gray-400 border-gray-950 border rounded-t-xl;
 }
 
 .link {
   @apply block text-white font-bold py-4 px-6 rounded-lg shadow-md transition duration-300;
 }
-
 
 /* ------------------------Lesson's Links---------------------------------------- */
 
@@ -69,29 +96,50 @@ input[type='number']::-webkit-outer-spin-button {
 .link-blue {
   @apply bg-lesson-blue hover:bg-lesson-blue-hover;
 }
+.dark .link-blue {
+  @apply bg-blue-500 hover:bg-blue-400;
+}
 
 .link-green {
   @apply bg-lesson-green hover:bg-lesson-green-hover;
+}
+.dark .link-green {
+  @apply bg-green-500 hover:bg-green-400;
 }
 
 .link-red {
   @apply bg-lesson-red hover:bg-lesson-red-hover;
 }
+.dark .link-red {
+  @apply bg-red-500 hover:bg-red-400;
+}
 
 .link-purple {
   @apply bg-lesson-purple hover:bg-lesson-purple-hover;
+}
+.dark .link-purple {
+  @apply bg-purple-500 hover:bg-purple-400;
 }
 
 .link-yellow {
   @apply bg-lesson-yellow hover:bg-lesson-yellow-hover;
 }
+.dark .link-yellow {
+  @apply bg-yellow-500 hover:bg-yellow-400;
+}
 
 .link-pink {
   @apply bg-lesson-pink hover:bg-lesson-pink-hover;
 }
+.dark .link-pink {
+  @apply bg-pink-500 hover:bg-pink-400;
+}
 
 .link-teal {
   @apply bg-lesson-teal hover:bg-lesson-teal-hover;
+}
+.dark .link-teal {
+  @apply bg-teal-500 hover:bg-teal-400;
 }
 
 /*----------------Article------------------------------------------------------------*/
@@ -99,69 +147,142 @@ input[type='number']::-webkit-outer-spin-button {
 .header_h1 {
   @apply text-center text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 mb-3 p-2;
 }
+.dark .header_h1 {
+  @apply bg-gradient-to-r from-blue-400 via-purple-500 to-pink-400;
+}
+
 .term {
- @apply bg-red-100 text-red-800 font-semibold px-6 py-3 rounded-lg shadow-md text-xl border-l-4 border-red-500 pt-1 pb-1
+  @apply bg-red-100 text-red-800 font-semibold px-6 py-3 rounded-lg shadow-md text-xl border-l-4 border-red-500 pt-1 pb-1;
 }
-.header_h2_even{
-  @apply text-3xl font-bold text-green-600 mb-4 border-b-4 border-green-400 pb-2 leading-10 m-10
+.dark .term {
+  @apply bg-red-800 text-red-200 border-red-400;
 }
-.header_h2_odd{
+
+.header_h2_even {
+  @apply text-3xl font-bold text-green-600 mb-4 border-b-4 border-green-400 pb-2 leading-10 m-10;
+}
+.dark .header_h2_even {
+  @apply text-green-400 border-green-600;
+}
+
+.header_h2_odd {
   @apply text-3xl font-bold text-green-600 mb-4 bg-green-100 p-3 rounded-lg shadow-md leading-5 m-10;
 }
-.header_h3{
-  @apply text-2xl font-bold text-pink-700 mb-4
+.dark .header_h2_odd {
+  @apply text-green-300 bg-green-800;
 }
-/*.paragraph{
-  @apply text-lg leading-relaxed text-gray-800 mx-auto my-6 first:mt-0;
-}*/
 
-.paragraph{
+.header_h3 {
+  @apply text-2xl font-bold text-pink-700 mb-4;
+}
+.dark .header_h3 {
+  @apply text-pink-400;
+}
+
+.header_h4 {
+  @apply text-2xl font-semibold mb-3 text-gray-800;
+}
+.dark  .header_h4 {
+  @apply text-gray-300;
+}
+
+.paragraph {
   @apply text-lg leading-relaxed bg-white p-6 rounded-lg shadow-lg border-l-4 border-indigo-500;
 }
+.dark .paragraph {
+  @apply bg-gray-800 text-gray-300 border-indigo-400;
+}
 
-
-.paragraph_example{
+.paragraph_example {
   @apply text-lg leading-relaxed text-gray-700 max-w-2xl mx-auto mb-6;
 }
-.table_info{
+.dark .paragraph_example {
+  @apply text-gray-400;
+}
+
+.table_info {
   @apply table-auto w-full border-collapse border border-gray-300;
 }
-.table_header{
-  @apply border border-gray-300 px-4 py-2 bg-blue-200 text-blue-900
-}
-.table_data_cell{
-  @apply border border-gray-300 p-4
-}
-.table_row{
-  @apply even:bg-gray-50
-}
-.unordered_list{
-  @apply list-disc list-inside mb-6 paragraph w-full
-}
-.order_list{
-  @apply list-decimal list-inside mb-6 paragraph w-full
+.dark .table_info {
+  @apply border-gray-600;
 }
 
-  /*-----------------Button---------------------------------------------------------------*/
+.table_header {
+  @apply border border-gray-300 px-4 py-2 bg-blue-200 text-blue-900;
+}
+.dark .table_header {
+  @apply bg-gray-700 text-gray-200 border-gray-600;
+}
+
+.table_data_cell {
+  @apply border border-gray-300 p-4;
+}
+.dark .table_data_cell {
+  @apply border-gray-600 text-gray-400;
+}
+
+.table_row {
+  @apply even:bg-gray-50;
+}
+.dark .table_row {
+  @apply even:bg-gray-700;
+}
+
+.unordered_list {
+  @apply list-disc list-inside mb-6 paragraph w-full;
+}
+.dark .unordered_list {
+  @apply text-gray-300;
+}
+
+.order_list {
+  @apply list-decimal list-inside mb-6 paragraph w-full;
+}
+.dark .order_list {
+  @apply text-gray-300;
+}
+
+/*-----------------Button---------------------------------------------------------------*/
 
 .button_to {
-  @apply flex items-center justify-center text-white font-bold py-4 px-6 rounded-lg cursor-pointer;
+  @apply text-font flex items-center justify-center py-2  rounded-lg cursor-pointer bg-white hover:bg-gray-300;
+}
+.dark .button_to {
+  @apply text-white bg-gray-800 hover:bg-gray-700;
 }
 
 /*-----------------Tasks---------------------------------------------------------------*/
 .condition_task {
   @apply p-2.5 text-xl;
 }
+.dark .condition_task {
+  @apply text-gray-300;
+}
 
 .main_block_task {
   @apply container pt-0 p-8 flex flex-col justify-center place-items-center;
+}
+.dark .main_block_task {
+  @apply bg-gray-900 text-gray-300;
 }
 
 /* Общие стили для карточек */
 .card-base {
   @apply p-6 rounded-lg shadow-lg transform transition duration-300 ease-in-out;
 }
+.dark .card-base {
+  @apply bg-gray-800 text-gray-300;
+}
 
 .card-hover {
   @apply hover:shadow-2xl hover:scale-105;
+}
+.dark .card-hover {
+  @apply hover:shadow-gray-900;
+}
+
+
+/* Style for card of words */
+.annotation_card{
+  @apply paragraph text-gray-700 text-base bg-indigo-50 p-4 rounded-lg shadow-inner;
 }

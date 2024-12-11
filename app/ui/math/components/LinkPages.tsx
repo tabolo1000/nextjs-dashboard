@@ -16,7 +16,7 @@ export function Link_pages({ directories }: { directories: string[] }) {
 
     return (
         <div>
-            <h2 className="text-3xl font-extrabold text-gray-800 mb-8">
+            <h2 className="header_h1">
                 Explore the World of Words
             </h2>
 
@@ -27,7 +27,7 @@ export function Link_pages({ directories }: { directories: string[] }) {
                     placeholder="Search words..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-blue-300 transition"
+                    className="dark:bg-gray-900 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-blue-300 transition"
                 />
             </div>
 
@@ -38,17 +38,17 @@ export function Link_pages({ directories }: { directories: string[] }) {
                         <Link
                             href={`/linguistics/words/${dir}`}
                             key={dir}
-                            className="group relative bg-white shadow-lg rounded-lg p-6 transition-transform transform hover:scale-105 hover:shadow-xl"
+                            className="dark:bg-dark-card group relative bg-white shadow-lg rounded-lg p-6 transition-transform transform hover:scale-105 hover:shadow-xl"
                         >
                             <div
                                 className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 opacity-0 group-hover:opacity-10 rounded-lg transition-opacity"
                             ></div>
 
-                            <h3 className="text-xl font-semibold text-gray-900 mb-4 group-hover:text-blue-600">
+                            <h3 className="header_h4">
                                 {dir.replace(/_/g, ' ')}
                             </h3>
 
-                            <p className="text-gray-600">
+                            <p className="dark:text-gray-400 text-gray-600">
                                 Dive into the meaning and etymology of "{dir.replace(/_/g, ' ')}".
                             </p>
 

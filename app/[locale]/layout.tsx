@@ -2,6 +2,7 @@ import {NextIntlClientProvider} from 'next-intl';
 import {getMessages, setRequestLocale} from 'next-intl/server';
 import {notFound} from 'next/navigation';
 import { routing} from '@/i18n/routing';
+//import styles from "@auth/core/src/lib/pages/styles";
 //import {param} from "ts-interface-checker";
 
 /*
@@ -18,7 +19,7 @@ export default async function LocaleLayout({
     params: {locale: string}
 }) {
     // Ensure that the incoming `locale` is valid
-    if (!routing.locales.includes(locale as any)) {
+    if (!routing.locales.includes(locale as ("en" | "ru"))) {
         notFound();
     }
 

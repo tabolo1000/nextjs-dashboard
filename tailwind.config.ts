@@ -6,6 +6,7 @@ const config: Config = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: 'class', // Устанавливаем поддержку темной темы через класс
   theme: {
     extend: {
       gridTemplateColumns: {
@@ -22,30 +23,35 @@ const config: Config = {
         },
       },
       colors: {
-        'lesson-blue': '#3b82f6',       // Синий цвет для урока первого
-        'lesson-blue-hover': '#2563eb', // Темнее на два тона
-
-        'lesson-green': '#10b981',      // Зеленый цвет для урока второго
-        'lesson-green-hover': '#059669', // Темнее на два тона
-
-        'lesson-teal': '#14b8a6',       // Бирюзовый цвет для урока третьего
-        'lesson-teal-hover': '#0d9488', // Темнее на два тона
-
-        'lesson-yellow': '#facc15',     // Желтый цвет для урока четвертого
-        'lesson-yellow-hover': '#eab308', // Темнее на два тона
-
-        'lesson-red': '#ef4444',        // Красный цвет для урока пятого
-        'lesson-red-hover': '#dc2626',  // Темнее на два тона
-
-        'lesson-purple': '#a855f7',     // Фиолетовый цвет для урока шестого
-        'lesson-purple-hover': '#9333ea', // Темнее на два тона
-
-        'lesson-pink': '#ec4899',       // Розовый цвет для урока седьмого
-        'lesson-pink-hover': '#db2777', // Темнее на два тона
+        'font': '#101010',
+        'background': 'rgb(30,1,1)',
+        'lesson-blue': '#3b82f6',
+        'lesson-blue-hover': '#2563eb',
+        'lesson-green': '#10b981',
+        'lesson-green-hover': '#059669',
+        'lesson-teal': '#14b8a6',
+        'lesson-teal-hover': '#0d9488',
+        'lesson-yellow': '#facc15',
+        'lesson-yellow-hover': '#eab308',
+        'lesson-red': '#ef4444',
+        'lesson-red-hover': '#dc2626',
+        'lesson-purple': '#a855f7',
+        'lesson-purple-hover': '#9333ea',
+        'lesson-pink': '#ec4899',
+        'lesson-pink-hover': '#db2777',
         blue: {
           400: '#2589FE',
           500: '#0070F3',
           600: '#2F6FEB',
+        },
+        // Добавляем цвета для темной темы
+        dark: {
+          background: '#121212',
+          foreground: '#1e1e1e',
+          card: '#1f2937',
+          text: '#ffffff',
+          muted: '#a3a3a3',
+          accent: '#3b82f6',
         },
       },
     },
@@ -59,4 +65,5 @@ const config: Config = {
   },
   plugins: [require('@tailwindcss/forms')],
 };
+
 export default config;

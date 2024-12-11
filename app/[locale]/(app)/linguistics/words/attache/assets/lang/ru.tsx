@@ -5,10 +5,42 @@ import { Highlight } from "@/app/ui/math/components/Highlight";
 import { Quote_with_annotation } from "@/app/ui/math/components/сopywriting/Quote_with_annotation";
 import attacheImage from "@/app/[locale]/(app)/linguistics/words/attache/assets/img/attache.jpeg";
 import { Interactive_Image } from "@/app/ui/math/components/Interactive_Image";
+import axios from "axios";
 
-export default function Attache() {
+export default async function Attache() {
+    let data: Data_first[] = []
+  //  try {
+  //      const res = await fetch("http://localhost:3000/login"); // Ждём ответ от сервера
+   //     data = await res.json(); // Ждём, пока JSON распарсится
+   //     console.log(data); // Работайте с данными здесь
+   //     debugger; // Остановимся после получения данных
+   // } catch (error) {
+   //     console.error("Ошибка при запросе:", error);
+    //    debugger;
+   // }
+
+   try{
+    let dataPerson = await axios.post("http://localhost:3000/login/post", {name: "Mickale", age: 28});
+    debugger
+    data.push(dataPerson.data.person);
+    debugger
+   }
+   catch(error){
+    console.error("Ошибка при запросе:", error);
+    debugger
+   };
+
+
+    debugger;
     return (
         <div className="main_block_task">
+            {data.map((e, i)=>{
+                return <div>
+                    <h2>{e.name}</h2>
+                    <h2>{e.age}</h2>
+                </div>
+            })}
+            sfdfsdfds
             <h1 className="header_h1">Атташе</h1>
 
             <Section title="Этимология слова 'Атташе'">
@@ -135,3 +167,21 @@ export default function Attache() {
         </div>
     );
 }
+
+
+
+
+export interface Data_first {
+    title: string;
+    translation: string;
+    morpheme: {
+      root: string[];
+      prefix?: string; // Делаем свойства необязательными, если они могут отсутствовать
+      suffix?: string;
+      end?: string;
+    };
+    description: string;
+    icon: string;
+    quote: string;
+    annotation: string;
+  }

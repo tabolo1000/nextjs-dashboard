@@ -1,6 +1,7 @@
 import Language_switcher from "@/app/ui/math/components/Language_switcher";
 import {Aside_panel} from "@/app/[locale]/(app)/Aside_panel";
 import {Logo} from "@/app/ui/math/components/Logo";
+import ThemeToggle from "@/app/ui/math/components/ThemeToggle";
 
 
 
@@ -18,11 +19,16 @@ export default function Layout({children}:LayoutProps){
     ]
 
     return (
-        <div className="layout">
+        <div className="layout main">
             {/* Header */}
             <header className="header flex justify-between fixed w-full max-h-20 z-10">
                 <Logo/>
-                <Language_switcher name="English" locales={language}/>
+                <div className="flex justify-between">
+                    <div className={"mr-1"}>
+                        <Language_switcher name="English" locales={language}/>
+                    </div>
+                        <ThemeToggle/>
+                </div>
             </header>
 
             <div className="layout-body flex flex-1 pt-16">

@@ -17,7 +17,6 @@ export default async function Attache_info({
     setRequestLocale(locale);
 
     const Attache = await getMessages(locale);
-    debugger
     return (
       <div><Attache /></div>
     );
