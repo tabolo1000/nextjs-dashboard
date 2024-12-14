@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { Box, Pagination, Stack } from "@mui/material";
 import { Slider_card } from "@/app/ui/math/components/Slider_card";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -7,114 +8,143 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import data from "./(kata_words)/data.json";
+import axios from "axios";
 
 import {
-    Navigation,
-    Keyboard,
-    Virtual,
-    Mousewheel,
-    FreeMode,
-    Zoom,
-    A11y,
-    Manipulation,
+  Navigation,
+  Keyboard,
+  Virtual,
+  Mousewheel,
+  FreeMode,
+  Zoom,
+  A11y,
+  Manipulation,
 } from "swiper/modules";
 
-import { useState } from "react";
-
 export default function ButtonInfoSlider() {
-    const itemsPerPage = 10; // Количество записей на странице
-    const totalPages = Math.ceil(data.length / itemsPerPage); // Общее количество страниц
+  const [data, setData] = useState<Array<WordData>>([]); // Состояние для данных
+  const [page, setPage] = useState(1); // Текущая страница
+  const itemsPerPage = 10; // Количество записей на странице
 
-    const [page, setPage] = useState(1); // Текущая страница
-
-    // Определяем текущие элементы для отображения
-    const currentItems = data.slice(
-        (page - 1) * itemsPerPage,
-        page * itemsPerPage
-    );
-
-    // Обработчик изменения страницы
-    const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-        setPage(value);
+  // Загрузка данных
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3001/words");
+        debugger
+        setData(response.data)
+      } catch (error) {
+        console.error("Ошибка при запросе:", error); // Логирование ошибки
+      }
     };
+  
+    fetchData();
+  }, []);
+  // Определяем текущие элементы для отображения
+  const currentItems = data.slice(
+    (page - 1) * itemsPerPage,
+    page * itemsPerPage
+  );
 
-    return (
-        <div className="">
-            <h1 className="header_h1 absolute opacity-0">Button Information Slider</h1>
-            <Box sx={{ maxWidth: 900, margin: "0 auto" }}>
-                <Swiper
-                    modules={[
-                        Navigation,
-                        Virtual,
-                        Keyboard,
-                        Mousewheel,
-                        FreeMode,
-                        Zoom,
-                        A11y,
-                        Manipulation,
-                    ]}
-                    zoom={{ maxRatio: 3 }}
-                    virtual
-                    a11y={{
-                        prevSlideMessage: "Предыдущий слайд",
-                        nextSlideMessage: "Следующий слайд",
-                    }}
-                    freeMode
-                    mousewheel={{ forceToAxis: true }}
-                    keyboard={{ enabled: true }}
-                    spaceBetween={30}
-                    slidesPerView={1}
-                    navigation
-                    pagination={{ clickable: true }}
-                    scrollbar={{ draggable: true}}
-                    hashNavigation={{ watchState: true }}
-                >
-                    {currentItems.map((item, index) => (
-                        <SwiperSlide key={index}>
-                            <Slider_card
-                                morpheme={item.morpheme}
-                                title={item.title}
-                                description={item.description}
-                                icon={item.icon}
-                                quote={item.quote}
-                                annotation={item.annotation}
-                                joke={item.joke || ""}
-                                derivatives={item.derivatives}
-                            />
-                        </SwiperSlide>
-                    ))}
-                </Swiper>
-                <Box sx={{ display: "flex", justifyContent: "center", marginTop: 2 }}>
-                    <Stack spacing={2}>
-                        <Pagination
-                            shape="rounded"
-                            variant="outlined"
-                            count={totalPages}
-                            color="primary"
-                            page={page}
-                            onChange={handleChange}
-                            //className="!text-gray-400 dark:!text-gray-200 [&_.Mui-selected]:!bg-blue-600 [&_.Mui-selected]:!text-white"
-                            sx={{
-                                "& .MuiPaginationItem-root": {
-                                  color: "gray", // Цвет текста по умолчанию
-                                },
-                                "& .Mui-selected": {
-                                  backgroundColor: "#2563eb", // Синий фон для выбранного элемента
-                                  color: "white", // Белый текст для выбранного элемента
-                                },
-                                "& .MuiPaginationItem-root:hover": {
-                                  backgroundColor: "#1e40af", // Тёмно-синий фон при наведении
-                                },
-                            }}
-                        />
-                    </Stack>
-                </Box>
-            </Box>
-        </div>
-    );
+  // Обработчик изменения страницы
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
+
+  return (
+    <div className="">
+      <h1 className="header_h1 absolute opacity-0">
+        Button Information Slider
+      </h1>
+      <Box sx={{ maxWidth: 900, margin: "0 auto" }}>
+        <Swiper
+          modules={[
+            Navigation,
+            Virtual,
+            Keyboard,
+            Mousewheel,
+            FreeMode,
+            Zoom,
+            A11y,
+            Manipulation,
+          ]}
+          zoom={{ maxRatio: 3 }}
+          virtual
+          a11y={{
+            prevSlideMessage: "Предыдущий слайд",
+            nextSlideMessage: "Следующий слайд",
+          }}
+          freeMode
+          mousewheel={{ forceToAxis: true }}
+          keyboard={{ enabled: true }}
+          spaceBetween={30}
+          slidesPerView={1}
+          navigation
+          pagination={{ clickable: true }}
+          scrollbar={{ draggable: true }}
+          hashNavigation={{ watchState: true }}
+        >
+          {currentItems.map((item, index) => (
+            <SwiperSlide key={index}>
+              <Slider_card
+                morpheme={item.morpheme}
+                title={item.title}
+                description={item.description}
+                icon={item.icon}
+                quote={item.quote}
+                annotation={item.annotation}
+                joke={item.joke || ""}
+                derivatives={item.derivatives}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        <Box sx={{ display: "flex", justifyContent: "center", marginTop: 2 }}>
+          <Stack spacing={2}>
+            <Pagination
+              shape="rounded"
+              variant="outlined"
+              count={Math.ceil(data.length / itemsPerPage)} // Общее количество страниц
+              color="primary"
+              page={page}
+              onChange={handleChange}
+              sx={{
+                "& .MuiPaginationItem-root": {
+                  color: "gray", // Цвет текста по умолчанию
+                },
+                "& .Mui-selected": {
+                  backgroundColor: "#2563eb", // Синий фон для выбранного элемента
+                  color: "white", // Белый текст для выбранного элемента
+                },
+                "& .MuiPaginationItem-root:hover": {
+                  backgroundColor: "#1e40af", // Тёмно-синий фон при наведении
+                },
+              }}
+            />
+          </Stack>
+        </Box>
+      </Box>
+    </div>
+  );
 }
 
+
+
+interface WordData {
+    title: string;
+    description: string;
+    icon: string;
+    quote: string;
+    annotation: string;
+    joke?: string;
+    morpheme: {
+        prefix: Array<string>;
+        root: Array<string>;
+        suffix: Array<string>;
+        end: Array<string>;
+    }
+    derivatives?: Array<string>;
+}
 
 
 function getItems() {

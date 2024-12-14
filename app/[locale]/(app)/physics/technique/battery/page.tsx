@@ -9,19 +9,17 @@ export async function getMessages(locale: string) {
     }
 }
 
-export default async function Technique_info({
-                                                  params: { locale }
-                                              }: {
+export default async function Battery_info({
+                                                 params: { locale }
+                                             }: {
     params: { locale: string };
 }) {
     setRequestLocale(locale);
 
-    const Technique = await getMessages(locale);
-    debugger
+    const Battery = await getMessages(locale);
     return (
-      <div>
-        <Technique />
-    </div>
+        <div><Battery /></div>
     );
 }
+
 

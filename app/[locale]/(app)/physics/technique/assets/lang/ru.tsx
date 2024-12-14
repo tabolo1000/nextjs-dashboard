@@ -17,6 +17,13 @@ export default async function Technique() {
                 icon={<FaSnowflake />}
                 iconColor="text-blue-500"
             />
+            <LessonCard
+                to={"./technique/battery/"}
+                title="Техноло"
+                description="Узнайте, как работают холодильники, используя термодинамику для охлаждения и сохранения продуктов."
+                icon={<FaSnowflake />}
+                iconColor="text-blue-500"
+            />
         </div>
     </div>
 }
