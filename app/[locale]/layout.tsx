@@ -2,6 +2,10 @@ import {NextIntlClientProvider} from 'next-intl';
 import {getMessages, setRequestLocale} from 'next-intl/server';
 import {notFound} from 'next/navigation';
 import { routing} from '@/i18n/routing';
+
+import {store} from "@/app/store";
+import {Providers} from "@/app/providers";
+
 //import styles from "@auth/core/src/lib/pages/styles";
 //import {param} from "ts-interface-checker";
 
@@ -30,11 +34,13 @@ export default async function LocaleLayout({
     const messages = await getMessages();
     return (
         <html lang={locale}>
-        <body>
-        <NextIntlClientProvider messages={messages}>
-            {children}
-        </NextIntlClientProvider>
-        </body>
+            <body>
+                <Providers>
+                    <NextIntlClientProvider messages={messages}>
+                        {children}
+                    </NextIntlClientProvider>
+                </Providers>
+            </body>
         </html>
     );
 }

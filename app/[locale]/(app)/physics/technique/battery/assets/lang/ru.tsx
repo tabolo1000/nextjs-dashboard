@@ -1,30 +1,28 @@
-
-
 import { Section } from "@/app/ui/math/components/Section";
-import { BatteryReactionsSwiper } from "../BatteryReactionsSwiper";
 import { Highlight } from "@/app/ui/math/components/Highlight";
-import dynamic from "next/dynamic";
-import { TableComponent } from "./TableComponent";
+import {CustomTable} from "@/app/ui/math/components/CustomTable";
+import React from "react";
+import {BatterySlide} from "@/app/[locale]/(app)/physics/technique/battery/assets/BatterySlide";
+import {Interactive_Image} from "@/app/ui/math/components/Interactive_Image";
+import battery from "../img/battery.png"
+import alkaline_battery from "../img/alkaline_battery.png"
+import akb from "../img/akb_4.png"
+import anod from "../img/anod (4).jpg"
+import cupper from "../img/cupper.jpg"
+import cuSO4 from "../img/cuSO4.jpg"
+import Li_lon from "../img/Li-lon.jpg"
+import type_of_battery from "../img/type_of_battery.jpg"
+import work_battery from "../img/work_battery.jpg"
+import zink from "../img/zink.jpg"
 
 
-const rowData = [
-    { parameter: "Напряжение", value: "1.5 В" },
-    { parameter: "Срок хранения", value: "5–10 лет" },
-    { parameter: "Перезаряжаемые", value: "Нет" },
-    { parameter: "Емкость", value: "до 3000 мА·ч (AA)" },
-];
 
-// Столбцы
-const columnDefs = [
-    { headerName: "Параметр", field: "parameter", sortable: true, filter: true },
-    { headerName: "Значение", field: "value", sortable: true, filter: true },
-];
 
 
 
 const BatteryAndCopperArticle: React.FC = () => {
     return (
-        <div className="main_block_task" >
+        <div className="main_block_task " >
            
             {/* Заголовок статьи */}
             <h1 className="header_h1 "> Как работают батарейки и что влияет на их эффективность? </h1>
@@ -38,7 +36,9 @@ const BatteryAndCopperArticle: React.FC = () => {
                 температуры и условий хранения.
             </p>
 
-            <TableComponent columnDefs = {columnDefs} rowData = {rowData}/>
+
+            <Interactive_Image src={battery} alt={"batter"} width={300} height={300}/>
+
 
             {/* Основной принцип работы батареек */}
             <Section title="Основной принцип работы батарейки" parity>
@@ -48,7 +48,7 @@ const BatteryAndCopperArticle: React.FC = () => {
                     которое преобразует химическую энергию в электрическую.
                     Это стало возможным благодаря открытиям в химии и физике,
                     начиная с работы Алессандро Вольта в XVIII веке,
-                    когда была создана первая батарейка — "вольтов столб".
+                    когда была создана первая батарейка — &#34;вольтов столб&#34;.
                 </p>
 
                 {/* Основные компоненты */}
@@ -57,26 +57,29 @@ const BatteryAndCopperArticle: React.FC = () => {
                     <li>
                         <Highlight>Анод:</Highlight> Источник электронов. Например, цинковая пластина в обычной батарейке.
                         <p className="paragraph">
-                            Этимология: от греческого слова "ἄνοδος" (анодос), что означает "восхождение". Это связано с движением заряда от анода в направлении внешней цепи.
+                            Этимология: от греческого слова &#34;ἄνοδος&#34; (анодос), что означает &#34;восхождение&#34;. Это связано с движением заряда от анода в направлении внешней цепи.
                         </p>
+                        <Interactive_Image src={anod} alt={"batter"} width={300} height={300}/>
                     </li>
                     <li>
                         <Highlight>Катод:</Highlight> Приёмник электронов. Например, угольный стержень или медная пластина.
                         <p className="paragraph">
-                            Этимология: от греческого "κάθοδος" (катодос), что означает "нисхождение". Это отражает движение заряда к катоду внутри батарейки.
+                            Этимология: от греческого &#34;κάθοδος&#34; (катодос), что означает &#34;нисхождение&#34;. Это отражает движение заряда к катоду внутри батарейки.
                         </p>
+                        <Interactive_Image src={zink} alt={"batter"} width={300} height={300}/>
                     </li>
                     <li>
                         <Highlight>Электролит:</Highlight> Среда, в которой происходят реакции. Например, раствор солей или кислоты.
                         <p className="paragraph">
-                            Этимология: от греческого "ἤλεκτρον" (электрон, янтарь) и "λύσις" (разложение). Электролит — это вещество, которое проводит электрический ток за счёт движения ионов.
+                            Этимология: от греческого &#34;ἤλεκτρον&#34; (электрон, янтарь) и &#34;λύσις&#34; (разложение). Электролит — это вещество, которое проводит электрический ток за счёт движения ионов.
                         </p>
+                        <Interactive_Image src={cuSO4} alt={"batter"} width={300} height={300}/>
                     </li>
                 </ul>
 
                 {/* Метафора для упрощения понимания */}
                 <p className="paragraph">
-                    Если представить батарейку как систему подачи воды, то анод — это резервуар, из которого "вытекает" вода (электроны), катод — это место, где вода "собирается", а электролит — это трубы, по которым вода движется, чтобы соединить оба конца.
+                    Если представить батарейку как систему подачи воды, то анод — это резервуар, из которого &#34;вытекает&#34; вода (электроны), катод — это место, где вода &#34;собирается&#34;, а электролит — это трубы, по которым вода движется, чтобы соединить оба конца.
                 </p>
 
                 {/* Как работает батарейка */}
@@ -118,7 +121,7 @@ const BatteryAndCopperArticle: React.FC = () => {
 
             {/* Химические реакции в батарейке */}
 
-            <BatteryReactionsSwiper />
+            <BatterySlide  />
 
             {/* Условия хранения */}
             <Section title="Как условия хранения влияют на батарейки?">
@@ -169,36 +172,19 @@ const BatteryAndCopperArticle: React.FC = () => {
                 </ul>
 
                 <h3 className="header_h3 ">Сроки хранения</h3>
-                <table className="table-auto w-full  border-collapse border border-gray-600">
-                    <thead>
-                        <tr>
-                            <th className="border border-gray-600 px-4 py-2">Тип батарейки</th>
-                            <th className="border border-gray-600 px-4 py-2">Рекомендуемая температура</th>
-                            <th className="border border-gray-600 px-4 py-2">Срок хранения</th>
-                            <th className="border border-gray-600 px-4 py-2">Особенности</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td className="border border-gray-600 px-4 py-2">Щелочные</td>
-                            <td className="border border-gray-600 px-4 py-2">0°C – +25°C</td>
-                            <td className="border border-gray-600 px-4 py-2">5–10 лет</td>
-                            <td className="border border-gray-600 px-4 py-2">Сохраняют до 90% ёмкости через 5 лет при правильных условиях.</td>
-                        </tr>
-                        <tr>
-                            <td className="border border-gray-600 px-4 py-2">Литий-ионные</td>
-                            <td className="border border-gray-600 px-4 py-2">+5°C – +20°C</td>
-                            <td className="border border-gray-600 px-4 py-2">1–3 года</td>
-                            <td className="border border-gray-600 px-4 py-2">Теряют 10–20% ёмкости ежегодно даже без использования.</td>
-                        </tr>
-                        <tr>
-                            <td className="border border-gray-600 px-4 py-2">Свинцово-кислотные</td>
-                            <td className="border border-gray-600 px-4 py-2">+10°C – +25°C</td>
-                            <td className="border border-gray-600 px-4 py-2">6–12 месяцев</td>
-                            <td className="border border-gray-600 px-4 py-2">Требуют подзарядки каждые 6 месяцев при хранении.</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <CustomTable
+                    columns={[
+                        { label: "Тип батарейки", textAlign: "left" },
+                        { label: "Рекомендуемая температура", textAlign: "left" },
+                        { label: "Срок хранения", textAlign: "left" },
+                        { label: "Особенности", textAlign: "left" },
+                    ]}
+                    rows={[
+                        ["Щелочные", "0°C – +25°C", "5–10 лет", "Сохраняют до 90% ёмкости через 5 лет при правильных условиях."],
+                        ["Литий-ионные", "+5°C – +20°C", "1–3 года", "Теряют 10–20% ёмкости ежегодно даже без использования."],
+                        ["Свинцово-кислотные", "+10°C – +25°C", "6–12 месяцев", "Требуют подзарядки каждые 6 месяцев при хранении."]
+                    ]}
+                />
 
                 <p className="paragraph  mt-4">
                     Соблюдение этих рекомендаций поможет батарейкам сохранить свою ёмкость и работоспособность на протяжении долгого времени.
@@ -265,36 +251,19 @@ const BatteryAndCopperArticle: React.FC = () => {
 
                 {/* Таблица температур для разных батареек */}
                 <h3 className="header_h3  mt-8">Рекомендованная температура</h3>
-                <table className="table-auto w-full  border-collapse border border-gray-600 mt-4">
-                    <thead>
-                        <tr>
-                            <th className="border border-gray-600 px-4 py-2">Тип батарейки</th>
-                            <th className="border border-gray-600 px-4 py-2">Оптимальная температура</th>
-                            <th className="border border-gray-600 px-4 py-2">Критическая температура</th>
-                            <th className="border border-gray-600 px-4 py-2">Особенности</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td className="border border-gray-600 px-4 py-2">Щелочные</td>
-                            <td className="border border-gray-600 px-4 py-2">+10°C – +25°C</td>
-                            <td className="border border-gray-600 px-4 py-2">-10°C / +50°C</td>
-                            <td className="border border-gray-600 px-4 py-2">Снижение ёмкости при сильном холоде или жаре.</td>
-                        </tr>
-                        <tr>
-                            <td className="border border-gray-600 px-4 py-2">Литий-ионные</td>
-                            <td className="border border-gray-600 px-4 py-2">+15°C – +25°C</td>
-                            <td className="border border-gray-600 px-4 py-2">-20°C / +40°C</td>
-                            <td className="border border-gray-600 px-4 py-2">Быстрая деградация при жаре, снижение ёмкости на морозе.</td>
-                        </tr>
-                        <tr>
-                            <td className="border border-gray-600 px-4 py-2">Свинцово-кислотные</td>
-                            <td className="border border-gray-600 px-4 py-2">+10°C – +25°C</td>
-                            <td className="border border-gray-600 px-4 py-2">-10°C / +45°C</td>
-                            <td className="border border-gray-600 px-4 py-2">Сильный саморазряд при жаре, возможное замерзание электролита на морозе.</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <CustomTable
+                    columns={[
+                        { label: "Тип батарейки", textAlign: "left" },
+                        { label: "Оптимальная температура", textAlign: "left" },
+                        { label: "Критическая температура", textAlign: "left" },
+                        { label: "Особенности", textAlign: "left" },
+                    ]}
+                    rows={[
+                        ["Щелочные", "+10°C – +25°C", "-10°C / +50°C", "Снижение ёмкости при сильном холоде или жаре."],
+                        ["Литий-ионные", "+15°C – +25°C", "-20°C / +40°C", "Быстрая деградация при жаре, снижение ёмкости на морозе."],
+                        ["Свинцово-кислотные", "+10°C – +25°C", "-10°C / +45°C", "Сильный саморазряд при жаре, возможное замерзание электролита на морозе."]
+                    ]}
+                />
 
                 {/* Рекомендации */}
                 <h3 className="header_h3  mt-8">Рекомендации по эксплуатации</h3>
@@ -426,47 +395,18 @@ const BatteryAndCopperArticle: React.FC = () => {
                             Сравнение последовательного и параллельного соединений
                         </h3>
                     </header>
-                    <table
-                        className="table-auto w-full border-collapse border border-green-800 mt-4"
-                        aria-label="Сравнение последовательного и параллельного соединений"
-                    >
-                        <thead className="bg-green-800 text-green-300">
-                            <tr>
-                                <th className="border border-green-800 px-4 py-2">Характеристика</th>
-                                <th className="border border-green-800 px-4 py-2">
-                                    Последовательное соединение
-                                </th>
-                                <th className="border border-green-800 px-4 py-2">
-                                    Параллельное соединение
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td className="border border-green-800 px-4 py-2">Напряжение</td>
-                                <td className="border border-green-800 px-4 py-2">Суммируется</td>
-                                <td className="border border-green-800 px-4 py-2">
-                                    Остаётся таким же
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="border border-green-800 px-4 py-2">Ёмкость</td>
-                                <td className="border border-green-800 px-4 py-2">
-                                    Остаётся неизменной
-                                </td>
-                                <td className="border border-green-800 px-4 py-2">Суммируется</td>
-                            </tr>
-                            <tr>
-                                <td className="border border-green-800 px-4 py-2">Сила тока</td>
-                                <td className="border border-green-800 px-4 py-2">
-                                    Остаётся неизменной
-                                </td>
-                                <td className="border border-green-800 px-4 py-2">
-                                    Увеличивается
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <CustomTable
+                        columns={[
+                            { label: "Характеристика", textAlign: "left" },
+                            { label: "Последовательное соединение", textAlign: "left" },
+                            { label: "Параллельное соединение", textAlign: "left" },
+                        ]}
+                        rows={[
+                            ["Напряжение", "Суммируется", " Остаётся таким же"],
+                            ["Ёмкость", "Остаётся неизменной", "Суммируется"],
+                            ["Сила тока", "Остаётся неизменной", "Увеличивается"],
+                        ]}
+                    />
                 </article>
 
                 {/* Заключение */}
@@ -512,78 +452,25 @@ const BatteryAndCopperArticle: React.FC = () => {
                     <p className="paragraph ">
                         Цилиндрические батарейки — самые распространённые. Они используются в пультах, фонариках, игрушках и других устройствах.
                     </p>
-                    <table
-                        className="table-auto w-full border-collapse border border-green-800 mt-4"
-                        aria-label="Таблица цилиндрических батареек"
-                    >
-                        <thead className="bg-green-800 text-green-300">
-                            <tr>
-                                <th className="border border-green-800 px-4 py-2">Формат</th>
-                                <th className="border border-green-800 px-4 py-2">Диаметр (мм)</th>
-                                <th className="border border-green-800 px-4 py-2">Длина (мм)</th>
-                                <th className="border border-green-800 px-4 py-2">Напряжение</th>
-                                <th className="border border-green-800 px-4 py-2">Примеры устройств</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td className="border border-green-800 px-4 py-2">AA (R6)</td>
-                                <td className="border border-green-800 px-4 py-2">14,5</td>
-                                <td className="border border-green-800 px-4 py-2">50,5</td>
-                                <td className="border border-green-800 px-4 py-2">1,2–1,5 В</td>
-                                <td className="border border-green-800 px-4 py-2">Пульты, фонарики</td>
-                            </tr>
-                            <tr>
-                                <td className="border border-green-800 px-4 py-2">AAA (R03)</td>
-                                <td className="border border-green-800 px-4 py-2">10,5</td>
-                                <td className="border border-green-800 px-4 py-2">44,5</td>
-                                <td className="border border-green-800 px-4 py-2">1,2–1,5 В</td>
-                                <td className="border border-green-800 px-4 py-2">Часы, пульты</td>
-                            </tr>
-                            <tr>
-                                <td className="border border-green-800 px-4 py-2">C (R14)</td>
-                                <td className="border border-green-800 px-4 py-2">26,2</td>
-                                <td className="border border-green-800 px-4 py-2">50,0</td>
-                                <td className="border border-green-800 px-4 py-2">1,5 В</td>
-                                <td className="border border-green-800 px-4 py-2">Фонари, радио, игрушки</td>
-                            </tr>
-                            <tr>
-                                <td className="border border-green-800 px-4 py-2">D (R20)</td>
-                                <td className="border border-green-800 px-4 py-2">34,2</td>
-                                <td className="border border-green-800 px-4 py-2">61,5</td>
-                                <td className="border border-green-800 px-4 py-2">1,5 В</td>
-                                <td className="border border-green-800 px-4 py-2">Фонари, радио, крупные игрушки</td>
-                            </tr>
-                            <tr>
-                                <td className="border border-green-800 px-4 py-2">18650</td>
-                                <td className="border border-green-800 px-4 py-2">18,6</td>
-                                <td className="border border-green-800 px-4 py-2">65,2</td>
-                                <td className="border border-green-800 px-4 py-2">3,6–4,2 В</td>
-                                <td className="border border-green-800 px-4 py-2">Ноутбуки, фонари, вейпы</td>
-                            </tr>
-                            <tr>
-                                <td className="border border-green-800 px-4 py-2">14500</td>
-                                <td className="border border-green-800 px-4 py-2">14,5</td>
-                                <td className="border border-green-800 px-4 py-2">50,0</td>
-                                <td className="border border-green-800 px-4 py-2">3,6–3,7 В</td>
-                                <td className="border border-green-800 px-4 py-2">Фонарики, портативные устройства</td>
-                            </tr>
-                            <tr>
-                                <td className="border border-green-800 px-4 py-2">21700</td>
-                                <td className="border border-green-800 px-4 py-2">21,0</td>
-                                <td className="border border-green-800 px-4 py-2">70,0</td>
-                                <td className="border border-green-800 px-4 py-2">3,6–4,2 В</td>
-                                <td className="border border-green-800 px-4 py-2">Электровелосипеды, фонари</td>
-                            </tr>
-                            <tr>
-                                <td className="border border-green-800 px-4 py-2">32650</td>
-                                <td className="border border-green-800 px-4 py-2">32,2</td>
-                                <td className="border border-green-800 px-4 py-2">70,0</td>
-                                <td className="border border-green-800 px-4 py-2">3,2–3,7 В</td>
-                                <td className="border border-green-800 px-4 py-2">Мощные фонари, электровелосипеды</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <CustomTable
+                        columns={[
+                            { label: "Формат", textAlign: "left" },
+                            { label: "Диаметр (мм)", textAlign: "left" },
+                            { label: "Длина (мм)", textAlign: "left" },
+                            { label: "Напряжение", textAlign: "left" },
+                            { label: "Примеры устройств", textAlign: "left" },
+                        ]}
+                        rows={[
+                            ["AA (R6)", "14,5", "50,5", "1,2–1,5 В", "Пульты, фонарики"],
+                            ["AAA (R03)", "10,5", "44,5", "1,2–1,5 В", "Часы, пульты"],
+                            ["C (R14)", "26,2", "50,0", "1,5 В", "Фонари, радио, игрушки"],
+                            ["D (R20)", "34,2", "61,5", "1,5 В", "Фонари, радио, крупные игрушки"],
+                            ["18650", "18,6", "65,2", "3,6–4,2 В", "Ноутбуки, фонари, вейпы"],
+                            ["14500", "14,5", "50,0", "3,6–3,7 В", "Фонарики, портативные устройства"],
+                            ["21700", "21,0", "70,0", "3,6–4,2 В", "Электровелосипеды, фонари"],
+                            ["32650", "32,2", "70,0", "3,2–3,7 В", "Мощные фонари, электровелосипеды"]
+                        ]}
+                    />
                     <p className="paragraph  mt-4">
                         <Highlight>Особенности:</Highlight> Например, батарейки формата 18650 требуют систем защиты от переразряда и перезаряда, особенно при использовании в мощных устройствах.
                     </p>
@@ -602,64 +489,23 @@ const BatteryAndCopperArticle: React.FC = () => {
                     <p className="paragraph ">
                         Таблеточные батарейки компактны и используются в часах, калькуляторах, медицинских приборах и других миниатюрных устройствах.
                     </p>
-                    <table
-                        className="table-auto w-full border-collapse border border-green-800 mt-4"
-                        aria-label="Таблица таблеточных батареек"
-                    >
-                        <thead className="bg-green-800 text-green-300">
-                            <tr>
-                                <th className="border border-green-800 px-4 py-2">Формат</th>
-                                <th className="border border-green-800 px-4 py-2">Диаметр (мм)</th>
-                                <th className="border border-green-800 px-4 py-2">Высота (мм)</th>
-                                <th className="border border-green-800 px-4 py-2">Напряжение</th>
-                                <th className="border border-green-800 px-4 py-2">Примеры устройств</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td className="border border-green-800 px-4 py-2">CR2032</td>
-                                <td className="border border-green-800 px-4 py-2">20</td>
-                                <td className="border border-green-800 px-4 py-2">3,2</td>
-                                <td className="border border-green-800 px-4 py-2">3 В</td>
-                                <td className="border border-green-800 px-4 py-2">Часы, материнские платы</td>
-                            </tr>
-                            <tr>
-                                <td className="border border-green-800 px-4 py-2">CR2025</td>
-                                <td className="border border-green-800 px-4 py-2">20</td>
-                                <td className="border border-green-800 px-4 py-2">2,5</td>
-                                <td className="border border-green-800 px-4 py-2">3 В</td>
-                                <td className="border border-green-800 px-4 py-2">Пульты, брелоки</td>
-                            </tr>
-                            <tr>
-                                <td className="border border-green-800 px-4 py-2">CR2016</td>
-                                <td className="border border-green-800 px-4 py-2">20</td>
-                                <td className="border border-green-800 px-4 py-2">1,6</td>
-                                <td className="border border-green-800 px-4 py-2">3 В</td>
-                                <td className="border border-green-800 px-4 py-2">Калькуляторы, пульты</td>
-                            </tr>
-                            <tr>
-                                <td className="border border-green-800 px-4 py-2">LR44</td>
-                                <td className="border border-green-800 px-4 py-2">11,6</td>
-                                <td className="border border-green-800 px-4 py-2">5,4</td>
-                                <td className="border border-green-800 px-4 py-2">1,5 В</td>
-                                <td className="border border-green-800 px-4 py-2">Игрушки, лазеры</td>
-                            </tr>
-                            <tr>
-                                <td className="border border-green-800 px-4 py-2">SR44</td>
-                                <td className="border border-green-800 px-4 py-2">11,6</td>
-                                <td className="border border-green-800 px-4 py-2">5,4</td>
-                                <td className="border border-green-800 px-4 py-2">1,55 В</td>
-                                <td className="border border-green-800 px-4 py-2">Часы, точные приборы</td>
-                            </tr>
-                            <tr>
-                                <td className="border border-green-800 px-4 py-2">CR123A</td>
-                                <td className="border border-green-800 px-4 py-2">17,0</td>
-                                <td className="border border-green-800 px-4 py-2">34,5</td>
-                                <td className="border border-green-800 px-4 py-2">3 В</td>
-                                <td className="border border-green-800 px-4 py-2">Фонарики, сигнализации</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <CustomTable
+                        columns={[
+                            { label: "Формат", textAlign: "left" },
+                            { label: "Диаметр (мм)", textAlign: "left" },
+                            { label: "Высота (мм)", textAlign: "left" },
+                            { label: "Напряжение", textAlign: "left" },
+                            { label: "Примеры устройств", textAlign: "left" },
+                        ]}
+                        rows={[
+                            ["CR2032", "20", "3,2", "3 В", "Часы, материнские платы"],
+                            ["CR2025", "20", "2,5", "3 В", "Пульты, брелоки"],
+                            ["CR2016", "20", "1,6", "3 В", "Калькуляторы, пульты"],
+                            ["LR44", "11,6", "5,4", "1,5 В", "Игрушки, лазеры"],
+                            ["SR44", "11,6", "5,4", "1,55 В", "Часы, точные приборы"],
+                            ["CR123A", "17,0", "34,5", "3 В", "Фонарики, сигнализации"]
+                        ]}
+                    />
                     <p className="paragraph  mt-4">
                         <Highlight>Особенности:</Highlight> Литиевые батарейки, такие как CR2032, сохраняют заряд до 10 лет, что делает их лучшим выбором для устройств с низким энергопотреблением.
                     </p>
@@ -678,76 +524,23 @@ const BatteryAndCopperArticle: React.FC = () => {
                     <p className="paragraph ">
                         Призматические батарейки имеют прямоугольную или плоскую форму. Они широко используются в компактных устройствах, таких как мобильные телефоны, фотокамеры, ноутбуки и электромобили.
                     </p>
-                    <table
-                        className="table-auto w-full border-collapse border border-green-800 mt-4"
-                        aria-label="Таблица призматических батареек"
-                    >
-                        <thead className="bg-green-800 text-green-300">
-                            <tr>
-                                <th className="border border-green-800 px-4 py-2">Формат</th>
-                                <th className="border border-green-800 px-4 py-2">Размеры (мм)</th>
-                                <th className="border border-green-800 px-4 py-2">Напряжение</th>
-                                <th className="border border-green-800 px-4 py-2">Ёмкость (мА·ч)</th>
-                                <th className="border border-green-800 px-4 py-2">Примеры устройств</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td className="border border-green-800 px-4 py-2">9V (PP3)</td>
-                                <td className="border border-green-800 px-4 py-2">26,5 × 17,5 × 48,5</td>
-                                <td className="border border-green-800 px-4 py-2">9 В</td>
-                                <td className="border border-green-800 px-4 py-2">300–600</td>
-                                <td className="border border-green-800 px-4 py-2">
-                                    Пожарные извещатели, мультиметры
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="border border-green-800 px-4 py-2">BL-5C</td>
-                                <td className="border border-green-800 px-4 py-2">53 × 34 × 5,5</td>
-                                <td className="border border-green-800 px-4 py-2">3,7 В</td>
-                                <td className="border border-green-800 px-4 py-2">850–1150</td>
-                                <td className="border border-green-800 px-4 py-2">
-                                    Мобильные телефоны (Nokia), портативные устройства
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="border border-green-800 px-4 py-2">LP402025</td>
-                                <td className="border border-green-800 px-4 py-2">40 × 20 × 2,5</td>
-                                <td className="border border-green-800 px-4 py-2">3,7 В</td>
-                                <td className="border border-green-800 px-4 py-2">150–200</td>
-                                <td className="border border-green-800 px-4 py-2">
-                                    Bluetooth-наушники, медицинские устройства
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="border border-green-800 px-4 py-2">LP803860</td>
-                                <td className="border border-green-800 px-4 py-2">80 × 38 × 6</td>
-                                <td className="border border-green-800 px-4 py-2">3,7 В</td>
-                                <td className="border border-green-800 px-4 py-2">2000–2500</td>
-                                <td className="border border-green-800 px-4 py-2">
-                                    Портативные колонки, планшеты
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="border border-green-800 px-4 py-2">LP805060</td>
-                                <td className="border border-green-800 px-4 py-2">80 × 50 × 6</td>
-                                <td className="border border-green-800 px-4 py-2">3,7 В</td>
-                                <td className="border border-green-800 px-4 py-2">3000–3500</td>
-                                <td className="border border-green-800 px-4 py-2">
-                                    Электронные книги, фотокамеры
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="border border-green-800 px-4 py-2">EV Module</td>
-                                <td className="border border-green-800 px-4 py-2">Призматический</td>
-                                <td className="border border-green-800 px-4 py-2">3,2–3,7 В</td>
-                                <td className="border border-green-800 px-4 py-2">40 000+</td>
-                                <td className="border border-green-800 px-4 py-2">
-                                    Электромобили (Tesla, BYD)
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <CustomTable
+                        columns={[
+                            { label: "Формат", textAlign: "left" },
+                            { label: "Размеры (мм)", textAlign: "left" },
+                            { label: "Напряжение", textAlign: "left" },
+                            { label: "Ёмкость (мА·ч)", textAlign: "left" },
+                            { label: "Примеры устройств", textAlign: "left" },
+                        ]}
+                        rows={[
+                            ["9V (PP3)", "26,5 × 17,5 × 48,5", "9 В", "300–600", "Пожарные извещатели, мультиметры"],
+                            ["BL-5C", "53 × 34 × 5,5", "3,7 В", "850–1150", "Мобильные телефоны (Nokia), портативные устройства"],
+                            ["LP402025", "40 × 20 × 2,5", "3,7 В", "150–200", "Bluetooth-наушники, медицинские устройства"],
+                            ["LP803860", "80 × 38 × 6", "3,7 В", "2000–2500", "Портативные колонки, планшеты"],
+                            ["LP805060", "80 × 50 × 6", "3,7 В", "3000–3500", "Электронные книги, фотокамеры"],
+                            ["EV Module", "Призматический", "3,2–3,7 В", "40 000+", "Электромобили (Tesla, BYD)"]
+                        ]}
+                    />
                     <p className="paragraph  mt-4">
                         <Highlight>Особенности:</Highlight> Призматические батарейки чаще всего применяются в устройствах, где важно компактное размещение. Многие из них имеют литий-ионную или литий-полимерную основу. Литий-полимерные аккумуляторы (Li-Po) имеют меньший вес и толщину по сравнению с литий-ионными, но требуют более осторожного обращения из-за чувствительности к температуре и механическим повреждениям.
                     </p>
@@ -769,47 +562,20 @@ const BatteryAndCopperArticle: React.FC = () => {
                     <p className="paragraph ">
                         Автомобильные аккумуляторы используются для запуска двигателя и питания электрических систем автомобиля. Классический автомобильный аккумулятор — это свинцово-кислотная батарея, которая обеспечивает напряжение 12 В.
                     </p>
-                    <table
-                        className="table-auto w-full border-collapse border border-green-800 mt-4"
-                        aria-label="Таблица автомобильных аккумуляторов"
-                    >
-                        <thead className="bg-green-800 text-green-300">
-                            <tr>
-                                <th className="border border-green-800 px-4 py-2">Тип аккумулятора</th>
-                                <th className="border border-green-800 px-4 py-2">Напряжение</th>
-                                <th className="border border-green-800 px-4 py-2">Ёмкость (А·ч)</th>
-                                <th className="border border-green-800 px-4 py-2">Примеры применения</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td className="border border-green-800 px-4 py-2">Свинцово-кислотный</td>
-                                <td className="border border-green-800 px-4 py-2">12 В</td>
-                                <td className="border border-green-800 px-4 py-2">45–100</td>
-                                <td className="border border-green-800 px-4 py-2">Легковые автомобили</td>
-                            </tr>
-                            <tr>
-                                <td className="border border-green-800 px-4 py-2">AGM</td>
-                                <td className="border border-green-800 px-4 py-2">12 В</td>
-                                <td className="border border-green-800 px-4 py-2">70–120</td>
-                                <td className="border border-green-800 px-4 py-2">Внедорожники, гибриды</td>
-                            </tr>
-                            <tr>
-                                <td className="border border-green-800 px-4 py-2">Гелевый</td>
-                                <td className="border border-green-800 px-4 py-2">12 В</td>
-                                <td className="border border-green-800 px-4 py-2">50–200</td>
-                                <td className="border border-green-800 px-4 py-2">Мотоциклы, грузовики</td>
-                            </tr>
-                            <tr>
-                                <td className="border border-green-800 px-4 py-2">Литий-ионный</td>
-                                <td className="border border-green-800 px-4 py-2">3,2–3,7 В (ячейка)</td>
-                                <td className="border border-green-800 px-4 py-2">1000–10000+</td>
-                                <td className="border border-green-800 px-4 py-2">
-                                    Электромобили, гибриды (Tesla, Nissan Leaf)
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <CustomTable
+                        columns={[
+                            { label: "Тип аккумулятора", textAlign: "left" },
+                            { label: "Напряжение", textAlign: "left" },
+                            { label: "Ёмкость (А·ч)", textAlign: "left" },
+                            { label: "Примеры применения", textAlign: "left" },
+                        ]}
+                        rows={[
+                            ["Свинцово-кислотный", "12 В", "45–100", "Легковые автомобили"],
+                            ["AGM", "12 В", "70–120", "Внедорожники, гибриды"],
+                            ["Гелевый", "12 В", "50–200", "Мотоциклы, грузовики"],
+                            ["Литий-ионный", "3,2–3,7 В (ячейка)", "1000–10000+", "Электромобили, гибриды (Tesla, Nissan Leaf)"]
+                        ]}
+                    />
                     <p className="paragraph  mt-4">
                         <Highlight>Особенности:</Highlight> Свинцово-кислотные АКБ требуют регулярного обслуживания (добавления дистиллированной воды), тогда как AGM и гелевые батареи отличаются большей устойчивостью к вибрациям и долговечностью. Литий-ионные аккумуляторы в электромобилях представляют собой сложные модули, обеспечивающие высокую ёмкость и длительный срок службы.
                     </p>
@@ -842,61 +608,20 @@ const BatteryAndCopperArticle: React.FC = () => {
                     <p className="paragraph ">
                         Эта категория включает батарейки стандартных форматов AA, AAA, C, D, 9V и кнопочные элементы. Они используются в пультах, игрушках, фонарях, часах и другой электронике.
                     </p>
-                    <table
-                        className="table-auto w-full border-collapse border border-green-800 mt-4"
-                        aria-label="Производители бытовых батареек"
-                    >
-                        <thead className="bg-green-800 text-green-300">
-                            <tr>
-                                <th className="border border-green-800 px-4 py-2">Производитель</th>
-                                <th className="border border-green-800 px-4 py-2">Типы батареек</th>
-                                <th className="border border-green-800 px-4 py-2">Особенности</th>
-                                <th className="border border-green-800 px-4 py-2">Рекомендация</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td className="border border-green-800 px-4 py-2">Duracell</td>
-                                <td className="border border-green-800 px-4 py-2">AA, AAA, 9V</td>
-                                <td className="border border-green-800 px-4 py-2">
-                                    Высокая емкость, долговечность, линейки <Highlight>Ultra Power</Highlight> и <Highlight>Optimum</Highlight>.
-                                </td>
-                                <td className="border border-green-800 px-4 py-2">
-                                    Для устройств с большим энергопотреблением (игрушки, фонари).
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="border border-green-800 px-4 py-2">Energizer</td>
-                                <td className="border border-green-800 px-4 py-2">AA, AAA, литиевые</td>
-                                <td className="border border-green-800 px-4 py-2">
-                                    Литиевые батарейки <Highlight>Ultimate Lithium</Highlight> для экстремальных температур.
-                                </td>
-                                <td className="border border-green-800 px-4 py-2">
-                                    Для профессиональной техники, фотоаппаратов.
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="border border-green-800 px-4 py-2">Panasonic</td>
-                                <td className="border border-green-800 px-4 py-2">AA, AAA, C, D</td>
-                                <td className="border border-green-800 px-4 py-2">
-                                    Линейка <Highlight>Evolta</Highlight> — конкурент Duracell.
-                                </td>
-                                <td className="border border-green-800 px-4 py-2">
-                                    Универсальный выбор для бытовой электроники.
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="border border-green-800 px-4 py-2">GP Batteries</td>
-                                <td className="border border-green-800 px-4 py-2">AA, AAA</td>
-                                <td className="border border-green-800 px-4 py-2">
-                                    Хорошее соотношение цены и качества.
-                                </td>
-                                <td className="border border-green-800 px-4 py-2">
-                                    Для повседневного использования.
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <CustomTable
+                        columns={[
+                            { label: "Производитель", textAlign: "left" },
+                            { label: "Типы батареек", textAlign: "left" },
+                            { label: "Особенности", textAlign: "left" },
+                            { label: "Рекомендация", textAlign: "left" },
+                        ]}
+                        rows={[
+                            ["Duracell", "AA, AAA, 9V", "Высокая емкость, долговечность, линейки Ultra Power и Optimum.", "Для устройств с большим энергопотреблением (игрушки, фонари)."],
+                            ["Energizer", "AA, AAA, литиевые", "Литиевые батарейки Ultimate Lithium для экстремальных температур.", "Для профессиональной техники, фотоаппаратов."],
+                            ["Panasonic", "AA, AAA, C, D", "Линейка Evolta — конкурент Duracell.", "Универсальный выбор для бытовой электроники."],
+                            ["GP Batteries", "AA, AAA", "Хорошее соотношение цены и качества.", "Для повседневного использования."]
+                        ]}
+                    />
                 </Section>
 
                 {/* Категория 2: Перезаряжаемые аккумуляторы */}
@@ -904,61 +629,20 @@ const BatteryAndCopperArticle: React.FC = () => {
                     <p className="paragraph ">
                         Перезаряжаемые аккумуляторы используются в устройствах с высоким энергопотреблением: фотоаппаратах, геймпадах, электроинструментах. Они более экологичны и долговечны, чем одноразовые батарейки.
                     </p>
-                    <table
-                        className="table-auto w-full border-collapse border border-green-800 mt-4"
-                        aria-label="Производители перезаряжаемых аккумуляторов"
-                    >
-                        <thead className="bg-green-800 text-green-300">
-                            <tr>
-                                <th className="border border-green-800 px-4 py-2">Производитель</th>
-                                <th className="border border-green-800 px-4 py-2">Тип</th>
-                                <th className="border border-green-800 px-4 py-2">Особенности</th>
-                                <th className="border border-green-800 px-4 py-2">Рекомендация</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td className="border border-green-800 px-4 py-2">Panasonic (Eneloop)</td>
-                                <td className="border border-green-800 px-4 py-2">NiMH</td>
-                                <td className="border border-green-800 px-4 py-2">
-                                    Сохраняют до 80% заряда за 1 год хранения.
-                                </td>
-                                <td className="border border-green-800 px-4 py-2">
-                                    Лучший выбор для фото- и видеотехники.
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="border border-green-800 px-4 py-2">Sony</td>
-                                <td className="border border-green-800 px-4 py-2">Li-ion</td>
-                                <td className="border border-green-800 px-4 py-2">
-                                    Надежные литий-ионные аккумуляторы для бытовой электроники.
-                                </td>
-                                <td className="border border-green-800 px-4 py-2">
-                                    Подходят для камер и портативных устройств.
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="border border-green-800 px-4 py-2">Samsung SDI</td>
-                                <td className="border border-green-800 px-4 py-2">Li-ion</td>
-                                <td className="border border-green-800 px-4 py-2">
-                                    Литий-ионные ячейки для смартфонов и ноутбуков.
-                                </td>
-                                <td className="border border-green-800 px-4 py-2">
-                                    Для гаджетов и модульных сборок.
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="border border-green-800 px-4 py-2">IKEA (LADDA)</td>
-                                <td className="border border-green-800 px-4 py-2">NiMH</td>
-                                <td className="border border-green-800 px-4 py-2">
-                                    Аналог Panasonic Eneloop по доступной цене.
-                                </td>
-                                <td className="border border-green-800 px-4 py-2">
-                                    Для экономного использования.
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <CustomTable
+                        columns={[
+                            { label: "Производитель", textAlign: "left" },
+                            { label: "Тип", textAlign: "left" },
+                            { label: "Особенности", textAlign: "left" },
+                            { label: "Рекомендация", textAlign: "left" },
+                        ]}
+                        rows={[
+                            ["Panasonic (Eneloop)", "NiMH", "Сохраняют до 80% заряда за 1 год хранения.", "Лучший выбор для фото- и видеотехники."],
+                            ["Sony", "Li-ion", "Надежные литий-ионные аккумуляторы для бытовой электроники.", "Подходят для камер и портативных устройств."],
+                            ["Samsung SDI", "Li-ion", "Литий-ионные ячейки для смартфонов и ноутбуков.", "Для гаджетов и модульных сборок."],
+                            ["IKEA (LADDA)", "NiMH", "Аналог Panasonic Eneloop по доступной цене.", "Для экономного использования."]
+                        ]}
+                    />
                 </Section>
 
                 {/* Категория 3: Литий-ионные аккумуляторы */}
@@ -1343,38 +1027,20 @@ const BatteryAndCopperArticle: React.FC = () => {
 
                 {/* Таблица параметров */}
                 <h3 className="header_h3  mt-8">Рекомендуемые параметры осаждения</h3>
-                <table className="table-auto w-full  border-collapse border border-gray-600 mt-4">
-                    <thead>
-                        <tr>
-                            <th className="border border-gray-600 px-4 py-2">Параметр</th>
-                            <th className="border border-gray-600 px-4 py-2">Рекомендуемое значение</th>
-                            <th className="border border-gray-600 px-4 py-2">Последствия отклонений</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td className="border border-gray-600 px-4 py-2">Концентрация CuSO₄</td>
-                            <td className="border border-gray-600 px-4 py-2">0.5–1.5 моль/л</td>
-                            <td className="border border-gray-600 px-4 py-2">
-                                Слишком низкая концентрация снижает скорость осаждения, высокая — ухудшает качество покрытия.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td className="border border-gray-600 px-4 py-2">Температура раствора</td>
-                            <td className="border border-gray-600 px-4 py-2">40–60°C</td>
-                            <td className="border border-gray-600 px-4 py-2">
-                                Высокая температура может вызвать побочные реакции, низкая — замедляет процесс.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td className="border border-gray-600 px-4 py-2">Плотность тока</td>
-                            <td className="border border-gray-600 px-4 py-2">0.5–1.0 А/дм²</td>
-                            <td className="border border-gray-600 px-4 py-2">
-                                Высокая плотность вызывает неравномерное покрытие, низкая — снижает скорость осаждения.
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <CustomTable
+                    columns={[
+                        { label: "Производитель", textAlign: "left" },
+                        { label: "Тип", textAlign: "left" },
+                        { label: "Особенности", textAlign: "left" },
+                        { label: "Рекомендация", textAlign: "left" },
+                    ]}
+                    rows={[
+                        ["Panasonic (Eneloop)", "NiMH", "Сохраняют до 80% заряда за 1 год хранения.", "Лучший выбор для фото- и видеотехники."],
+                        ["Sony", "Li-ion", "Надежные литий-ионные аккумуляторы для бытовой электроники.", "Подходят для камер и портативных устройств."],
+                        ["Samsung SDI", "Li-ion", "Литий-ионные ячейки для смартфонов и ноутбуков.", "Для гаджетов и модульных сборок."],
+                        ["IKEA (LADDA)", "NiMH", "Аналог Panasonic Eneloop по доступной цене.", "Для экономного использования."]
+                    ]}
+                />
 
                 {/* Рекомендации */}
                 <h3 className="header_h3  mt-8">Рекомендации по процессу</h3>

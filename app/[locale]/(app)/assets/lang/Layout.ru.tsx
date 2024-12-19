@@ -1,9 +1,9 @@
-import {Link} from "@/i18n/routing";
+import { Link } from "@/i18n/routing";
 import Language_switcher from "@/app/ui/math/components/Language_switcher";
-import {Aside_panel} from "@/app/[locale]/(app)/Aside_panel";
-import {Logo} from "@/app/ui/math/components/Logo";
+import { Aside_panel } from "@/app/[locale]/(app)/Aside_panel";
+import { Logo } from "@/app/ui/math/components/Logo";
 import ThemeToggle from "@/app/ui/math/components/ThemeToggle";
-import {Base_button} from "@/app/ui/math/components/Base_button";
+import { Base_button } from "@/app/ui/math/components/Base_button";
 import { Button } from "@mui/material";
 
 interface LayoutProps {
@@ -12,7 +12,7 @@ interface LayoutProps {
 
 
 
-const Layout: React.FC<LayoutProps> = ({children}:LayoutProps ) => {
+const Layout: React.FC<LayoutProps> = ({ children }: LayoutProps) => {
     const language = [
         {
             locale: "en",
@@ -27,13 +27,19 @@ const Layout: React.FC<LayoutProps> = ({children}:LayoutProps ) => {
         <div className="layout main">
             {/* Header */}
             <header className="header flex justify-between fixed w-full max-h-20 z-10">
-                <Logo/>
-                <div className="flex items-stretch justify-between w-1/5">
+                <Logo />
+                <div className="flex items-stretch justify-between ">
                     <div className={"mr-1"}>
-                        <Language_switcher name="Русский" locales={language}/>
+                        <Language_switcher name="Русский" locales={language} />
                     </div>
-                        <ThemeToggle/>
-                        <Link href = "/login">Login</Link>
+                    <div className={"mr-1"}>
+                        <ThemeToggle />
+                    </div>
+                    <div className={"mr-1"}>
+                        <Link className="button_to mx-3 p-2" href="/login">Login</Link>
+                    </div>
+
+
                 </div>
             </header>
 
@@ -46,11 +52,11 @@ const Layout: React.FC<LayoutProps> = ({children}:LayoutProps ) => {
                     physics: "Физика",
                     words: "Лингвистика",
                     logout: "Выйти",
-                }}/>
+                }} />
 
                 {/* Main Content */}
-                <div className=" "></div>
-                <main className="main-content ml-[18%] mx-5 my-2 ">
+                <div className=""></div>
+                <main className="main-content ml-[18%] mx-5 my-2 max-w-[82%] ">
                     {children} {/* Отображение дочерних элементов */}
                 </main>
 

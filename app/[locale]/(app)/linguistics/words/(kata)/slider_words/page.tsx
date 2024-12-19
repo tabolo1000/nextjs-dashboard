@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React from "react";
 import { Box, Pagination, Stack } from "@mui/material";
 import { Slider_card } from "@/app/ui/math/components/Slider_card";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -8,7 +8,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import axios from "axios";
+
 
 import {
   Navigation,
@@ -19,38 +19,20 @@ import {
   Zoom,
   A11y,
   Manipulation,
+    Autoplay,
 } from "swiper/modules";
+import useSlider_words from "@/app/[locale]/(app)/linguistics/words/(kata)/useSlider_words";
+
 
 export default function ButtonInfoSlider() {
-  const [data, setData] = useState<Array<WordData>>([]); // Состояние для данных
-  const [page, setPage] = useState(1); // Текущая страница
-  const itemsPerPage = 10; // Количество записей на странице
+    const { pagination, data, actions } = useSlider_words();
 
-  // Загрузка данных
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("http://localhost:3001/words");
-        debugger
-        setData(response.data)
-      } catch (error) {
-        console.error("Ошибка при запросе:", error); // Логирование ошибки
-      }
-    };
-  
-    fetchData();
-  }, []);
-  // Определяем текущие элементы для отображения
-  const currentItems = data.slice(
-    (page - 1) * itemsPerPage,
-    page * itemsPerPage
-  );
+    const { pageCount, currentPage, handleChange } = pagination;
+    const { currentItems, loading, error } = data;
+    const { handleWordChange } = actions;
 
-  // Обработчик изменения страницы
-  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    setPage(value);
-  };
-
+    if (loading.status) return <p>{loading.message}</p>;
+    if (error) return <p>Ошибка: {error}</p>;
   return (
     <div className="">
       <h1 className="header_h1 absolute opacity-0">
@@ -67,6 +49,7 @@ export default function ButtonInfoSlider() {
             Zoom,
             A11y,
             Manipulation,
+              Autoplay,
           ]}
           zoom={{ maxRatio: 3 }}
           virtual
@@ -74,6 +57,8 @@ export default function ButtonInfoSlider() {
             prevSlideMessage: "Предыдущий слайд",
             nextSlideMessage: "Следующий слайд",
           }}
+          autoplay={{delay: 30000}}
+          loop={true}
           freeMode
           mousewheel={{ forceToAxis: true }}
           keyboard={{ enabled: true }}
@@ -84,9 +69,10 @@ export default function ButtonInfoSlider() {
           scrollbar={{ draggable: true }}
           hashNavigation={{ watchState: true }}
         >
-          {currentItems.map((item, index) => (
-            <SwiperSlide key={index}>
+          {currentItems.map((item) => (
+            <SwiperSlide key={item.id}>
               <Slider_card
+                  id = {item.id}
                 morpheme={item.morpheme}
                 title={item.title}
                 description={item.description}
@@ -95,6 +81,7 @@ export default function ButtonInfoSlider() {
                 annotation={item.annotation}
                 joke={item.joke || ""}
                 derivatives={item.derivatives}
+                  handleWordChange = {handleWordChange}
               />
             </SwiperSlide>
           ))}
@@ -104,9 +91,9 @@ export default function ButtonInfoSlider() {
             <Pagination
               shape="rounded"
               variant="outlined"
-              count={Math.ceil(data.length / itemsPerPage)} // Общее количество страниц
+              count={pageCount} // Общее количество страниц
               color="primary"
-              page={page}
+              page={currentPage}
               onChange={handleChange}
               sx={{
                 "& .MuiPaginationItem-root": {
@@ -130,7 +117,7 @@ export default function ButtonInfoSlider() {
 
 
 
-interface WordData {
+/*interface WordData {
     title: string;
     description: string;
     icon: string;
@@ -144,7 +131,7 @@ interface WordData {
         end: Array<string>;
     }
     derivatives?: Array<string>;
-}
+}*/
 
 
 function getItems() {

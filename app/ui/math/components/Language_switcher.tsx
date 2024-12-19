@@ -77,17 +77,18 @@ export default React.memo(function LanguageSwitcher({
     };
 
     return (
-        <div className="w-36 relative inline-block text-left">
+        <div className="relative inline-block text-left">
             {/* Кнопка для открытия меню */}
 
             <div>
                 <Base_button
                     onClick={handleClick}
-                    classStyle={"button_to"}
+                    classStyle={"button_to px-2"}
                     id="fade-button"
+                    
                 >
                     {renderFlagIcon(locale)}
-                    {name}
+                    
                     {/* Иконка стрелки вниз */}
                     <svg
                         className="-mr-1 ml-2 h-5 w-5"

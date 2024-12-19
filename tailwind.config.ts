@@ -24,6 +24,9 @@ const config: Config = {
       },
       colors: {
         'font': '#101010',
+        'bg_table_header': '#f6d73b',
+        'bg_table_row_odd': 'rgba(246,215,59,0.65)',
+        'bg_table_row_even': '#f6d73b',
         'background': 'rgb(30,1,1)',
         'lesson-blue': '#3b82f6',
         'lesson-blue-hover': '#2563eb',
