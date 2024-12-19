@@ -7,6 +7,11 @@ export const fetchWordsCarousel = async (): Promise<WordCarousel[]> => {
     return data;
 };
 
+export const deleteWord = async (id: string): Promise<WordCarousel> => {
+    const { data } = await api.delete<WordCarousel>(`/words/${id}`);
+    return data;
+};
+
 // Получение слова по ID
 export const fetchWordById = async (id: string): Promise<WordCarousel> => {
     const { data } = await api.get<WordCarousel>(`/words-carousel/${id}`);
@@ -23,4 +28,6 @@ export const updateWord = async (word: WordCarouselUpdate): Promise<WordCarousel
     const { data } = await api.put<WordCarousel>('/words', word);
     return data;
 };
+
+
 

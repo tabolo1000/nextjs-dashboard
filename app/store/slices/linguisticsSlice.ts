@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {createApiThunk} from "@/app/store/utils/apiThunk";
-import {createWord, fetchWordsCarousel, updateWord} from "@/app/api/linguistics";
+import {createWord, deleteWord, fetchWordsCarousel, updateWord} from "@/app/api/linguistics";
 
 const initialState: LinguisticsState = {
     wordsCarousel: [
@@ -92,19 +92,20 @@ const linguisticsSlice = createSlice({
                 };
                 state.error = action.payload || 'Не удалось добавить слово';
             });
-        // Обновление слова (updateWordToCarousel)
+
+        // Удаление слова (deleteWordToCarousel)
         builder
-            .addCase(updateWordToCarousel.pending, (state) => {
+            .addCase(deleteWordToCarousel.pending, (state) => {
                 state.loading = {
                     status: true,
-                    message: "Идет обновление в базе данных..."
+                    message: "Идет удаление слова в базе данных..."
                 };
                 state.error = null;
             })
-            .addCase(updateWordToCarousel.fulfilled, (state, action) => {
+            .addCase(deleteWordToCarousel.fulfilled, (state, action) => {
                 state.loading = {
                     status: false,
-                    message: "Слово успешно обновлено!"
+                    message: "Слово успешно удалено!"
                 };
 
                 // Находим индекс элемента в массиве
@@ -112,17 +113,17 @@ const linguisticsSlice = createSlice({
 
                 if (index !== -1) {
                     // Заменяем элемент по индексу на новый
-                    state.wordsCarousel[index] = action.payload;
+                    state.wordsCarousel.splice(index, 1)
                 }
             })
-            .addCase(updateWordToCarousel.rejected, (state, action) => {
+            .addCase(deleteWordToCarousel.rejected, (state, action) => {
                 state.loading = {
                     status: false,
-                    message: "Обновление слова не удалась!"
+                    message: "Удаление слова не удалась!"
                 };
-                state.error = action.payload || 'Не удалось обновить слово';
+                state.error = action.payload || 'Не удалось удалить слово';
             });
-    },
+        },
 });
 
 //export const { createWordForCarousel } = linguisticsSlice.actions;
@@ -153,6 +154,14 @@ export const updateWordToCarousel = createApiThunk<WordCarousel, WordCarouselUpd
     'linguistics/updateWord',
     async (newWord) => {
         return updateWord(newWord); // Возвращаем обновленное слово
+    }
+);
+
+// Удаление слова в карусели
+export const deleteWordToCarousel = createApiThunk<WordCarousel, string>(
+    'linguistics/deleteWord',
+    async (id) => {
+        return deleteWord(id); // Возвращаем удаленное слово
     }
 );
 

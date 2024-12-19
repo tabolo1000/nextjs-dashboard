@@ -1,13 +1,17 @@
 "use client";
 
-import { Box, CardContent, Input, Typography } from "@mui/material";
+import {Box, Button, CardContent, Input, Typography} from "@mui/material";
 import { Morpheme } from "@/app/ui/math/components/Morpheme";
 import React, { useState } from "react";
 import { WordCarousel, WordCarouselUpdate } from "@/app/store/slices/linguisticsSlice";
+import {AddBoxOutlined, ChangeCircleOutlined, DeleteOutline} from "@mui/icons-material";
+
 
 export function Slider_card({
                                 id,
                                 handleWordChange,
+                                handleWordDelete,
+                                isEditingForm,
                                 morpheme,
                                 title,
                                 description,
@@ -16,7 +20,12 @@ export function Slider_card({
                                 annotation,
                                 joke,
                                 derivatives,
-                            }: WordCarousel & { handleWordChange: (value: WordCarouselUpdate) => void }) {
+
+                            }: WordCarousel & {
+    handleWordChange: (value: WordCarouselUpdate) => void,
+    handleWordDelete: (id: string) => void
+                                isEditingForm: (active:  boolean) => void
+                            },) {
     // Состояние для редактирования всех полей
     const [editableFields, setEditableFields] = useState<Partial<WordCarousel>>({
         title,
@@ -26,8 +35,9 @@ export function Slider_card({
         joke,
         derivatives,
     });
-
     const [editingField, setEditingField] = useState<string | null>(null); // Какое поле редактируется
+
+
 
     // Универсальная функция для обновления полей
     const handleFieldChange = (fieldName: string, value: string) => {
@@ -67,7 +77,6 @@ export function Slider_card({
         });
         setEditingField(null);
     };
-
     return (
         <Box
             sx={{ display: "flex", alignItems: "center", gap: 2 }}
@@ -75,6 +84,14 @@ export function Slider_card({
         >
             {/* Card Content */}
             <CardContent className="space-y-4">
+                <div className={"flex flex-row justify-end items-center gap-1 w-full "}>
+                    <div className="border border-gray-400 p-2 rounded-lg bg-blue-50 dark:bg-opacity-10">
+                        <Button className={"text-green-600"} onClick={()=> isEditingForm(true) }><AddBoxOutlined />Добавить</Button>
+                        <Button className={"text-amber-600"} onClick={()=>handleWordDelete(id)}><ChangeCircleOutlined />Изменить</Button>
+                        <Button className={"text-red-600"} onClick={()=>handleWordDelete(id)}><DeleteOutline />Удалить</Button>
+                    </div>
+                </div>
+
                 {/* Title */}
                 <Typography variant="h5" component="div" className="indent-4 header_h3 flex justify-right align-middle">
                     {icon}

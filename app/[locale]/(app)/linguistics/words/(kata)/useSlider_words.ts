@@ -2,6 +2,7 @@
 import {useAppDispatch, useAppSelector} from "@/app/store/hooks";
 import React, {useCallback, useEffect, useState} from "react";
 import {
+    deleteWordToCarousel,
     Loading,
     loadWordsForCarousel,
     updateWordToCarousel,
@@ -16,6 +17,7 @@ export default function useSlider_words(): ReturnType{
     const [currentPage, setPage] = useState(1); // Текущая страница
     const itemsPerPage = 10; // Количество записей на странице
     const pageCount = Math.ceil(wordsCarousel.length / itemsPerPage)
+    const [editingFrom, isEditingForm] = useState<boolean>(false);
 
 
     useEffect(() => {
@@ -50,6 +52,12 @@ export default function useSlider_words(): ReturnType{
         }))
     }, [dispatch]);
 
+    const handleWordDelete = useCallback((
+        id: string
+    ) => {
+        dispatch(deleteWordToCarousel(id))
+    }, [dispatch]);
+
     return {
         pagination: {
             pageCount,
@@ -57,12 +65,15 @@ export default function useSlider_words(): ReturnType{
             handleChange,
         },
         data: {
+            editingFrom,
             currentItems,
             loading,
             error,
         },
         actions: {
             handleWordChange,
+            handleWordDelete,
+            isEditingForm
         },
     }
 }
@@ -81,10 +92,13 @@ interface Data  {
     currentItems: WordCarousel[],
     loading: Loading,
     error: string | null,
+    editingFrom: boolean
 }
 
 interface Actions {
     handleWordChange: (value: WordCarouselUpdate) => void,
+    handleWordDelete: (id: string) => void,
+    isEditingForm (active:  boolean): void
 }
 
 interface ReturnType {

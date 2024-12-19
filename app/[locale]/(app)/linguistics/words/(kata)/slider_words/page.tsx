@@ -22,14 +22,15 @@ import {
     Autoplay,
 } from "swiper/modules";
 import useSlider_words from "@/app/[locale]/(app)/linguistics/words/(kata)/useSlider_words";
+import {CodexForm} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/CodexForm";
 
 
 export default function ButtonInfoSlider() {
     const { pagination, data, actions } = useSlider_words();
 
     const { pageCount, currentPage, handleChange } = pagination;
-    const { currentItems, loading, error } = data;
-    const { handleWordChange } = actions;
+    const { currentItems, loading, error, editingFrom } = data;
+    const { handleWordChange, handleWordDelete, isEditingForm } = actions;
 
     if (loading.status) return <p>{loading.message}</p>;
     if (error) return <p>Ошибка: {error}</p>;
@@ -39,77 +40,86 @@ export default function ButtonInfoSlider() {
         Button Information Slider
       </h1>
       <Box sx={{ maxWidth: 900, margin: "0 auto" }}>
-        <Swiper
-          modules={[
-            Navigation,
-            Virtual,
-            Keyboard,
-            Mousewheel,
-            FreeMode,
-            Zoom,
-            A11y,
-            Manipulation,
-              Autoplay,
-          ]}
-          zoom={{ maxRatio: 3 }}
-          virtual
-          a11y={{
-            prevSlideMessage: "Предыдущий слайд",
-            nextSlideMessage: "Следующий слайд",
-          }}
-          autoplay={{delay: 30000}}
-          loop={true}
-          freeMode
-          mousewheel={{ forceToAxis: true }}
-          keyboard={{ enabled: true }}
-          spaceBetween={30}
-          slidesPerView={1}
-          navigation
-          pagination={{ clickable: true }}
-          scrollbar={{ draggable: true }}
-          hashNavigation={{ watchState: true }}
-        >
-          {currentItems.map((item) => (
-            <SwiperSlide key={item.id}>
-              <Slider_card
-                  id = {item.id}
-                morpheme={item.morpheme}
-                title={item.title}
-                description={item.description}
-                icon={item.icon}
-                quote={item.quote}
-                annotation={item.annotation}
-                joke={item.joke || ""}
-                derivatives={item.derivatives}
-                  handleWordChange = {handleWordChange}
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-        <Box sx={{ display: "flex", justifyContent: "center", marginTop: 2 }}>
-          <Stack spacing={2}>
-            <Pagination
-              shape="rounded"
-              variant="outlined"
-              count={pageCount} // Общее количество страниц
-              color="primary"
-              page={currentPage}
-              onChange={handleChange}
-              sx={{
-                "& .MuiPaginationItem-root": {
-                  color: "gray", // Цвет текста по умолчанию
-                },
-                "& .Mui-selected": {
-                  backgroundColor: "#2563eb", // Синий фон для выбранного элемента
-                  color: "white", // Белый текст для выбранного элемента
-                },
-                "& .MuiPaginationItem-root:hover": {
-                  backgroundColor: "#1e40af", // Тёмно-синий фон при наведении
-                },
-              }}
-            />
-          </Stack>
-        </Box>
+          {
+              (editingFrom)
+              ? <CodexForm />
+                  : <>
+                      <Swiper
+                          modules={[
+                              Navigation,
+                              Virtual,
+                              Keyboard,
+                              Mousewheel,
+                              FreeMode,
+                              Zoom,
+                              A11y,
+                              Manipulation,
+                              Autoplay,
+                          ]}
+                          zoom={{ maxRatio: 3 }}
+                          virtual
+                          a11y={{
+                              prevSlideMessage: "Предыдущий слайд",
+                              nextSlideMessage: "Следующий слайд",
+                          }}
+                          autoplay={{delay: 30000}}
+                          loop={true}
+                          freeMode
+                          mousewheel={{ forceToAxis: true }}
+                          keyboard={{ enabled: true }}
+                          spaceBetween={30}
+                          slidesPerView={1}
+                          navigation
+                          pagination={{ clickable: true }}
+                          scrollbar={{ draggable: true }}
+                          hashNavigation={{ watchState: true }}
+                      >
+                          {currentItems.map((item) => (
+                              <SwiperSlide key={item.id}>
+                                  <Slider_card
+                                      id = {item.id}
+                                      morpheme={item.morpheme}
+                                      title={item.title}
+                                      description={item.description}
+                                      icon={item.icon}
+                                      quote={item.quote}
+                                      annotation={item.annotation}
+                                      joke={item.joke || ""}
+                                      derivatives={item.derivatives}
+                                      handleWordChange = {handleWordChange}
+                                      handleWordDelete = {handleWordDelete}
+                                      isEditingForm = {isEditingForm}
+                                  />
+                              </SwiperSlide>
+                          ))}
+                      </Swiper>
+                      <Box sx={{ display: "flex", justifyContent: "center", marginTop: 2 }}>
+                          <Stack spacing={2}>
+                              <Pagination
+                                  shape="rounded"
+                                  variant="outlined"
+                                  count={pageCount} // Общее количество страниц
+                                  color="primary"
+                                  page={currentPage}
+                                  onChange={handleChange}
+                                  sx={{
+                                      "& .MuiPaginationItem-root": {
+                                          color: "gray", // Цвет текста по умолчанию
+                                      },
+                                      "& .Mui-selected": {
+                                          backgroundColor: "#2563eb", // Синий фон для выбранного элемента
+                                          color: "white", // Белый текст для выбранного элемента
+                                      },
+                                      "& .MuiPaginationItem-root:hover": {
+                                          backgroundColor: "#1e40af", // Тёмно-синий фон при наведении
+                                      },
+                                  }}
+                              />
+                          </Stack>
+                      </Box>
+                  </>
+          }
+
       </Box>
     </div>
   );
