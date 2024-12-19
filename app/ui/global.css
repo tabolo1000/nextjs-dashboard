@@ -186,8 +186,15 @@ input[type='number']::-webkit-outer-spin-button {
   @apply text-gray-300;
 }
 
+.paragraph_base {
+  @apply text-lg leading-relaxed p-6 rounded-lg shadow-lg bg-white indent-4;
+}
+.dark .paragraph_base {
+  @apply bg-gray-800 text-gray-300 border-indigo-400;
+}
+
 .paragraph {
-  @apply text-lg leading-relaxed bg-white p-6 rounded-lg shadow-lg border-l-4 border-indigo-500;
+  @apply paragraph_base  border-l-4 border-indigo-500;
 }
 .dark .paragraph {
   @apply bg-gray-800 text-gray-300 border-indigo-400;
