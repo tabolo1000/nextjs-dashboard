@@ -55,6 +55,7 @@ export default function useSlider_words(): ReturnType{
     const handleWordDelete = useCallback((
         id: string
     ) => {
+        debugger
         dispatch(deleteWordToCarousel(id))
     }, [dispatch]);
 
@@ -82,10 +83,15 @@ export default function useSlider_words(): ReturnType{
 
 //-------------------------------------------------- Types ---------------------------------------
 
+export type TPageCountWordCarousel = number;
+export type TCurrentPageWordCarousel = number;
+export type THandlePaginationWordCarousel = (event: React.ChangeEvent<unknown>, value: number) => void;
+
+
 interface Pagination {
-    pageCount: number,
-    currentPage: number,
-    handleChange: (event: React.ChangeEvent<unknown>, value: number) => void,
+    pageCount: TPageCountWordCarousel,
+    currentPage: TCurrentPageWordCarousel,
+    handleChange: THandlePaginationWordCarousel,
 }
 
 interface Data  {

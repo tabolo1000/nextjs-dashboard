@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import {Base_button} from "@/app/ui/math/components/Base_button";
+import LightModeIcon from '@mui/icons-material/LightMode';
+import NightsStayIcon from '@mui/icons-material/NightsStay';
 
 export default function ThemeToggle() {
     const [theme, setTheme] = useState('light');
@@ -22,11 +24,11 @@ export default function ThemeToggle() {
 
     return (
         <Base_button
-            classStyle={"button_to px-2"}
+            classStyle={"button_to px-2 "}
             onClick={toggleTheme}
         >
             <div >
-                {theme === 'light' ? '🌞' : '🌙'}
+                {theme === 'light' ? <LightModeIcon className="text-yellow-500" /> : <NightsStayIcon className="text-yellow-500"/>}
             </div>
         </Base_button>
     );

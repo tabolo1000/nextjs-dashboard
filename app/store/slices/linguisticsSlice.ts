@@ -5,7 +5,7 @@ import {createWord, deleteWord, fetchWordsCarousel, updateWord} from "@/app/api/
 const initialState: LinguisticsState = {
     wordsCarousel: [
         {
-            id: "",
+            "_id": "",
             "title": "Персистентность: англ. Persistence [pəˈsɪstəns], фр. Persistance [pɛʁ.si.stɑ̃s], нем. Persistenz [ˌpɛʁ.zɪˈstɛnt͡s], польск. Persystencja [pɛr.sɨsˈtɛn.t͡sja]",
             "icon": "🔄",
             "quote": "«Персистентность — это умение продолжать двигаться вперёд, несмотря на любые препятствия.»",
@@ -109,7 +109,7 @@ const linguisticsSlice = createSlice({
                 };
 
                 // Находим индекс элемента в массиве
-                const index = state.wordsCarousel.findIndex((el) => el.id === action.payload.id);
+                const index = state.wordsCarousel.findIndex((el) => el._id === action.payload._id);
 
                 if (index !== -1) {
                     // Заменяем элемент по индексу на новый
@@ -173,7 +173,7 @@ export interface Loading {
 }
 
 export interface WordCarousel {
-    id: string
+    _id: string
     morpheme: WordCarouselMorpheme,
     title: string,
     description: string,
@@ -185,7 +185,7 @@ export interface WordCarousel {
 }
 
 export interface WordCarouselUpdate {
-    id: string;
+    _id: string;
     morpheme?: WordCarouselMorpheme,
     title?: string,
     description?: string,

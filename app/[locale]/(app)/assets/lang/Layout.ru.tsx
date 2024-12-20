@@ -3,8 +3,7 @@ import Language_switcher from "@/app/ui/math/components/Language_switcher";
 import { Aside_panel } from "@/app/[locale]/(app)/Aside_panel";
 import { Logo } from "@/app/ui/math/components/Logo";
 import ThemeToggle from "@/app/ui/math/components/ThemeToggle";
-import { Base_button } from "@/app/ui/math/components/Base_button";
-import { Button } from "@mui/material";
+import {Person2TwoTone} from "@mui/icons-material";
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -28,18 +27,10 @@ const Layout: React.FC<LayoutProps> = ({ children }: LayoutProps) => {
             {/* Header */}
             <header className="header flex justify-between fixed w-full max-h-20 z-10">
                 <Logo />
-                <div className="flex items-stretch justify-between ">
-                    <div className={"mr-1"}>
-                        <Language_switcher name="Русский" locales={language} />
-                    </div>
-                    <div className={"mr-1"}>
-                        <ThemeToggle />
-                    </div>
-                    <div className={"mr-1"}>
-                        <Link className="button_to mx-3 p-2" href="/login">Login</Link>
-                    </div>
-
-
+                <div className="flex items-stretch justify-between gap-2 ">
+                    <Language_switcher name="Русский" locales={language} />
+                    <ThemeToggle />
+                    <Link className="button_to p-2" href="/login"><Person2TwoTone/></Link>
                 </div>
             </header>
 
