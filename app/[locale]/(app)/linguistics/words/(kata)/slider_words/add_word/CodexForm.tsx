@@ -96,7 +96,8 @@ export const CodexForm: React.FC<CodexFormProps> = memo(function CodexForm({
                           "quote": "Цитата",
                           "annotation": "Аннотация",
                           "joke": "Шутка",
-                          "derivatives": ["производное1"]
+                          "derivatives": ["производное1"],
+                          "collections": ["conversation_topic_dream"]
                        }'
                               onJsonParsed={(parsedData) => {
                                   const updatedValues = {
@@ -157,6 +158,23 @@ export const CodexForm: React.FC<CodexFormProps> = memo(function CodexForm({
                                              rows={4}
                                              error={!!ErrorMessage}
                                              helperText={<ErrorMessage name="description" />}
+                                      />
+                                  )}
+                              </Field>
+                          </Box>
+                          <Box mb={3}>
+                              <Field name="collections">
+                                  {({ field }: any) => (
+                                      <Input className={"paragraph_base"}
+                                             {...field}
+                                             fullWidth
+                                             placeholder={"Введите ваше описание."}
+                                             label="Описание"
+                                             variant="outlined"
+                                             multiline
+                                             rows={4}
+                                             error={!!ErrorMessage}
+                                             helperText={<ErrorMessage name="collections" />}
                                       />
                                   )}
                               </Field>
@@ -268,4 +286,5 @@ interface CodexFormValues {
   annotation: string;
   joke: string;
   derivatives: string[];
+  collections: string[];
 }

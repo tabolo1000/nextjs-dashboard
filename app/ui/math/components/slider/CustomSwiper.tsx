@@ -56,6 +56,7 @@ export default function CustomSwiper({
                     annotation={item.annotation}
                     joke={item.joke || ""}
                     derivatives={item.derivatives}
+                    collections={item.collections}
                     handleWordChange={handleWordChange}
                     handleWordDelete={handleWordDelete}
                     isEditingForm={isEditingForm}

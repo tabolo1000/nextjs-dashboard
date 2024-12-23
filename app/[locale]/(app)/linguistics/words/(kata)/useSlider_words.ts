@@ -2,7 +2,7 @@
 import {useAppDispatch, useAppSelector} from "@/app/store/hooks";
 import React, {useCallback, useEffect, useState} from "react";
 import {
-    deleteWordToCarousel,
+    deleteWordToCarousel, loadCollectionWordsForCarousel,
     Loading,
     loadWordsForCarousel,
     updateWordToCarousel,
@@ -20,8 +20,12 @@ export default function useSlider_words(): ReturnType{
     const [editingFrom, isEditingForm] = useState<boolean>(false);
 
 
-    useEffect(() => {
+    /*useEffect(() => {
         dispatch(loadWordsForCarousel()); // Загружаем слова при монтировании
+    }, []);*/
+
+    useEffect(() => {
+        dispatch(loadCollectionWordsForCarousel(["conversation_topic_dream"])); // Загружаем слова при монтировании
     }, []);
 
    /* useEffect(() => {

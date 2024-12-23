@@ -51,7 +51,7 @@ export const EditableField: React.FC<EditableFieldProps> = ({
                 />
             ) : (
                 <span
-                    className="italic cursor-pointer"
+                    className="italic cursor-pointer inline-block "
                     onDoubleClick={() => setEditing(true)}
                 >
           {value || placeholder}

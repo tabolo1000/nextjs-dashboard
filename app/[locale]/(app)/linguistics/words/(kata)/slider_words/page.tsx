@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, LinearProgress, Box, Typography } from "@mui/material";
 import { CodexForm } from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/add_word/CodexForm";
 import { SliderSettings, SliderSettingsType } from "@/app/ui/math/components/slider/SliderSettings";

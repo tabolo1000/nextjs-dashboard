@@ -22,6 +22,7 @@ export function Slider_card({
                                 annotation,
                                 joke,
                                 derivatives,
+                                collections
                             }: WordCarousel & {
     handleWordChange: (value: WordCarouselUpdate) => void;
     handleWordDelete: (id: string) => void;
@@ -34,6 +35,7 @@ export function Slider_card({
         annotation,
         joke,
         derivatives,
+        collections,
     });
   /*  const toastId = React.useRef<number | string>("");
     const {loading}  = useAppSelector(state => state.linguistics)
@@ -79,38 +81,9 @@ export function Slider_card({
     };
 
 
-
-   /* useEffect(() => {
-        if (loading.deleteWord.status === LoadingStatus.padding) {
-            // Показываем уведомление о загрузке только один раз
-            if (!toastId.current) {
-                toastId.current = toast.loading(loading.deleteWord.message);
-            }
-        }
-
-        if (loading.deleteWord.status === LoadingStatus.fulfilled) {
-            // Закрываем предыдущее уведомление и показываем уведомление об успехе
-            if (toastId.current) {
-                toast.dismiss(toastId.current);
-                toastId.current = "";
-            }
-            toast.success(loading.deleteWord.message);
-        }
-
-        if (loading.deleteWord.status === LoadingStatus.rejected) {
-            // Закрываем предыдущее уведомление и показываем уведомление об ошибке
-            if (toastId.current) {
-                toast.dismiss(toastId.current);
-                toastId.current = "";
-            }
-            toast.error(loading.deleteWord.message);
-        }
-    }, [loading.deleteWord.status, loading.deleteWord.message]);*/
-
     return (
         <>
             <Box
-                sx={{ display: "flex", alignItems: "center", gap: 2 }}
                 className="dark:border-gray-600 relative p-6 border-gray-200 rounded-lg border-2 shadow-lg"
             >
                 <ConfirmationModal
@@ -125,21 +98,22 @@ export function Slider_card({
                     <div className="flex flex-row justify-end items-center gap-1 w-full">
                         <div className="border border-gray-400 p-2 rounded-lg bg-blue-50 dark:bg-opacity-10">
                             <Button className="text-green-600" onClick={() => isEditingForm(true)}>
-                                <AddBoxOutlined /> Добавить
+                                <AddBoxOutlined/> Добавить
                             </Button>
                             <Button className="text-amber-600" onClick={() => "handleWordDelete(_id)"}>
-                                <ChangeCircleOutlined /> Изменить
+                                <ChangeCircleOutlined/> Изменить
                             </Button>
-                            <Button className="text-red-600" onClick={ () => {
+                            <Button className="text-red-600" onClick={() => {
                                 setOpenModal(true)
                             }}>
-                                <DeleteOutline /> Удалить
+                                <DeleteOutline/> Удалить
                             </Button>
                         </div>
                     </div>
 
                     {/* Заголовок */}
-                    <Typography variant="h5" component="div" className="indent-4 header_h3 flex justify-right align-middle">
+                    <Typography variant="h5" component="div"
+                                className="indent-4 header_h3 flex justify-right align-middle">
                         {icon}
                         <EditableField
                             className="ml-2"
@@ -205,6 +179,22 @@ export function Slider_card({
                         multiline
                         className="annotation_card"
                     />
+
+
+                    <div className="paragraph_base">
+                        <span className="font-bold text-purple-600">Коллекции:</span>
+                        {editableFields.collections &&
+                            editableFields.collections.map((e: string, i: number) => (
+                                <EditableField
+                                    key={i}
+                                    value={e}
+                                    onSubmit={(value) => handleArrayFieldChange(i, value)}
+                                    placeholder={`Коллекции ${i + 1}`}
+                                    className="italic"
+                                />
+                            ))}
+                    </div>
+
                 </CardContent>
             </Box>
         </>

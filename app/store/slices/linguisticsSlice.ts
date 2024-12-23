@@ -1,6 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {createApiThunk} from "@/app/store/utils/apiThunk";
-import {createWord, deleteWord, fetchWordsCarousel, updateWord} from "@/app/api/linguistics";
+import {
+    createWord,
+    deleteWord,
+    fetchCollectionWordsCarousel,
+    fetchWordsCarousel,
+    updateWord
+} from "@/app/api/linguistics";
 
 export enum LoadingStatus {
     padding = "padding",
@@ -25,7 +31,8 @@ const initialState: LinguisticsState = {
             "joke": "Персистентность — это когда даже Wi-Fi в подвале упорно держит одну палочку связи.",
             "derivatives": [
                 "Персистенция — устаревшая форма, обозначающая стойкость или долговременность.",
-                ]
+                ],
+            "collections": [],
        }
     ],
     loading: {
@@ -70,6 +77,30 @@ const linguisticsSlice = createSlice({
                 state.wordsCarousel = action.payload;
             })
             .addCase(loadWordsForCarousel.rejected, (state, action) => {
+                state.loading.fetchWords = {
+                    status: LoadingStatus.rejected,
+                    message: "Загрузка слов не удалась :(",
+                };
+                state.error = action.payload || "Не удалось загрузить слова";
+            });
+
+        // Загрузка слов коллекции
+        builder
+            .addCase(loadCollectionWordsForCarousel.pending, (state) => {
+                state.loading.fetchWords = {
+                    status: LoadingStatus.padding,
+                    message: "Идет загрузка слов...",
+                };
+                state.error = null;
+            })
+            .addCase(loadCollectionWordsForCarousel.fulfilled, (state, action) => {
+                state.loading.fetchWords = {
+                    status: LoadingStatus.fulfilled,
+                    message: "Слова успешно загружены!!!",
+                };
+                state.wordsCarousel = action.payload;
+            })
+            .addCase(loadCollectionWordsForCarousel.rejected, (state, action) => {
                 state.loading.fetchWords = {
                     status: LoadingStatus.rejected,
                     message: "Загрузка слов не удалась :(",
@@ -148,6 +179,13 @@ export const loadWordsForCarousel = createApiThunk<WordCarousel[], void>(
     }
 );
 
+export const loadCollectionWordsForCarousel = createApiThunk<WordCarousel[], Array<string>>(
+    'linguistics/loadCollectionWords',
+    async (collection) => {
+        return fetchCollectionWordsCarousel(collection); // Возвращаем список слов
+    }
+);
+
 // Добавление нового слова в карусель
 export const addWordToCarousel = createApiThunk<WordCarousel, AddWordCarouselUpdate>(
     'linguistics/addWord',
@@ -197,6 +235,7 @@ export interface WordCarousel {
     annotation?: string,
     joke?: string,
     derivatives?: Array<string>
+    collections?: string[],
 }
 
 export interface WordCarouselUpdate {
@@ -209,6 +248,7 @@ export interface WordCarouselUpdate {
     annotation?: string,
     joke?: string,
     derivatives?: Array<string>
+    collections?: string[],
 }
 
 export interface AddWordCarouselUpdate {
@@ -220,6 +260,7 @@ export interface AddWordCarouselUpdate {
     annotation: string,
     joke: string,
     derivatives: Array<string>
+    collections?: string[],
 }
 
 interface WordCarouselMorpheme {
