@@ -1,19 +1,22 @@
 "use client";
 
-import React from "react";
+import React, {memo, useCallback, useEffect} from "react";
 import { Formik, Form, Field, FieldArray, ErrorMessage } from "formik";
 import {
-  Input ,
+  Input,
   Button,
   Box,
   Typography,
-  IconButton,
+  IconButton, CircularProgress,
 } from "@mui/material";
-import { Add, Delete } from "@mui/icons-material";
-import axios from "axios";
+import {Add, Delete, ExitToAppTwoTone} from "@mui/icons-material";
 import {validationSchema} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/add_word/validationSchema";
 import {DynamicArrayField} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/add_word/DynamicArrayField";
 import {JsonUploader} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/add_word/JsonUploader";
+import {useAppDispatch, useAppSelector} from "@/app/store/hooks";
+import {addWordToCarousel, LoadingStatus} from "@/app/store/slices/linguisticsSlice";
+import {Base_button} from "@/app/ui/math/components/Base_button";
+
 
 
 
@@ -36,38 +39,51 @@ const initialValues: CodexFormValues = {
 };
 
 
-const instance = axios.create({
-  baseURL: "http://localhost:3001/linguistics/words/words_carousel",
-});
+export const CodexForm: React.FC<CodexFormProps> = memo(function CodexForm({
+                                                           editingFrom,
+                                                           isEditingForm
+                                                         }) {
 
-export const CodexForm: React.FC<CodexFormProps> = ({
-                                                      editingFrom,
-    isEditingForm
-                                    }) => {
-  const handleSubmit = async (values: CodexFormValues) => {
-    try {
-      const response = await instance.post("", values);
-      console.log("Данные успешно отправлены:", response.data);
-    } catch (error) {
-      console.error("Ошибка при отправке данных:", error);
-    }
-  };
+  const {loading}  = useAppSelector(state => state.linguistics)
+  const dispatch = useAppDispatch();
+
+
+  const handleSubmit = useCallback((values: CodexFormValues, { resetForm }: any) => {
+        dispatch(addWordToCarousel(values))
+      resetForm();
+  }, [addWordToCarousel])
+
+
+
+
+
 
   return (
-      <Box className={"border-2 border-gray-200 dark:border-gray-700"} maxWidth="md" mx="auto" p={4}>
-        <Typography variant="h4" gutterBottom>
-          Добавить новую запись
-        </Typography>
-        <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            onSubmit={handleSubmit}
-        >
-          {({ values, setFieldValue, setValues }) => (
-              <Form>
-                {/* Поле для загрузки JSON */}
-                <JsonUploader
-                    placeholder='{
+
+      <>
+          <div className="relative right-0 flex justify-end">
+              <Base_button
+                  classStyle={"exit_button"}
+                  onClick={() => isEditingForm(!editingFrom)}
+                  >
+                  <ExitToAppTwoTone className="text-3xl " />
+              </Base_button>
+          </div>
+          <Box className={"border-2 border-gray-200 dark:border-gray-700"} mx="auto" p={4}>
+              <Typography variant="h4" gutterBottom>
+                  Добавить новую запись
+              </Typography>
+              {/*{loading.addWord.message && <p>{loading.addWord.message}</p>}*/}
+              <Formik
+                  initialValues={initialValues}
+                  validationSchema={validationSchema}
+                  onSubmit={handleSubmit}
+              >
+                  {({ values, setFieldValue, setValues }) => (
+                      <Form>
+                          {/* Поле для загрузки JSON */}
+                          <JsonUploader
+                              placeholder='{
                           "title": "Пример",
                           "description": "Описание",
                           "morpheme": {
@@ -82,142 +98,152 @@ export const CodexForm: React.FC<CodexFormProps> = ({
                           "joke": "Шутка",
                           "derivatives": ["производное1"]
                        }'
-                    onJsonParsed={(parsedData) => {
-                      const updatedValues = {
-                        ...values,
-                        ...parsedData,
-                        morpheme: {
-                          ...values.morpheme,
-                          ...parsedData.morpheme,
-                        },
-                      };
-                      setValues(updatedValues);
-                    }}
-                />
-                {/* Приставки */}
-                <DynamicArrayField
-                    name="morpheme.prefix"
-                    label="Префиксы"
-                    placeholder="Введите префикс"
-                    minItems={1}
-                    allowMultiline={true}
-                />
-                {/* Корни */}
-                <DynamicArrayField
-                    name="morpheme.root"
-                    label="Корни"
-                    placeholder="Введите корень"
-                    minItems={1}
-                    allowMultiline={true}
-                />
-                {/* Suffix */}
-                  <DynamicArrayField
-                      name="morpheme.suffix"
-                      label="Суффиксы"
-                      placeholder="Введите суффикс"
-                      minItems={1}
-                      allowMultiline={true}
-                  />
-                {/* End */}
-                <DynamicArrayField
-                    name="morpheme.end"
-                    label="Окончания"
-                    placeholder="Введите окончание"
-                    minItems={1}
-                    allowMultiline={true}
-                />
+                              onJsonParsed={(parsedData) => {
+                                  const updatedValues = {
+                                      ...values,
+                                      ...parsedData,
+                                      morpheme: {
+                                          ...values.morpheme,
+                                          ...parsedData.morpheme,
+                                      },
+                                  };
+                                  setValues(updatedValues);
+                              }}
+                          />
+                          {/* Приставки */}
+                          <DynamicArrayField
+                              name="morpheme.prefix"
+                              label="Префиксы"
+                              placeholder="Введите префикс"
+                              minItems={1}
+                              allowMultiline={true}
+                          />
+                          {/* Корни */}
+                          <DynamicArrayField
+                              name="morpheme.root"
+                              label="Корни"
+                              placeholder="Введите корень"
+                              minItems={1}
+                              allowMultiline={true}
+                          />
+                          {/* Suffix */}
+                          <DynamicArrayField
+                              name="morpheme.suffix"
+                              label="Суффиксы"
+                              placeholder="Введите суффикс"
+                              minItems={1}
+                              allowMultiline={true}
+                          />
+                          {/* End */}
+                          <DynamicArrayField
+                              name="morpheme.end"
+                              label="Окончания"
+                              placeholder="Введите окончание"
+                              minItems={1}
+                              allowMultiline={true}
+                          />
 
-                {/* Описание */}
-                <Box mb={3}>
-                  <Field name="description">
-                    {({ field }: any) => (
-                        <Input className={"paragraph_base"}
-                            {...field}
-                            fullWidth
-                             placeholder={"Введите ваше описание."}
-                            label="Описание"
-                            variant="outlined"
-                            multiline
-                            rows={4}
-                            error={!!ErrorMessage}
-                            helperText={<ErrorMessage name="description" />}
-                        />
-                    )}
-                  </Field>
-                </Box>
-
-                {/* Другие поля... */}
-                {/* Производные */}
-                <Box mb={3}>
-                  <Typography variant="subtitle1">Производные:</Typography>
-                  <FieldArray name="derivatives">
-                    {({ remove, push }) => (
-                        <>
-                          {values.derivatives.map((derivative, index) => (
-                              <Box display="flex" alignItems="center" key={index} mb={2}>
-                                <Field name={`derivatives[${index}]`}>
+                          {/* Описание */}
+                          <Box mb={3}>
+                              <Field name="description">
                                   {({ field }: any) => (
                                       <Input className={"paragraph_base"}
-                                          {...field}
-                                          fullWidth
-                                             placeholder={"Введите ваши производные."}
-                                          label={`Производное ${index + 1}`}
-                                          variant="outlined"
-                                          error={!!ErrorMessage}
+                                             {...field}
+                                             fullWidth
+                                             placeholder={"Введите ваше описание."}
+                                             label="Описание"
+                                             variant="outlined"
                                              multiline
-                                          helperText={
-                                            <ErrorMessage name={`derivatives[${index}]`} />
-                                          }
+                                             rows={4}
+                                             error={!!ErrorMessage}
+                                             helperText={<ErrorMessage name="description" />}
                                       />
                                   )}
-                                </Field>
-                                <IconButton
-                                    onClick={() => remove(index)}
-                                    disabled={values.derivatives.length === 1}
-                                    aria-label="удалить"
-                                    color="error"
-                                >
-                                  <Delete />
-                                </IconButton>
-                              </Box>
-                          ))}
-                          <Button
-                              variant="contained"
-                              startIcon={<Add />}
-                              onClick={() => push("")}
-                          >
-                            Добавить производное
-                          </Button>
-                        </>
-                    )}
-                  </FieldArray>
-                </Box>
+                              </Field>
+                          </Box>
 
-                {/* Кнопка отправки */}
-                <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    fullWidth
-                    size="large"
-                >
-                  Добавить запись
-                </Button>
-                <Button
-                    onClick={() => {isEditingForm(!editingFrom)}}
-                    variant="contained"
-                    color="success"
-                    fullWidth
-                    size="large"
-                >
-                  Назад
-                </Button>
-              </Form>
-          )}
-        </Formik>
-      </Box>
+                          {/* Другие поля... */}
+                          {/* Производные */}
+                          <Box mb={3}>
+                              <Typography variant="subtitle1">Производные:</Typography>
+                              <FieldArray name="derivatives">
+                                  {({ remove, push }) => (
+                                      <>
+                                          {values.derivatives.map((derivative, index) => (
+                                              <Box display="flex" alignItems="center" key={index} mb={2}>
+                                                  <Field name={`derivatives[${index}]`}>
+                                                      {({ field }: any) => (
+                                                          <Input className={"paragraph_base"}
+                                                                 {...field}
+                                                                 fullWidth
+                                                                 placeholder={"Введите ваши производные."}
+                                                                 label={`Производное ${index + 1}`}
+                                                                 variant="outlined"
+                                                                 error={!!ErrorMessage}
+                                                                 multiline
+                                                                 helperText={
+                                                                     <ErrorMessage name={`derivatives[${index}]`} />
+                                                                 }
+                                                          />
+                                                      )}
+                                                  </Field>
+                                                  <IconButton
+                                                      onClick={() => remove(index)}
+                                                      disabled={values.derivatives.length === 1}
+                                                      aria-label="удалить"
+                                                      color="error"
+                                                  >
+                                                      <Delete />
+                                                  </IconButton>
+                                              </Box>
+                                          ))}
+                                          <Button
+                                              variant="contained"
+                                              startIcon={<Add />}
+                                              onClick={() => push("")}
+                                          >
+                                              Добавить производное
+                                          </Button>
+                                      </>
+                                  )}
+                              </FieldArray>
+                          </Box>
+
+                          {/* Кнопка отправки */}
+                          <Base_button
+                              disabled={(loading.addWord.status === LoadingStatus.padding)}
+                              classStyle="button_to bg-lesson-blue hover:bg-blue-500 dark:bg-blue-650 dark:hover:bg-blue-700 disabled:bg-gray-300 dark:disabled:bg-dark-card"
+                              type="submit"
+                          >
+                              {
+                                  loading.addWord.status === LoadingStatus.padding
+                                      ? <>
+                                          <CircularProgress color="success" size={20} sx={{marginRight: 1}}/>
+                                          {loading.addWord.message}
+                                      </>
+                                      : loading.addWord.status === LoadingStatus.fulfilled
+                                          ? <>Добавить запись</>
+                                          : <>Попробуйте добавить еще раз!!!</>
+                              }
+
+                          </Base_button>
+                          <Button
+                              onClick={() => {isEditingForm(!editingFrom)}}
+                              variant="contained"
+                              color="success"
+                              fullWidth
+                              size="large"
+                          >
+                              Назад
+                          </Button>
+                      </Form>
+                  )}
+              </Formik>
+          </Box>
+      </>
+
   );
-};
+})
 
 
 //------------------Types-----------------------------------

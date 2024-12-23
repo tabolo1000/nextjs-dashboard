@@ -18,6 +18,22 @@ export default async function Linguistics() {
                 icon={<FaLanguage />}
                 iconColor="text-purple-600"
             />
+
+            <LessonCard
+                to={"./linguistics/words/slider_words"}
+                title="Словесная карусель"
+                description="Изучение происхождения слов, их изменения во времени и влияния разных языков на современную лексику."
+                icon={<FaLanguage />}
+                iconColor="text-purple-600"
+            />
+
+            <LessonCard
+                to={"./linguistics/words/conversation_topics"}
+                title="Темы"
+                description="Изучение происхождения слов, их изменения во времени и влияния разных языков на современную лексику."
+                icon={<FaLanguage />}
+                iconColor="text-purple-600"
+            />
         </div>
     </div>
 }

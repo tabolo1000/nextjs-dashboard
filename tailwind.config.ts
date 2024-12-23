@@ -23,6 +23,7 @@ const config: Config = {
         },
       },
       colors: {
+        'error': "#101010",
         'font': '#101010',
         'bg_table_header': '#f6d73b',
         'bg_table_row_odd': 'rgba(246,215,59,0.65)',

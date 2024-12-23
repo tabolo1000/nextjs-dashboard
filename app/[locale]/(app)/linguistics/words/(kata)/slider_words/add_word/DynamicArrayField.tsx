@@ -1,7 +1,8 @@
 import React from "react";
 import { Field, FieldArray, ErrorMessage } from "formik";
 import { Box, Button, IconButton, Typography, Input } from "@mui/material";
-import { Add, Delete } from "@mui/icons-material";
+import {Add, AddBoxOutlined, Delete, ExitToAppTwoTone} from "@mui/icons-material";
+import {Base_button} from "@/app/ui/math/components/Base_button";
 
 interface DynamicArrayFieldProps {
     name: string; // Имя массива в Formik
@@ -31,7 +32,6 @@ export const DynamicArrayField: React.FC<DynamicArrayFieldProps> = ({
                         <>
                             {
                                 values.map((_: string, index: number) => {
-                                    debugger
                                     return (
                                     <Box display="flex" alignItems="center" key={index} mb={2}>
                                         <Field name={`${name}[${index}]`}>
@@ -56,13 +56,15 @@ export const DynamicArrayField: React.FC<DynamicArrayFieldProps> = ({
                                         </IconButton>
                                     </Box>
                                 )})}
-                            <Button
-                                variant="contained"
-                                startIcon={<Add />}
-                                onClick={() => push("")} // Добавить новый элемент
-                            >
-                                Добавить {label.toLowerCase()}
-                            </Button>
+                            <Box className = {""} alignItems="right"  mb={2}>
+                                <Base_button
+                                    classStyle={"add_button"}
+                                    onClick={() => push("")}
+                                >
+                                    <AddBoxOutlined className="text-3xl" />
+                                    Добавить {" " + label.toLowerCase()}
+                                </Base_button>
+                            </Box>
                         </>
                     );
                 }}

@@ -24,6 +24,10 @@ export default function useSlider_words(): ReturnType{
         dispatch(loadWordsForCarousel()); // Загружаем слова при монтировании
     }, []);
 
+   /* useEffect(() => {
+        dispatch({type: 'linguistics/loadWords'}); // Загружаем слова при монтировании
+    }, []);*/
+
     // Определяем текущие элементы для отображения
     const currentItems = wordsCarousel.slice(
         (currentPage - 1) * itemsPerPage,
@@ -50,6 +54,7 @@ export default function useSlider_words(): ReturnType{
         dispatch(updateWordToCarousel({
             ...value
         }))
+        /*dispatch({type: 'linguistics/updateWord', payload: value});*/
     }, [dispatch]);
 
     const handleWordDelete = useCallback((
@@ -57,6 +62,7 @@ export default function useSlider_words(): ReturnType{
     ) => {
         debugger
         dispatch(deleteWordToCarousel(id))
+        //dispatch({type: 'linguistics/deleteWord', payload: id});
     }, [dispatch]);
 
     return {

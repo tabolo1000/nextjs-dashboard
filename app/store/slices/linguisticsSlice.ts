@@ -2,6 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 import {createApiThunk} from "@/app/store/utils/apiThunk";
 import {createWord, deleteWord, fetchWordsCarousel, updateWord} from "@/app/api/linguistics";
 
+export enum LoadingStatus {
+    padding = "padding",
+    fulfilled = "fulfilled",
+    rejected = "rejected",
+}
+
 const initialState: LinguisticsState = {
     wordsCarousel: [
         {
@@ -23,11 +29,13 @@ const initialState: LinguisticsState = {
        }
     ],
     loading: {
-        status: false,
-        message: null
+            addWord: { status: LoadingStatus.fulfilled, message: null },
+            deleteWord: { status: LoadingStatus.fulfilled, message: null },
+            fetchWords: { status: LoadingStatus.fulfilled, message: null },
     },
     error: null,
 };
+
 
 // 1. Redux Toolkit uses the Immer library, which wraps state in a “proxy object”.
 
@@ -45,85 +53,84 @@ const linguisticsSlice = createSlice({
        */
     },
     extraReducers: (builder) => {
-        // Загрузка слов (loadWordsForCarousel)
+        // Загрузка слов
         builder
             .addCase(loadWordsForCarousel.pending, (state) => {
-                state.loading = {
-                    status: true,
-                    message: "Идет загрузка слов..."
+                state.loading.fetchWords = {
+                    status: LoadingStatus.padding,
+                    message: "Идет загрузка слов...",
                 };
                 state.error = null;
             })
             .addCase(loadWordsForCarousel.fulfilled, (state, action) => {
-                state.loading = {
-                    status: false,
-                    message: "Слова успешно загружены"
+                state.loading.fetchWords = {
+                    status: LoadingStatus.fulfilled,
+                    message: "Слова успешно загружены!!!",
                 };
                 state.wordsCarousel = action.payload;
             })
             .addCase(loadWordsForCarousel.rejected, (state, action) => {
-                state.loading = {
-                    status: false,
-                    message: "Загрузка слов не удалась"
+                state.loading.fetchWords = {
+                    status: LoadingStatus.rejected,
+                    message: "Загрузка слов не удалась :(",
                 };
-                state.error = action.payload || 'Не удалось загрузить слова';
+                state.error = action.payload || "Не удалось загрузить слова";
             });
 
-        // Добавление слова (addWordToCarousel)
+        // Добавление слова
         builder
             .addCase(addWordToCarousel.pending, (state) => {
-                state.loading = {
-                    status: true,
-                    message: "Идет добавление в базу данных..."
+                state.loading.addWord = {
+                    status: LoadingStatus.padding,
+                    message: "Идет добавление слова...",
                 };
                 state.error = null;
             })
             .addCase(addWordToCarousel.fulfilled, (state, action) => {
-                state.loading = {
-                    status: false,
-                    message: "Слова успешно добавлено!"
+                state.loading.addWord = {
+                    status: LoadingStatus.fulfilled,
+                    message: "Слово успешно добавлено!!!",
                 };
                 state.wordsCarousel.push(action.payload);
             })
             .addCase(addWordToCarousel.rejected, (state, action) => {
-                state.loading = {
-                    status: false,
-                    message: "Загрузка слова не удалась!"
+                state.loading.addWord = {
+                    status: LoadingStatus.rejected,
+                    message: "Добавление слова не удалось :(",
                 };
-                state.error = action.payload || 'Не удалось добавить слово';
+                state.error = action.payload || "Не удалось добавить слово";
             });
 
-        // Удаление слова (deleteWordToCarousel)
+        // Удаление слова
         builder
             .addCase(deleteWordToCarousel.pending, (state) => {
-                state.loading = {
-                    status: true,
-                    message: "Идет удаление слова в базе данных..."
+                state.loading.deleteWord = {
+                    status: LoadingStatus.padding,
+                    message: "Идет удаление слова...",
                 };
                 state.error = null;
             })
             .addCase(deleteWordToCarousel.fulfilled, (state, action) => {
-                state.loading = {
-                    status: false,
-                    message: "Слово успешно удалено!"
+                state.loading.deleteWord = {
+                    status: LoadingStatus.fulfilled,
+                    message: "Слово успешно удалено!!!",
                 };
 
-                // Находим индекс элемента в массиве
-                const index = state.wordsCarousel.findIndex((el) => el._id === action.payload._id);
-
+                const index = state.wordsCarousel.findIndex(
+                    (el) => el._id === action.payload._id
+                );
                 if (index !== -1) {
-                    // Заменяем элемент по индексу на новый
-                    state.wordsCarousel.splice(index, 1)
+                    state.wordsCarousel.splice(index, 1);
                 }
             })
             .addCase(deleteWordToCarousel.rejected, (state, action) => {
-                state.loading = {
-                    status: false,
-                    message: "Удаление слова не удалась!"
+                state.loading.deleteWord = {
+                    status: LoadingStatus.rejected,
+                    message: "Удаление слова не удалось :(",
                 };
-                state.error = action.payload || 'Не удалось удалить слово';
+                state.error = action.payload || "Не удалось удалить слово";
             });
-        },
+    },
 });
 
 //export const { createWordForCarousel } = linguisticsSlice.actions;
@@ -142,7 +149,7 @@ export const loadWordsForCarousel = createApiThunk<WordCarousel[], void>(
 );
 
 // Добавление нового слова в карусель
-export const addWordToCarousel = createApiThunk<WordCarousel, WordCarousel>(
+export const addWordToCarousel = createApiThunk<WordCarousel, AddWordCarouselUpdate>(
     'linguistics/addWord',
     async (newWord) => {
         return createWord(newWord); // Возвращаем добавленное слово
@@ -167,9 +174,17 @@ export const deleteWordToCarousel = createApiThunk<WordCarousel, string>(
 
 //--------------------------Types---------------------------------
 
+interface ActionLoading {
+    status: LoadingStatus;
+    message: string | null;
+}
+
+
+
 export interface Loading {
-    status: boolean,
-    message: string | null,
+    addWord: ActionLoading;
+    deleteWord: ActionLoading;
+    fetchWords: ActionLoading;
 }
 
 export interface WordCarousel {
@@ -194,6 +209,17 @@ export interface WordCarouselUpdate {
     annotation?: string,
     joke?: string,
     derivatives?: Array<string>
+}
+
+export interface AddWordCarouselUpdate {
+    morpheme: WordCarouselMorpheme,
+    title: string,
+    description: string,
+    icon: string,
+    quote: string,
+    annotation: string,
+    joke: string,
+    derivatives: Array<string>
 }
 
 interface WordCarouselMorpheme {

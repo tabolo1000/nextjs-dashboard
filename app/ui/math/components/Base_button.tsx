@@ -1,35 +1,36 @@
-"use client"
+import React from "react";
 
+interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+    onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+    classStyle?: string;
+    name?: string;
+    type?: "button" | "submit" | "reset";
+    children?: React.ReactNode;
+    id?: string;
+    disabled?: boolean;
+}
 
-
-
-import {MouseEvent} from "react";
-
-export const Base_button = ({
-    onClick, classStyle,name, type, children, id
-                            }: Props) => {
-
+export const Base_button: React.FC<Props> = ({
+                                     onClick,
+                                     classStyle = "",
+                                     name,
+                                     type = "button",
+                                     children,
+                                     id,
+                                     disabled = false,
+                                     ...rest
+                                 }) => {
     return (
-        <div
-            className={classStyle}
+        <button
             id={id}
+            name={name}
+            type={type}
+            className={classStyle}
+            onClick={onClick}
+            disabled={disabled}
+            {...rest} // Передача дополнительных атрибутов
         >
-            <button type={type || "button"} onClick={onClick || undefined} className={"text-lg w-full base-animation-all"}>
-                <div className={"inline-flex items-center justify-center"}>
-                    {
-                        (children || name)
-                    }
-                </div>
-            </button>
-        </div>
-    )
-}
-
-interface Props {
-    onClick?: (event?: MouseEvent<HTMLElement> | any) => void,
-    classStyle: string,
-    name?: string,
-    type?: "button" | "submit" | "reset",
-    children?: React.ReactNode,
-    id?: string,
-}
+            {children}
+        </button>
+    );
+};

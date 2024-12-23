@@ -1,5 +1,5 @@
 import api from './config';
-import {WordCarousel, WordCarouselUpdate} from '../store/slices/linguisticsSlice'; // Типы данных
+import {AddWordCarouselUpdate, WordCarousel, WordCarouselUpdate} from '../store/slices/linguisticsSlice'; // Типы данных
 
 // Получение всех слов для карусели
 export const fetchWordsCarousel = async (): Promise<WordCarousel[]> => {
@@ -19,7 +19,7 @@ export const fetchWordById = async (id: string): Promise<WordCarousel> => {
 };
 
 // Добавление нового слова
-export const createWord = async (word: WordCarousel): Promise<WordCarousel> => {
+export const createWord = async (word: AddWordCarouselUpdate): Promise<WordCarousel> => {
     const { data } = await api.post<WordCarousel>('linguistics/words/words_carousel', word);
     return data;
 };
