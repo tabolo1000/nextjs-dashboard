@@ -6,7 +6,7 @@ import { AddBoxOutlined, ChangeCircleOutlined, DeleteOutline } from "@mui/icons-
 import { WordCarousel, WordCarouselUpdate} from "@/app/store/slices/linguisticsSlice";
 import {EditableField} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/add_word/EditableField";
 import ConfirmationModal from "@/app/ui/math/components/ConfirmationModal";
-import {ToastContainer} from "react-toastify";
+//import {ToastContainer} from "react-toastify";
 
 
 export function Slider_card({
@@ -79,6 +79,26 @@ export function Slider_card({
         console.log("Deletion cancelled");
         setOpenModal(false);
     };
+
+
+   /* const handleAddFieldChange = (value: string) => {
+       if (value.length > 6) {
+           const updatedArray = [...(editableFields.collections || [])];
+           updatedArray.push(value);
+
+           setEditableFields((prev) => ({
+               ...prev,
+               collections: updatedArray,
+           }));
+
+           handleWordChange({
+               _id,
+               collections: updatedArray,
+           });
+       }
+    };
+
+    const [u, s] = useState("")*/
 
 
     return (
@@ -183,6 +203,12 @@ export function Slider_card({
 
                     <div className="paragraph_base">
                         <span className="font-bold text-purple-600">Коллекции:</span>
+                      {/*  <input
+                            type="text"
+
+                            onChange={(e)=> s(e.currentTarget.value)}
+                            onBlur={()=> handleAddFieldChange(u)}
+                        />*/}
                         {editableFields.collections &&
                             editableFields.collections.map((e: string, i: number) => (
                                 <EditableField

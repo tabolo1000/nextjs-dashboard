@@ -20,7 +20,7 @@ export default async function Linguistics() {
             />
 
             <LessonCard
-                to={"./linguistics/words/slider_words"}
+                to={"./linguistics/words/slider_words_theme"}
                 title="Словесная карусель"
                 description="Изучение происхождения слов, их изменения во времени и влияния разных языков на современную лексику."
                 icon={<FaLanguage />}

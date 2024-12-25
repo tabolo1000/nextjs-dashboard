@@ -1,7 +1,7 @@
 import {A11y, Autoplay, FreeMode, Keyboard, Manipulation, Mousewheel, Navigation, Virtual, Zoom} from "swiper/modules";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {Slider_card} from "@/app/ui/math/components/slider/Slider_card";
-import React from "react";
+import React, {useRef} from "react";
 import {SliderSettingsType} from "@/app/ui/math/components/slider/SliderSettings";
 import {WordCarousel, WordCarouselUpdate} from "@/app/store/slices/linguisticsSlice";
 
@@ -14,6 +14,17 @@ export default function CustomSwiper({
     isEditingForm,
 
                                      }:CustomSwiperProps) {
+/*
+    currentItems.findIndex(())
+
+    const swiperRef = useRef("");
+
+    const goToSlide = (index) => {
+        if (swiperRef.current) {
+            swiperRef.current.swiper.slideTo(index);
+        }
+    };*/
+
     return <Swiper
         modules={[
             Navigation,
@@ -73,5 +84,5 @@ interface CustomSwiperProps {
     currentItems: WordCarousel[],
     handleWordChange: (value: WordCarouselUpdate) => void,
     handleWordDelete: (id: string) => void,
-    isEditingForm (active:  boolean): void
+    isEditingForm: (active: boolean) => void
 }

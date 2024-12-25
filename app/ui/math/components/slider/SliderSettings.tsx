@@ -49,7 +49,7 @@ export const SliderSettings = ({
                 <Slider
                     value={settings.delay}
                     min={1000}
-                    max={30000}
+                    max={60000}
                     step={500}
                     onChange={(e, value) =>
                         setSettings((prev) => ({ ...prev, delay: value as number }))

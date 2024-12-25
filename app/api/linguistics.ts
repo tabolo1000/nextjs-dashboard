@@ -2,9 +2,15 @@ import api from './config';
 import {AddWordCarouselUpdate, WordCarousel, WordCarouselUpdate} from '../store/slices/linguisticsSlice'; // Типы данных
 
 // Получение всех слов для карусели
-export const fetchWordsCarousel = async (): Promise<WordCarousel[]> => {
-    const { data } = await api.get<WordCarousel[]>('linguistics/words/words_carousel');
-    return data;
+export const fetchWordsCarousel = async (collection: Array<string>): Promise<WordCarousel[]> => {
+    //const queryString = qs.stringify({ collection }, { arrayFormat: 'repeat' });
+    if(collection.length !== 0){
+        const { data } = await api.get<WordCarousel[]>(`linguistics/words/words_carousel/${collection[0]}`);
+        return data;
+    }
+    const { data } = await api.get<WordCarousel[]>(`linguistics/words/words_carousel`);
+        return data;
+
 };
 
 export const fetchCollectionWordsCarousel = async (collection: Array<string>): Promise<WordCarousel[]> => {

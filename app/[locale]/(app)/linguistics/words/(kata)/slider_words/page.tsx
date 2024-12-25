@@ -1,65 +1,30 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { Button, LinearProgress, Box, Typography } from "@mui/material";
-import { CodexForm } from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/add_word/CodexForm";
-import { SliderSettings, SliderSettingsType } from "@/app/ui/math/components/slider/SliderSettings";
-import CustomSwiper from "@/app/ui/math/components/slider/CustomSwiper";
-import CustomPagination from "@/app/ui/math/components/slider/CustomPagination";
+import React from "react";
+import { Box, LinearProgress, Typography } from "@mui/material";
+import { AnimatePresence } from "framer-motion";
+import { ToastContainer } from "react-toastify";
+import SliderContent from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/move/SliderContent";
+import SettingsContent from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/move/SettingsContent";
+import EditFormContainer from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/move/EditFormContainer";
 import useSlider_words from "@/app/[locale]/(app)/linguistics/words/(kata)/useSlider_words";
-import { ExitToAppTwoTone, SettingsApplicationsTwoTone } from "@mui/icons-material";
-import { AnimatePresence, motion } from "framer-motion";
 import { LoadingStatus } from "@/app/store/slices/linguisticsSlice";
-import { toast, ToastContainer } from "react-toastify";
 
-export default function ButtonInfoSlider() {
-    // Hooks и состояния
-    const { pagination, data, actions } = useSlider_words();
-    const { pageCount, currentPage, handleChange } = pagination;
-    const { currentItems, loading, error, editingFrom } = data;
-    const { handleWordChange, handleWordDelete, isEditingForm } = actions;
-
-    const [settings, setSettings] = useState<SliderSettingsType>({
-        loop: true,
-        delay: 10000,
-        slidesPerView: 1,
-        autoplay: true,
-    });
-
-    const [isSettingsActive, setIsSettingsActive] = useState(false);
-    const toastId = React.useRef<number | string>("");
+export default function Carrousel_Slider({
+                                             endPoints,
+                                             setTopic,
+                                         }: {
+    endPoints: Array<string>;
+    setTopic: (topic: string | null) => void;
+}) {
+    const { pagination, data, actions } = useSlider_words(endPoints);
+    const { pageCount, currentPage, handleChangePage } = pagination;
+    const { currentItems, loading, error, editingFrom, settings} = data;
+    const { handleWordChange, handleWordDelete, isSettingsActive, toggleSettings, setSettings } = actions;
 
 
-    const handleLoadingNotifications = (loadingKey: keyof typeof loading) => {
-        const { status, message } = loading[loadingKey];
-  debugger
-        if (status === LoadingStatus.padding) {
-            if (!toastId.current) {
-                toastId.current = toast.loading(message);
-                debugger
-            }
 
-        } else {
-            if (toastId.current) {
-                toast.dismiss(toastId.current);
-                toastId.current = "";
-            }
 
-            setTimeout(() => {
-                if (status === LoadingStatus.fulfilled) toast.success(message);
-                if (status === LoadingStatus.rejected) toast.error(message);
-            }, 100); // Задержка 100 мс
-        }
-    };
-
-    useEffect(() => handleLoadingNotifications("addWord"), [loading.addWord]);
-    useEffect(() => handleLoadingNotifications("deleteWord"), [loading.deleteWord]);
-    useEffect(() => handleLoadingNotifications("fetchWords"), [loading.fetchWords]);
-
-    // Переключение между настройками и слайдером
-    const toggleSettings = () => setIsSettingsActive((prev) => !prev);
-
-    // Анимации слайдера
     const animationVariants = {
         initial: { opacity: 0, y: 20 },
         animate: { opacity: 1, y: 0, transition: { duration: 0.5 } },
@@ -71,15 +36,15 @@ export default function ButtonInfoSlider() {
         return (
             <>
                 <Box>
-                <Typography color="error">Ошибка: {loading.fetchWords.message} {error}</Typography>
-            </Box>
+                    <Typography color="error">
+                        Ошибка: {loading.fetchWords.message} {error}
+                    </Typography>
+                </Box>
                 <ToastContainer theme="dark" position="top-right" autoClose={3000} />
             </>
-
-
-
         );
     }
+
     if (loading.fetchWords.status === LoadingStatus.padding) {
         return (
             <>
@@ -105,72 +70,32 @@ export default function ButtonInfoSlider() {
                 <Box className="base-animation-all w-full">
                     <AnimatePresence mode="wait">
                         {editingFrom ? (
-                            <motion.div
-                                key="edit-form"
-                                variants={animationVariants}
-                                initial="initial"
-                                animate="animate"
-                                exit="exit"
-                                className="p-6 rounded-lg shadow-lg "
-                            >
-                                <CodexForm editingFrom={editingFrom} isEditingForm={isEditingForm} />
-                            </motion.div>
+                            <EditFormContainer
+                                editingFrom={editingFrom}
+                                isEditingForm={actions.setEditingForm}
+                                animationVariants={animationVariants}
+                            />
+                        ) : isSettingsActive ? (
+                            <SettingsContent
+                                toggleSettings={toggleSettings}
+                                settings={data.settings}
+                                setSettings={actions.setSettings}
+                                animationVariants={animationVariants}
+                            />
                         ) : (
-                            <>
-                                {isSettingsActive ? (
-                                    <motion.div
-                                        key="settings"
-                                        variants={animationVariants}
-                                        initial="initial"
-                                        animate="animate"
-                                        exit="exit"
-                                        className="p-6 rounded-lg shadow-lg"
-                                    >
-                                        <Box className="flex justify-end">
-                                            <Button
-                                                variant="outlined"
-                                                color="error"
-                                                onClick={toggleSettings}
-                                                className="hover:bg-red-500 transition-all mb-2"
-                                            >
-                                                <ExitToAppTwoTone className="text-3xl" />
-                                            </Button>
-                                        </Box>
-                                        <SliderSettings settings={settings} setSettings={setSettings} />
-                                    </motion.div>
-                                ) : (
-                                    <motion.div
-                                        key="slider"
-                                        variants={animationVariants}
-                                        initial="initial"
-                                        animate="animate"
-                                        exit="exit"
-                                        className="p-6 rounded-lg shadow-lg"
-                                    >
-                                        <Box className="flex justify-end">
-                                            <Button
-                                                variant="outlined"
-                                                onClick={toggleSettings}
-                                                className="transition-all mb-2"
-                                            >
-                                                <SettingsApplicationsTwoTone className="text-3xl" />
-                                            </Button>
-                                        </Box>
-                                        <CustomSwiper
-                                            settings={settings}
-                                            currentItems={currentItems}
-                                            handleWordChange={handleWordChange}
-                                            handleWordDelete={handleWordDelete}
-                                            isEditingForm={isEditingForm}
-                                        />
-                                        <CustomPagination
-                                            pageCount={pageCount}
-                                            currentPage={currentPage}
-                                            handleChange={handleChange}
-                                        />
-                                    </motion.div>
-                                )}
-                            </>
+                            <SliderContent
+                                toggleSettings={toggleSettings}
+                                setTopic={setTopic}
+                                settings={data.settings}
+                                currentItems={currentItems}
+                                handleWordChange={handleWordChange}
+                                handleWordDelete={handleWordDelete}
+                                isEditingForm={actions.setEditingForm}
+                                pageCount={pageCount}
+                                currentPage={currentPage}
+                                handleChange={handleChangePage}
+                                animationVariants={animationVariants}
+                            />
                         )}
                     </AnimatePresence>
                 </Box>
@@ -179,3 +104,6 @@ export default function ButtonInfoSlider() {
         </>
     );
 }
+
+
+

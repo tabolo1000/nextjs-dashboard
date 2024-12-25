@@ -172,10 +172,10 @@ export default linguisticsSlice.reducer;
 
 //-------------------------------------------------Thunks-----------------------------------------
 
-export const loadWordsForCarousel = createApiThunk<WordCarousel[], void>(
+export const loadWordsForCarousel = createApiThunk<WordCarousel[], Array<string>>(
     'linguistics/loadWords',
-    async () => {
-        return fetchWordsCarousel(); // Возвращаем список слов
+    async (collection) => {
+        return fetchWordsCarousel(collection); // Возвращаем список слов
     }
 );
 
