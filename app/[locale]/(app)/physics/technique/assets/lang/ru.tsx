@@ -2,7 +2,6 @@ import {FaSnowflake} from 'react-icons/fa';
 import {LessonCard} from "@/app/ui/math/components/LessonCard";
 
 
-
 export default async function Technique() {
     return <div className="main_block_task">
         <h1 className="header_h1">
@@ -12,14 +11,21 @@ export default async function Technique() {
             {/* Refrigerator Technology */}
             <LessonCard
                 to={"./technique/refrigerator/"}
-                title="Технология холодильника"
+                title="Технология холодильника."
                 description="Узнайте, как работают холодильники, используя термодинамику для охлаждения и сохранения продуктов."
                 icon={<FaSnowflake />}
                 iconColor="text-blue-500"
             />
             <LessonCard
                 to={"./technique/battery/"}
-                title="Техноло"
+                title="Устройство батареек."
+                description="Узнайте, как работают холодильники, используя термодинамику для охлаждения и сохранения продуктов."
+                icon={<FaSnowflake />}
+                iconColor="text-blue-500"
+            />
+            <LessonCard
+                to={"./technique/glass/"}
+                title="Что такое стекло и каким оно бывает."
                 description="Узнайте, как работают холодильники, используя термодинамику для охлаждения и сохранения продуктов."
                 icon={<FaSnowflake />}
                 iconColor="text-blue-500"

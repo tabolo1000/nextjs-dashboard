@@ -7,7 +7,7 @@ export function Interactive_Image({
     width,
 }: Interactive_Image_Props) {
     return (
-        <div className="flex justify-center items-center ">
+        <div className="flex justify-center items-center m-2 p-2">
             <Image
                 className={"rounded-lg object-cover object-center"}
                 src={(typeof src === "string")? `${src}` : src}

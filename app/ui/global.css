@@ -37,7 +37,7 @@ input[type='number']::-webkit-outer-spin-button {
 }
 
 .layout-body {
-  @apply flex flex-1;
+  @apply flex ;
 }
 
 .header {
@@ -70,14 +70,14 @@ input[type='number']::-webkit-outer-spin-button {
 }
 
 .main-content {
-  @apply flex-1 bg-gray-100 p-6 base-animation-all;
+  @apply bg-gray-100 p-6 base-animation-all lg:mx-5 my-2;
 }
 .dark .main-content {
   @apply bg-gray-900 text-gray-300 border-gray-900 border-8 rounded-xl;
 }
 
 .footer {
-  @apply base-animation-all bg-blue-600 text-white p-4 text-center ;
+  @apply base-animation-all bg-blue-600 text-white p-4 text-center;
 }
 .dark .footer {
   @apply bg-gray-800 text-gray-400 border-gray-950 border rounded-t-xl;
@@ -145,7 +145,7 @@ input[type='number']::-webkit-outer-spin-button {
 /*----------------Article------------------------------------------------------------*/
 
 .header_h1 {
-  @apply text-center text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 mb-3 p-2;
+  @apply text-center text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 mb-3 p-4;
 }
 .dark .header_h1 {
   @apply bg-gradient-to-r from-blue-400 via-purple-500 to-pink-400;
@@ -173,7 +173,7 @@ input[type='number']::-webkit-outer-spin-button {
 }
 
 .header_h3 {
-  @apply ml-10 text-2xl font-bold text-pink-700 my-4 border-pink-400;
+  @apply ml-10 text-2xl font-bold text-pink-700 my-4 border-pink-400 border-b-2 w-fit;
 }
 .dark .header_h3 {
   @apply text-pink-400;
@@ -184,6 +184,18 @@ input[type='number']::-webkit-outer-spin-button {
 }
 .dark  .header_h4 {
   @apply text-gray-300;
+}
+.header_h5 {
+  @apply text-lg font-semibold text-green-600;
+}
+.dark  .header_h5 {
+  @apply text-green-400;
+}
+.under_text {
+  @apply ml-10 italic text-gray-600;
+}
+.dark  .under_text {
+  @apply text-green-400;
 }
 
 .paragraph_base {
@@ -208,11 +220,33 @@ input[type='number']::-webkit-outer-spin-button {
 }
 
 .paragraph_example {
-  @apply text-lg leading-relaxed text-gray-800 max-w-2xl mx-auto mb-6 p-2 rounded shadow-md shadow-green-500 border;
+  @apply text-lg leading-relaxed text-gray-800  mx-auto mb-6 p-2 rounded shadow-md shadow-green-500 border;
 }
 
 .dark .paragraph_example {
   @apply text-gray-300; /* Сделаем текст немного светлее */
+}
+
+
+.third_priority_content {
+  @apply border-b-2 border-[#009999] text-[#006363] p-1 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300
+}
+.dark .third_priority_content  {
+  @apply border-[#009999] text-[#009999]
+}
+
+.second_priority_content {
+  @apply border-b-2 border-[#FF7400] text-[#A64B00] p-1 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300
+}
+.dark .second_priority_content  {
+  @apply border-[#FF7400] text-[#FF7400]
+}
+
+.conclusion_of_article {
+  @apply bg-green-400 dark:bg-green-800 dark:text-green-300 p-4 mt-6 rounded-lg shadow-lg
+}
+.dark .conclusion_of_article {
+  @apply  bg-green-800 text-green-300
 }
 
 /* Выделение ключевых слов */
@@ -261,14 +295,18 @@ input[type='number']::-webkit-outer-spin-button {
 /* ---------------------- list -----------------*/
 
 .unordered_list {
-  @apply  list-inside mb-6 paragraph w-full;
+  @apply  list-inside mb-6 w-full mt-2;
 }
 .dark .unordered_list {
   @apply text-gray-300;
 }
 
+.unordered_list_li {
+  @apply m-2;
+}
+
 .order_list {
-  @apply list-decimal list-inside mb-6 paragraph w-full;
+  @apply list-decimal list-inside mb-6 w-full;
 }
 .dark .order_list {
   @apply text-gray-300;
@@ -325,6 +363,17 @@ input[type='number']::-webkit-outer-spin-button {
 .dark .main_block_task {
   @apply bg-gray-900 text-gray-300;
 }
+
+
+{/* Used it for the first time on an article about batteries */}
+.main_block_article {
+  @apply container pt-0 p-8 flex flex-col justify-center place-items-center rounded shadow-md shadow-green-500 border border-l-4 border-indigo-500
+}
+
+.dark .main_block_article {
+  @apply bg-gray-800 border-indigo-400;
+}
+
 
 /* Общие стили для карточек */
 .card-base {

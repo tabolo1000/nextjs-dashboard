@@ -113,7 +113,7 @@ const Battery_the_Slide: React.FC<{
                 <ul className="unordered_list dark:text-gray-300 ">
                     {reactions.map((reaction, index) => (
                         <li  key={index}>
-                            <span className={"second_priority_content"}>{reaction.label + ":"}</span> {reaction.details}
+                            <Highlight>{reaction.label + ":"}</Highlight> {reaction.details}
                             <div className="text-center p-5 text-red-600 font-black text-3xl">
                                 <p>{reaction.formula}</p>
                             </div>
@@ -132,7 +132,7 @@ const Battery_the_Slide: React.FC<{
 export const BatterySlide: React.FC = () => {
     return (
         <Section title="Химические реакции в батарейках">
-        <p className="paragraph_base">
+        <p className="paragraph_example">
                 Здесь мы рассмотрим несколько типов батареек, их состав, реакции и
                 особенности.
             </p>

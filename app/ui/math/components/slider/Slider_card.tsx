@@ -81,7 +81,7 @@ export function Slider_card({
     };
 
 
-   /* const handleAddFieldChange = (value: string) => {
+    const handleAddFieldChange = (value: string) => {
        if (value.length > 6) {
            const updatedArray = [...(editableFields.collections || [])];
            updatedArray.push(value);
@@ -98,7 +98,7 @@ export function Slider_card({
        }
     };
 
-    const [u, s] = useState("")*/
+    const [u, s] = useState("")
 
 
     return (
@@ -203,12 +203,12 @@ export function Slider_card({
 
                     <div className="paragraph_base">
                         <span className="font-bold text-purple-600">Коллекции:</span>
-                      {/*  <input
+                        <input
                             type="text"
 
                             onChange={(e)=> s(e.currentTarget.value)}
                             onBlur={()=> handleAddFieldChange(u)}
-                        />*/}
+                        />
                         {editableFields.collections &&
                             editableFields.collections.map((e: string, i: number) => (
                                 <EditableField

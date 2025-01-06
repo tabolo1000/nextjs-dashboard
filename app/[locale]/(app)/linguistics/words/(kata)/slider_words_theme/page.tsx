@@ -37,6 +37,13 @@ const topicWords: TopicWord[] = [
         iconColor: "text-orange-500",
     },
     {
+        topic: "conversation_topic_programmer", // Тема "Еда"
+        title: "Слова: Программирование",
+        description: "Слова, связанные с блюдами, ингредиентами и кулинарными предпочтениями. Подходит для обсуждений о любимой еде и рецептах.",
+        icon: <FaLeaf />,
+        iconColor: "text-red-900",
+    },
+    {
         topic: "conversation_topic_food", // Тема "Еда"
         title: "Слова: Еда и кулинария",
         description: "Слова, связанные с блюдами, ингредиентами и кулинарными предпочтениями. Подходит для обсуждений о любимой еде и рецептах.",

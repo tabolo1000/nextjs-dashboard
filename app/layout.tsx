@@ -15,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-    <body className={`${inriaSans.className} subpixel-antialiased`}>{children}</body>
+      <body className={`${inriaSans.className} subpixel-antialiased dark:bg-gray-800`}>{children}</body>
     </html>
   );
 }

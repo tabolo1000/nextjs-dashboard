@@ -1,3 +1,5 @@
+import React from "react";
+
 export const Highlight = ({children}: HighlightProps) => (
     <span className="bg-green-400 text-green-700 font-semibold px-6
         py-3 rounded-lg shadow-md text-xl border-b-4 border-green-500
@@ -7,5 +9,5 @@ export const Highlight = ({children}: HighlightProps) => (
 
 
 interface HighlightProps {
-    children: string,
+    children: React.ReactNode,
 }
