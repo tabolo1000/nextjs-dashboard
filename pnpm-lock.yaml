@@ -65,6 +65,9 @@ importers:
       framer-motion:
         specifier: ^11.15.0
         version: 11.15.0(@emotion/is-prop-valid@1.3.1)(react-dom@19.0.0-rc-f38c22b244-20240704(react@19.0.0-rc-f38c22b244-20240704))(react@19.0.0-rc-f38c22b244-20240704)
+      motion:
+        specifier: ^11.16.0
+        version: 11.16.0(@emotion/is-prop-valid@1.3.1)(react-dom@19.0.0-rc-f38c22b244-20240704(react@19.0.0-rc-f38c22b244-20240704))(react@19.0.0-rc-f38c22b244-20240704)
       next:
         specifier: 15.0.0-canary.56
         version: 15.0.0-canary.56(@babel/core@7.26.0)(react-dom@19.0.0-rc-f38c22b244-20240704(react@19.0.0-rc-f38c22b244-20240704))(react@19.0.0-rc-f38c22b244-20240704)
@@ -3012,6 +3015,20 @@ packages:
       react-dom:
         optional: true
 
+  framer-motion@11.16.0:
+    resolution: {integrity: sha512-oL2AWqLQuw0+CNEUa0sz3mWC/n3i147CckvpQn8bLRs30b+HxTxlRi0YR2FpHHhAbWV7DKjNdHU42KHLfBWh/g==}
+    peerDependencies:
+      '@emotion/is-prop-valid': '*'
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      '@emotion/is-prop-valid':
+        optional: true
+      react:
+        optional: true
+      react-dom:
+        optional: true
+
   framer-motion@4.1.17:
     resolution: {integrity: sha512-thx1wvKzblzbs0XaK2X0G1JuwIdARcoNOW7VVwjO8BUltzXPyONGAElLu6CiCScsOQRI7FIk/45YTFtJw5Yozw==}
     peerDependencies:
@@ -3633,8 +3650,28 @@ packages:
   motion-dom@11.14.3:
     resolution: {integrity: sha512-lW+D2wBy5vxLJi6aCP0xyxTxlTfiu+b+zcpVbGVFUxotwThqhdpPRSmX8xztAgtZMPMeU0WGVn/k1w4I+TbPqA==}
 
+  motion-dom@11.16.0:
+    resolution: {integrity: sha512-4bmEwajSdrljzDAYpu6ceEdtI4J5PH25fmN8YSx7Qxk6OMrC10CXM0D5y+VO/pFZjhmCvm2bGf7Rus482kwhzA==}
+
   motion-utils@11.14.3:
     resolution: {integrity: sha512-Xg+8xnqIJTpr0L/cidfTTBFkvRw26ZtGGuIhA94J9PQ2p4mEa06Xx7QVYZH0BP+EpMSaDlu+q0I0mmvwADPsaQ==}
+
+  motion-utils@11.16.0:
+    resolution: {integrity: sha512-ngdWPjg31rD4WGXFi0eZ00DQQqKKu04QExyv/ymlC+3k+WIgYVFbt6gS5JsFPbJODTF/r8XiE/X+SsoT9c0ocw==}
+
+  motion@11.16.0:
+    resolution: {integrity: sha512-d7EhBRFFBm6Ee6Q81Od45KOr3feA7UL/eAL+OKNZmf6rQJEwiXfvc/nkM522Ahiuvole1/8rNQyOX8JHKr8QoQ==}
+    peerDependencies:
+      '@emotion/is-prop-valid': '*'
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      '@emotion/is-prop-valid':
+        optional: true
+      react:
+        optional: true
+      react-dom:
+        optional: true
 
   ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
@@ -8445,6 +8482,16 @@ snapshots:
       react: 19.0.0-rc-f38c22b244-20240704
       react-dom: 19.0.0-rc-f38c22b244-20240704(react@19.0.0-rc-f38c22b244-20240704)
 
+  framer-motion@11.16.0(@emotion/is-prop-valid@1.3.1)(react-dom@19.0.0-rc-f38c22b244-20240704(react@19.0.0-rc-f38c22b244-20240704))(react@19.0.0-rc-f38c22b244-20240704):
+    dependencies:
+      motion-dom: 11.16.0
+      motion-utils: 11.16.0
+      tslib: 2.7.0
+    optionalDependencies:
+      '@emotion/is-prop-valid': 1.3.1
+      react: 19.0.0-rc-f38c22b244-20240704
+      react-dom: 19.0.0-rc-f38c22b244-20240704(react@19.0.0-rc-f38c22b244-20240704)
+
   framer-motion@4.1.17(react-dom@19.0.0-rc-f38c22b244-20240704(react@19.0.0-rc-f38c22b244-20240704))(react@19.0.0-rc-f38c22b244-20240704):
     dependencies:
       framesync: 5.3.0
@@ -9055,7 +9102,22 @@ snapshots:
 
   motion-dom@11.14.3: {}
 
+  motion-dom@11.16.0:
+    dependencies:
+      motion-utils: 11.16.0
+
   motion-utils@11.14.3: {}
+
+  motion-utils@11.16.0: {}
+
+  motion@11.16.0(@emotion/is-prop-valid@1.3.1)(react-dom@19.0.0-rc-f38c22b244-20240704(react@19.0.0-rc-f38c22b244-20240704))(react@19.0.0-rc-f38c22b244-20240704):
+    dependencies:
+      framer-motion: 11.16.0(@emotion/is-prop-valid@1.3.1)(react-dom@19.0.0-rc-f38c22b244-20240704(react@19.0.0-rc-f38c22b244-20240704))(react@19.0.0-rc-f38c22b244-20240704)
+      tslib: 2.7.0
+    optionalDependencies:
+      '@emotion/is-prop-valid': 1.3.1
+      react: 19.0.0-rc-f38c22b244-20240704
+      react-dom: 19.0.0-rc-f38c22b244-20240704(react@19.0.0-rc-f38c22b244-20240704)
 
   ms@2.1.3: {}
 

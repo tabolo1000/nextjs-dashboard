@@ -4,21 +4,18 @@ import {Link} from "@/i18n/routing";
 import {AcademicCapIcon, BookOpenIcon, CollectionIcon, LightningBoltIcon, LogoutIcon} from '@heroicons/react/outline';
 import {useState} from "react";
 import {usePathname} from "next/navigation";
-import {Button} from "@mui/material";
 
 
 export function Aside_panel({
-    nameLink,
-    setOpen,
-    isOpen,
+    nameLink
+
                             }: Aside_panel_props) {
     const urlPath = usePathname();
     const [activeLink, setActiveLink] = useState<string>(urlPath.split("/")[2]);
 
 
-    return <aside className="hidden lg:block base-animation-all sidebar bg-gray-900 min-h-screen p-4 fixed">
+    return <aside className="lg:block base-animation-all sidebar bg-gray-900 min-h-screen p-4 fixed">
         <nav className="sidebar-nav">
-            <Button onClick={()=>setOpen(!isOpen)} variant={"contained"}>Close</Button>
             <ul className="space-y-4 ">
                 <li>
                     <Link href="/math"
@@ -78,6 +75,4 @@ interface Aside_panel_props {
         physics: string;
         logout: string;
     }
-    setOpen: (isOpen: boolean)=>void
-    isOpen: boolean;
 }
