@@ -15,7 +15,7 @@ export function Aside_panel({
 
 
     return <aside className="lg:block base-animation-all sidebar bg-gray-900 min-h-screen p-4 fixed">
-        <nav className="sidebar-nav">
+        <nav>
             <ul className="space-y-4 ">
                 <li>
                     <Link href="/math"

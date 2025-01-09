@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {createApiThunk} from "@/app/store/utils/apiThunk";
+
 import {
     createWord,
     deleteWord,
@@ -7,6 +7,7 @@ import {
     fetchWordsCarousel,
     updateWord
 } from "@/app/api/linguistics";
+import {createApiThunk} from "@/app/lib/utils";
 
 export enum LoadingStatus {
     padding = "padding",

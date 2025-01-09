@@ -19,7 +19,7 @@ const Layout: React.FC<LayoutProps> = ({ children }: LayoutProps) => {
         },
     ];
 
-    return (<div className="relative bg-gray-100 min-h-screen dark:bg-gray-900 base-animation-all ">
+    return (<div className="relative bg-gray-100 min-h-screen dark:bg-gray-900 base-animation-all overflow-clip">
             <OperatingPanel />
             <Header language={language}/>
             <MainBlock content={children}/>

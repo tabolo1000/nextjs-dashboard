@@ -1,4 +1,5 @@
 import { Revenue } from './definitions';
+import {createAsyncThunk} from "@reduxjs/toolkit";
 
 export const formatCurrency = (amount: number) => {
   return (amount / 100).toLocaleString('en-US', {
@@ -80,5 +81,41 @@ export function formatTime(seconds: number) {
   const sec = time.getUTCSeconds().toString().padStart(2, '0');
 
   return `${hours}:${minutes}:${sec}`;
+}
+
+/**
+ * Общая функция для создания асинхронных санок
+ * @param typePrefix Префикс для действия (например, 'linguistics/loadWords')
+ * @param asyncFunc Асинхронная функция, которая выполняет запрос или операцию
+ */
+
+export const createApiThunk = <ReturnedType, ArgsType = void>(
+    typePrefix: string,
+    asyncFunc: (args: ArgsType) => Promise<ReturnedType>
+) =>
+    createAsyncThunk<ReturnedType, ArgsType, AsyncThunkConfig>(
+        typePrefix,
+        async (args, { rejectWithValue }) => {
+          try {
+            return await asyncFunc(args); // Выполняем асинхронную функцию
+          } catch (error: any) {
+            console.error(`Ошибка в thunk ${typePrefix}:`, error);
+            return rejectWithValue(error.message || 'Произошла ошибка');
+          }
+        }
+    );
+
+export function saveToLocalStorage<T>(key: string, value: T): void {
+  localStorage.setItem(key, JSON.stringify(value));
+}
+
+export function getFromLocalStorage<T>(key: string): T | null {
+  const item = localStorage.getItem(key);
+  return item ? JSON.parse(item) : null;
+}
+
+
+interface AsyncThunkConfig {
+  rejectValue: string; // Тип значения, которое будет возвращено в случае ошибки
 }
 

@@ -22,9 +22,8 @@ export function Header({language}: HeaderProps) {
         },
         exit: {
             opacity: 0,
-            y: 100,
-            x: -500,
-            width: ["100%", "0%"]
+            y: 50,
+            x: 500,
         } ,
     };
     return <>
@@ -35,7 +34,7 @@ export function Header({language}: HeaderProps) {
             repeatDelay: 1,
         }}> {/* для всех в групп */}
         <AnimatePresence>
-            {!isOpenHeaderPanel && (
+            {isOpenHeaderPanel && (
                 <motion.div
                     variants={isAnimating ? animatePresence : {}}
                     className={"z-50"}

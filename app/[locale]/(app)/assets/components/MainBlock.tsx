@@ -10,28 +10,31 @@ export function MainBlock({content} : {content: React.ReactNode}) {
     const {isOpenHeaderPanel, isOpenAsidePanel} = useAppSelector((state)=> state.mainSlice.panel)
     const {isAnimating} = useAppSelector((state)=> state.mainSlice.animation)
 
-    const asideVariants = {
+    const asideVariants = isAnimating ? {
         initial: {opacity: 0, y: -50, x: -500},
         animate: {
             opacity: 1, y: 0, x: 0,
             width: ["0%", "100%"],
         },
         exit: {
+
             opacity: 0,
             y: 100,
             x: -500,
             width: ["100%", "0%"]
         } ,
-    };
+    }: {};
+    debugger
     return <div
         className={
         `flex h-full flex-col content-center w-[1140px] mx-auto
-        ${!isOpenHeaderPanel && "pt-16 base-animation-all"}
+        ${isOpenHeaderPanel && "pt-16 base-animation-all"}
     `}>
+
         <AnimatePresence>
-            {!isOpenAsidePanel && (
+            {isOpenAsidePanel && (
                 <motion.div
-                    variants={isAnimating ? asideVariants : {}}
+                    variants={asideVariants}
                     className={"z-49"}
                     initial="initial"
                     animate="animate"
@@ -56,8 +59,8 @@ export function MainBlock({content} : {content: React.ReactNode}) {
             )}
         </AnimatePresence>
         <main
-            className={`w-full grow 
-                         ${isOpenAsidePanel ? "ml-[0%] max-w-[100%]" : "p-4 xl:ml-[18%] xl:max-w-[82%] lg:ml-[25%] lg:max-w-[75%]"}
+            className={`w-full
+                         ${isOpenAsidePanel ? "p-4 xl:ml-[18%] xl:max-w-[82%] lg:ml-[25%] lg:max-w-[75%]"  : "ml-[0%] max-w-[100%]"}
                          ${isAnimating && "base-animation-all"}
                          `}
         >

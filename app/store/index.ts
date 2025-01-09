@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 //import userReducer from './slices/userSlice';
 import linguisticsReducer from './slices/linguisticsSlice';
-import mainSlice from "@/app/store/slices/mainSlice";
+import mainSlice from "@/app/store/slices/mainSlice/mainSlice";
 
 export const store = configureStore({
     reducer: {
