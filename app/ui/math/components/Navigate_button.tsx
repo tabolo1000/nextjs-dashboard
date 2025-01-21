@@ -45,19 +45,20 @@ export default function NavigateButton({ to }: Props) {
     }, [to.nextExercise, routerHandler, to.localNavigationSecondButton]);
 
     return (
-        <div className="right-sidebar bg-gray-100 p-4 border-l w-full">
-            <h2 className="text-xl font-bold mb-4 opacity-0 absolute">Навигация</h2>
+        <div className="bg-gray-100 dark:bg-gray-900 p-4 border-l w-full">
             <div className="flex">
                 <Base_button
                     onClick={onClickNextTask}
-                    name={"Перейти к следующей теме"}
                     classStyle={"w-1/2 button_to bg-blue-500 hover:bg-blue-700 mr-5"}
-                />
+                >
+                    Перейти к следующей теме
+                </Base_button>
                 <Base_button
                     onClick={onClickNextExercise}
-                    name={"Пройти практическое занятие"}
                     classStyle={"w-1/2 button_to bg-green-500 hover:bg-green-600"}
-                />
+                >
+                    Пройти практическое занятие
+                </Base_button>
             </div>
         </div>
     );

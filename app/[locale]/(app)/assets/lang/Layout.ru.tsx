@@ -1,7 +1,8 @@
 import {MainBlock} from "@/app/[locale]/(app)/assets/components/MainBlock";
 import {Header} from "@/app/[locale]/(app)/assets/components/Header";
 import {Footer} from "@/app/[locale]/(app)/assets/components/Footer";
-import {OperatingPanel} from "@/app/[locale]/(app)/assets/components/OperatingPanel";
+import OperatingPanel from "@/app/[locale]/(app)/assets/components/OperatingPanel";
+import Chat from "@/app/[locale]/(app)/assets/components/Chat";
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -23,6 +24,7 @@ const Layout: React.FC<LayoutProps> = ({ children }: LayoutProps) => {
             <OperatingPanel />
             <Header language={language}/>
             <MainBlock content={children}/>
+            <Chat/>
             <Footer />
         </div>
     );

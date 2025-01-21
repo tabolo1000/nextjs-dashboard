@@ -1,5 +1,5 @@
-import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
-import {getFromLocalStorage, saveToLocalStorage} from "@/app/lib/utils";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 
 
 const initialState: MainState = {

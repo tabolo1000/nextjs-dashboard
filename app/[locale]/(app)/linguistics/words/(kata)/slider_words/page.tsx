@@ -10,6 +10,8 @@ import EditFormContainer from "@/app/[locale]/(app)/linguistics/words/(kata)/sli
 import useSlider_words from "@/app/[locale]/(app)/linguistics/words/(kata)/useSlider_words";
 import { LoadingStatus } from "@/app/store/slices/linguisticsSlice";
 
+
+
 export default function Carrousel_Slider({
                                              endPoints,
                                              setTopic,
@@ -19,9 +21,8 @@ export default function Carrousel_Slider({
 }) {
     const { pagination, data, actions } = useSlider_words(endPoints);
     const { pageCount, currentPage, handleChangePage } = pagination;
-    const { currentItems, loading, error, editingFrom, settings} = data;
-    const { handleWordChange, handleWordDelete, isSettingsActive, toggleSettings, setSettings } = actions;
-
+    const { currentItems, loading, error, editingFrom} = data;
+    const { handleWordChange, handleWordDelete, isSettingsActive, toggleSettings} = actions;
 
 
 
@@ -65,7 +66,6 @@ export default function Carrousel_Slider({
                 <Typography component="h1" variant="h4" className="header_h1 absolute opacity-0">
                     Button Information Slider
                 </Typography>
-
                 {/* Контент */}
                 <Box className="base-animation-all w-full">
                     <AnimatePresence mode="wait">
@@ -78,15 +78,12 @@ export default function Carrousel_Slider({
                         ) : isSettingsActive ? (
                             <SettingsContent
                                 toggleSettings={toggleSettings}
-                                settings={data.settings}
-                                setSettings={actions.setSettings}
                                 animationVariants={animationVariants}
                             />
                         ) : (
                             <SliderContent
                                 toggleSettings={toggleSettings}
                                 setTopic={setTopic}
-                                settings={data.settings}
                                 currentItems={currentItems}
                                 handleWordChange={handleWordChange}
                                 handleWordDelete={handleWordDelete}

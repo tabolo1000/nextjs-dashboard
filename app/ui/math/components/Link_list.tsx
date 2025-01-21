@@ -22,10 +22,11 @@ export default function Link_list({
         {style: "link-base link-blue", numberOfLesson: "Урок первый"},
         {style: "link-base link-green", numberOfLesson: "Урок второй"},
         {style: "link-base link-teal", numberOfLesson: "Урок третий "},
-        {style: "link-base link-yellow", numberOfLesson: "Урок четверный"},
+        {style: "link-base link-yellow", numberOfLesson: "Урок четвертый"},
         {style: "link-base link-red", numberOfLesson: "Урок пятый"},
         {style: "link-base link-purple", numberOfLesson: "Урок шестой"},
         {style: "link-base link-pink", numberOfLesson: "Урок седьмой"},
+        {style: "link-base link-blue", numberOfLesson: "Урок Восьмой"},
     ]
     return (
         <div className="flex justify-center items-center min-w-full min-h-">
@@ -34,7 +35,7 @@ export default function Link_list({
                     <li
                         className="text-center"
                         key={i}>
-                        <Link href={`${el.baseUrl}${ el.paths}`}
+                        <Link href={`${el.baseUrl}${el.paths}`}
                               className={styleForLink[i].style}>
                             {styleForLink[i].numberOfLesson}: { el.name }
                         </Link>

@@ -25,6 +25,13 @@ export default async function Math() {
                 icon={<FaLeaf />}
                 iconColor="text-green-500"
             />
+            <LessonCard
+                to={"/biology/base"}
+                title="Базовый курс: Биология и здоровье"
+                description="Изучение всех типов витаминов, их функций, источников и влияния на здоровье человека."
+                icon={<FaLeaf />}
+                iconColor="text-green-500"
+            />
         </div>
     </div>
 }

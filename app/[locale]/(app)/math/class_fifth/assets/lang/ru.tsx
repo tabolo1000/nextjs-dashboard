@@ -37,6 +37,69 @@ export default async function Physics() {
                 icon={<FaRuler />}
                 iconColor="text-orange-500"
             />
+
+
+            {/* Измерительные инструменты и шкалы */}
+            <LessonCard
+                to={"./class_fifth/lesson_fourth"}
+                title="lesson_fourth"
+                description="Изучение принципов работы измерительных приборов — от линеек и термометров до весов и координатных лучей."
+                icon={<FaRuler />}
+                iconColor="text-orange-500"
+            />
+
+            {/* Измерительные инструменты и шкалы */}
+            <LessonCard
+                to={"./class_fifth/lesson_fifth"}
+                title="lesson_fifth"
+                description="Изучение принципов работы измерительных приборов — от линеек и термометров до весов и координатных лучей."
+                icon={<FaRuler />}
+                iconColor="text-orange-500"
+            />
+
+            {/* Измерительные инструменты и шкалы */}
+            <LessonCard
+                to={"./class_fifth/lesson_sixth"}
+                title="lesson_sixth"
+                description="Изучение принципов работы измерительных приборов — от линеек и термометров до весов и координатных лучей."
+                icon={<FaRuler />}
+                iconColor="text-orange-500"
+            />
+
+            {/* Измерительные инструменты и шкалы */}
+            <LessonCard
+                to={"./class_fifth/lesson_seventh"}
+                title="lesson_seventh"
+                description="Изучение принципов работы измерительных приборов — от линеек и термометров до весов и координатных лучей."
+                icon={<FaRuler />}
+                iconColor="text-orange-500"
+            />
+
+            {/* Измерительные инструменты и шкалы */}
+            <LessonCard
+                to={"./class_fifth/lesson_eighth"}
+                title="lesson_eighth"
+                description="Изучение принципов работы измерительных приборов — от линеек и термометров до весов и координатных лучей."
+                icon={<FaRuler />}
+                iconColor="text-orange-500"
+            />
+
+            {/* Измерительные инструменты и шкалы */}
+            <LessonCard
+                to={"./class_fifth/lesson_ninth"}
+                title="lesson_ninth"
+                description="Изучение принципов работы измерительных приборов — от линеек и термометров до весов и координатных лучей."
+                icon={<FaRuler />}
+                iconColor="text-orange-500"
+            />
+            <LessonCard
+                to={"./class_fifth/brief_arithmetic"}
+                title="lesson_ninth"
+                description="Изучение принципов работы измерительных приборов — от линеек и термометров до весов и координатных лучей."
+                icon={<FaRuler />}
+                iconColor="text-orange-500"
+            />
+
         </div>
     </div>
 }

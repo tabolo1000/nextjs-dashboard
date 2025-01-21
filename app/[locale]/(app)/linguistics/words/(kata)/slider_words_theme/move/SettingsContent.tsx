@@ -4,13 +4,11 @@ import React from "react";
 import {motion, Variants} from "framer-motion";
 import { Box, Button } from "@mui/material";
 import { ExitToAppTwoTone } from "@mui/icons-material";
-import { SliderSettings, SliderSettingsType } from "@/app/ui/math/components/slider/SliderSettings";
+import { SliderSettings } from "@/app/ui/math/components/slider/SliderSettings";
 
 
 export default React.memo(function SettingsContent ({
                                                                                  toggleSettings,
-                                                                                 settings,
-                                                                                 setSettings,
                                                                                  animationVariants,
                                                                              }: SettingsContentProps) {
     return (
@@ -33,9 +31,8 @@ export default React.memo(function SettingsContent ({
                     <ExitToAppTwoTone className="text-3xl" />
                 </Button>
             </Box>
-
             {/* Компонент SliderSettings */}
-            <SliderSettings settings={settings} setSettings={setSettings} />
+            <SliderSettings />
         </motion.div>
     );
 })
@@ -46,7 +43,5 @@ export default React.memo(function SettingsContent ({
 
 interface SettingsContentProps {
     toggleSettings: () => void;
-    settings: SliderSettingsType;
-    setSettings: (settings: SliderSettingsType) => void;
     animationVariants: Variants
 }

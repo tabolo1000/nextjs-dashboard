@@ -27,9 +27,11 @@ export default memo(function ActionButtons({
                                            }: ActionButtonsProps) {
     return (
         <Box
-            className={`flex ${
-                orientation === "horizontal" ? "flex-row" : "flex-col"
-            }  ${style}`}
+            className={`
+                flex 
+                ${orientation === "horizontal" ? "flex-row" : "flex-col"}
+                ${style}`
+            }
             gap={gap}
         >
             {actions.map((action, index) => (
@@ -38,7 +40,6 @@ export default memo(function ActionButtons({
                     onClick={action.onClick}
                     color={action.color ||  "primary"}
                     variant={action.variant || "outlined"}
-                    className={`transition-all ${action.className || ""}`}
                     title={action.tooltip} // Подсказка при наведении
                 >
                     {action.icon}

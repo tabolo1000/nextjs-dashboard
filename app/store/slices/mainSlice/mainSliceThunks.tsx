@@ -1,6 +1,7 @@
-import {Dispatch, PayloadAction, ThunkDispatch} from "@reduxjs/toolkit";
+import {Dispatch, PayloadAction} from "@reduxjs/toolkit";
 import {getFromLocalStorage, saveToLocalStorage} from "@/app/lib/utils";
 import {animation, asidePanel, headerPanel} from "@/app/store/slices/mainSlice/mainSlice";
+
 
 function createToggleThunk<T>(
     key: string,
@@ -54,7 +55,7 @@ export const initializeAnimation = createInitThunk(
     animation
 );
 
-export const MainConfiguration = () => (dispatch: ThunkDispatch<any, any, any>) => {
+export const MainConfiguration = () => (dispatch: Dispatch<{}>) => {
     dispatch(initializeHeaderPanel());
     dispatch(initializeAsidePanel());
     dispatch(initializeAnimation());

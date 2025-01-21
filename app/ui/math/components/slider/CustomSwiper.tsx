@@ -1,30 +1,32 @@
-import {A11y, Autoplay, FreeMode, Keyboard, Manipulation, Mousewheel, Navigation, Virtual, Zoom} from "swiper/modules";
+import {
+    A11y,
+    Autoplay,
+    FreeMode,
+    Keyboard,
+    Manipulation,
+    Mousewheel,
+    Navigation,
+    Virtual,
+    Zoom,
+    EffectCube,
+} from "swiper/modules";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {Slider_card} from "@/app/ui/math/components/slider/Slider_card";
-import React, {useRef} from "react";
-import {SliderSettingsType} from "@/app/ui/math/components/slider/SliderSettings";
+import React from "react";
 import {WordCarousel, WordCarouselUpdate} from "@/app/store/slices/linguisticsSlice";
+import {useSettingSlider} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/(state)/setting";
+import 'swiper/swiper-bundle.css';
+import 'swiper/css/effect-cube';
 
 
 export default function CustomSwiper({
-    settings,
     currentItems,
     handleWordChange,
     handleWordDelete,
     isEditingForm,
 
                                      }:CustomSwiperProps) {
-/*
-    currentItems.findIndex(())
-
-    const swiperRef = useRef("");
-
-    const goToSlide = (index) => {
-        if (swiperRef.current) {
-            swiperRef.current.swiper.slideTo(index);
-        }
-    };*/
-
+    const { settings } = useSettingSlider()
     return <Swiper
         modules={[
             Navigation,
@@ -36,22 +38,25 @@ export default function CustomSwiper({
             A11y,
             Manipulation,
             Autoplay,
+            EffectCube,
         ]}
-        zoom={{ maxRatio: 3 }}
-        virtual
+        autoplay={settings.autoplay ? { delay: settings.delay } : false}
+        loop={settings.loop}
+        slidesPerView={settings.slidesPerView}
         a11y={{
             prevSlideMessage: "Предыдущий слайд",
             nextSlideMessage: "Следующий слайд",
         }}
-        autoplay={settings.autoplay ? { delay: settings.delay } : false}
-        loop={settings.loop}
         freeMode
-        mousewheel={{ forceToAxis: true }}
+        cubeEffect={{
+            shadow: true,
+            shadowOffset: 20,
+            shadowScale:  0.94,
+            slideShadows: true
+        }}
         keyboard={{ enabled: true }}
         spaceBetween={30}
-        slidesPerView={settings.slidesPerView}
         navigation
-        pagination={{ clickable: true }}
         scrollbar={{ draggable: true }}
         hashNavigation={{ watchState: true }}
     >
@@ -80,7 +85,6 @@ export default function CustomSwiper({
 //------------------------Types---------------------------------------------
 
 interface CustomSwiperProps {
-    settings: SliderSettingsType,
     currentItems: WordCarousel[],
     handleWordChange: (value: WordCarouselUpdate) => void,
     handleWordDelete: (id: string) => void,

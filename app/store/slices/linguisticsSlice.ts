@@ -167,8 +167,7 @@ const linguisticsSlice = createSlice({
 
 //export const { createWordForCarousel } = linguisticsSlice.actions;
 export default linguisticsSlice.reducer;
-
-
+export const linguisticsSliceAction = linguisticsSlice.actions
 
 
 //-------------------------------------------------Thunks-----------------------------------------

@@ -14,7 +14,7 @@ import { AnimatePresence, motion, MotionConfig} from "framer-motion";
 export function Header({language}: HeaderProps) {
     const isOpenHeaderPanel = useAppSelector((state)=> state.mainSlice.panel.isOpenHeaderPanel)
     const {isAnimating} = useAppSelector((state)=> state.mainSlice.animation)
-    const animatePresence = {
+    const animatePresence = isAnimating?({
         initial: {opacity: 0, y: -50, x: -500},
         animate: {
             opacity: 1, y: 0, x: 0,
@@ -25,7 +25,11 @@ export function Header({language}: HeaderProps) {
             y: 50,
             x: 500,
         } ,
-    };
+    }): ({
+        initial: { opacity: 1, y: 0, x: 0 },
+        animate: { opacity: 1, y: 0, x: 0 },
+        exit: { opacity: 1, y: 0, x: 0 },
+    });
     return <>
         <MotionConfig transition={{
             delay: .2,
@@ -34,9 +38,10 @@ export function Header({language}: HeaderProps) {
             repeatDelay: 1,
         }}> {/* для всех в групп */}
         <AnimatePresence>
-            {isOpenHeaderPanel && (
+            {(isOpenHeaderPanel) && (
                 <motion.div
-                    variants={isAnimating ? animatePresence : {}}
+                    key={isAnimating ? "animating" : "static"}
+                    variants={animatePresence}
                     className={"z-50"}
                     initial="initial"
                     animate="animate"

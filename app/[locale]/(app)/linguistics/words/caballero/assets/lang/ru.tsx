@@ -2,7 +2,7 @@ import React from "react";
 import { Section } from "@/app/ui/math/components/Section";
 import { Base_card } from "@/app/ui/math/components/Base_card";
 import { Highlight } from "@/app/ui/math/components/Highlight";
-import caballeroImage from "./../img/caballero.jpeg";
+import caballeroImage from "../img/caballero.jpeg";
 import { Interactive_Image } from "@/app/ui/math/components/Interactive_Image";
 import { Quote_with_annotation } from "@/app/ui/math/components/сopywriting/Quote_with_annotation";
 

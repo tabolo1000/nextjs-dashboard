@@ -1,3 +1,4 @@
+/*
 'use server';
 
 import { sql } from '@vercel/postgres';
@@ -104,7 +105,7 @@ export async function updateInvoice(
     `;
   } catch (error) {
     return {
-      message: 'Database Error: Failed to Create Invoice.',
+      message: 'Database Error: Failed to Create Invoice.' + error,
     };
   }
 
@@ -143,4 +144,4 @@ export async function authenticate(
     }
     throw error;
   }
-}
+}*/

@@ -6,13 +6,11 @@ import { SettingsApplicationsTwoTone, ExitToAppTwoTone } from "@mui/icons-materi
 import ActionButtons from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/move/ActionButtons";
 import CustomSwiper from "@/app/ui/math/components/slider/CustomSwiper";
 import CustomPagination from "@/app/ui/math/components/slider/CustomPagination";
-import { SliderSettingsType } from "@/app/ui/math/components/slider/SliderSettings";
 import {WordCarousel, WordCarouselUpdate} from "@/app/store/slices/linguisticsSlice";
 
 export default memo(function SliderContent ({
                                                 toggleSettings,
                                                 setTopic,
-                                                settings,
                                                 currentItems,
                                                 handleWordChange,
                                                 handleWordDelete,
@@ -29,29 +27,32 @@ export default memo(function SliderContent ({
             initial="initial"
             animate="animate"
             exit="exit"
-            className="p-6 rounded-lg shadow-lg"
+            className="p-6 rounded-lg shadow-lg relative border border-red-200 "
         >
             {/* Buttons window management */}
-            <ActionButtons
-                actions={[
-                    {
-                        icon: <SettingsApplicationsTwoTone className="text-3xl" />,
-                        onClick: toggleSettings,
-                        tooltip: "Открыть настройки",
-                    },
-                    {
-                        icon: <ExitToAppTwoTone className="text-3xl" />,
-                        onClick: () => setTopic(null),
-                        color: "error",
-                        tooltip: "Выйти",
-                    },
-                ]}
-                style={"justify-end mb-2"}
-            />
+            <div className="absolute translate-x-full right-0 top-0">
+                <ActionButtons
+                    actions={[
+                        {
+                            icon: <SettingsApplicationsTwoTone className="text-3xl" />,
+                            onClick: toggleSettings,
+                            tooltip: "Открыть настройки",
+                        },
+                        {
+                            icon: <ExitToAppTwoTone className="text-3xl" />,
+                            onClick: () => setTopic(null),
+                            color: "error",
+                            tooltip: "Выйти",
+                        },
+                    ]}
+                    orientation={"vertical"}
+                    style={""}
+                />
+            </div>
+
 
             {/* Slider window */}
             <CustomSwiper
-                settings={settings}
                 currentItems={currentItems}
                 handleWordChange={handleWordChange}
                 handleWordDelete={handleWordDelete}
@@ -73,7 +74,6 @@ export default memo(function SliderContent ({
 interface SliderContentProps {
     toggleSettings: () => void;
     setTopic: (topic: string | null) => void;
-    settings: SliderSettingsType;
     currentItems: WordCarousel[];
     handleWordChange: (word: WordCarouselUpdate) => void;
     handleWordDelete: (id: string) => void;

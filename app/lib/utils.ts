@@ -24,7 +24,7 @@ export const formatDateToLocal = (
 
 export const generateYAxis = (revenue: Revenue[]) => {
   // Calculate what labels we need to display on the y-axis
-  // based on highest record and in 1000s
+  // based on highest record and in the 1000s
   const yAxisLabels = [];
   const highestRecord = Math.max(...revenue.map((month) => month.revenue));
   const topLabel = Math.ceil(highestRecord / 1000) * 1000;
@@ -89,6 +89,11 @@ export function formatTime(seconds: number) {
  * @param asyncFunc Асинхронная функция, которая выполняет запрос или операцию
  */
 
+// Конфигурация для AsyncThunk
+interface AsyncThunkConfig {
+  rejectValue: string; // Тип значения, передаваемого в rejectWithValue
+}
+
 export const createApiThunk = <ReturnedType, ArgsType = void>(
     typePrefix: string,
     asyncFunc: (args: ArgsType) => Promise<ReturnedType>
@@ -97,10 +102,17 @@ export const createApiThunk = <ReturnedType, ArgsType = void>(
         typePrefix,
         async (args, { rejectWithValue }) => {
           try {
-            return await asyncFunc(args); // Выполняем асинхронную функцию
-          } catch (error: any) {
-            console.error(`Ошибка в thunk ${typePrefix}:`, error);
-            return rejectWithValue(error.message || 'Произошла ошибка');
+            // Выполняем асинхронную функцию
+            return await asyncFunc(args);
+          } catch (error: unknown) {
+            // Гарантируем, что ошибка имеет тип Error
+            if (error instanceof Error) {
+              console.error(`Ошибка в thunk ${typePrefix}:`, error);
+              return rejectWithValue(error.message); // Передаём сообщение ошибки
+            } else {
+              console.error(`Неизвестная ошибка в thunk ${typePrefix}:`, error);
+              return rejectWithValue('Произошла неизвестная ошибка');
+            }
           }
         }
     );

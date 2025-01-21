@@ -11,17 +11,13 @@ import {
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import {useSettingSlider} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/(state)/setting";
 
 
 
 // Компонент настроек
-export const SliderSettings = ({
-                            settings,
-                            setSettings,
-                        }: {
-    settings: SliderSettingsType;
-    setSettings: React.Dispatch<React.SetStateAction<SliderSettingsType>>;
-}) => {
+export const SliderSettings = () => {
+    const { setSettings, settings } = useSettingSlider()
     return (
         <Box className={"dark:border-gray-600 relative p-6 border-gray-200 rounded-lg border-2 shadow-lg rounded-tr-none"} p={2}  mb={4}>
             <Typography variant="h6" mb={2}>
@@ -33,9 +29,7 @@ export const SliderSettings = ({
                 control={
                     <Switch
                         checked={settings.loop}
-                        onChange={() =>
-                            setSettings((prev) => ({ ...prev, loop: !prev.loop }))
-                        }
+                        onChange={() => setSettings({ loop: !settings.loop })}
                     />
                 }
                 label={`Цикличность: ${settings.loop ? "Включена" : "Отключена"}`}
@@ -51,8 +45,8 @@ export const SliderSettings = ({
                     min={1000}
                     max={60000}
                     step={500}
-                    onChange={(e, value) =>
-                        setSettings((prev) => ({ ...prev, delay: value as number }))
+                    onChange={(_, value) =>
+                        setSettings({delay: value as number})
                     }
                 />
             </Box>
@@ -68,7 +62,7 @@ export const SliderSettings = ({
                     max={5}
                     step={1}
                     onChange={(e, value) =>
-                        setSettings((prev) => ({ ...prev, slidesPerView: value as number }))
+                        setSettings({slidesPerView: value as number})
                     }
                 />
             </Box>
@@ -79,7 +73,7 @@ export const SliderSettings = ({
                     <Switch
                         checked={settings.autoplay}
                         onChange={() =>
-                            setSettings((prev) => ({ ...prev, autoplay: !prev.autoplay }))
+                            setSettings({autoplay: !settings.autoplay})
                         }
                     />
                 }
@@ -91,9 +85,10 @@ export const SliderSettings = ({
 
 
 // Типы данных для настроек
+/*
 export interface SliderSettingsType {
     loop: boolean;
     delay: number;
     slidesPerView: number;
     autoplay: boolean;
-}
+}*/
