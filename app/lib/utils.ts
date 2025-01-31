@@ -131,3 +131,11 @@ interface AsyncThunkConfig {
   rejectValue: string; // Тип значения, которое будет возвращено в случае ошибки
 }
 
+
+export function getLocalizedText(
+    lang: string,
+    translations: Record<string, string>
+): string {
+  return translations[lang] || translations["en"]; // Возвращаем английский по умолчанию
+}
+

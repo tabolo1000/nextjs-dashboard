@@ -8,6 +8,7 @@ import {
     updateWord
 } from "@/app/api/linguistics";
 import {createApiThunk} from "@/app/lib/utils";
+import {languageMessage} from "@/i18n/languages";
 
 export enum LoadingStatus {
     padding = "padding",
@@ -66,7 +67,10 @@ const linguisticsSlice = createSlice({
             .addCase(loadWordsForCarousel.pending, (state) => {
                 state.loading.fetchWords = {
                     status: LoadingStatus.padding,
-                    message: "Идет загрузка слов...",
+                    message: {
+                        en: "Word download is in progress",
+                        ru: "Идет загрузка слов"
+                    },
                 };
                 state.error = null;
             })
@@ -79,8 +83,12 @@ const linguisticsSlice = createSlice({
             })
             .addCase(loadWordsForCarousel.rejected, (state, action) => {
                 state.loading.fetchWords = {
+
                     status: LoadingStatus.rejected,
-                    message: "Загрузка слов не удалась :(",
+                    message: {
+                        ru: "Загрузка слов не удалась ⚠",
+                        en: "Uploading words failed ⚠"
+                    },
                 };
                 state.error = action.payload || "Не удалось загрузить слова";
             });
@@ -104,7 +112,7 @@ const linguisticsSlice = createSlice({
             .addCase(loadCollectionWordsForCarousel.rejected, (state, action) => {
                 state.loading.fetchWords = {
                     status: LoadingStatus.rejected,
-                    message: "Загрузка слов не удалась :(",
+                    message: "Загрузка слов не удалась ⚠",
                 };
                 state.error = action.payload || "Не удалось загрузить слова";
             });
@@ -214,8 +222,11 @@ export const deleteWordToCarousel = createApiThunk<WordCarousel, string>(
 
 interface ActionLoading {
     status: LoadingStatus;
-    message: string | null;
+    message: string | null | languageMessage
 }
+
+
+
 
 
 

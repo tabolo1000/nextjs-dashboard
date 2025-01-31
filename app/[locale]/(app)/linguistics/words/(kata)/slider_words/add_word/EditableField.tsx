@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Input, Typography } from "@mui/material";
+import { Input } from "@mui/material";
 
 interface EditableFieldProps {
     label?: string; // Заголовок, который выводится перед полем

@@ -18,6 +18,41 @@ export default async function Vitamins() {
                 icon={<FaHeartbeat />}
                 iconColor="text-red-500"
             />
+            <LessonCard
+                to={"./first_class/second_lesson"}
+                title="Второй Урок"
+                description="Важный витамин, отвечающий за свёртывание крови, здоровье костей и правильное функционирование сердечно-сосудистой системы."
+                icon={<FaHeartbeat />}
+                iconColor="text-red-500"
+            />
+            <LessonCard
+                to={"./first_class/third_lesson"}
+                title="Третий Урок"
+                description="Важный витамин, отвечающий за свёртывание крови, здоровье костей и правильное функционирование сердечно-сосудистой системы."
+                icon={<FaHeartbeat />}
+                iconColor="text-red-500"
+            />
+            <LessonCard
+                to={"./first_class/fourth_lesson"}
+                title="Четвертый Урок"
+                description="Важный витамин, отвечающий за свёртывание крови, здоровье костей и правильное функционирование сердечно-сосудистой системы."
+                icon={<FaHeartbeat />}
+                iconColor="text-red-500"
+            />
+            <LessonCard
+                to={"./first_class/fifth_lesson"}
+                title="Пятый Урок"
+                description="Важный витамин, отвечающий за свёртывание крови, здоровье костей и правильное функционирование сердечно-сосудистой системы."
+                icon={<FaHeartbeat />}
+                iconColor="text-red-500"
+            />
+            <LessonCard
+                to={"./first_class/sixth_lesson"}
+                title="Шестой Урок"
+                description="Важный витамин, отвечающий за свёртывание крови, здоровье костей и правильное функционирование сердечно-сосудистой системы."
+                icon={<FaHeartbeat />}
+                iconColor="text-red-500"
+            />
         </div>
     </div>
 }

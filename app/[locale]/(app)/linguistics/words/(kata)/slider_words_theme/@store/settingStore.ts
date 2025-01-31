@@ -4,6 +4,7 @@ import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware'
 import { produce } from "immer";
 
+
 export interface SliderSettingsType {
     loop?: boolean;
     delay?: number;
@@ -44,8 +45,6 @@ export const useSettingSlider = create<SettingsType>()(
         { name: 'slider_words_setting' },
     )
 );
-
-
 
 
 

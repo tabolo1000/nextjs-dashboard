@@ -20,7 +20,6 @@ const EditFormContainer: React.FC<EditFormContainerProps> = ({
             exit="exit"
             className="p-6 rounded-lg shadow-lg"
         >
-            {/* Форма редактирования */}
             <CodexForm editingFrom={editingFrom} isEditingForm={isEditingForm} />
         </motion.div>
     );

@@ -32,6 +32,7 @@ export const fetchWordById = async (id: string): Promise<WordCarousel> => {
 
 // Добавление нового слова
 export const createWord = async (word: AddWordCarouselUpdate): Promise<WordCarousel> => {
+    debugger
     const { data } = await api.post<WordCarousel>('linguistics/words/words_carousel', word);
     return data;
 };

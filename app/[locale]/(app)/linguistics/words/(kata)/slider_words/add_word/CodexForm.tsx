@@ -1,6 +1,6 @@
 "use client";
 
-import React, {memo, useCallback, useEffect} from "react";
+import React, {memo, useCallback} from "react";
 import { Formik, Form, Field, FieldArray, ErrorMessage } from "formik";
 import {
   Input,
@@ -36,6 +36,7 @@ const initialValues: CodexFormValues = {
   annotation: "",
   joke: "",
   derivatives: [""],
+    collections: [""]
 };
 
 
@@ -48,13 +49,11 @@ export const CodexForm: React.FC<CodexFormProps> = memo(function CodexForm({
   const dispatch = useAppDispatch();
 
 
-  const handleSubmit = useCallback((values: CodexFormValues, { resetForm }: any) => {
-        dispatch(addWordToCarousel(values))
+  const handleSubmit = useCallback((values: CodexFormValues, { resetForm }) => {
+   debugger
+      dispatch(addWordToCarousel(values))
       resetForm();
-  }, [addWordToCarousel])
-
-
-
+  }, [dispatch])
 
 
 
@@ -147,7 +146,7 @@ export const CodexForm: React.FC<CodexFormProps> = memo(function CodexForm({
                           {/* Описание */}
                           <Box mb={3}>
                               <Field name="description">
-                                  {({ field }: any) => (
+                                  {({field}: any) => (
                                       <Input className={"paragraph_base"}
                                              {...field}
                                              fullWidth
@@ -157,14 +156,14 @@ export const CodexForm: React.FC<CodexFormProps> = memo(function CodexForm({
                                              multiline
                                              rows={4}
                                              error={!!ErrorMessage}
-                                             helperText={<ErrorMessage name="description" />}
+                                             helperText={<ErrorMessage name="description"/>}
                                       />
                                   )}
                               </Field>
                           </Box>
                           <Box mb={3}>
                               <Field name="collections">
-                                  {({ field }: any) => (
+                                  {({field}: any) => (
                                       <Input className={"paragraph_base"}
                                              {...field}
                                              fullWidth
@@ -174,7 +173,7 @@ export const CodexForm: React.FC<CodexFormProps> = memo(function CodexForm({
                                              multiline
                                              rows={4}
                                              error={!!ErrorMessage}
-                                             helperText={<ErrorMessage name="collections" />}
+                                             helperText={<ErrorMessage name="collections"/>}
                                       />
                                   )}
                               </Field>
@@ -185,12 +184,12 @@ export const CodexForm: React.FC<CodexFormProps> = memo(function CodexForm({
                           <Box mb={3}>
                               <Typography variant="subtitle1">Производные:</Typography>
                               <FieldArray name="derivatives">
-                                  {({ remove, push }) => (
+                                  {({remove, push}) => (
                                       <>
                                           {values.derivatives.map((derivative, index) => (
                                               <Box display="flex" alignItems="center" key={index} mb={2}>
                                                   <Field name={`derivatives[${index}]`}>
-                                                      {({ field }: any) => (
+                                                      {({field}: any) => (
                                                           <Input className={"paragraph_base"}
                                                                  {...field}
                                                                  fullWidth
@@ -200,7 +199,7 @@ export const CodexForm: React.FC<CodexFormProps> = memo(function CodexForm({
                                                                  error={!!ErrorMessage}
                                                                  multiline
                                                                  helperText={
-                                                                     <ErrorMessage name={`derivatives[${index}]`} />
+                                                                     <ErrorMessage name={`derivatives[${index}]`}/>
                                                                  }
                                                           />
                                                       )}
@@ -211,13 +210,13 @@ export const CodexForm: React.FC<CodexFormProps> = memo(function CodexForm({
                                                       aria-label="удалить"
                                                       color="error"
                                                   >
-                                                      <Delete />
+                                                      <Delete/>
                                                   </IconButton>
                                               </Box>
                                           ))}
                                           <Button
                                               variant="contained"
-                                              startIcon={<Add />}
+                                              startIcon={<Add/>}
                                               onClick={() => push("")}
                                           >
                                               Добавить производное
@@ -226,7 +225,14 @@ export const CodexForm: React.FC<CodexFormProps> = memo(function CodexForm({
                                   )}
                               </FieldArray>
                           </Box>
-
+                          <button
+                              type="submit"
+                              /*disabled={isSubmitting}*/
+                              className="w-full bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white py-3 rounded-lg font-bold text-lg tracking-wide shadow-md transition hover:shadow-lg disabled:opacity-50"
+                          >
+                              Загрузка...
+                          </button>
+                          <button type="submit">add</button>
                           {/* Кнопка отправки */}
                           <Base_button
                               disabled={(loading.addWord.status === LoadingStatus.padding)}
@@ -246,7 +252,9 @@ export const CodexForm: React.FC<CodexFormProps> = memo(function CodexForm({
 
                           </Base_button>
                           <Button
-                              onClick={() => {isEditingForm(!editingFrom)}}
+                              onClick={() => {
+                                  isEditingForm(!editingFrom)
+                              }}
                               variant="contained"
                               color="success"
                               fullWidth
@@ -259,7 +267,6 @@ export const CodexForm: React.FC<CodexFormProps> = memo(function CodexForm({
               </Formik>
           </Box>
       </>
-
   );
 })
 
@@ -268,17 +275,18 @@ export const CodexForm: React.FC<CodexFormProps> = memo(function CodexForm({
 
 
 interface CodexFormProps {
-  editingFrom: boolean
-  isEditingForm (active:  boolean): void
+    editingFrom: boolean
+
+    isEditingForm(active: boolean): void
 }
 
 interface CodexFormValues {
-  title: string;
-  morpheme: {
-    prefix?: string[];
-    root: string[];
-    suffix?: string[];
-    end?: string[];
+    title: string;
+    morpheme: {
+        prefix?: string[];
+        root: string[];
+        suffix?: string[];
+        end?: string[];
   };
   description: string;
   icon: string;

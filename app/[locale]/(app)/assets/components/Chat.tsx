@@ -118,7 +118,7 @@ export default function Chat() {
     };
 
     return (
-        <div className="fixed z-50 bottom-4 right-4">
+        <div className="fixed z-50 bottom-20 right-4">
             {/* Иконка открытия */}
             {!isOpen && (
                 <motion.button

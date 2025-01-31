@@ -4,12 +4,12 @@ import React, {memo} from "react";
 import { Box, Button, ButtonProps } from "@mui/material";
 
 export interface ActionButton {
-    icon: React.ReactNode; // Иконка кнопки
-    onClick: () => void; // Обработчик нажатия
-    color?: ButtonProps["color"]; // Цвет кнопки (на базе MUI)
-    variant?: ButtonProps["variant"]; // Вариант кнопки (на базе MUI)
-    className?: string; // Дополнительные классы
-    tooltip?: string; // Подсказка (если требуется)
+    icon: React.ReactNode;
+    onClick: () => void;
+    color?: ButtonProps["color"];
+    variant?: ButtonProps["variant"];
+    className?: string;
+    tooltip?: string;
 }
 
 interface ActionButtonsProps {

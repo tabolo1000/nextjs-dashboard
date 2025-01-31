@@ -1,30 +1,31 @@
+/**
+ * Page adding and displaying words slider as well as its settings
+ */
+
 "use client";
 
 import React from "react";
-import { Box, LinearProgress, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { AnimatePresence } from "framer-motion";
 import { ToastContainer } from "react-toastify";
-import SliderContent from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/move/SliderContent";
-import SettingsContent from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/move/SettingsContent";
-import EditFormContainer from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/move/EditFormContainer";
+import SliderContent from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/@components/SliderContent";
+import SettingsContent from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/@components/SettingsContent";
+import EditFormContainer from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/@components/EditFormContainer";
 import useSlider_words from "@/app/[locale]/(app)/linguistics/words/(kata)/useSlider_words";
 import { LoadingStatus } from "@/app/store/slices/linguisticsSlice";
+import {useSliderStore} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/@store/sliderStore";
+import {languageMessage} from "@/i18n/languages";
+import {ErrorScreen} from "@/app/[locale]/(app)/@components/ErrorScreen";
+import {LoaderScreen} from "@/app/[locale]/(app)/@components/LoaderScreen";
 
 
 
-export default function Carrousel_Slider({
-                                             endPoints,
-                                             setTopic,
-                                         }: {
-    endPoints: Array<string>;
-    setTopic: (topic: string | null) => void;
-}) {
-    const { pagination, data, actions } = useSlider_words(endPoints);
+export default function Carrousel_Slider() {
+    const { topics, setTopic } = useSliderStore();
+    const { pagination, data, actions } = useSlider_words(topics);
     const { pageCount, currentPage, handleChangePage } = pagination;
-    const { currentItems, loading, error, editingFrom} = data;
-    const { handleWordChange, handleWordDelete, isSettingsActive, toggleSettings} = actions;
-
-
+    const { currentItems, loading, editingFrom } = data;
+    const { handleWordChange, handleWordDelete, isSettingsActive, toggleSettings, handleLoadWords } = actions;
 
     const animationVariants = {
         initial: { opacity: 0, y: 20 },
@@ -32,41 +33,24 @@ export default function Carrousel_Slider({
         exit: { opacity: 0, y: -20, transition: { duration: 0.5 } },
     };
 
-    // Загрузка или ошибка
-    if (loading.fetchWords.status === LoadingStatus.rejected) {
+    // Используем LoadingHandler
+    if (loading.fetchWords.status === LoadingStatus.rejected || loading.fetchWords.status === LoadingStatus.padding) {
         return (
-            <>
-                <Box>
-                    <Typography color="error">
-                        Ошибка: {loading.fetchWords.message} {error}
-                    </Typography>
-                </Box>
-                <ToastContainer theme="dark" position="top-right" autoClose={3000} />
-            </>
+            <LoadingHandler
+                status={loading.fetchWords.status}
+                message={loading.fetchWords.message as languageMessage}
+                onRetry={handleLoadWords}
+            />
         );
     }
 
-    if (loading.fetchWords.status === LoadingStatus.padding) {
-        return (
-            <>
-                <Box>
-                    <LinearProgress />
-                    <Typography>{loading.fetchWords.message}</Typography>
-                </Box>
-                <ToastContainer theme="dark" position="top-right" autoClose={3000} />
-            </>
-        );
-    }
-
-    // Основной рендер
     return (
         <>
             <Box>
-                {/* Заголовок для SEO */}
                 <Typography component="h1" variant="h4" className="header_h1 absolute opacity-0">
                     Button Information Slider
                 </Typography>
-                {/* Контент */}
+
                 <Box className="base-animation-all w-full">
                     <AnimatePresence mode="wait">
                         {editingFrom ? (
@@ -97,10 +81,41 @@ export default function Carrousel_Slider({
                     </AnimatePresence>
                 </Box>
             </Box>
+
             <ToastContainer theme="dark" position="top-right" autoClose={3000} />
         </>
     );
 }
 
+type LoadingHandlerProps = {
+    status: string;
+    message: languageMessage;
+    onRetry?: () => void;
+};
+
+const LoadingHandler: React.FC<LoadingHandlerProps> = ({ status, message, onRetry }) => {
+    if (status === LoadingStatus.rejected) {
+        return <ErrorScreen message={message} onRetry={onRetry!} />;
+    }
+
+    if (status === LoadingStatus.padding) {
+        return <LoaderScreen message={message} />;
+    }
+
+    return null;
+};
+
+/*export function getErrorMessage(status: number): string {
+    const errorMessages: Record<number, string> = {
+        400: "Неверный запрос. Проверьте данные и повторите попытку.",
+        401: "Неавторизован. Пожалуйста, выполните вход.",
+        403: "Доступ запрещён. У вас недостаточно прав.",
+        404: "Ресурс не найден. Проверьте URL.",
+        500: "Внутренняя ошибка сервера. Попробуйте позже.",
+        503: "Сервис временно недоступен. Попробуйте позже.",
+    };
+
+    return errorMessages[status] || "Произошла неизвестная ошибка.";
+}*/
 
 

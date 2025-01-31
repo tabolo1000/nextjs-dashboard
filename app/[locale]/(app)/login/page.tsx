@@ -10,11 +10,11 @@ import {useRouter} from "next/navigation";
 
 const AuthForm: React.FC = () => {
     const { isLogin, toggleMode, submitForm } = useAuthStore(); // Zustand стейт и методы
-    const router = useRouter()
-    if(isLogin) {
+  /*  const router = useRouter()
+    if(!isLogin) {
         router.push("/profile");
         return
-    }
+    }*/
 
     // Типизация значений формы
     interface AuthFormValues {

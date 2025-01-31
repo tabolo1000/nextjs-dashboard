@@ -8,28 +8,37 @@ import {
     Animation,
     MotionPhotosOff,
     ScreenLockLandscape,
-    KeyboardArrowDown, ChatBubbleOutline,
+    KeyboardArrowDown,
 } from '@mui/icons-material';
 import {useAppDispatch, useAppSelector} from "@/app/store/hooks";
 import {toggleAnimation, toggleAsidePanel, toggleHeaderPanel} from "@/app/store/slices/mainSlice/mainSliceThunks";
+import {usePathname} from "next/navigation";
+import {getLocalizedText} from "@/app/lib/utils";
 
 export default function SettingsPanel() {
     const [isOpen, setIsOpen] = useState(false); // Состояние открытия панели
     const {isOpenHeaderPanel, isOpenAsidePanel} = useAppSelector((state)=> state.mainSlice.panel)
     const {isAnimating} = useAppSelector((state)=> state.mainSlice.animation)
     const dispatch = useAppDispatch();
+    const currentLang = usePathname().split("/")[1]
 
     // Параметры панели
     const settings = [
         {
-            name: 'Toggle Animation',
+            name: getLocalizedText(currentLang, {
+                en: "Disable animations",
+                ru: "Отключить анимацию",
+            }),
             isActive: isAnimating,
             truthIcon: <Animation />,
             falseIcon: <MotionPhotosOff />,
             callback: () =>  dispatch(toggleAnimation({isAnimating: !isAnimating})),
         },
         {
-            name: 'Toggle Lock',
+            name: getLocalizedText(currentLang, {
+                en: "Presentation mode",
+                ru: "Режим презентации",
+            }),
             isActive: (isOpenHeaderPanel === true && isOpenAsidePanel === true),
             truthIcon: <ScreenLockLandscape />,
             falseIcon: <KeyboardArrowDown />,
@@ -39,14 +48,20 @@ export default function SettingsPanel() {
             },
         },
         {
-            name: 'Toggle Lock',
+            name: getLocalizedText(currentLang, {
+                en: "Hide panel",
+                ru: "Скрыть панель",
+            }),
             isActive: isOpenAsidePanel,
             truthIcon: <ScreenLockLandscape />,
             falseIcon: <KeyboardArrowDown />,
             callback: () => dispatch(toggleAsidePanel({isOpenAsidePanel: !isOpenAsidePanel})),
         },
         {
-            name: 'Toggle Lock',
+            name: getLocalizedText(currentLang, {
+                en: "Hide header",
+                ru: "Скрыть хедер",
+            }),
             isActive: isOpenHeaderPanel,
             truthIcon: <ScreenLockLandscape />,
             falseIcon: <KeyboardArrowDown />,
@@ -55,7 +70,7 @@ export default function SettingsPanel() {
     ];
 
     return (
-        <div className="fixed bottom-20 right-5 z-50 flex flex-col items-end">
+        <div className="fixed bottom-36 right-4 z-50 flex flex-col items-end">
             {/* Кнопка открытия панели */}
                 <motion.button
                     onClick={() => isOpen ? setIsOpen(false) : setIsOpen(true)}
@@ -79,7 +94,10 @@ export default function SettingsPanel() {
                         exit={{ opacity: 0, y: 20 }}
                         transition={{ duration: 0.3 }}
                     >
-                        <h3 className="text-lg font-semibold mb-4">Settings</h3>
+                        <h3 className="text-lg font-semibold mb-4">{
+                            getLocalizedText(currentLang, {
+                            en: "Settings", ru: "Настройки"
+                        })} </h3>
                         <div className="flex flex-col gap-4">
                             {settings.map((setting, index) => (
                                 <SettingItem

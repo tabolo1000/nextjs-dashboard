@@ -18,6 +18,13 @@ export default async function Vitamins() {
                 icon={<FaHeartbeat />}
                 iconColor="text-red-500"
             />
+            <LessonCard
+                to={"./base/brif"}
+                title="Первый класс"
+                description="Важный витамин, отвечающий за свёртывание крови, здоровье костей и правильное функционирование сердечно-сосудистой системы."
+                icon={<FaHeartbeat />}
+                iconColor="text-red-500"
+            />
         </div>
     </div>
 }

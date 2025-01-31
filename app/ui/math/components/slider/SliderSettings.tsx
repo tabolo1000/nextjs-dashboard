@@ -11,7 +11,7 @@ import {
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import {useSettingSlider} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/(state)/setting";
+import {useSettingSlider} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/@store/settingStore";
 
 
 

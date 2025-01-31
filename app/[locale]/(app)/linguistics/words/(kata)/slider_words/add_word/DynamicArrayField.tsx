@@ -1,7 +1,7 @@
 import React from "react";
-import { Field, FieldArray, ErrorMessage } from "formik";
-import { Box, Button, IconButton, Typography, Input } from "@mui/material";
-import {Add, AddBoxOutlined, Delete, ExitToAppTwoTone} from "@mui/icons-material";
+import { Field, FieldArray } from "formik";
+import { Box, IconButton, Typography, Input } from "@mui/material";
+import {AddBoxOutlined, Delete} from "@mui/icons-material";
 import {Base_button} from "@/app/ui/math/components/Base_button";
 
 interface DynamicArrayFieldProps {
@@ -22,10 +22,9 @@ export const DynamicArrayField: React.FC<DynamicArrayFieldProps> = ({
 
     return (
         <Box mb={3}>
-            <Typography variant="subtitle1">{label}</Typography>
+            <Typography variant="subtitle1">{label}</Typography>dada
             <FieldArray name={name}>
                 {({ remove, push, form }) => {
-                    debugger
                     const values = form.values.morpheme[name.split(".")[1]] || [""]; // Получение массива значений
 
                     return (
