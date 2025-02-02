@@ -2,18 +2,8 @@ import {NextIntlClientProvider} from 'next-intl';
 import {getMessages, setRequestLocale} from 'next-intl/server';
 import {notFound} from 'next/navigation';
 import { routing} from '@/i18n/routing';
-
-import {store} from "@/app/store";
-import {Providers} from "@/app/providers";
-
-//import styles from "@auth/core/src/lib/pages/styles";
-//import {param} from "ts-interface-checker";
-
-/*
-export function generateStaticParams() {
-    return routing.locales.map((locale) => ({locale}));
-}
-*/
+import {Providers} from "@/app/[locale]/@assets/providers";
+import {Language} from "@/i18n/languages";
 
 export default async function LocaleLayout({
                                                children,
@@ -23,7 +13,7 @@ export default async function LocaleLayout({
     params: {locale: string}
 }) {
     // Ensure that the incoming `locale` is valid
-    if (!routing.locales.includes(locale as ("en" | "ru"))) {
+    if (!routing.locales.includes(locale as (Language.En | Language.Ru))) {
         notFound();
     }
 
