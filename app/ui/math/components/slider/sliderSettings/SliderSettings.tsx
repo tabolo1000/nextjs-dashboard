@@ -12,19 +12,31 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import {useSettingSlider} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/@store/settingStore";
+import {usePathname} from "next/navigation";
+import {localizedText, LocalizedText} from "@/app/ui/math/components/slider/sliderSettings/language";
 
 
-
-// Компонент настроек
+/**
+ * Settings component
+ */
 export const SliderSettings = () => {
-    const { setSettings, settings } = useSettingSlider()
+    const { setSettings, settings } = useSettingSlider();
+    const lang = usePathname().split("/")[1]; // Определение языка из URL
+    const LocText: LocalizedText = localizedText(lang)
+
+
     return (
-        <Box className={"dark:border-gray-600 relative p-6 border-gray-200 rounded-lg border-2 shadow-lg rounded-tr-none"} p={2}  mb={4}>
-            <Typography variant="h6" mb={2}>
-                Настройки слайдера
+        <Box
+            className="h-[75vh] dark:text-white dark:border-gray-600 relative p-6 border-gray-200 rounded-lg border-2 shadow-lg rounded-tr-none"
+            p={2}
+            mb={4}
+        >
+            {/* Заголовок */}
+            <Typography variant="h6" mb={2} align={"center"}>
+                {LocText.title}
             </Typography>
 
-            {/* Цикличность */}
+            {/* Цикличность слайдера */}
             <FormControlLabel
                 control={
                     <Switch
@@ -32,13 +44,15 @@ export const SliderSettings = () => {
                         onChange={() => setSettings({ loop: !settings.loop })}
                     />
                 }
-                label={`Цикличность: ${settings.loop ? "Включена" : "Отключена"}`}
+                label={`${LocText.loop}: ${
+                    settings.loop ? LocText.loopEnabled : LocText.loopDisabled
+                }`}
             />
 
             {/* Скорость прокрутки */}
             <Box mt={2}>
-                <Typography variant="body1" gutterBottom>
-                    Скорость прокрутки (мс): {settings.delay}ms
+                <Typography variant="body1" gutterBottom >
+                    {LocText.scrollSpeed}: {settings.delay}ms
                 </Typography>
                 <Slider
                     value={settings.delay}
@@ -46,23 +60,23 @@ export const SliderSettings = () => {
                     max={60000}
                     step={500}
                     onChange={(_, value) =>
-                        setSettings({delay: value as number})
+                        setSettings({ delay: value as number })
                     }
                 />
             </Box>
 
             {/* Количество слайдов */}
             <Box mt={2}>
-                <Typography variant="body1" gutterBottom>
-                    Количество слайдов на экране: {settings.slidesPerView}
+                <Typography variant="body1" gutterBottom >
+                    {LocText.slidesPerView}: {settings.slidesPerView}
                 </Typography>
                 <Slider
                     value={settings.slidesPerView}
                     min={1}
-                    max={5}
+                    max={2}
                     step={1}
-                    onChange={(e, value) =>
-                        setSettings({slidesPerView: value as number})
+                    onChange={(_, value) =>
+                        setSettings({ slidesPerView: value as number })
                     }
                 />
             </Box>
@@ -73,22 +87,17 @@ export const SliderSettings = () => {
                     <Switch
                         checked={settings.autoplay}
                         onChange={() =>
-                            setSettings({autoplay: !settings.autoplay})
+                            setSettings({ autoplay: !settings.autoplay })
                         }
                     />
                 }
-                label={`Автопрокрутка: ${settings.autoplay ? "Включена" : "Отключена"}`}
+                label={`${LocText.autoplay}: ${
+                    settings.autoplay
+                        ? LocText.autoplayEnabled
+                        : LocText.autoplayDisabled
+                }`}
             />
         </Box>
     );
 };
 
-
-// Типы данных для настроек
-/*
-export interface SliderSettingsType {
-    loop: boolean;
-    delay: number;
-    slidesPerView: number;
-    autoplay: boolean;
-}*/

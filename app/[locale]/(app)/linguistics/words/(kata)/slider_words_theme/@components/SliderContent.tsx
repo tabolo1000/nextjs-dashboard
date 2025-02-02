@@ -1,16 +1,13 @@
 "use client";
 
-import React, {memo, useEffect, useState} from "react";
+import React, {memo} from "react";
 import {motion, Variants} from "framer-motion";
-import { SettingsApplicationsTwoTone, ExitToAppTwoTone } from "@mui/icons-material";
-import ActionButtons from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/@components/ActionButtons";
 import CustomSwiper from "@/app/ui/math/components/slider/CustomSwiper";
 import CustomPagination from "@/app/ui/math/components/slider/CustomPagination";
 import {WordCarousel, WordCarouselUpdate} from "@/app/store/slices/linguisticsSlice";
+import SearchWords from "@/app/[locale]/(app)/linguistics/words/(kata)/@components/SearchWords";
 
 export default memo(function SliderContent ({
-                                                toggleSettings,
-                                                setTopic,
                                                 currentItems,
                                                 handleWordChange,
                                                 handleWordDelete,
@@ -19,7 +16,12 @@ export default memo(function SliderContent ({
                                                 currentPage,
                                                 handleChange,
                                                 animationVariants,
+                                                setIsModalSearchOpen,
+                                                isModalSearchOpen
+
+
                                             }: SliderContentProps) {
+
     return (
         <motion.div
             key="slider"
@@ -29,28 +31,6 @@ export default memo(function SliderContent ({
             exit="exit"
             className="p-6 rounded-lg shadow-lg relative border border-red-200 "
         >
-            {/* Buttons window management */}
-            <div className="absolute translate-x-full right-0 top-0">
-                <ActionButtons
-                    actions={[
-                        {
-                            icon: <SettingsApplicationsTwoTone className="text-3xl" />,
-                            onClick: toggleSettings,
-                            tooltip: "Открыть настройки",
-                        },
-                        {
-                            icon: <ExitToAppTwoTone className="text-3xl" />,
-                            onClick: () => setTopic([]),
-                            color: "error",
-                            tooltip: "Выйти",
-                        },
-                    ]}
-                    orientation={"vertical"}
-                    style={""}
-                />
-            </div>
-
-
             {/* Slider window */}
             <CustomSwiper
                 currentItems={currentItems}
@@ -65,7 +45,9 @@ export default memo(function SliderContent ({
                 currentPage={currentPage}
                 handleChange={handleChange}
             />
-            <TextReader/>
+            <SearchWords setIsModalSearchOpen={setIsModalSearchOpen} isModalSearchOpen={isModalSearchOpen} />
+            {/*<SearchWord/>*/}
+            {/*<TextReader/>*/}
         </motion.div>
     );
 })
@@ -73,8 +55,6 @@ export default memo(function SliderContent ({
 //---------------------------------------Types------------------------------
 
 interface SliderContentProps {
-    toggleSettings: () => void;
-    setTopic: (topic: string[]) => void;
     currentItems: WordCarousel[];
     handleWordChange: (word: WordCarouselUpdate) => void;
     handleWordDelete: (id: string) => void;
@@ -83,7 +63,44 @@ interface SliderContentProps {
     currentPage: number;
     handleChange: (event: React.ChangeEvent<unknown>, page: number) => void;
     animationVariants: Variants;
+    setIsModalSearchOpen: (isModalSearchOpen: boolean) => void;
+    isModalSearchOpen: boolean;
 }
+
+
+
+
+//--------------------------------draft
+
+/*@Get('/searchWord')
+async findWord(@Query('word') word: string): Promise<Word | null> {
+    return this.wordService.findWord(word);
+}*/
+
+/*function SearchWord() {
+
+    const [word, setWord] = useState<null | WordCarousel>(null)
+    const  submitHandler = async (value: {text: string}) => {
+        await axios.get(`http://localhost:3001/linguistics/words/words_carousel/searchWord?word=`+ value.text)
+            .then((el)=> setWord(el.data));
+    }
+    return  <Formik
+        initialValues={{text: "g"}}
+        onSubmit={submitHandler}
+    >
+        <Form>
+            <label htmlFor="text">Search Words</label>
+            <Field name="text" type="text"/>
+            <button type={"submit"}>pick</button>
+            {word && <div className={"text-white"}>
+                {word.title}
+                {word.description}
+            </div>}
+        </Form>
+
+    </Formik>
+}
+
 
 
 
@@ -168,5 +185,5 @@ const TextReader = () => {
             </button>
         </div>
     );
-};
+};*/
 

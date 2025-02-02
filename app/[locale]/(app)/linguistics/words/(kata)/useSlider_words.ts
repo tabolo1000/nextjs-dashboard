@@ -54,6 +54,7 @@ export default function useSlider_words(endPoints: Array<string>): ReturnType {
     const [currentPage, setPage] = useState(1);
     const [isSettingsActive, setIsSettingsActive] = useState(false);
     const [editingFrom, setEditingForm] = useState<boolean>(false);
+    const [isSearch, setSearch] = useState<boolean>(false);
 
     const itemsPerPage = 20;
     const pageCount = Math.ceil(wordsCarousel.length / itemsPerPage);
@@ -96,6 +97,7 @@ export default function useSlider_words(endPoints: Array<string>): ReturnType {
             loading,
             error,
             editingFrom,
+            isSearch
         },
         actions: {
             handleLoadWords,
@@ -104,6 +106,7 @@ export default function useSlider_words(endPoints: Array<string>): ReturnType {
             setEditingForm,
             toggleSettings,
             isSettingsActive,
+            setSearch
         },
     };
 }
@@ -125,12 +128,14 @@ interface Data {
     loading: Loading;
     error: string | null;
     editingFrom: boolean;
+    isSearch: boolean
 }
 
-interface Actions {
+export interface Actions {
     handleWordChange: (value: WordCarouselUpdate) => void;
     handleWordDelete: (id: string) => void;
     setEditingForm: (active: boolean) => void;
+    setSearch: (isSearch: boolean) => void;
     toggleSettings: () => void;
     isSettingsActive: boolean;
     handleLoadWords: () => void;

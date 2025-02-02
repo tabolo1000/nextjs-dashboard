@@ -24,6 +24,7 @@ import { useSliderStore } from "@/app/[locale]/(app)/linguistics/words/(kata)/sl
 import { TopicWord } from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/@types/main";
 import { usePathname } from "next/navigation";
 import {Language} from "@/i18n/languages";
+import {getLocalizedText} from "@/app/lib/utils";
 
 export type MenuProps = {
     topicWords: TopicWord[];
@@ -41,7 +42,10 @@ export default function Menu({ topicWords }: MenuProps) {
         <>
             <div className="main_block_task">
                 <h1 className="header_h1">
-                    {language === Language.En ? "Words" : "Слова"}
+                    {getLocalizedText(language, {
+                        en: "Words",
+                        ru: "Слова"
+                    })}
                 </h1>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
                     {topicWords.map((word, i) => (
@@ -59,3 +63,4 @@ export default function Menu({ topicWords }: MenuProps) {
         </>
     );
 }
+

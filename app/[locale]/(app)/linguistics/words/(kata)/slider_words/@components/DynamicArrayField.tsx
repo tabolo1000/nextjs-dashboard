@@ -22,10 +22,10 @@ export const DynamicArrayField: React.FC<DynamicArrayFieldProps> = ({
 
     return (
         <Box mb={3}>
-            <Typography variant="subtitle1">{label}</Typography>dada
+            <Typography variant="subtitle1" sx={{paddingLeft: "20px", paddingY: "5px"}}  >{label}</Typography>
             <FieldArray name={name}>
                 {({ remove, push, form }) => {
-                    const values = form.values.morpheme[name.split(".")[1]] || [""]; // Получение массива значений
+                    const values = form.values.morpheme[name.split(".")[1]] || [""];
 
                     return (
                         <>
@@ -33,7 +33,7 @@ export const DynamicArrayField: React.FC<DynamicArrayFieldProps> = ({
                                 values.map((_: string, index: number) => {
                                     return (
                                     <Box display="flex" alignItems="center" key={index} mb={2}>
-                                        <Field name={`${name}[${index}]`}>
+                                        <Field name={`${name}[${index}]:`}>
                                             {({ field }: any) => (
                                                 <Input
                                                     className={"paragraph_base"}

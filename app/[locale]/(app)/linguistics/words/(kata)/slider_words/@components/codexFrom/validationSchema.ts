@@ -18,5 +18,8 @@ export const validationSchema = Yup.object({
     derivatives: Yup.array()
         .of(Yup.string().required("Введите производное"))
         .min(1, "Укажите хотя бы одно производное"),
+    collections: Yup.array()
+        .of(Yup.string().required("Введите коллекцию"))
+        .required("Введите хотя бы одну коллекцию")
 });
 

@@ -1,6 +1,4 @@
-/**
- * Full screen error
- */
+
 
 import {usePathname} from "next/navigation";
 import {motion} from "framer-motion";
@@ -8,7 +6,9 @@ import {getLocalizedText} from "@/app/lib/utils";
 import React from "react";
 
 
-
+/**
+ * Full screen error
+ */
 export function ErrorScreen({
                                 message = {
                                     en: "Something went wrong. Please try again.",

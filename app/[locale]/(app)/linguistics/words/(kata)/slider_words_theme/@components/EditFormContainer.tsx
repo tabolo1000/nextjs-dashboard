@@ -2,10 +2,16 @@
 
 import React from "react";
 import {motion, Variants} from "framer-motion";
-import { CodexForm } from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/add_word/CodexForm";
+import { CodexForm } from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CodexForm";
 
 
-
+/**
+ * Edits by double-tapping the word
+ * @param editingFrom
+ * @param isEditingForm
+ * @param animationVariants
+ * @constructor
+ */
 const EditFormContainer: React.FC<EditFormContainerProps> = ({
                                                                  editingFrom,
                                                                  isEditingForm,

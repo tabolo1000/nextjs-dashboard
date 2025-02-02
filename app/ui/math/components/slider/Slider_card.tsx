@@ -4,7 +4,7 @@ import { Morpheme } from "@/app/ui/math/components/Morpheme";
 import { AddBoxOutlined, ChangeCircleOutlined, DeleteOutline } from "@mui/icons-material";
 
 import { WordCarousel, WordCarouselUpdate} from "@/app/store/slices/linguisticsSlice";
-import {EditableField} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/add_word/EditableField";
+import {EditableField} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/EditableField";
 import ConfirmationModal from "@/app/ui/math/components/ConfirmationModal";
 //import {ToastContainer} from "react-toastify";
 
