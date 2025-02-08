@@ -4,8 +4,8 @@ import React, {memo} from "react";
 import {motion, Variants} from "framer-motion";
 import CustomSwiper from "@/app/ui/math/components/slider/CustomSwiper";
 import CustomPagination from "@/app/ui/math/components/slider/CustomPagination";
-import {WordCarousel, WordCarouselUpdate} from "@/app/store/slices/linguisticsSlice";
 import SearchWords from "@/app/[locale]/(app)/linguistics/words/(kata)/@components/SearchWords";
+import {WordCarousel, WordCarouselUpdate} from "@/app/store/slices/wordsSliderSlice/wordsSliderSlice";
 
 export default memo(function SliderContent ({
                                                 currentItems,

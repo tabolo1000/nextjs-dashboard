@@ -15,8 +15,9 @@ import { validationSchema } from "@/app/[locale]/(app)/linguistics/words/(kata)/
 import { DynamicArrayField } from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/DynamicArrayField";
 import { JsonUploader } from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/JsonUploader/JsonUploader";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
-import { addWordToCarousel, LoadingStatus } from "@/app/store/slices/linguisticsSlice";
 import { Base_button } from "@/app/ui/math/components/Base_button";
+import {addWordToCarousel} from "@/app/store/slices/wordsSliderSlice/wordsSliderSliceThunks";
+import {LoadingStatus} from "@/app/store/slices/wordsSliderSlice/wordsSliderSlice";
 
 // Типы
 interface CodexFormProps {

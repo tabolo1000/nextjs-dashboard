@@ -1,8 +1,8 @@
 import React from "react";
-import {LoadingStatus} from "@/app/store/slices/linguisticsSlice";
 import {ErrorScreen} from "@/app/[locale]/(app)/@components/ErrorScreen";
 import {LoaderScreen} from "@/app/[locale]/(app)/@components/LoaderScreen";
 import {languageMessage} from "@/i18n/languages";
+import {LoadingStatus} from "@/app/store/slices/wordsSliderSlice/wordsSliderSlice";
 
 
 type LoadingHandlerProps = {

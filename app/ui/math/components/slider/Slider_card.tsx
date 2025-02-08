@@ -3,7 +3,7 @@ import { Box, Button, CardContent, Typography } from "@mui/material";
 import { Morpheme } from "@/app/ui/math/components/Morpheme";
 import { AddBoxOutlined, ChangeCircleOutlined, DeleteOutline } from "@mui/icons-material";
 
-import { WordCarousel, WordCarouselUpdate} from "@/app/store/slices/linguisticsSlice";
+import { WordCarousel, WordCarouselUpdate} from "@/app/store/slices/linguisticsSlice/wordsSliderSlice";
 import {EditableField} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/EditableField";
 import ConfirmationModal from "@/app/ui/math/components/ConfirmationModal";
 //import {ToastContainer} from "react-toastify";

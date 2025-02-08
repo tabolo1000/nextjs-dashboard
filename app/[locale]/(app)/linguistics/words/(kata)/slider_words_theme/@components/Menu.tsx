@@ -23,7 +23,6 @@ import { LessonCard } from "@/app/ui/math/components/LessonCard";
 import { useSliderStore } from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/@store/sliderStore";
 import { TopicWord } from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/@types/main";
 import { usePathname } from "next/navigation";
-import {Language} from "@/i18n/languages";
 import {getLocalizedText} from "@/app/lib/utils";
 
 export type MenuProps = {

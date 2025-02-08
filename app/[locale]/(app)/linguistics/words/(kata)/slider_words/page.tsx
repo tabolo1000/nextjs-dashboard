@@ -5,7 +5,6 @@ import { Box, Typography } from "@mui/material";
 import { AnimatePresence } from "framer-motion";
 import { ToastContainer } from "react-toastify";
 import useSlider_words from "@/app/[locale]/(app)/linguistics/words/(kata)/useSlider_words";
-import { LoadingStatus } from "@/app/store/slices/linguisticsSlice";
 import {useSliderStore} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/@store/sliderStore";
 import {languageMessage} from "@/i18n/languages";
 import {animationVariants} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@assets/animaition";
@@ -15,6 +14,7 @@ import {
     getActionButtonsConfig
 } from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/getActionButtonsConfig";
 import BlockContent from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/BlockContent";
+import {LoadingStatus} from "@/app/store/slices/wordsSliderSlice/wordsSliderSlice";
 
 
 /**

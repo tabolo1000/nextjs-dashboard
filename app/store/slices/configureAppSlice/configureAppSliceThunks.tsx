@@ -1,12 +1,13 @@
 import {createStorageThunk} from "@/app/lib/utils";
+
+import {AppDispatch} from "@/app/store";
 import {
     setAnimationState,
     PanelState,
     toggleAsidePanel,
     toggleHeaderPanel,
     AnimationState
-} from "@/app/store/slices/mainSlice/configureAppSlice";
-import {AppDispatch} from "@/app/store";
+} from "@/app/store/slices/configureAppSlice/configureAppSlice";
 /**
  * Based on their arguments:
  *  key: string

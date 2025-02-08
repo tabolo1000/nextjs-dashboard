@@ -1,7 +1,11 @@
 'use client';
 
-import React, {useEffect, useState} from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import {
+    MainConfiguration,
+    toggleAnimationTo,
+    toggleAsidePanelTo,
+    toggleHeaderPanelTo
+} from "@/app/store/slices/configureAppSlice/configureAppSliceThunks";
 import {
     Settings,
     Close,
@@ -10,15 +14,12 @@ import {
     ScreenLockLandscape,
     KeyboardArrowDown,
 } from '@mui/icons-material';
+import React, {useEffect, useState} from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import {useAppDispatch, useAppSelector} from "@/app/store/hooks";
-import {
-    MainConfiguration,
-    toggleAnimationTo,
-    toggleAsidePanelTo,
-    toggleHeaderPanelTo
-} from "@/app/store/slices/mainSlice/configureAppSliceThunks";
 import {usePathname} from "next/navigation";
 import {getLocalizedText} from "@/app/lib/utils";
+
 
 export default function SettingsPanel() {
     const [isOpen, setIsOpen] = useState(false); // Состояние открытия панели

@@ -13,7 +13,7 @@ import {
 import {Swiper, SwiperSlide} from "swiper/react";
 import {Slider_card} from "@/app/ui/math/components/slider/Slider_card";
 import React from "react";
-import {WordCarousel, WordCarouselUpdate} from "@/app/store/slices/linguisticsSlice";
+import {WordCarousel, WordCarouselUpdate} from "@/app/store/slices/linguisticsSlice/wordsSliderSlice";
 import {useSettingSlider} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/@store/settingStore";
 import 'swiper/swiper-bundle.css';
 import 'swiper/css/effect-cube';

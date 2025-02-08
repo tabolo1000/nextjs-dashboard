@@ -5,8 +5,8 @@ import SettingsContent
 import SliderContent from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/@components/SliderContent";
 import {Actions} from "@/app/[locale]/(app)/linguistics/words/(kata)/useSlider_words";
 import {Variants} from "framer-motion";
-import {WordCarousel, WordCarouselUpdate} from "@/app/store/slices/linguisticsSlice";
 import React from "react";
+import {WordCarousel, WordCarouselUpdate} from "@/app/store/slices/wordsSliderSlice/wordsSliderSlice";
 
 const BlockContent = ({
                              editingFrom,

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { AnimatePresence, motion } from "framer-motion";
 import { Field, Form, Formik } from "formik";
-import {WordCarousel} from "@/app/store/slices/linguisticsSlice";
+import {WordCarousel} from "@/app/store/slices/linguisticsSlice/wordsSliderSlice";
 
 /*interface WordCarousel {
     title: string;

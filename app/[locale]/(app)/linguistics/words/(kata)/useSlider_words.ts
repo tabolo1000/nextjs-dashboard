@@ -41,10 +41,9 @@ import {
     deleteWordToCarousel,
     loadWordsForCarousel,
     updateWordToCarousel,
-    WordCarousel,
-    WordCarouselUpdate,
-    Loading,
-} from "@/app/store/slices/linguisticsSlice";
+} from "@/app/store/slices/wordsSliderSlice/wordsSliderSliceThunks";
+import {Loading, WordCarousel, WordCarouselUpdate} from "@/app/store/slices/wordsSliderSlice/wordsSliderSlice";
+
 
 
 export default function useSlider_words(endPoints: Array<string>): ReturnType {

@@ -1,14 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-
-import {
-    createWord,
-    deleteWord,
-    fetchCollectionWordsCarousel,
-    fetchWordsCarousel,
-    updateWord
-} from "@/app/api/linguistics";
-import {createApiThunk} from "@/app/lib/utils";
 import {languageMessage} from "@/i18n/languages";
+import {
+    addWordToCarousel,
+    deleteWordToCarousel,
+    loadCollectionWordsForCarousel,
+    loadWordsForCarousel
+} from "@/app/store/slices/wordsSliderSlice/wordsSliderSliceThunks";
+
 
 export enum LoadingStatus {
     padding = "padding",
@@ -16,27 +14,11 @@ export enum LoadingStatus {
     rejected = "rejected",
 }
 
-const initialState: LinguisticsState = {
-    wordsCarousel: [
-        {
-            "_id": "",
-            "title": "Персистентность: англ. Persistence [pəˈsɪstəns], фр. Persistance [pɛʁ.si.stɑ̃s], нем. Persistenz [ˌpɛʁ.zɪˈstɛnt͡s], польск. Persystencja [pɛr.sɨsˈtɛn.t͡sja]",
-            "icon": "🔄",
-            "quote": "«Персистентность — это умение продолжать двигаться вперёд, несмотря на любые препятствия.»",
-            "description": "Слово «персистентность» заимствовано из латинского *persistentia*, что означает «стойкость», «упорство» или «непрерывность». Корень *persistere* состоит из префикса *per-* («через», «до конца») и *sistere* («стоять», «оставаться»). Первоначально слово использовалось в значении «неизменное упорство», но с развитием науки и технологий приобрело более широкий спектр значений. Сегодня термин встречается в таких областях, как медицина (например, устойчивость вирусов), информатика (например, долговременное хранение данных), психология (упорство в достижении цели) и других дисциплинах. В русском языке термин появился в XX веке, особенно с ростом научной и технической литературы.",
-            "morpheme": {
-                "prefix": ["пер"],
-                "root": ["систент"],
-                "suffix": ["ность"]
-            },
-            "annotation": "Персистентность символизирует устойчивость и продолжительность, как в природе, так и в технологиях. Это качество, которое позволяет преодолевать изменения и сохранять целостность.",
-            "joke": "Персистентность — это когда даже Wi-Fi в подвале упорно держит одну палочку связи.",
-            "derivatives": [
-                "Персистенция — устаревшая форма, обозначающая стойкость или долговременность.",
-                ],
-            "collections": [],
-       }
-    ],
+/**
+ * Condition for working with slider words in the liguistics section
+ */
+const initialState: WordsSliderSliceState = {
+    wordsCarousel: [],
     loading: {
             addWord: { status: LoadingStatus.fulfilled, message: null },
             deleteWord: { status: LoadingStatus.fulfilled, message: null },
@@ -45,24 +27,14 @@ const initialState: LinguisticsState = {
     error: null,
 };
 
-
-// 1. Redux Toolkit uses the Immer library, which wraps state in a “proxy object”.
-
-const linguisticsSlice = createSlice({
+const WordsSliderSlice = createSlice({
     name: 'linguistics',
     initialState,
-    reducers: {
-        /*
-        loadingWordForCarousel(
-            state: LinguisticsState,
-            action: PayloadAction<WordCarousel[]>
-        ){
-            state.wordsCarousel.push(...action.payload)
-        },
-       */
-    },
+    reducers: {},
     extraReducers: (builder) => {
-        // Загрузка слов
+        /**
+         * Loading words
+         */
         builder
             .addCase(loadWordsForCarousel.pending, (state) => {
                 state.loading.fetchWords = {
@@ -92,8 +64,9 @@ const linguisticsSlice = createSlice({
                 };
                 state.error = action.payload || "Не удалось загрузить слова";
             });
-
-        // Загрузка слов коллекции
+        /**
+         * Loading the words of the collection
+         */
         builder
             .addCase(loadCollectionWordsForCarousel.pending, (state) => {
                 state.loading.fetchWords = {
@@ -116,8 +89,9 @@ const linguisticsSlice = createSlice({
                 };
                 state.error = action.payload || "Не удалось загрузить слова";
             });
-
-        // Добавление слова
+        /**
+         * Adding a word
+         */
         builder
             .addCase(addWordToCarousel.pending, (state) => {
                 state.loading.addWord = {
@@ -140,8 +114,9 @@ const linguisticsSlice = createSlice({
                 };
                 state.error = action.payload || "Не удалось добавить слово";
             });
-
-        // Удаление слова
+        /**
+         * Word deletion
+         */
         builder
             .addCase(deleteWordToCarousel.pending, (state) => {
                 state.loading.deleteWord = {
@@ -173,62 +148,15 @@ const linguisticsSlice = createSlice({
     },
 });
 
-//export const { createWordForCarousel } = linguisticsSlice.actions;
-export default linguisticsSlice.reducer;
-export const linguisticsSliceAction = linguisticsSlice.actions
+//------------------------- Export LinguisticsState -------------------------------------------------
 
+export default WordsSliderSlice.reducer;
+//------------------------------------------- Types ---------------------------------------------------
 
-//-------------------------------------------------Thunks-----------------------------------------
-
-export const loadWordsForCarousel = createApiThunk<WordCarousel[], Array<string>>(
-    'linguistics/loadWords',
-    async (collection) => {
-        return fetchWordsCarousel(collection); // Возвращаем список слов
-    }
-);
-
-export const loadCollectionWordsForCarousel = createApiThunk<WordCarousel[], Array<string>>(
-    'linguistics/loadCollectionWords',
-    async (collection) => {
-        return fetchCollectionWordsCarousel(collection); // Возвращаем список слов
-    }
-);
-
-// Добавление нового слова в карусель
-export const addWordToCarousel = createApiThunk<WordCarousel, AddWordCarouselUpdate>(
-    'linguistics/addWord',
-    async (newWord) => {
-        return createWord(newWord); // Возвращаем добавленное слово
-    }
-);
-
-// Обновление слова в карусели
-export const updateWordToCarousel = createApiThunk<WordCarousel, WordCarouselUpdate>(
-    'linguistics/updateWord',
-    async (newWord) => {
-        return updateWord(newWord); // Возвращаем обновленное слово
-    }
-);
-
-// Удаление слова в карусели
-export const deleteWordToCarousel = createApiThunk<WordCarousel, string>(
-    'linguistics/deleteWord',
-    async (id) => {
-        return deleteWord(id); // Возвращаем удаленное слово
-    }
-);
-
-//--------------------------Types---------------------------------
-
-interface ActionLoading {
+type ActionLoading = {
     status: LoadingStatus;
     message: string | null | languageMessage
 }
-
-
-
-
-
 
 export interface Loading {
     addWord: ActionLoading;
@@ -281,7 +209,7 @@ interface WordCarouselMorpheme {
     end?: Array<string>;
 }
 
-interface LinguisticsState {
+interface WordsSliderSliceState {
     wordsCarousel: WordCarousel[],
     loading: Loading;
     error: string | null;
