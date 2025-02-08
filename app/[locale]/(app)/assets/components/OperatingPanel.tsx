@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
     Settings,
@@ -11,7 +11,12 @@ import {
     KeyboardArrowDown,
 } from '@mui/icons-material';
 import {useAppDispatch, useAppSelector} from "@/app/store/hooks";
-import {toggleAnimation, toggleAsidePanel, toggleHeaderPanel} from "@/app/store/slices/mainSlice/mainSliceThunks";
+import {
+    MainConfiguration,
+    toggleAnimationTo,
+    toggleAsidePanelTo,
+    toggleHeaderPanelTo
+} from "@/app/store/slices/mainSlice/configureAppSliceThunks";
 import {usePathname} from "next/navigation";
 import {getLocalizedText} from "@/app/lib/utils";
 
@@ -21,6 +26,10 @@ export default function SettingsPanel() {
     const {isAnimating} = useAppSelector((state)=> state.mainSlice.animation)
     const dispatch = useAppDispatch();
     const currentLang = usePathname().split("/")[1]
+
+    useEffect(() => {
+        dispatch(MainConfiguration())
+    }, [dispatch]);
 
     // Параметры панели
     const settings = [
@@ -32,7 +41,7 @@ export default function SettingsPanel() {
             isActive: isAnimating,
             truthIcon: <Animation />,
             falseIcon: <MotionPhotosOff />,
-            callback: () =>  dispatch(toggleAnimation({isAnimating: !isAnimating})),
+            callback: () =>  dispatch(toggleAnimationTo({isAnimating: !isAnimating})),
         },
         {
             name: getLocalizedText(currentLang, {
@@ -43,8 +52,8 @@ export default function SettingsPanel() {
             truthIcon: <ScreenLockLandscape />,
             falseIcon: <KeyboardArrowDown />,
             callback: () => {
-                dispatch(toggleHeaderPanel({isOpenHeaderPanel: !isOpenHeaderPanel}))
-                dispatch(toggleAsidePanel({isOpenAsidePanel: !isOpenAsidePanel}))
+                dispatch(toggleHeaderPanelTo({isOpenHeaderPanel: !isOpenHeaderPanel}))
+                dispatch(toggleAsidePanelTo({isOpenAsidePanel: !isOpenAsidePanel}))
             },
         },
         {
@@ -55,7 +64,7 @@ export default function SettingsPanel() {
             isActive: isOpenAsidePanel,
             truthIcon: <ScreenLockLandscape />,
             falseIcon: <KeyboardArrowDown />,
-            callback: () => dispatch(toggleAsidePanel({isOpenAsidePanel: !isOpenAsidePanel})),
+            callback: () => dispatch(toggleAsidePanelTo({isOpenAsidePanel: !isOpenAsidePanel})),
         },
         {
             name: getLocalizedText(currentLang, {
@@ -65,7 +74,7 @@ export default function SettingsPanel() {
             isActive: isOpenHeaderPanel,
             truthIcon: <ScreenLockLandscape />,
             falseIcon: <KeyboardArrowDown />,
-            callback: () => dispatch(toggleHeaderPanel({isOpenHeaderPanel: !isOpenHeaderPanel})),
+            callback: () => dispatch(toggleHeaderPanelTo({isOpenHeaderPanel: !isOpenHeaderPanel})),
         },
     ];
 
