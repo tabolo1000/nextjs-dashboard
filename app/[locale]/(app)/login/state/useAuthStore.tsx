@@ -55,7 +55,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
         } catch (error: unknown) {
             if(error instanceof ErrorFromResponse){
                 console.error('Ошибка:', error.response?.data || error.message);
-                setErrors({ server: error.response?.data?.message || 'Ошибка сервера' });
+
             }
         } finally {
             setSubmitting(false);

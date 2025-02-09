@@ -29,7 +29,7 @@ input[type='number']::-webkit-outer-spin-button {
 /* main */
 
 .dark .main{
-  @apply base-animation-all bg-background h-min min-h-screen;
+  @apply base-animation-all bg-component_background h-min min-h-screen;
 }
 
 .layout {

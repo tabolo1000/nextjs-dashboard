@@ -1,5 +1,9 @@
 import api from './config';
-import {AddWordCarouselUpdate, WordCarousel, WordCarouselUpdate} from '../store/slices/linguisticsSlice/wordsSliderSlice'; // Типы данных
+import {
+    AddWordCarouselUpdate,
+    WordCarousel,
+    WordCarouselUpdate
+} from "@/app/store/slices/wordsSliderSlice/wordsSliderSlice";
 
 // Получение всех слов для карусели
 export const fetchWordsCarousel = async (collection: Array<string>): Promise<WordCarousel[]> => {
