@@ -1,9 +1,6 @@
-// userSlice.ts
 import { createSlice} from '@reduxjs/toolkit';
-import {authAPI, AuthFormValues} from "@/app/api/user.api";
-import {AuthResponse, UserState} from '@/app/store/slices/userSlice/userSlice.types';
-import {createApiThunk} from "@/app/lib/utils";
-
+import { UserState } from '@/app/store/slices/userSlice/userSlice.types';
+import {userSliceThunks} from "@/app/store/slices/userSlice/userSliceThunks";
 
 const initialState: UserState = {
     id: '',
@@ -52,7 +49,6 @@ const initialState: UserState = {
 };
 
 
-
 const userSlice = createSlice({
     name: 'user',
     initialState,
@@ -66,8 +62,9 @@ const userSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(loginUser.fulfilled, (state, action) => {
-                const { id, username, email, avatarUrl, role, access_token } = action.payload;
+            .addCase(userSliceThunks.loginUser.fulfilled, (state, action) => {
+                const { user, access_token } = action.payload;
+                const {id, username, email, avatarUrl, role,} = user
                 state.id = id;
                 state.username = username;
                 state.email = email;
@@ -77,11 +74,13 @@ const userSlice = createSlice({
                 state.lastLogin = new Date().toISOString();
                 localStorage.setItem('access_token', access_token);
             })
-            .addCase(loginUser.rejected, (state, action) => {
+            .addCase(userSliceThunks.loginUser.rejected, (state) => {
                 state.loggedIn = false;
                 // Можно добавить обработку ошибок
             })
-            .addCase(registerUser.fulfilled, (state, action) => {
+            .addCase(
+                userSliceThunks.registerUser.fulfilled,
+                (state, action) => {
                 // Логика после успешной регистрации
             });
     }
@@ -90,44 +89,3 @@ const userSlice = createSlice({
 export const { logout } = userSlice.actions;
 export default userSlice.reducer;
 
-
-export const loginUser = createApiThunk(
-    'user/login',
-    async (credentials: AuthFormValues) => {
-        return  authAPI.login(credentials);
-    }
-);
-export const registerUser = createApiThunk(
-    'user/register',
-    async (credentials: AuthFormValues) => {
-        return authAPI.register(credentials);
-    }
-);
-/*
-// Асинхронные Thunk-и
-export const loginUser = createAsyncThunk(
-    'user/login',
-    async (credentials: { username: string; password: string }, { rejectWithValue }) => {
-        try {
-            debugger
-            const response = await authAPI.login(credentials);
-            debugger
-
-            return response.data;
-        } catch (error) {
-            return rejectWithValue(error.response?.data?.message || 'Ошибка авторизации');
-        }
-    }
-);
-
-export const registerUser = createAsyncThunk(
-    'user/register',
-    async (credentials: { username: string; password: string }, { rejectWithValue }) => {
-        try {
-            const response = await authAPI.register(credentials);
-            return response.data;
-        } catch (error) {
-            return rejectWithValue(error.response?.data?.message || 'Ошибка регистрации');
-        }
-    }
-);*/

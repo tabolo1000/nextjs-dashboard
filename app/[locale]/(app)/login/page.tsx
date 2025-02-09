@@ -7,8 +7,8 @@ import SubmitButton from './components/SubmitButton';
 import SocialButton from './components/SocialButton';
 import { schemaAuthForm } from './schema/schemaAuthForm';
 import {useAppDispatch, useAppSelector} from "@/app/store/hooks";
-import {loginUser, registerUser} from "@/app/store/slices/userSlice/userSlice";
 import {AuthFormValues} from "@/app/api/user.api";
+import {loginUser} from "@/app/store/slices/userSlice/userSliceThunks";
 
 const AuthForm: React.FC = () => {
     const user = useAppSelector(state => state.user);
