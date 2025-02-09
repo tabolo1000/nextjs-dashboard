@@ -6,7 +6,7 @@ const config: Config = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  darkMode: 'class', // Поддержка темной темы через класс
+  darkMode: 'class',
   theme: {
     extend: {
       gridTemplateColumns: {

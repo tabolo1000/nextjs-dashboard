@@ -8,6 +8,7 @@ import SocialButton from './components/SocialButton';
 import { schemaAuthForm } from './schema/schemaAuthForm';
 import {useAppDispatch, useAppSelector} from "@/app/store/hooks";
 import {loginUser, registerUser} from "@/app/store/slices/userSlice/userSlice";
+import {AuthFormValues} from "@/app/api/user.api";
 
 const AuthForm: React.FC = () => {
     const user = useAppSelector(state => state.user);
@@ -25,13 +26,17 @@ const AuthForm: React.FC = () => {
         async (values: AuthFormValues, actions: FormikHelpers<AuthFormValues>) => {
             const { setSubmitting, resetForm, setErrors } = actions;
             try {
-                const resultAction = await dispatch(
+                const resultAction = await dispatch(/*
                     user.loggedIn ? loginUser(values) : registerUser(values)  // делать запрос перед всем чтоб понять залогинен я или нет
+                */
+                    loginUser(values)
                 );
-
+                debugger
                 if (loginUser.fulfilled.match(resultAction)) {
                     // Успешный логин
+                    debugger
                 } else if (resultAction.payload) {
+                    debugger
                     setErrors({ server: resultAction.payload });
                 }
             } finally {
@@ -106,4 +111,4 @@ export default AuthForm;
 
 //---------------------------------------------------Types-------------------------------------------
 
-type AuthFormValues = Record<"username" | "password", string>
+

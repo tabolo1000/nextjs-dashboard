@@ -1,7 +1,8 @@
 // userSlice.ts
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import {authAPI} from "@/app/api/user.api";
-import { UserState, UserRole, AccountStatus, GameProgress, SocialConnections } from '@/app/store/slices/userSlice/userSlice.types';
+import { createSlice} from '@reduxjs/toolkit';
+import {authAPI, AuthFormValues} from "@/app/api/user.api";
+import {AuthResponse, UserState} from '@/app/store/slices/userSlice/userSlice.types';
+import {createApiThunk} from "@/app/lib/utils";
 
 
 const initialState: UserState = {
@@ -50,30 +51,7 @@ const initialState: UserState = {
     },
 };
 
-// Асинхронные Thunk-и
-export const loginUser = createAsyncThunk(
-    'user/login',
-    async (credentials: { username: string; password: string }, { rejectWithValue }) => {
-        try {
-            const response = await authAPI.login(credentials);
-            return response.data;
-        } catch (error) {
-            return rejectWithValue(error.response?.data?.message || 'Ошибка авторизации');
-        }
-    }
-);
 
-export const registerUser = createAsyncThunk(
-    'user/register',
-    async (credentials: { username: string; password: string }, { rejectWithValue }) => {
-        try {
-            const response = await authAPI.register(credentials);
-            return response.data;
-        } catch (error) {
-            return rejectWithValue(error.response?.data?.message || 'Ошибка регистрации');
-        }
-    }
-);
 
 const userSlice = createSlice({
     name: 'user',
@@ -111,3 +89,45 @@ const userSlice = createSlice({
 
 export const { logout } = userSlice.actions;
 export default userSlice.reducer;
+
+
+export const loginUser = createApiThunk(
+    'user/login',
+    async (credentials: AuthFormValues) => {
+        return  authAPI.login(credentials);
+    }
+);
+export const registerUser = createApiThunk(
+    'user/register',
+    async (credentials: AuthFormValues) => {
+        return authAPI.register(credentials);
+    }
+);
+/*
+// Асинхронные Thunk-и
+export const loginUser = createAsyncThunk(
+    'user/login',
+    async (credentials: { username: string; password: string }, { rejectWithValue }) => {
+        try {
+            debugger
+            const response = await authAPI.login(credentials);
+            debugger
+
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response?.data?.message || 'Ошибка авторизации');
+        }
+    }
+);
+
+export const registerUser = createAsyncThunk(
+    'user/register',
+    async (credentials: { username: string; password: string }, { rejectWithValue }) => {
+        try {
+            const response = await authAPI.register(credentials);
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response?.data?.message || 'Ошибка регистрации');
+        }
+    }
+);*/
