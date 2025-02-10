@@ -10,17 +10,26 @@ import {useAppDispatch} from "@/app/store/hooks";
 import {AuthFormValues} from "@/app/api/user.api";
 import {userSliceThunks} from "@/app/store/slices/userSlice/userSliceThunks";
 import {useRouter} from "@/i18n/routing";
+import {usePathname} from "next/navigation";
+import {localizedAuthFormText, LocalizedAuthFormText} from "@/app/[locale]/(app)/login/@assets/language";
 
-
+/**
+ * Responsible for the login page that is
+ * displayed if the token is not present
+ * @constructor
+ */
 const AuthForm: React.FC = () => {
     const dispatch = useAppDispatch();
     const router = useRouter();
+    const lang = usePathname().split("/")[1];
+    const authFormText: LocalizedAuthFormText = localizedAuthFormText(lang)
 
-    const [isLogin, setIsLogin] = useState(true); // Переключение между режимами входа и регистрации
+    const [isLogin, setIsLogin] = useState(true);
 
     const initialValues: AuthFormValues = {
         username: "",
         password: "",
+        server: ""
     };
 
     /**
@@ -31,21 +40,22 @@ const AuthForm: React.FC = () => {
     const handleSubmit = useCallback(
         async (values: AuthFormValues, actions: FormikHelpers<AuthFormValues>) => {
             const { setSubmitting, setErrors } = actions;
-            const { loginUser, registerUser } = userSliceThunks;
-            debugger
+
             try {
-                const resultAction = await dispatch(isLogin ? loginUser(values) : registerUser(values));
+                const thunkAction = isLogin
+                    ? userSliceThunks.loginUser(values)
+                    : userSliceThunks.registerUser(values);
 
-                if (loginUser.fulfilled.match(resultAction)) {
-                    router.push("/profile"); // Редирект после успешного входа
-                } else if (resultAction.payload) {
-                    setErrors({ server: resultAction.payload });
+                await dispatch(thunkAction).unwrap();
+
+                router.push("/profile");
+            } catch (error) {
+                if (typeof error === "string") {
+                    setErrors({ server: error });
+                } else {
+                    console.error("Ошибка входа/регистрации:", error);
                 }
-            }catch (error){
-                debugger
-            }
-
-            finally {
+            } finally {
                 setSubmitting(false);
             }
         },
@@ -56,33 +66,33 @@ const AuthForm: React.FC = () => {
         <div className="h-3/5 flex items-center justify-center bg-gradient-to-br dark:from-gray-900 via-white to-blue-100 dark:text-dark-text_color px-4 from-blue-100 dark:via-gray-600 dark:to-gray-700 text-text_color transition-all">
             <div className="dark:bg-dark-component_background bg-component_background m-2 p-8 rounded-2xl shadow-2xl w-full max-w-sm transform transition duration-500 hover:scale-[1.00001] border-2 border-border_color dark:border-dark-border_color">
                 <h2 className="text-3xl font-extrabold mb-6 text-center">
-                    {isLogin ? "Вход в аккаунт" : "Регистрация"}
+                    {isLogin ? authFormText.submitLogin : authFormText.submitRegister}
                 </h2>
 
                 <Formik initialValues={initialValues} validationSchema={schemaAuthForm} onSubmit={handleSubmit}>
                     {({ errors }: FormikProps<AuthFormValues>) => (
                         <Form>
                             {/* Form fields */}
-                            <InputField label="Имя пользователя" name="username" type="text" placeholder="Введите ваше имя" />
-                            <InputField label="Пароль" name="password" type="password" placeholder="Введите ваш пароль" />
+                            <InputField label={authFormText.usernameLabel}  name="username" type="text" placeholder={authFormText.usernamePlaceholder}  />
+                            <InputField label={authFormText.passwordLabel}  name="password" type="password" placeholder={authFormText.passwordPlaceholder}  />
                             {/* Server error message */}
                             {errors.server && <div className="text-error dark:text-dark_error text-sm mt-2 text-center">{errors.server}</div>}
                             {/* Send button */}
-                            <SubmitButton>{isLogin ? "Войти" : "Зарегистрироваться"}</SubmitButton>
+                            <SubmitButton>{isLogin ? authFormText.submitLogin : authFormText.submitRegister}</SubmitButton>
                         </Form>
                     )}
                 </Formik>
                 {/* Switching between modes */}
                 <p className="mt-2 text-sm text-center dark:text-dark-text_color_muted text-text_color">
-                    {isLogin ? "Нет аккаунта?" : "Уже есть аккаунт?"}{" "}
+                    {isLogin ? authFormText.switchToRegister : authFormText.switchToLogin}{" "}
                     <button onClick={() => setIsLogin(!isLogin)} className="text-link_color hover:text-hover_link_color underline transition">
-                        {isLogin ? "Регистрация" : "Вход"}
+                        {isLogin ? authFormText.registerLink : authFormText.loginLink}
                     </button>
                 </p>
                 {/* Third party authentication services */}
-                <div className="mt-4 flex gap-4 justify-center">
-                    <SocialButton title="Login with Google" icon="google" />
-                    <SocialButton title="Login with Github" icon="github" />
+                <div className="mt-4 flex gap-3 justify-center">
+                    <SocialButton title={authFormText.loginWithGoogle} icon="google" />
+                    <SocialButton title={authFormText.loginWithGithub} icon="github" />
                 </div>
             </div>
         </div>
@@ -91,7 +101,5 @@ const AuthForm: React.FC = () => {
 
 export default AuthForm;
 
-
-//---------------------------------------------------Types-------------------------------------------
 
 

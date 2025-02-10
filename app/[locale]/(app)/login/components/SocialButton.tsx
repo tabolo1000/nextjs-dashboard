@@ -30,7 +30,7 @@ const SocialButton: React.FC<SocialButtonProps> = ({ title, icon }) => {
     };
 
     return (
-        <button className="border border-border_color dark:border-dark-border_color group w-40 h-12 flex items-center justify-center rounded-full transition-all duration-300 bg-background_ec dark:bg-dark-background_ec hover:bg-background_ec_hover dark:hover:bg-dark-background_ec_hover shadow-md hover:shadow-none">
+        <button className="border border-border_color dark:border-dark-border_color group w-45 h-12 p-1 flex items-center justify-center rounded-full transition-all duration-300 bg-background_ec dark:bg-dark-background_ec hover:bg-background_ec_hover dark:hover:bg-dark-background_ec_hover shadow-md hover:shadow-none">
             <div className="flex items-center space-x-2 text-text_color dark:text-dark-text_color">
                 {icons[icon]}
                 <span className="text-sm font-medium">{title}</span>

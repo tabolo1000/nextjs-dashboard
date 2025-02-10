@@ -29,6 +29,6 @@ export const authAPI = {
         }).then(response => response.data)
 };
 
-export type AuthFormValues = Record<"username" | "password", string>
+export type AuthFormValues = Record<"username" | "password" | "server", string>
 
 
