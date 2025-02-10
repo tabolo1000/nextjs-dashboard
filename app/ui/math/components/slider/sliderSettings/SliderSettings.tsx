@@ -21,7 +21,7 @@ import {localizedText, LocalizedText} from "@/app/ui/math/components/slider/slid
  */
 export const SliderSettings = () => {
     const { setSettings, settings } = useSettingSlider();
-    const lang = usePathname().split("/")[1]; // Определение языка из URL
+    const lang = usePathname().split("/")[1];
     const LocText: LocalizedText = localizedText(lang)
 
 

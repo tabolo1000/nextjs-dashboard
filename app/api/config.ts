@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {getCookie } from "cookies-next";
 /**
  * General settings for api.
  */
@@ -26,5 +27,23 @@ api.interceptors.response.use(
         return Promise.reject(errorData);
     }
 );
+
+api.interceptors.request.use((config) => {
+    if (typeof window === "undefined") {
+        // Сервер: берем токен из cookies
+        const token = getCookie("access_token");
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+    } else {
+        // Клиент: берем токен из cookies (или localStorage, если нужно)
+        const token = getCookie("access_token");
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+    }
+
+    return config;
+});
 
 export default api;

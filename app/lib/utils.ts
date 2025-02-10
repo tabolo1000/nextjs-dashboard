@@ -38,6 +38,7 @@ export function createStorageThunk<T>(
                 saveToLocalStorage(key, value);
             } else {
                 value = getFromLocalStorage<T>(key);
+                debugger
             }
 
             if (value !== null) {
@@ -92,19 +93,22 @@ function handleThunkError(error: unknown, typePrefix: string, thunkAPI: GetThunk
  *
  * @param typePrefix - Action type. Prefix for the action (e.g. 'linguistics/loadWords')
  * @param asyncFunc - Asynchronous function working with REST API
- * @param storageKey - storage key
+ * @param storageKey - Caution!!! Storage key has two functions as
+ * a key in LocalStorage and in response data[key]
  */
 export const createApiThunkWithStorage = <ReturnedType, ArgsType = void>(
     typePrefix: string,
     asyncFunc: (args: ArgsType) => Promise<ReturnedType>,
-    storageKey?: string
+    storageKey?: keyof ReturnedType
 ) =>
     createAsyncThunk<ReturnedType, ArgsType, AsyncThunkConfig>(
         typePrefix,
         async (args, thunkAPI) => {
             try {
                 const data = await asyncFunc(args);
-                if (storageKey) saveToLocalStorage(storageKey, data);
+                if (storageKey && data[storageKey] !== undefined) {
+                    saveToLocalStorage(storageKey as string, data[storageKey]);
+                }
                 return data;
             } catch (error) {
                 return handleThunkError(error, typePrefix, thunkAPI);

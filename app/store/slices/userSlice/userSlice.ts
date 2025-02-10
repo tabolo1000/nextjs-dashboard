@@ -1,7 +1,10 @@
-import { createSlice} from '@reduxjs/toolkit';
-import { UserState } from '@/app/store/slices/userSlice/userSlice.types';
+import {createSlice} from '@reduxjs/toolkit';
+import {UserState} from '@/app/store/slices/userSlice/userSlice.types';
 import {userSliceThunks} from "@/app/store/slices/userSlice/userSliceThunks";
 
+/**
+ * A part of the user experience
+ */
 const initialState: UserState = {
     id: '',
     username: '',
@@ -47,22 +50,30 @@ const initialState: UserState = {
         },
     },
 };
-
-
 const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        // Синхронные редьюсеры (ваши существующие)
+        // Logging out of account
         logout: (state) => {
             Object.assign(state, initialState);
-            localStorage.removeItem('access_token');
         },
-        /*updateProfile: (state, action: PayloadAction<{ /!* ... *!/ }>) => { /!* ... *!/ },*/
+        getUserData: (state, action) => {
+            const {id, username, email, avatarUrl, role,} = action.payload;
+            debugger
+            state.id = id;
+            state.username = username;
+            state.email = email;
+            state.avatarUrl = avatarUrl || '/default-avatar.png';
+            state.role = role;
+            state.loggedIn = true;
+            state.lastLogin = new Date().toISOString();
+        },
     },
     extraReducers: (builder) => {
         builder
             .addCase(userSliceThunks.loginUser.fulfilled, (state, action) => {
+                debugger
                 const { user, access_token } = action.payload;
                 const {id, username, email, avatarUrl, role,} = user
                 state.id = id;
@@ -72,7 +83,6 @@ const userSlice = createSlice({
                 state.role = role;
                 state.loggedIn = true;
                 state.lastLogin = new Date().toISOString();
-                localStorage.setItem('access_token', access_token);
             })
             .addCase(userSliceThunks.loginUser.rejected, (state) => {
                 state.loggedIn = false;
@@ -82,10 +92,29 @@ const userSlice = createSlice({
                 userSliceThunks.registerUser.fulfilled,
                 (state, action) => {
                 // Логика после успешной регистрации
-            });
+            })
+            .addCase(
+                userSliceThunks.registerUser.rejected,
+                (state, action) => {
+
+                })
+            .addCase(
+                userSliceThunks.checkAuthUser.fulfilled,
+                (state) => {
+                    state.loggedIn = true
+                })
+            .addCase(
+                userSliceThunks.checkAuthUser.rejected,
+                (state) => {
+                    state.loggedIn = false;
+                })
+
     }
 });
 
-export const { logout } = userSlice.actions;
+export const { logout, getUserData } = userSlice.actions;
 export default userSlice.reducer;
 
+
+
+/*updateProfile: (state, action: PayloadAction<{ /!* ... *!/ }>) => { /!* ... *!/ },*/

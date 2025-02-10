@@ -40,7 +40,7 @@ export default memo(function ActionButtons({
                     onClick={action.onClick}
                     color={action.color ||  "primary"}
                     variant={action.variant || "outlined"}
-                    title={action.tooltip} // Подсказка при наведении
+                    title={action.tooltip}
                 >
                     {action.icon}
                 </Button>
