@@ -1,5 +1,5 @@
-import {createAsyncThunk, GetThunkAPI, PayloadAction} from "@reduxjs/toolkit";
-import {AppDispatch} from "@/app/store";
+import {createAsyncThunk, GetThunkAPI} from "@reduxjs/toolkit";
+import {RootState} from "@/app/store";
 import {deleteCookie} from "cookies-next";
 
 /**
@@ -7,53 +7,56 @@ import {deleteCookie} from "cookies-next";
  * @param key - storage key
  * @param value - value key
  */
-export function saveToLocalStorage<T>(key: string, value: T): void {
-  localStorage.setItem(key, JSON.stringify(value));
-}
+export const saveToLocalStorage = <T>(key: string, value: T): boolean => {
+    if (typeof window === "undefined") {
+        throw new Error("localStorage is not supported in this environment.");
+    }
+    localStorage.setItem(key, JSON.stringify(value));
+    return true;
+};
 
 /**
  * Gets a value from localStorage by key or null
  * @param key - storage key
  */
 export function getFromLocalStorage<T>(key: string): T | null {
-  const item = localStorage.getItem(key);
-  return item ? JSON.parse(item) : null;
+    const item = localStorage.getItem(key);
+    return item ? JSON.parse(item) : null;
 }
 
 /**
  * The action with panels is get saved in localStorage
  * @param key storage key
- * @param actionCreator action
+ * @param actionType action
  *
  * If value is not passed, read from localStorage.
  * If passed, save to localStorage and dispatch it
  */
-export function createStorageThunk<T>(
-    key: string,
-    actionCreator: (payload: T) => PayloadAction<T>
-) {
-    return (value?: T | null) => (dispatch: AppDispatch) => {
-        try {
-            if (value !== undefined) {
-                saveToLocalStorage(key, value);
-            } else {
-                value = getFromLocalStorage<T>(key);
-                debugger
+export function createStorageThunk<T>(key: string, actionType: string) {
+    return createAsyncThunk<T | null, T | undefined, { state: RootState }>(
+        actionType,
+        async (value) => {
+            try {
+                if (value !== undefined) {
+                    saveToLocalStorage(key, value);
+                    return value;
+                } else {
+                    return getFromLocalStorage<T>(key);
+                }
+            } catch (error) {
+                console.error(`Ошибка работы с localStorage (${key}):`, error);
+                return null;
             }
-
-            if (value !== null) {
-                dispatch(actionCreator(value));
-            }
-        } catch (error) {
-            console.error(`Error when working with localStorage (${key}):`, error);
         }
-    };
+    );
 }
+
 
 // Configuration for AsyncThunk
 interface AsyncThunkConfig {
-  rejectValue: string;
+    rejectValue: string;
 }
+
 /**
  * Creates an asynchronous thunk to work with extra reducers
  * @param typePrefix - Action type. Prefix for the action (e.g. 'linguistics/loadWords')
@@ -80,7 +83,7 @@ export const createApiThunk = <ReturnedType, ArgsType = void>(
  * @param typePrefix - Action type. Prefix for the action (e.g. 'linguistics/loadWords')
  * @param thunkAPI
  */
-function handleThunkError(error: unknown, typePrefix: string, thunkAPI: GetThunkAPI<AsyncThunkConfig> ) {
+function handleThunkError(error: unknown, typePrefix: string, thunkAPI: GetThunkAPI<AsyncThunkConfig>) {
     if (error instanceof Error) {
         console.error(`Error in thunk ${typePrefix}:`, error);
         return thunkAPI.rejectWithValue(error.message);
@@ -120,23 +123,26 @@ export const createApiThunkWithStorage = <ReturnedType, ArgsType = void>(
  * Cleaning cookies and localstorage
  * @param cookiesKey - Key in the cookies object
  * @param localStorageKey - Key in the localStorage object
- * @param actionCreator - the action creater to be performed
+ * @param actionType - the action creater to be performed
  */
 export function removeCookiesThunk(
     cookiesKey: string,
     localStorageKey: string,
-    actionCreator: () => PayloadAction
+    actionType: string
 ) {
-    return () => async (dispatch: AppDispatch) => {
-        try {
-            deleteCookie(cookiesKey);
-            localStorage.removeItem(localStorageKey);
+    return createAsyncThunk<void, void>(
+        actionType,
+        async (_, {dispatch}) => {
+            try {
+                deleteCookie(cookiesKey);
+                localStorage.removeItem(localStorageKey);
 
-            dispatch(actionCreator());
-        } catch (error) {
-            console.error("Ошибка при удалении cookies или localStorage:", error);
+                dispatch({type: actionType});
+            } catch (error) {
+                console.error("Ошибка при удалении cookies или localStorage:", error);
+            }
         }
-    };
+    );
 }
 
 /**
@@ -148,7 +154,7 @@ export function getLocalizedText(
     lang: string,
     translations: Record<string, string>
 ): string {
-  return translations[lang] || translations["en"];
+    return translations[lang] || translations["en"];
 }
 
 /**

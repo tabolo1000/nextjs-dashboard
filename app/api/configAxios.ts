@@ -32,6 +32,7 @@ api.interceptors.request.use((config) => {
     if (typeof window === "undefined") {
         // Сервер: берем токен из cookies
         const token = getCookie("access_token");
+        debugger
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }

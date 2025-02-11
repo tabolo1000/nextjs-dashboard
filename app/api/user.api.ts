@@ -1,15 +1,15 @@
-import api from "@/app/api/config";
+/*import api from "@/app/api/configAxios";
 import {AuthResponse} from "@/app/store/slices/userSlice/userSlice.types";
 import {setCookie} from "cookies-next";
 
-/**
+/!**
  * Authentication API
- */
+ *!/
 export const authAPI = {
     login: (credentials: AuthFormValues) =>
         api.post<AuthResponse>("login", credentials).then(response => {
             const { access_token } = response.data;
-
+            debugger
             setCookie("access_token", access_token, {
                 maxAge: 60 * 60 * 24 * 7, // 7 дней // 604800 сек
                 path: "/",
@@ -29,6 +29,6 @@ export const authAPI = {
         }).then(response => response.data)
 };
 
-export type AuthFormValues = Record<"username" | "password" | "server", string>
+export type AuthFormValues = Record<"username" | "password" | "server", string>*/
 
 

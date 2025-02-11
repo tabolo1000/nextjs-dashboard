@@ -1,4 +1,3 @@
-// userTypes.ts
 export type UserRole = 'user' | 'admin' | 'moderator' | 'guest';
 export type AccountStatus = 'active' | 'banned' | 'restricted';
 
@@ -52,16 +51,21 @@ export type UserState = {
 // Типы для API
 export interface AuthResponse {
     access_token: string;
-    user: {
-        id: string;
-        username: string;
-        email: string;
-        role: UserRole;
-        avatarUrl?: string;
-    };
+    user: User;
+}
+export type User = {
+    id: string;
+    username: string;
+    email: string;
+    role: UserRole;
+    avatarUrl?: string;
+    phone?: string;
+    lastLogin?: string | null;
 }
 
 export interface ErrorResponse {
     message: string;
     statusCode: number;
 }
+
+

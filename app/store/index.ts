@@ -1,13 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import configureAppSlice from "@/app/store/slices/configureAppSlice/configureAppSlice";
 import WordsSliderSlice from "@/app/store/slices/wordsSliderSlice/wordsSliderSlice";
-import userSlice from "@/app/store/slices/userSlice/userSlice";
+import {authAPI} from "@/app/store/slices/userSlice/userSliceQuery";
 /**
  * Status of main functions of the app
  */
 export const store = configureStore({
     reducer: {
-        user: userSlice,
         /**
          * Working with the word slider
          */
@@ -15,8 +14,14 @@ export const store = configureStore({
         /**
          * Sets Settings for the entire appliance
          */
-        mainSlice: configureAppSlice
+        mainSlice: configureAppSlice,
+        /**
+         * Log in, log out of the account work with users.
+         */
+        [authAPI.reducerPath]: authAPI.reducer,
     },
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware().concat(authAPI.middleware),
 });
 //-----------------------------------------Types----------------------------------------------------------
 

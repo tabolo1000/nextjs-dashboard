@@ -10,6 +10,12 @@ interface InputFieldProps {
     placeholder?: string;
 }
 
+/**
+ * Field for Formic
+ * @param label
+ * @param props
+ * @constructor
+ */
 const InputField: React.FC<InputFieldProps> = ({ label, ...props }) => {
     const [field, meta] = useField(props);
 
