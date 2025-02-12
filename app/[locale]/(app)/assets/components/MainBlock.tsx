@@ -1,20 +1,19 @@
 "use client";
 
 import React from "react";
-import { Aside_panel } from "@/app/[locale]/(app)/Aside_panel";
-import { useAppSelector } from "@/app/store/hooks";
-import { motion } from "framer-motion";
-import { AnimatePresence } from "framer-motion";
+import {Aside_panel} from "@/app/[locale]/(app)/Aside_panel";
+import {useAppSelector} from "@/app/store/hooks";
+import {AnimatePresence, motion} from "framer-motion";
 
-export function MainBlock({ content }: { content: React.ReactNode }) {
-    const { isOpenHeaderPanel, isOpenAsidePanel } = useAppSelector(
+export function MainBlock({content}: { content: React.ReactNode }) {
+    const {isOpenHeaderPanel, isOpenAsidePanel} = useAppSelector(
         (state) => state.mainSlice.panel
     );
-    const { isAnimating } = useAppSelector((state) => state.mainSlice.animation);
+    const {isAnimating} = useAppSelector((state) => state.mainSlice.animation);
 
     const asideVariants = isAnimating
         ? {
-            initial: { opacity: 0, y: -50, x: -500 },
+            initial: {opacity: 0, y: -50, x: -500},
             animate: {
                 opacity: 1,
                 y: 0,
@@ -29,9 +28,9 @@ export function MainBlock({ content }: { content: React.ReactNode }) {
             },
         }
         : {
-            initial: { opacity: 1, x: 0, y: 0 },
-            animate: { opacity: 1, x: 0, y: 0 },
-            exit: { opacity: 1, x: 0, y: 0 },
+            initial: {opacity: 1, x: 0, y: 0},
+            animate: {opacity: 1, x: 0, y: 0},
+            exit: {opacity: 1, x: 0, y: 0},
         };
 
     const transition = isAnimating
@@ -40,11 +39,11 @@ export function MainBlock({ content }: { content: React.ReactNode }) {
             duration: 0.4,
             ease: ["easeOut"],
         }
-        : { duration: 0 };
+        : {duration: 0};
 
     return (
         <div
-            className={`flex h-full flex-col content-center w-[1140px] mx-auto
+            className={`flex flex-col content-center w-[1140px] mx-auto  
                 ${isOpenHeaderPanel && "pt-16 base-animation-all"}
             `}
         >
@@ -72,18 +71,23 @@ export function MainBlock({ content }: { content: React.ReactNode }) {
             </AnimatePresence>
 
 
-
             <main
-                className={`w-full 
+                className={`w-full
                     ${
                     isOpenAsidePanel
-                        ? "p-4 xl:ml-[18%] xl:max-w-[82%] lg:ml-[25%] lg:max-w-[75%]"
-                        : "ml-[0%] max-w-[100%]"
+                        ? "p-2 xl:ml-[18%] xl:max-w-[82%] lg:ml-[25%] lg:max-w-[75%] "
+                        : "ml-[0%] max-w-[100%] min-h-screen"
                 }
                     ${isAnimating && "base-animation-all"}
                 `}
             >
-                <div className="bg-white rounded-lg shadow-md px-6 py-4 dark:bg-gray-900">
+                <div className={`
+                    ${!isOpenAsidePanel? "h-screen" : "h-full"}
+                    bg-white dark:bg-gray-900
+                    flex items-center  justify-center
+                    rounded-lg shadow-md
+                    px-6 py-2 
+                `}>
                     {content}
                 </div>
             </main>

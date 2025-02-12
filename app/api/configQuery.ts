@@ -14,5 +14,5 @@ export const baseQuery = fetchBaseQuery({
         headers.set("Content-Type", "application/json");
         return headers;
     },
-    timeout: 20000
+    timeout: 20000000
 });

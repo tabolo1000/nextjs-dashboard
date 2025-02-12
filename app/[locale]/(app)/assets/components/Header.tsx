@@ -94,7 +94,7 @@ interface HeaderProps {
 
 
 
-export const Switch = () => {
+/*export const Switch = () => {
     return (
         <div className="relative">
             <input
@@ -129,8 +129,9 @@ export const Switch = () => {
             </label>
         </div>
     );
-};
+};*/
 
+/*
 
 const Button = () => {
     return (
@@ -196,4 +197,4 @@ const Button = () => {
     );
 };
 
-export default Button;
+export default Button;*/
