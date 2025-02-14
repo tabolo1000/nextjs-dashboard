@@ -1,5 +1,4 @@
 import {ApolloClient, HttpLink, InMemoryCache} from "@apollo/client";
-import {onError} from "@apollo/client/link/error";
 
 /*const errorLink = onError(({ graphQLErrors, networkError }) => {
     if (graphQLErrors) {
@@ -14,8 +13,10 @@ import {onError} from "@apollo/client/link/error";
 
 const client = new ApolloClient({
     link: new HttpLink({
-        uri: process.env.NEXT_PUBLIC_API_URL?.trim() +  "/graphql" || "http://localhost:3001/graphql",
-        credentials: "same-origin", // Для передачи cookies (auth)
+        uri: process.env.NEXT_PUBLIC_API_URL?.trim()
+            ? `${process.env.NEXT_PUBLIC_API_URL}/graphql`
+            : "http://localhost:3001/graphql",
+        credentials: "include", // Для кросс-доменных запросов
     }),
     cache: new InMemoryCache(),
 });

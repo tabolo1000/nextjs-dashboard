@@ -19,7 +19,7 @@ export default async function Layout ({
 
     const LayoutLang = await getMessages(locale);
     return (
-        <LayoutLang children={children}/>
+        <LayoutLang>{children}</LayoutLang>
     );
 };
 

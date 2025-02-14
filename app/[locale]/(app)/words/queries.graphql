@@ -1,0 +1,6 @@
+query GetWords($collectionName: String) {
+    words(collectionName: $collectionName) {
+        title
+        joke
+    }
+}

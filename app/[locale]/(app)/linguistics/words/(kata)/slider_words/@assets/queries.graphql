@@ -1,0 +1,12 @@
+query searchWords($substring: String!, $limit: Float!) {
+    searchWords(substring: $substring, limit: $limit ) {
+        title
+        morpheme {
+            prefix
+            root
+            suffix
+            end
+        }
+        description
+    }
+}
