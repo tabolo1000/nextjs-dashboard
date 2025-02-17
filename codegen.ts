@@ -2,20 +2,26 @@ import type { CodegenConfig } from "@graphql-codegen/cli";
 
 const config: CodegenConfig = {
     schema: "http://localhost:3001/graphql",
-    documents: ["./app/**/*.graphql"], // Где искать GraphQL-запросы
+    documents: [
+        "./app/**/*.graphql",
+        "./app/@graphql/**/*.ts|*.graphql",
+        "./app/**/*.ts*"
+    ],
     generates: {
-        "./@graphql/generated.ts": {
+        "./app/@graphql/@generated/": {
+            preset: "client",
             plugins: [
-                "typescript",
-                "typescript-operations",
-                "typed-document-node",
+
             ],
             presetConfig: {
-                gqlTagName: 'gql',
+                gqlTagName: "gql",
                 fragmentMasking: false
             }
-        },
+        }
     },
+    config: {
+        schemaDescription: true
+    }
 };
 
 export default config;

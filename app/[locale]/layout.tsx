@@ -4,7 +4,7 @@ import {notFound} from 'next/navigation';
 import {routing} from '@/i18n/routing';
 import {Providers} from "@/app/[locale]/@assets/providers";
 import {Language} from "@/i18n/languages";
-import ApolloClientProvider from "@/@graphql/@components/ApolloProvider";
+import ApolloClientProvider from "@/app/@graphql/@components/ApolloProvider";
 
 export default async function LocaleLayout({
                                                children,

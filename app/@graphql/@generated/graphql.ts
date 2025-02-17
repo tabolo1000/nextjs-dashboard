@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -55,7 +56,7 @@ export type Query = {
 
 
 export type QuerySearchWordsArgs = {
-  limit: Scalars['Float']['input'];
+  limit: Scalars['Int']['input'];
   substring: Scalars['String']['input'];
 };
 
@@ -71,6 +72,7 @@ export type QueryWordsArgs = {
 
 export type Word = {
   __typename?: 'Word';
+  _id: Scalars['String']['output'];
   annotation?: Maybe<Scalars['String']['output']>;
   collections: Array<Scalars['String']['output']>;
   derivatives: Array<Scalars['String']['output']>;
@@ -81,13 +83,15 @@ export type Word = {
   title: Scalars['String']['output'];
 };
 
+export type MorphemeWordFragment = { __typename?: 'Morpheme', prefix?: Array<string> | null, root?: Array<string> | null, suffix?: Array<string> | null, end?: Array<string> | null };
+
 export type SearchWordsQueryVariables = Exact<{
   substring: Scalars['String']['input'];
-  limit: Scalars['Float']['input'];
+  limit: Scalars['Int']['input'];
 }>;
 
 
-export type SearchWordsQuery = { __typename?: 'Query', searchWords: Array<{ __typename?: 'Word', title: string, description: string, morpheme?: { __typename?: 'Morpheme', prefix?: Array<string> | null, root?: Array<string> | null, suffix?: Array<string> | null, end?: Array<string> | null } | null }> };
+export type SearchWordsQuery = { __typename?: 'Query', searchWords: Array<{ __typename?: 'Word', _id: string, title: string, description: string, morpheme?: { __typename?: 'Morpheme', prefix?: Array<string> | null, root?: Array<string> | null, suffix?: Array<string> | null, end?: Array<string> | null } | null }> };
 
 export type GetWordsQueryVariables = Exact<{
   collectionName?: InputMaybe<Scalars['String']['input']>;
@@ -96,6 +100,6 @@ export type GetWordsQueryVariables = Exact<{
 
 export type GetWordsQuery = { __typename?: 'Query', words: Array<{ __typename?: 'Word', title: string, joke?: string | null }> };
 
-
-export const SearchWordsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"searchWords"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"substring"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Float"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"searchWords"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"substring"},"value":{"kind":"Variable","name":{"kind":"Name","value":"substring"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"morpheme"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"prefix"}},{"kind":"Field","name":{"kind":"Name","value":"root"}},{"kind":"Field","name":{"kind":"Name","value":"suffix"}},{"kind":"Field","name":{"kind":"Name","value":"end"}}]}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<SearchWordsQuery, SearchWordsQueryVariables>;
+export const MorphemeWordFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"MorphemeWord"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Morpheme"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"prefix"}},{"kind":"Field","name":{"kind":"Name","value":"root"}},{"kind":"Field","name":{"kind":"Name","value":"suffix"}},{"kind":"Field","name":{"kind":"Name","value":"end"}}]}}]} as unknown as DocumentNode<MorphemeWordFragment, unknown>;
+export const SearchWordsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"searchWords"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"substring"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"searchWords"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"substring"},"value":{"kind":"Variable","name":{"kind":"Name","value":"substring"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"_id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"morpheme"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"MorphemeWord"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"MorphemeWord"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Morpheme"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"prefix"}},{"kind":"Field","name":{"kind":"Name","value":"root"}},{"kind":"Field","name":{"kind":"Name","value":"suffix"}},{"kind":"Field","name":{"kind":"Name","value":"end"}}]}}]} as unknown as DocumentNode<SearchWordsQuery, SearchWordsQueryVariables>;
 export const GetWordsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetWords"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"collectionName"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"words"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"collectionName"},"value":{"kind":"Variable","name":{"kind":"Name","value":"collectionName"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"joke"}}]}}]}}]} as unknown as DocumentNode<GetWordsQuery, GetWordsQueryVariables>;

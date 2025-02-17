@@ -53,8 +53,12 @@ export default function SettingsPanel() {
             truthIcon: <ScreenLockLandscape />,
             falseIcon: <KeyboardArrowDown />,
             callback: () => {
-                dispatch(toggleHeaderPanelTo({isOpenHeaderPanel: !isOpenHeaderPanel}))
-                dispatch(toggleAsidePanelTo({isOpenAsidePanel: !isOpenAsidePanel}))
+                dispatch(toggleHeaderPanelTo({isOpenHeaderPanel: !isOpenHeaderPanel}));
+                dispatch(toggleAsidePanelTo({isOpenAsidePanel: !isOpenAsidePanel}));
+
+                (isOpenHeaderPanel)
+                    ? document.documentElement.requestFullscreen()
+                    : document.exitFullscreen()
             },
         },
         {

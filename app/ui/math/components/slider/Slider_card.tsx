@@ -2,11 +2,9 @@ import React, { useState} from "react";
 import { Box, Button, CardContent, Typography } from "@mui/material";
 import { Morpheme } from "@/app/ui/math/components/Morpheme";
 import { AddBoxOutlined, ChangeCircleOutlined, DeleteOutline } from "@mui/icons-material";
-
-import { WordCarousel, WordCarouselUpdate} from "@/app/store/slices/linguisticsSlice/wordsSliderSlice";
 import {EditableField} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/EditableField";
 import ConfirmationModal from "@/app/ui/math/components/ConfirmationModal";
-//import {ToastContainer} from "react-toastify";
+import {WordCarousel, WordCarouselUpdate} from "@/app/store/slices/wordsSliderSlice/wordsSliderSlice";
 
 
 export function Slider_card({
@@ -37,9 +35,7 @@ export function Slider_card({
         derivatives,
         collections,
     });
-  /*  const toastId = React.useRef<number | string>("");
-    const {loading}  = useAppSelector(state => state.linguistics)
-    const dispatch = useAppDispatch();*/
+    const [openModal, setOpenModal] = useState(false);
 
     const handleFieldChange = (fieldName: keyof WordCarousel, value: string) => {
         setEditableFields((prev) => ({
@@ -68,7 +64,24 @@ export function Slider_card({
         });
     };
 
-    const [openModal, setOpenModal] = useState(false);
+    const handleAddFieldChange = (value: string) => {
+        if (value.length > 6) {
+            const updatedArray = [...(editableFields.collections || [])];
+            updatedArray.push(value);
+
+            setEditableFields((prev) => ({
+                ...prev,
+                collections: updatedArray,
+            }));
+
+            handleWordChange({
+                _id,
+                collections: updatedArray,
+            });
+        }
+    };
+
+
     const handleDelete = () => {
         console.log("Word deleted");
         handleWordDelete(_id)
@@ -80,23 +93,6 @@ export function Slider_card({
         setOpenModal(false);
     };
 
-
-    const handleAddFieldChange = (value: string) => {
-       if (value.length > 6) {
-           const updatedArray = [...(editableFields.collections || [])];
-           updatedArray.push(value);
-
-           setEditableFields((prev) => ({
-               ...prev,
-               collections: updatedArray,
-           }));
-
-           handleWordChange({
-               _id,
-               collections: updatedArray,
-           });
-       }
-    };
 
     const [u, s] = useState("")
 

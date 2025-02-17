@@ -84,7 +84,7 @@ type LanguageMessage = {
     [key: string]: string;
 };
 type ErrorScreen = {
-    message: LanguageMessage;
+    message: LanguageMessage
     onRetry: () => void;
 }
 

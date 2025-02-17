@@ -84,7 +84,6 @@ export function MainBlock({content}: { content: React.ReactNode }) {
                 <div className={`
                     ${!isOpenAsidePanel? "min-h-screen" : "min-h-full"}
                     bg-white dark:bg-gray-900
-                    
                     rounded-lg shadow-md
                     px-6 py-2 
                 `}>

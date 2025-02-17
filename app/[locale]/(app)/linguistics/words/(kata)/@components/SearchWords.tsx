@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { Field, Form, Formik } from "formik";
-import {useQuery} from "@apollo/client";
-import {SearchWordsDocument} from "@/@graphql/generated";
+import React, {Suspense, useEffect, useState} from "react";
+import {AnimatePresence, motion} from "framer-motion";
+import {Field, Form, Formik} from "formik";
+import ShowWords from "@/app/[locale]/(app)/linguistics/words/(kata)/@components/showWords/ShowWords";
+import {LoaderScreen} from "@/app/[locale]/(app)/@components/LoaderScreen";
+import {ErrorBoundary} from "react-error-boundary";
+import {ErrorScreen} from "@/app/[locale]/(app)/@components/ErrorScreen";
 
 /**
- * Does word search by first letters despite case and spaces based on regular expression.
+ * Does word search by first letters
+ * despite case and spaces based
+ * on regular expression.
  * default limit = 4
  */
 const SearchWords: React.FC<SearchWordsProps> = ({
@@ -13,16 +17,7 @@ const SearchWords: React.FC<SearchWordsProps> = ({
                                                      setIsModalSearchOpen,
                                                  }) => {
 
-    const [searchTerm, setSearchTerm] = useState<string>("");
-    const [limit, ] = useState<number>(4);
-    const { data, loading, error } = useQuery(SearchWordsDocument, {
-        variables: {
-            substring: searchTerm,
-            limit: limit,
-        },
-        skip: !searchTerm.trim(),
-    });
-
+    const [searchTerm, setSearchTerm] = useState<string>("")
     /**
      * !!Crutch!!. Background window fix.
      */
@@ -37,108 +32,79 @@ const SearchWords: React.FC<SearchWordsProps> = ({
         };
     }, [isModalSearchOpen]);
 
-    return(
-            <AnimatePresence>
-                {isModalSearchOpen && (
+    return (
+        <AnimatePresence>
+            {isModalSearchOpen && (
+                <motion.div
+                    className="fixed pt-5 inset-0 bg-black bg-opacity-70 z-50 flex items-start justify-center overflow-auto"
+                    initial={{opacity: 0}}
+                    animate={{opacity: 1}}
+                    exit={{opacity: 0}}
+                >
                     <motion.div
-                        className="fixed pt-5 inset-0 bg-black bg-opacity-70 z-50 flex items-start justify-center overflow-auto"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
+                        className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg pt-9 w-full max-w-3xl relative"
+                        initial={{scale: 0.9}}
+                        animate={{scale: 1}}
+                        exit={{scale: 0.9}}
                     >
-                        <motion.div
-                            className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg pt-9 w-full max-w-3xl relative"
-                            initial={{scale: 0.9}}
-                            animate={{scale: 1}}
-                            exit={{scale: 0.9}}
+                        {/* The button closes the modal  */}
+                        <button
+                            onClick={() => setIsModalSearchOpen(false)}
+                            className="absolute top-4 right-6 text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white focus:outline-none"
                         >
-                            {/* The button closes the modal  */}
-                            <button
-                                onClick={() => setIsModalSearchOpen(false)}
-                                className="absolute top-4 right-6 text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white focus:outline-none"
-                            >
-                                ✖
-                            </button>
+                            ✖
+                        </button>
 
-                            {/* Header defining the modal window  */}
-                            <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 text-center">
-                                Поиск слов
-                            </h1>
+                        {/* Header defining the modal window  */}
+                        <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 text-center">
+                            Поиск слов
+                        </h1>
 
-                            {/* Collects the substring */}
-                            <Formik
-                                initialValues={{text: ""}}
-                                onSubmit={() => {
-                                }}
-                            >
-                                {({setFieldValue}) => (
-                                    <Form className="w-full flex flex-col space-y-4">
-                                        <div>
-                                            <Field
-                                                name="text"
-                                                type="text"
-                                                placeholder="Введите слово..."
-                                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                                    const value = e.target.value;
-                                                    setFieldValue!("text", value);
-                                                    setSearchTerm(value);
-                                                }}
-                                                className="w-full p-4 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                            />
-                                        </div>
-
-                                        {/* Load Indicator. Flag that sounds when loading is in progress */}
-                                        {loading && (
-                                            <div className="flex justify-center">
-                                                <div
-                                                    className="animate-spin rounded-full h-10 w-10 border-t-4 border-blue-500"></div>
-                                            </div>
-                                        )}
-
-                                        {/* Throws an error if the data has not been processed correctly  */}
-                                        {error && (
-                                            <p className="text-red-500 text-center">
-                                                {error.message}
-                                            </p>
-                                        )}
-
-                                        {/* Результаты поиска */}
-                                        {data?.searchWords && (
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                                                {data.searchWords.map((el, i) => (
-                                                    <div
-                                                        key={i}
-                                                        className="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow"
-                                                    >
-                                                        <h2 className="text-lg font-bold text-gray-800 dark:text-white">
-                                                            {el.title}
-                                                        </h2>
-                                                        <span className="text-gray-600 dark:text-gray-300">
-                                                            {el.morpheme?.root || "Описание отсутствует"}
-                                                        </span>
-                                                        <span className="text-gray-600 dark:text-gray-300">
-                                                            {el.morpheme?.suffix || "Описание отсутствует"}
-                                                        </span>
-                                                        <p className="text-gray-600 dark:text-gray-300">
-                                                            {el.description || "Описание отсутствует"}
-                                                        </p>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        )}
-                                    </Form>
-                                )}
-                            </Formik>
-                        </motion.div>
+                        {/* Collects the substring */}
+                        <Formik
+                            initialValues={{text: ""}}
+                            onSubmit={() => {
+                            }}
+                        >
+                            {({setFieldValue}) => (
+                                <Form className="w-full flex flex-col space-y-4">
+                                    <div>
+                                        <Field
+                                            name="text"
+                                            type="text"
+                                            placeholder="Введите слово..."
+                                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                                const value = e.target.value;
+                                                setFieldValue!("text", value);
+                                                setSearchTerm(value);
+                                            }}
+                                            className="w-full p-4 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        />
+                                    </div>
+                                    <ErrorBoundary
+                                        fallback={<ErrorScreen message={{ru: "Ошибка!", en: "Error"}} onRetry={() => {
+                                        }}/>}
+                                    >
+                                        <Suspense fallback={<LoaderScreen
+                                            message={{ru: "Идет загрузка!", en: "Loading..."}}/>}>
+                                            <ShowWords searchTerm={searchTerm}/>
+                                        </Suspense>
+                                    </ErrorBoundary>
+                                </Form>
+                            )}
+                        </Formik>
                     </motion.div>
-                )}
-            </AnimatePresence>
+                </motion.div>
+            )}
+        </AnimatePresence>
     )
 };
 
-
 export default SearchWords;
 
+
+
+//------------------------------------------Types -----------------------------------------------
 
 interface SearchWordsProps {
     isModalSearchOpen: boolean;
