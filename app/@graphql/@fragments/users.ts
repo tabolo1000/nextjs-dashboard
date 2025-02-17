@@ -8,7 +8,23 @@ const MorphemeWord = gql`
         end
     }
 `
+const SliderWord = gql`
+    fragment Word on Word {
+        _id,
+        title,
+        description,
+        morpheme {
+            ...MorphemeWord
+        },
+        quote,
+        joke,
+        annotation,
+        derivatives,
+        collections,
+    }
+`
 
 export const  WordsFragments = {
-    MorphemeWord
+    MorphemeWord,
+    SliderWord,
 }

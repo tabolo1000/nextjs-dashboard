@@ -15,7 +15,8 @@ const client = new ApolloClient({
     }),
     cache: new InMemoryCache({
         fragments: createFragmentRegistry(
-            WordsFragments.MorphemeWord // Word morpheme fragment
+            WordsFragments.MorphemeWord, // Word morpheme fragment
+            WordsFragments.SliderWord, // Full word for slider
         ),
     })
 });

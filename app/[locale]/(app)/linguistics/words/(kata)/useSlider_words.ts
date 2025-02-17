@@ -31,59 +31,111 @@
  * - `data`: Object containing word carousel data and states.
  * - `actions`: Object containing event handlers and state setters.
  *
-*/
+ */
 
 "use client";
 
-import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
-import React, { useCallback, useEffect, useState } from "react";
-import {
-    deleteWordToCarousel,
-    loadWordsForCarousel,
-    updateWordToCarousel,
-} from "@/app/store/slices/wordsSliderSlice/wordsSliderSliceThunks";
+import {useAppDispatch, useAppSelector} from "@/app/store/hooks";
+import React, {useCallback, useState} from "react";
+import {deleteWordToCarousel, loadWordsForCarousel,} from "@/app/store/slices/wordsSliderSlice/wordsSliderSliceThunks";
 import {Loading, WordCarousel, WordCarouselUpdate} from "@/app/store/slices/wordsSliderSlice/wordsSliderSlice";
-
+import {useMutation, useQuery} from "@apollo/client";
+import {
+    DeleteWordDocument,
+    DeleteWordMutation,
+    DeleteWordMutationVariables,
+    GetWordsDocument,
+    GetWordsQuery,
+    GetWordsQueryVariables,
+    UpdateWordDocument,
+    UpdateWordMutation,
+    UpdateWordMutationVariables
+} from "@/app/@graphql/@generated/graphql";
 
 
 export default function useSlider_words(endPoints: Array<string>): ReturnType {
+    const [changeWord] = useMutation<UpdateWordMutation, UpdateWordMutationVariables>(UpdateWordDocument);
+    const [deleteWord] = useMutation<DeleteWordMutation, DeleteWordMutationVariables>(DeleteWordDocument)
+
     const dispatch = useAppDispatch();
-    const { wordsCarousel, loading, error } = useAppSelector((state) => state.linguistics);
+    const {loading, error} = useAppSelector((state) => state.linguistics);
 
-    const [currentPage, setPage] = useState(1);
-    const [isSettingsActive, setIsSettingsActive] = useState(false);
-    const [editingFrom, setEditingForm] = useState<boolean>(false);
-    const [isSearch, setSearch] = useState<boolean>(false);
 
+    // Get the data and push it to the pages.
+    const {data} = useQuery<GetWordsQuery, GetWordsQueryVariables>(GetWordsDocument)
+    const wordsCarousel = data?.words || []
+    // Getting pages
     const itemsPerPage = 20;
     const pageCount = Math.ceil(wordsCarousel.length / itemsPerPage);
-    const currentItems = wordsCarousel.slice(
+    const [currentPage, setPage] = useState(1);
+    const currentItems = wordsCarousel?.slice(
         (currentPage - 1) * itemsPerPage,
         currentPage * itemsPerPage
     );
 
-    useEffect(() => {
-        dispatch(loadWordsForCarousel(endPoints));
-    }, [dispatch, endPoints]);
 
+    debugger
+
+
+    const [isSettingsActive, setIsSettingsActive] = useState(false);
+    const [editingFrom, setEditingForm] = useState<boolean>(false);
+    const [isSearch, setSearch] = useState<boolean>(false);
     const handleLoadWords = useCallback(() => {
         dispatch(loadWordsForCarousel(endPoints));
     }, []);
 
-    const handleChangePage = useCallback((_: unknown, value: number) => {
-        setPage(value);
-    }, []);
-    const handleWordChange = useCallback((value: WordCarouselUpdate) => {
-            dispatch(updateWordToCarousel(value));
+
+    /**
+     * Conventional deletion by id
+     * id-String-ObjectType(String!)
+     */
+    const handleWordDelete = useCallback(async (id: string) => {
+            await deleteWord({
+                variables: {
+                    id
+                }
+            });
         },
-        [dispatch]
+        [deleteWord]
     );
-    const handleWordDelete = useCallback((id: string) => {
+    /**
+     * Changing word fields
+     * words {
+     *     _id - Changing word fields
+     *     title - Any field. For example, tittle.
+     * }
+     */
+    const handleWordChange = useCallback(async (word: WordCarouselUpdate) => {
+            await changeWord({
+                variables: {
+                    word
+                }
+            })
+        },
+        [changeWord]
+    );
+
+    // Handler displaying the settings window
+    const toggleSettings = () => setIsSettingsActive((prev) => !prev);
+
+
+    /* old code --------------------------------
+            useEffect(() => {
+            dispatch(loadWordsForCarousel(endPoints));
+            }, [dispatch, endPoints]);
+
+
+            const handleWordDelete = useCallback((id: string) => {
             dispatch(deleteWordToCarousel(id));
         },
         [dispatch]
     );
-    const toggleSettings = () => setIsSettingsActive((prev) => !prev);
+
+     */
+    // !DEBUGGER! Page Definition.
+    const handleChangePage = useCallback((_: unknown, value: number) => {
+        setPage(value);
+    }, []);
 
     return {
         pagination: {
