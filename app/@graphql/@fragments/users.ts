@@ -8,9 +8,8 @@ const MorphemeWord = gql`
         end
     }
 `
-const SliderWord = gql`
-    fragment Word on Word {
-        _id,
+const WordWithoutID = gql`
+    fragment WordWithoutID on Word {
         title,
         description,
         morpheme {
@@ -24,7 +23,15 @@ const SliderWord = gql`
     }
 `
 
+const SliderWord = gql`
+    fragment Word on Word {
+        _id,
+        ...WordWithoutID
+    }
+`
+
 export const  WordsFragments = {
     MorphemeWord,
     SliderWord,
+    WordWithoutID,
 }

@@ -17,8 +17,14 @@ const client = new ApolloClient({
         fragments: createFragmentRegistry(
             WordsFragments.MorphemeWord, // Word morpheme fragment
             WordsFragments.SliderWord, // Full word for slider
+            WordsFragments.WordWithoutID,
         ),
-    })
+    }),
+    /*defaultOptions: {
+        watchQuery: {
+            fetchPolicy: "no-cache",
+        },
+    },*/
 });
 
 export default client;

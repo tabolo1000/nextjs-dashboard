@@ -37,10 +37,19 @@ const DELETE_WORDS = gql`
     }
 `
 
+const CREATE_WORD = gql`
+    mutation createWord($word: AddWordInput!) {
+        createWord(word: $word) {
+            ...Word
+        }
+    }
+`
+
 
 export const  queriesSliderWords = {
     SEARCH_WORDS,
     GET_WORDS,
     UPDATE_WORDS,
-    DELETE_WORDS
+    DELETE_WORDS,
+    CREATE_WORD,
 }

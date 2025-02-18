@@ -37,9 +37,9 @@
 
 import {useAppDispatch, useAppSelector} from "@/app/store/hooks";
 import React, {useCallback, useState} from "react";
-import {deleteWordToCarousel, loadWordsForCarousel,} from "@/app/store/slices/wordsSliderSlice/wordsSliderSliceThunks";
+import {loadWordsForCarousel} from "@/app/store/slices/wordsSliderSlice/wordsSliderSliceThunks";
 import {Loading, WordCarousel, WordCarouselUpdate} from "@/app/store/slices/wordsSliderSlice/wordsSliderSlice";
-import {useMutation, useQuery} from "@apollo/client";
+import {gql, useMutation, useQuery} from "@apollo/client";
 import {
     DeleteWordDocument,
     DeleteWordMutation,
@@ -54,7 +54,28 @@ import {
 
 
 export default function useSlider_words(endPoints: Array<string>): ReturnType {
-    const [changeWord] = useMutation<UpdateWordMutation, UpdateWordMutationVariables>(UpdateWordDocument);
+    const [changeWord] = useMutation<UpdateWordMutation, UpdateWordMutationVariables>(UpdateWordDocument, {
+        /*update(cache, { data: { updateWord } }) {
+            if (!updateWord) return;
+            cache.modify({
+                fields: {
+                    words(existingWords = []) {
+                        const newWordRef = cache.writeFragment({
+                            id: cache.identify(updateWord),
+                            fragment: gql`
+                                fragment NewWord on Word {
+                                    ...Word
+                                }
+                            `,
+                            data: updateWord,
+                        });
+                        return [...existingWords, newWordRef];
+                    },
+                },
+            });
+        }*/
+
+    });
     const [deleteWord] = useMutation<DeleteWordMutation, DeleteWordMutationVariables>(DeleteWordDocument)
 
     const dispatch = useAppDispatch();

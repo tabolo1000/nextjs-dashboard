@@ -1,27 +1,33 @@
 "use client";
 
-import React, { memo, useCallback, useMemo } from "react";
-import {Formik, Form, Field, FieldArray, FieldProps} from "formik";
+import React, {memo, useCallback, useMemo} from "react";
+import {Field, FieldArray, FieldProps, Form, Formik} from "formik";
+import {Box, Button, CircularProgress, IconButton, Input, Typography,} from "@mui/material";
+import {AddBoxOutlined, Delete} from "@mui/icons-material";
 import {
-    Input,
-    Button,
-    Box,
-    Typography,
-    IconButton,
-    CircularProgress,
-} from "@mui/material";
-import { AddBoxOutlined, Delete} from "@mui/icons-material";
-import { validationSchema } from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/validationSchema";
-import { DynamicArrayField } from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/DynamicArrayField";
-import { JsonUploader } from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/JsonUploader/JsonUploader";
-import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
-import { Base_button } from "@/app/ui/math/components/Base_button";
-import {addWordToCarousel} from "@/app/store/slices/wordsSliderSlice/wordsSliderSliceThunks";
+    validationSchema
+} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/validationSchema";
+import {
+    DynamicArrayField
+} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/DynamicArrayField";
+import {
+    JsonUploader
+} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/JsonUploader/JsonUploader";
+import {useAppSelector} from "@/app/store/hooks";
+import {Base_button} from "@/app/ui/math/components/Base_button";
 import {LoadingStatus} from "@/app/store/slices/wordsSliderSlice/wordsSliderSlice";
+import {gql, useMutation} from "@apollo/client";
+import {
+    CreateWordDocument,
+    CreateWordMutation,
+    CreateWordMutationVariables,
+    GetWordsDocument, GetWordsQuery
+} from "@/app/@graphql/@generated/graphql";
 
 // Типы
 interface CodexFormProps {
     editingFrom: boolean;
+
     isEditingForm(active: boolean): void;
 }
 
@@ -84,25 +90,44 @@ export const CodexForm: React.FC<CodexFormProps> = memo(function CodexForm({
                                                                                editingFrom,
                                                                                isEditingForm,
                                                                            }) {
-    const { loading } = useAppSelector((state) => state.linguistics);
-    const dispatch = useAppDispatch();
+    const {loading} = useAppSelector((state) => state.linguistics);
+    const [addWordToCarousel] = useMutation<CreateWordMutation, CreateWordMutationVariables>(CreateWordDocument)
+
 
     // Обработка отправки формы
     const handleSubmit = useCallback(
-        (values: CodexFormValues, { resetForm }: { resetForm: () => void }) => {
-            dispatch(addWordToCarousel(values));
+        async (values: CodexFormValues, { resetForm }: { resetForm: () => void }) => {
+            await addWordToCarousel({
+                variables: {
+                    word: values,
+                },
+                update(cache, { data: { createWord } }) {
+                    const existingWords = cache.readQuery<GetWordsQuery>({
+                        query: GetWordsDocument,
+                    });
+
+                    if (existingWords && createWord) {
+                        cache.writeQuery({
+                            query: GetWordsDocument,
+                            data: {
+                                words: [...existingWords.words, createWord],
+                            },
+                        });
+                    }
+                },
+            });
             resetForm();
         },
-        [dispatch]
+        [addWordToCarousel]
     );
 
     // Поля морфемы
     const morphemeFields = useMemo(
         () => [
-            { name: "morpheme.prefix", label: "Префиксы", placeholder: "Введите префикс" },
-            { name: "morpheme.root", label: "Корни", placeholder: "Введите корень" },
-            { name: "morpheme.suffix", label: "Суффиксы", placeholder: "Введите суффикс" },
-            { name: "morpheme.end", label: "Окончания", placeholder: "Введите окончание" },
+            {name: "morpheme.prefix", label: "Префиксы", placeholder: "Введите префикс"},
+            {name: "morpheme.root", label: "Корни", placeholder: "Введите корень"},
+            {name: "morpheme.suffix", label: "Суффиксы", placeholder: "Введите суффикс"},
+            {name: "morpheme.end", label: "Окончания", placeholder: "Введите окончание"},
         ],
         []
     );
@@ -122,7 +147,7 @@ export const CodexForm: React.FC<CodexFormProps> = memo(function CodexForm({
                 validationSchema={validationSchema}
                 onSubmit={handleSubmit}
             >
-                {({ values, setValues }) => (
+                {({values, setValues}) => (
                     <Form>
                         {/* Поле для загрузки JSON */}
                         <JsonUploader
@@ -157,7 +182,7 @@ export const CodexForm: React.FC<CodexFormProps> = memo(function CodexForm({
                         {/* Поле описания */}
                         <Box mb={3}>
                             <Field name="description">
-                                {({ field }: { field: FieldProps }) => (
+                                {({field}: { field: FieldProps }) => (
                                     <Input
                                         {...field}
                                         fullWidth
@@ -173,7 +198,7 @@ export const CodexForm: React.FC<CodexFormProps> = memo(function CodexForm({
                         {/* Поле Collections */}
                         <Box mb={3}>
                             <Field name="collections">
-                                {({ field }: { field: FieldProps }) => (
+                                {({field}: { field: FieldProps }) => (
                                     <Input
                                         {...field}
                                         fullWidth
@@ -188,16 +213,16 @@ export const CodexForm: React.FC<CodexFormProps> = memo(function CodexForm({
 
                         {/* Производные */}
                         <Box mb={3}>
-                            <Typography variant="subtitle1" sx={{ paddingLeft: "20px", paddingY: "5px" }}>
+                            <Typography variant="subtitle1" sx={{paddingLeft: "20px", paddingY: "5px"}}>
                                 Производные:
                             </Typography>
                             <FieldArray name="derivatives">
-                                {({ remove, push }) => (
+                                {({remove, push}) => (
                                     <>
                                         {values.derivatives.map((_, index) => (
                                             <Box display="flex" alignItems="center" key={index} mb={2}>
                                                 <Field name={`derivatives[${index}]`}>
-                                                    {({ field }: { field: FieldProps }) => (
+                                                    {({field}: { field: FieldProps }) => (
                                                         <Input
                                                             {...field}
                                                             fullWidth
@@ -212,7 +237,7 @@ export const CodexForm: React.FC<CodexFormProps> = memo(function CodexForm({
                                                     disabled={values.derivatives.length === 1}
                                                     color="error"
                                                 >
-                                                    <Delete />
+                                                    <Delete/>
                                                 </IconButton>
                                             </Box>
                                         ))}
@@ -220,7 +245,7 @@ export const CodexForm: React.FC<CodexFormProps> = memo(function CodexForm({
                                             classStyle={"add_button"}
                                             onClick={() => push("")}
                                         >
-                                            <AddBoxOutlined className="text-3xl" />
+                                            <AddBoxOutlined className="text-3xl"/>
                                             Добавить производное
                                         </Base_button>
                                     </>
@@ -236,7 +261,7 @@ export const CodexForm: React.FC<CodexFormProps> = memo(function CodexForm({
                         >
                             {loading.addWord.status === LoadingStatus.padding ? (
                                 <>
-                                    <CircularProgress color="success" size={20} sx={{ marginRight: 1 }} />
+                                    <CircularProgress color="success" size={20} sx={{marginRight: 1}}/>
                                     {loading.addWord.message}
                                 </>
                             ) : (
