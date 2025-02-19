@@ -58,7 +58,7 @@ const placeholder = `{
   "joke": "Шутка",
   "derivatives": ["производное1"],
   "collections": ["conversation_topic_dream"]
-}`;
+}`; // morpheme.prefix[0]  === "пре" // name of Formik
 
 type CodexFormProps = {
     editingFrom: boolean;

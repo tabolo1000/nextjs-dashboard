@@ -6,7 +6,7 @@ import React from "react";
 import {WordWithoutId} from "@/app/[locale]/(app)/linguistics/words/(kata)/words.type";
 import {
     DerivativesText
-} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/derivatives/assets/localizedText";
+} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/derivatives/assets/derivativesText";
 import {usePathname} from "next/navigation";
 import FormErrorField from "@/app/[locale]/(app)/linguistics/words/(kata)/@components/FormErrorField";
 
@@ -21,8 +21,6 @@ type DerivativesProps = {
 const Derivatives = ({values}: DerivativesProps) => {
     const lan = usePathname().split("/")[1]
     const text = DerivativesText(lan);
-    debugger
-
     return (
         <Box mb={3}>
             <Typography variant="subtitle1" sx={{paddingLeft: "20px", paddingY: "5px"}}>
