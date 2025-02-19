@@ -95,7 +95,6 @@ export default function useSlider_words(endPoints: Array<string>): ReturnType {
     );
 
 
-    debugger
 
 
     const [isSettingsActive, setIsSettingsActive] = useState(false);

@@ -16,6 +16,7 @@ const MorphemeFields = () => {
             ],
         []
     );
+
     return (
         <Box className="
             border-2 border-border_color dark:border-dark-border_color

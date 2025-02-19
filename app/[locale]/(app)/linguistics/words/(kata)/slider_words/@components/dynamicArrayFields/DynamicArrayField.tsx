@@ -8,6 +8,7 @@ import {usePathname} from "next/navigation";
 import {
     dynamicArrayFieldText
 } from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/dynamicArrayFields/assets/dynamicArrayFieldText";
+import {getNestedValue} from "@/app/lib/utils";
 
 interface DynamicArrayFieldProps {
     name: string;
@@ -27,7 +28,7 @@ interface DynamicArrayFieldProps {
  * @constructor
  */
 export const DynamicArrayField: React.FC<DynamicArrayFieldProps> = ({
-                                                                        name,
+                                                                        name, // derivatives
                                                                         label,
                                                                         placeholder,
                                                                         minItems = 1,
@@ -46,15 +47,21 @@ export const DynamicArrayField: React.FC<DynamicArrayFieldProps> = ({
             */}
             <FieldArray name={name}>
                 {({remove, push, form}) => {
-                    let values = form.values.morpheme[name.split(".")[1]];
-                    values = (values[0] || values[0]) === "" ? values : [""]
+
+                    let values = getNestedValue(form.values, name)
+                    if (Array.isArray(values)) values = (values[0] || values[0] === "") ? values : [""];
+                    if (typeof values === "string") values = [values];
+
                     return (
                         <>
                             {
-                                values.map((_: string, index: number) => (
-                                        <Box sx={{display: "flex"}} alignItems="center" key={index} mb={2}>
+                                values.map((_: string, index: number) => {
+                                    const d = (!Array.isArray(form.values[name])) ? `${name}` :  `${name}[${index}]`
+                                    return (
+                                        <Box sx={{display: "flex", position: "relative"}} alignItems="center" key={index}
+                                             mb={2}>
                                             <Field
-                                                name={`${name}[${index}]`} // morpheme.root[0] === ""
+                                                name={d} // morpheme.root[0] === "" `${name}[${index}]`
                                             >
                                                 {(el: FieldProps) => (
                                                     <>
@@ -80,7 +87,7 @@ export const DynamicArrayField: React.FC<DynamicArrayFieldProps> = ({
                                                 <Delete/>
                                             </IconButton>
                                         </Box>
-                                    )
+                                    )}
                                 )}
                             <Base_button
                                 classStyle={"add_button"}
