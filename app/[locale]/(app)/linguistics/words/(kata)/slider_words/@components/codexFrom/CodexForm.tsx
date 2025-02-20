@@ -1,6 +1,6 @@
 "use client";
 
-import React, {memo, useCallback} from "react";
+import React, {memo} from "react";
 import {Form, Formik} from "formik";
 import {Box, Button, CircularProgress, Typography,} from "@mui/material";
 import {
@@ -10,14 +10,6 @@ import {
     JsonUploader
 } from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/JsonUploader/JsonUploader";
 import {Base_button} from "@/app/ui/math/components/Base_button";
-import {useMutation} from "@apollo/client";
-import {
-    CreateWordDocument,
-    CreateWordMutation,
-    CreateWordMutationVariables,
-    GetWordsDocument,
-    GetWordsQuery
-} from "@/app/@graphql/@generated/graphql";
 import {CodexFormValues} from "@/app/[locale]/(app)/linguistics/words/(kata)/words.type";
 import MorphemeFields from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/MorphemeFields";
 import Derivatives
@@ -25,6 +17,8 @@ import Derivatives
 import {
     DynamicArrayField
 } from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/dynamicArrayFields/DynamicArrayField";
+import useCodexFrom
+    from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/useCodexFrom";
 
 
 // Initial value for the form
@@ -72,34 +66,7 @@ export const CodexForm: React.FC<CodexFormProps> = memo(function CodexForm({
                                                                                editingFrom,
                                                                                isEditingForm,
                                                                            }) {
-    const [addWordToCarousel, {loading}] = useMutation<CreateWordMutation, CreateWordMutationVariables>(CreateWordDocument)
-
-    // Form submission processing
-    const handleSubmit = useCallback(
-        async (values: CodexFormValues, {resetForm}: { resetForm: () => void }) => {
-            await addWordToCarousel({
-                variables: {
-                    word: values,
-                },
-                update(cache, {data: {createWord}}) {
-                    const existingWords = cache.readQuery<GetWordsQuery>({
-                        query: GetWordsDocument,
-                    });
-
-                    if (existingWords && createWord) {
-                        cache.writeQuery({
-                            query: GetWordsDocument,
-                            data: {
-                                words: [...existingWords.words, createWord],
-                            },
-                        });
-                    }
-                },
-            });
-            resetForm();
-        },
-        [addWordToCarousel]
-    );
+    const {loading, handleSubmit} = useCodexFrom()
 
 
     return (
@@ -201,7 +168,7 @@ export const CodexForm: React.FC<CodexFormProps> = memo(function CodexForm({
                         </Box>
 
                         {/* Displays an array of derivative words */}
-                        <Derivatives />
+                        <Derivatives/>
 
                         {/* The Collections field */}
                         <Box mb={3}>
@@ -260,12 +227,5 @@ export const CodexForm: React.FC<CodexFormProps> = memo(function CodexForm({
         </Box>
     );
 });
-
-
-/*
-type CodexFormValues2 = Partial<CodexFormValues>;
-type RequiredUser = Required<Morpheme>
-type UserNameAndAge = Pick<CodexFormValues, "title" | "morpheme">;
-type UserWithoutAge = Omit<CodexFormValues, "title">;*/
 
 
