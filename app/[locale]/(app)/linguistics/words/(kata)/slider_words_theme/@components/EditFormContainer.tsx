@@ -1,8 +1,11 @@
 "use client";
 
-import React from "react";
+import React, {Suspense} from "react";
 import {motion, Variants} from "framer-motion";
-import { CodexForm } from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CodexForm";
+import {CodexForm} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CodexForm";
+import {LoaderScreen} from "@/app/[locale]/(app)/@components/LoaderScreen";
+import {ErrorBoundary} from "react-error-boundary";
+import {ErrorScreen} from "@/app/[locale]/(app)/@components/ErrorScreen";
 
 
 /**
@@ -26,7 +29,9 @@ const EditFormContainer: React.FC<EditFormContainerProps> = ({
             exit="exit"
             className="p-6 rounded-lg shadow-lg"
         >
-            <CodexForm editingFrom={editingFrom} isEditingForm={isEditingForm} />
+            <ErrorBoundary fallback={<ErrorScreen message={{en: "Error", ru: "Ошибка"}} onRetry={()=>{}}/>} >
+                    <CodexForm editingFrom={editingFrom} isEditingForm={isEditingForm}/>
+            </ErrorBoundary>
         </motion.div>
     );
 };
@@ -39,6 +44,8 @@ export default EditFormContainer;
 // Типы для пропсов
 interface EditFormContainerProps {
     editingFrom: boolean;
-    isEditingForm (active:  boolean): void;
+
+    isEditingForm(active: boolean): void;
+
     animationVariants: Variants
 }

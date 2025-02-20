@@ -23,7 +23,7 @@ const BlockContent = ({
                              isModalSearchOpen
                          }: BlockContentProps) => {
     /**
-     * Editor slider
+     * Editor slider and add word
      */
     if (editingFrom) {
         return (

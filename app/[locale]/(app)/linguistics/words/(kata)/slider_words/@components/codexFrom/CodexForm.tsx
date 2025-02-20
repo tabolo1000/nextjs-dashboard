@@ -38,7 +38,6 @@ const initialValues: CodexFormValues = {
     derivatives: [""],
     collections: [""],
 };
-
 // Sample of filling out the form
 const placeholder = `{
   "title": "Пример",

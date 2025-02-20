@@ -39,7 +39,7 @@ import {useAppDispatch, useAppSelector} from "@/app/store/hooks";
 import React, {useCallback, useState} from "react";
 import {loadWordsForCarousel} from "@/app/store/slices/wordsSliderSlice/wordsSliderSliceThunks";
 import {Loading, WordCarousel, WordCarouselUpdate} from "@/app/store/slices/wordsSliderSlice/wordsSliderSlice";
-import {gql, useMutation, useQuery} from "@apollo/client";
+import {FetchResult, useMutation, useQuery} from "@apollo/client";
 import {
     DeleteWordDocument,
     DeleteWordMutation,
@@ -51,10 +51,24 @@ import {
     UpdateWordMutation,
     UpdateWordMutationVariables
 } from "@/app/@graphql/@generated/graphql";
+import {UpdateField, Word} from "@/app/[locale]/(app)/linguistics/words/(kata)/words.type";
 
 
 export default function useSlider_words(endPoints: Array<string>): ReturnType {
     const [changeWord] = useMutation<UpdateWordMutation, UpdateWordMutationVariables>(UpdateWordDocument, {
+        update(cache, {data}: FetchResult<UpdateWordMutation>) {
+            const existingWords = cache.readQuery<GetWordsQuery>({
+                query: GetWordsDocument,
+            });
+            if(existingWords && data?.updateWord) {
+                cache.writeQuery<GetWordsQuery>({
+                    query: GetWordsDocument,
+                    data: {
+                        words: [...existingWords.words, data?.updateWord],
+                    },
+                })
+            }
+        }
         /*update(cache, { data: { updateWord } }) {
             if (!updateWord) return;
             cache.modify({
@@ -95,8 +109,6 @@ export default function useSlider_words(endPoints: Array<string>): ReturnType {
     );
 
 
-
-
     const [isSettingsActive, setIsSettingsActive] = useState(false);
     const [editingFrom, setEditingForm] = useState<boolean>(false);
     const [isSearch, setSearch] = useState<boolean>(false);
@@ -125,7 +137,8 @@ export default function useSlider_words(endPoints: Array<string>): ReturnType {
      *     title - Any field. For example, tittle.
      * }
      */
-    const handleWordChange = useCallback(async (word: WordCarouselUpdate) => {
+    const handleWordChange = useCallback(async <T extends keyof Word>(word: UpdateField<T>) => {
+            debugger
             await changeWord({
                 variables: {
                     word

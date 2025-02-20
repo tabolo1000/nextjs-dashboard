@@ -46,8 +46,6 @@ export default memo(function SliderContent ({
                 handleChange={handleChange}
             />
             <SearchWords setIsModalSearchOpen={setIsModalSearchOpen} isModalSearchOpen={isModalSearchOpen} />
-            {/*<SearchWord/>*/}
-            {/*<TextReader/>*/}
         </motion.div>
     );
 })

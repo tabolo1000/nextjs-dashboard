@@ -90,14 +90,14 @@ export type QueryWordsArgs = {
 
 export type UpdateWordInput = {
   _id: Scalars['String']['input'];
-  annotation: Scalars['String']['input'];
-  collections: Array<Scalars['String']['input']>;
-  derivatives: Array<Scalars['String']['input']>;
+  annotation?: InputMaybe<Scalars['String']['input']>;
+  collections?: InputMaybe<Array<Scalars['String']['input']>>;
+  derivatives?: InputMaybe<Array<Scalars['String']['input']>>;
   description?: InputMaybe<Scalars['String']['input']>;
   icon?: InputMaybe<Scalars['String']['input']>;
-  joke: Scalars['String']['input'];
+  joke?: InputMaybe<Scalars['String']['input']>;
   morpheme?: InputMaybe<MorphemeInput>;
-  quote: Scalars['String']['input'];
+  quote?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
 

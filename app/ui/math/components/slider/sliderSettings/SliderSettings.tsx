@@ -31,12 +31,12 @@ export const SliderSettings = () => {
             p={2}
             mb={4}
         >
-            {/* Заголовок */}
+            {/* Caption */}
             <Typography variant="h6" mb={2} align={"center"}>
                 {LocText.title}
             </Typography>
 
-            {/* Цикличность слайдера */}
+            {/* Slider cycling */}
             <FormControlLabel
                 control={
                     <Switch
@@ -49,7 +49,7 @@ export const SliderSettings = () => {
                 }`}
             />
 
-            {/* Скорость прокрутки */}
+            {/* Scroll speed */}
             <Box mt={2}>
                 <Typography variant="body1" gutterBottom >
                     {LocText.scrollSpeed}: {settings.delay}ms
@@ -65,7 +65,7 @@ export const SliderSettings = () => {
                 />
             </Box>
 
-            {/* Количество слайдов */}
+            {/* Number of slides */}
             <Box mt={2}>
                 <Typography variant="body1" gutterBottom >
                     {LocText.slidesPerView}: {settings.slidesPerView}
@@ -81,7 +81,7 @@ export const SliderSettings = () => {
                 />
             </Box>
 
-            {/* Автопрокрутка */}
+            {/* Auto Scroll */}
             <FormControlLabel
                 control={
                     <Switch

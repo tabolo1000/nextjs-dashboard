@@ -25,3 +25,4 @@ export type CodexFormValues = Omit<Word, "_id">
 
 // new type
 export type WordWithoutId  = Omit<Word, "_id">
+export type UpdateField<T extends keyof Word> = Pick<Word, "_id" | T>;

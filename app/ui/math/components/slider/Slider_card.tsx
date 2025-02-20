@@ -4,7 +4,10 @@ import { Morpheme } from "@/app/ui/math/components/Morpheme";
 import { AddBoxOutlined, ChangeCircleOutlined, DeleteOutline } from "@mui/icons-material";
 import {EditableField} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/EditableField";
 import ConfirmationModal from "@/app/ui/math/components/ConfirmationModal";
-import {WordCarousel, WordCarouselUpdate} from "@/app/store/slices/wordsSliderSlice/wordsSliderSlice";
+import {WordCarousel} from "@/app/store/slices/wordsSliderSlice/wordsSliderSlice";
+import {UpdateField, Word} from "@/app/[locale]/(app)/linguistics/words/(kata)/words.type";
+import {useApolloClient} from "@apollo/client";
+import {WordFragment, WordFragmentDoc} from "@/app/@graphql/@generated/graphql";
 
 
 export function Slider_card({
@@ -13,52 +16,45 @@ export function Slider_card({
                                 handleWordDelete,
                                 isEditingForm,
                                 morpheme,
-                                title,
-                                description,
                                 icon,
-                                quote,
-                                annotation,
-                                joke,
-                                derivatives,
-                                collections
                             }: WordCarousel & {
-    handleWordChange: (value: WordCarouselUpdate) => void;
+    handleWordChange: <T extends keyof Word>(value: UpdateField<T>) => void;
     handleWordDelete: (id: string) => void;
     isEditingForm: (active: boolean) => void;
 }) {
-    const [editableFields, setEditableFields] = useState<Partial<WordCarousel>>({
-        title,
-        description,
-        quote,
-        annotation,
-        joke,
-        derivatives,
-        collections,
-    });
     const [openModal, setOpenModal] = useState(false);
+    const client = useApolloClient();
+    const editableFields: WordFragment | null = client.readFragment({
+        id: `Word:${_id}`,
+        fragment: WordFragmentDoc,
+        fragmentName: "Word"
+    });
 
-    const handleFieldChange = (fieldName: keyof WordCarousel, value: string) => {
-        setEditableFields((prev) => ({
-            ...prev,
-            [fieldName]: value,
-        }));
 
-        handleWordChange({
-            _id,
-            [fieldName]: value,
-        });
+
+    const handleFieldChange = <T extends keyof Word>(fieldName: T, value: Word[T]) => {
+        try {
+            const updateData: UpdateField<T> = {
+                _id,
+                [fieldName]: value
+            } as UpdateField<T>;
+
+            handleWordChange<T>(updateData);
+        }
+        catch (error){
+            if(error instanceof Error){
+                console.log(error.message);
+            }
+
+        }
+
     };
 
     const handleArrayFieldChange = (index: number, value: string) => {
-        const updatedArray = [...(editableFields.derivatives || [])];
+        const updatedArray = [...(editableFields?.derivatives || [])];
         updatedArray[index] = value;
 
-        setEditableFields((prev) => ({
-            ...prev,
-            derivatives: updatedArray,
-        }));
-
-        handleWordChange({
+        handleWordChange<'derivatives'>({
             _id,
             derivatives: updatedArray,
         });
@@ -66,15 +62,10 @@ export function Slider_card({
 
     const handleAddFieldChange = (value: string) => {
         if (value.length > 6) {
-            const updatedArray = [...(editableFields.collections || [])];
+            const updatedArray = [...(editableFields?.collections || [])];
             updatedArray.push(value);
 
-            setEditableFields((prev) => ({
-                ...prev,
-                collections: updatedArray,
-            }));
-
-            handleWordChange({
+            handleWordChange<'collections'>({
                 _id,
                 collections: updatedArray,
             });
@@ -133,7 +124,7 @@ export function Slider_card({
                         {icon}
                         <EditableField
                             className="ml-2"
-                            value={editableFields.title || ""}
+                            value={editableFields?.title || ""}
                             onSubmit={(value) => handleFieldChange("title", value)}
                             placeholder="Введите заголовок"
                         />
@@ -144,7 +135,7 @@ export function Slider_card({
                     {/* Описание */}
                     <EditableField
                         label="Описание"
-                        value={editableFields.description || ""}
+                        value={editableFields?.description || ""}
                         onSubmit={(value) => handleFieldChange("description", value)}
                         placeholder="Введите описание"
                         multiline
@@ -154,7 +145,7 @@ export function Slider_card({
                     {/* Цитата */}
                     <EditableField
                         label="Цитата"
-                        value={editableFields.quote || ""}
+                        value={editableFields?.quote || ""}
                         onSubmit={(value) => handleFieldChange("quote", value)}
                         placeholder="Введите цитату"
                         multiline
@@ -164,7 +155,7 @@ export function Slider_card({
                     {/* Аннотация */}
                     <EditableField
                         label="Аннотация"
-                        value={editableFields.annotation || ""}
+                        value={editableFields?.annotation || ""}
                         onSubmit={(value) => handleFieldChange("annotation", value)}
                         placeholder="Введите аннотацию"
                         multiline
@@ -174,8 +165,8 @@ export function Slider_card({
                     {/* Производные */}
                     <div className="paragraph_base">
                         <span className="font-bold text-purple-600">Производные слова:</span>
-                        {editableFields.derivatives &&
-                            editableFields.derivatives.map((e: string, i: number) => (
+                        {editableFields?.derivatives &&
+                            editableFields?.derivatives.map((e: string, i: number) => (
                                 <EditableField
                                     key={i}
                                     value={e}
@@ -189,7 +180,7 @@ export function Slider_card({
                     {/* Шутка */}
                     <EditableField
                         label="Joke"
-                        value={editableFields.joke || ""}
+                        value={editableFields?.joke || ""}
                         onSubmit={(value) => handleFieldChange("joke", value)}
                         placeholder="Введите шутку"
                         multiline
@@ -205,8 +196,8 @@ export function Slider_card({
                             onChange={(e)=> s(e.currentTarget.value)}
                             onBlur={()=> handleAddFieldChange(u)}
                         />
-                        {editableFields.collections &&
-                            editableFields.collections.map((e: string, i: number) => (
+                        {editableFields?.collections &&
+                            editableFields?.collections.map((e: string, i: number) => (
                                 <EditableField
                                     key={i}
                                     value={e}
