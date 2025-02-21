@@ -15,8 +15,8 @@ const SEARCH_WORDS = gql`
 `
 
 const GET_WORDS = gql`
-    query getWords {
-        words {
+    query getWords($collectionName: String!) {
+        words(collectionName: $collectionName) {
             ...Word
         }
     }

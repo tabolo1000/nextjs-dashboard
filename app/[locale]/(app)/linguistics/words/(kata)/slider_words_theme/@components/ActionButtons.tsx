@@ -2,6 +2,14 @@
 
 import React, {memo} from "react";
 import { Box, Button, ButtonProps } from "@mui/material";
+import {
+    useEditing,
+    useSettings, useSliderHandlers
+} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/@store/sliderStore";
+import {
+    getActionButtonsConfig
+} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/getActionButtonsConfig";
+
 
 export interface ActionButton {
     icon: React.ReactNode;
@@ -13,18 +21,23 @@ export interface ActionButton {
 }
 
 interface ActionButtonsProps {
-    actions: ActionButton[]; // Массив действий (кнопок)
     orientation?: "horizontal" | "vertical"; // Горизонтальная или вертикальная ориентация
     gap?: number; // Расстояние между кнопками
     style?: string;
 }
 
 export default memo(function ActionButtons({
-                                               actions,
                                                orientation = "horizontal",
                                                gap = 1,
                                                style
                                            }: ActionButtonsProps) {
+    const isSettingsActive = useSettings()
+    const isEditingActive = useEditing()
+    const {
+        setTopic,
+        setCurrentWindow
+    } = useSliderHandlers()
+    const actions = getActionButtonsConfig({isSettingsActive, isEditingActive, setTopic, setCurrentWindow})
     return (
         <Box
             className={`

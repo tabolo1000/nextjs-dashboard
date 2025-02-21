@@ -20,10 +20,12 @@
  */
 
 import { LessonCard } from "@/app/ui/math/components/LessonCard";
-import { useSliderStore } from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/@store/sliderStore";
 import { TopicWord } from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/@types/main";
 import { usePathname } from "next/navigation";
 import {getLocalizedText} from "@/app/lib/utils";
+import {
+    useSliderHandlers
+} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/@store/sliderStore";
 
 export type MenuProps = {
     topicWords: TopicWord[];
@@ -31,7 +33,8 @@ export type MenuProps = {
 
 export default function Menu({ topicWords }: MenuProps) {
     const language = usePathname().split("/")[1];
-    const { setTopic } = useSliderStore();
+    const { setTopic } = useSliderHandlers()
+    debugger
 
     const handleSelectTopic = (selectedTopic: string) => {
         setTopic([selectedTopic]);

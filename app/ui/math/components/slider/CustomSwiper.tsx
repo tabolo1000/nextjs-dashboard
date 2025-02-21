@@ -23,8 +23,7 @@ import {WordCarousel, WordCarouselUpdate} from "@/app/store/slices/wordsSliderSl
 export default function CustomSwiper({
     currentItems,
     handleWordChange,
-    handleWordDelete,
-    isEditingForm,
+    handleWordDelete
 
                                      }:CustomSwiperProps) {
     const { settings } = useSettingSlider()
@@ -76,7 +75,6 @@ export default function CustomSwiper({
                     collections={item.collections}
                     handleWordChange={handleWordChange}
                     handleWordDelete={handleWordDelete}
-                    isEditingForm={isEditingForm}
                 />
             </SwiperSlide>
         ))}
@@ -89,5 +87,4 @@ interface CustomSwiperProps {
     currentItems: WordCarousel[],
     handleWordChange: (value: WordCarouselUpdate) => void,
     handleWordDelete: (id: string) => void,
-    isEditingForm: (active: boolean) => void
 }

@@ -1,10 +1,14 @@
-import React, {Suspense, useEffect, useState} from "react";
+import React, {memo, Suspense, useEffect, useState} from "react";
 import {AnimatePresence, motion} from "framer-motion";
 import {Field, Form, Formik} from "formik";
 import ShowWords from "@/app/[locale]/(app)/linguistics/words/(kata)/@components/showWords/ShowWords";
 import {LoaderScreen} from "@/app/[locale]/(app)/@components/LoaderScreen";
 import {ErrorBoundary} from "react-error-boundary";
 import {ErrorScreen} from "@/app/[locale]/(app)/@components/ErrorScreen";
+import {
+    useSearch,
+    useSliderHandlers
+} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/@store/sliderStore";
 
 /**
  * Does word search by first letters
@@ -12,17 +16,16 @@ import {ErrorScreen} from "@/app/[locale]/(app)/@components/ErrorScreen";
  * on regular expression.
  * default limit = 4
  */
-const SearchWords: React.FC<SearchWordsProps> = ({
-                                                     isModalSearchOpen,
-                                                     setIsModalSearchOpen,
-                                                 }) => {
+const SearchWords = memo(function SearchWords() {
+    const isSearchActive = useSearch();
+    const {setCurrentWindow} = useSliderHandlers()
 
     const [searchTerm, setSearchTerm] = useState<string>("")
     /**
      * !!Crutch!!. Background window fix.
      */
     useEffect(() => {
-        if (isModalSearchOpen) {
+        if (isSearchActive) {
             document.body.style.overflow = "hidden";
         } else {
             document.body.style.overflow = "auto";
@@ -30,11 +33,11 @@ const SearchWords: React.FC<SearchWordsProps> = ({
         return () => {
             document.body.style.overflow = "auto";
         };
-    }, [isModalSearchOpen]);
+    }, [isSearchActive]);
 
     return (
         <AnimatePresence>
-            {isModalSearchOpen && (
+            {isSearchActive && (
                 <motion.div
                     className="fixed pt-5 inset-0 bg-black bg-opacity-70 z-50 flex items-start justify-center overflow-auto"
                     initial={{opacity: 0}}
@@ -49,7 +52,7 @@ const SearchWords: React.FC<SearchWordsProps> = ({
                     >
                         {/* The button closes the modal  */}
                         <button
-                            onClick={() => setIsModalSearchOpen(false)}
+                            onClick={() => setCurrentWindow("reset")}
                             className="absolute top-4 right-6 text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white focus:outline-none"
                         >
                             ✖
@@ -98,15 +101,7 @@ const SearchWords: React.FC<SearchWordsProps> = ({
             )}
         </AnimatePresence>
     )
-};
+})
 
-export default SearchWords;
+export default SearchWords
 
-
-
-//------------------------------------------Types -----------------------------------------------
-
-interface SearchWordsProps {
-    isModalSearchOpen: boolean;
-    setIsModalSearchOpen: (isModalSearchOpen: boolean) => void;
-}

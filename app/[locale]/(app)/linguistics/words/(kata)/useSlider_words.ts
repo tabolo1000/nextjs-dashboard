@@ -35,11 +35,11 @@
 
 "use client";
 
-import {useAppDispatch, useAppSelector} from "@/app/store/hooks";
+import {useAppDispatch} from "@/app/store/hooks";
 import React, {useCallback, useState} from "react";
 import {loadWordsForCarousel} from "@/app/store/slices/wordsSliderSlice/wordsSliderSliceThunks";
-import {Loading, WordCarousel, WordCarouselUpdate} from "@/app/store/slices/wordsSliderSlice/wordsSliderSlice";
-import {FetchResult, useMutation, useQuery} from "@apollo/client";
+import {WordCarousel, WordCarouselUpdate} from "@/app/store/slices/wordsSliderSlice/wordsSliderSlice";
+import {FetchResult, useMutation, useSuspenseQuery} from "@apollo/client";
 import {
     DeleteWordDocument,
     DeleteWordMutation,
@@ -49,18 +49,22 @@ import {
     GetWordsQueryVariables,
     UpdateWordDocument,
     UpdateWordMutation,
-    UpdateWordMutationVariables
+    UpdateWordMutationVariables,
+    WordFragment
 } from "@/app/@graphql/@generated/graphql";
-import {UpdateField, Word} from "@/app/[locale]/(app)/linguistics/words/(kata)/words.type";
+import {UpdateField} from "@/app/[locale]/(app)/linguistics/words/(kata)/words.type";
+import {useTopics} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/@store/sliderStore";
 
 
-export default function useSlider_words(endPoints: Array<string>): ReturnType {
+export default function useSlider_words() {
+    const topics = useTopics();
+
     const [changeWord] = useMutation<UpdateWordMutation, UpdateWordMutationVariables>(UpdateWordDocument, {
         update(cache, {data}: FetchResult<UpdateWordMutation>) {
             const existingWords = cache.readQuery<GetWordsQuery>({
                 query: GetWordsDocument,
             });
-            if(existingWords && data?.updateWord) {
+            if (existingWords && data?.updateWord) {
                 cache.writeQuery<GetWordsQuery>({
                     query: GetWordsDocument,
                     data: {
@@ -69,35 +73,34 @@ export default function useSlider_words(endPoints: Array<string>): ReturnType {
                 })
             }
         }
-        /*update(cache, { data: { updateWord } }) {
-            if (!updateWord) return;
-            cache.modify({
-                fields: {
-                    words(existingWords = []) {
-                        const newWordRef = cache.writeFragment({
-                            id: cache.identify(updateWord),
-                            fragment: gql`
-                                fragment NewWord on Word {
-                                    ...Word
-                                }
-                            `,
-                            data: updateWord,
-                        });
-                        return [...existingWords, newWordRef];
-                    },
-                },
-            });
-        }*/
-
     });
-    const [deleteWord] = useMutation<DeleteWordMutation, DeleteWordMutationVariables>(DeleteWordDocument)
+    const [deleteWord] = useMutation<DeleteWordMutation, DeleteWordMutationVariables>(DeleteWordDocument, {
+        update(cache, {data}: FetchResult<DeleteWordMutation>) {
+            const existingWords = cache.readQuery<GetWordsQuery>({
+                query: GetWordsDocument,
+            });
+            if (existingWords && data?.deleteWord) {
+                cache.writeQuery<GetWordsQuery>({
+                    query: GetWordsDocument,
+                    data: {
+                        words: existingWords.words.filter((el) => el._id !== data.deleteWord?._id),
+                    },
+                })
+            }
+        }
+    })
 
     const dispatch = useAppDispatch();
-    const {loading, error} = useAppSelector((state) => state.linguistics);
 
-
+    debugger
     // Get the data and push it to the pages.
-    const {data} = useQuery<GetWordsQuery, GetWordsQueryVariables>(GetWordsDocument)
+    const {data, error} = useSuspenseQuery<GetWordsQuery, GetWordsQueryVariables>(GetWordsDocument, {
+        variables: {
+            collectionName: topics[0],
+        },
+    });
+
+
     const wordsCarousel = data?.words || []
     // Getting pages
     const itemsPerPage = 20;
@@ -109,11 +112,8 @@ export default function useSlider_words(endPoints: Array<string>): ReturnType {
     );
 
 
-    const [isSettingsActive, setIsSettingsActive] = useState(false);
-    const [editingFrom, setEditingForm] = useState<boolean>(false);
-    const [isSearch, setSearch] = useState<boolean>(false);
     const handleLoadWords = useCallback(() => {
-        dispatch(loadWordsForCarousel(endPoints));
+        dispatch(loadWordsForCarousel(topics));
     }, []);
 
 
@@ -137,7 +137,7 @@ export default function useSlider_words(endPoints: Array<string>): ReturnType {
      *     title - Any field. For example, tittle.
      * }
      */
-    const handleWordChange = useCallback(async <T extends keyof Word>(word: UpdateField<T>) => {
+    const handleWordChange = useCallback(async <T extends keyof WordFragment>(word: UpdateField<T>) => {
             debugger
             await changeWord({
                 variables: {
@@ -149,7 +149,7 @@ export default function useSlider_words(endPoints: Array<string>): ReturnType {
     );
 
     // Handler displaying the settings window
-    const toggleSettings = () => setIsSettingsActive((prev) => !prev);
+    /*const toggleSettings = () => setIsSettingsActive((prev) => !prev);*/
 
 
     /* old code --------------------------------
@@ -178,19 +178,12 @@ export default function useSlider_words(endPoints: Array<string>): ReturnType {
         },
         data: {
             currentItems,
-            loading,
             error,
-            editingFrom,
-            isSearch
         },
         actions: {
             handleLoadWords,
             handleWordChange,
             handleWordDelete,
-            setEditingForm,
-            toggleSettings,
-            isSettingsActive,
-            setSearch
         },
     };
 }
@@ -209,19 +202,12 @@ interface Pagination {
 
 interface Data {
     currentItems: WordCarousel[];
-    loading: Loading;
     error: string | null;
-    editingFrom: boolean;
-    isSearch: boolean
 }
 
 export interface Actions {
     handleWordChange: (value: WordCarouselUpdate) => void;
     handleWordDelete: (id: string) => void;
-    setEditingForm: (active: boolean) => void;
-    setSearch: (isSearch: boolean) => void;
-    toggleSettings: () => void;
-    isSettingsActive: boolean;
     handleLoadWords: () => void;
 }
 

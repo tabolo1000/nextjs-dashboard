@@ -11,13 +11,10 @@ export default memo(function SliderContent ({
                                                 currentItems,
                                                 handleWordChange,
                                                 handleWordDelete,
-                                                isEditingForm,
                                                 pageCount,
                                                 currentPage,
                                                 handleChange,
                                                 animationVariants,
-                                                setIsModalSearchOpen,
-                                                isModalSearchOpen
 
 
                                             }: SliderContentProps) {
@@ -36,7 +33,6 @@ export default memo(function SliderContent ({
                 currentItems={currentItems}
                 handleWordChange={handleWordChange}
                 handleWordDelete={handleWordDelete}
-                isEditingForm={isEditingForm}
             />
 
             {/* Pagination after the bordering */}
@@ -45,7 +41,7 @@ export default memo(function SliderContent ({
                 currentPage={currentPage}
                 handleChange={handleChange}
             />
-            <SearchWords setIsModalSearchOpen={setIsModalSearchOpen} isModalSearchOpen={isModalSearchOpen} />
+            <SearchWords />
         </motion.div>
     );
 })
@@ -56,13 +52,10 @@ interface SliderContentProps {
     currentItems: WordCarousel[];
     handleWordChange: (word: WordCarouselUpdate) => void;
     handleWordDelete: (id: string) => void;
-    isEditingForm: (active: boolean) => void;
     pageCount: number;
     currentPage: number;
     handleChange: (event: React.ChangeEvent<unknown>, page: number) => void;
     animationVariants: Variants;
-    setIsModalSearchOpen: (isModalSearchOpen: boolean) => void;
-    isModalSearchOpen: boolean;
 }
 
 

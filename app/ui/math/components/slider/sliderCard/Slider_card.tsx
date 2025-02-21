@@ -1,28 +1,27 @@
 import React from "react";
-import { Box, Button, CardContent, Typography } from "@mui/material";
-import { Morpheme } from "@/app/ui/math/components/Morpheme";
-import { AddBoxOutlined, ChangeCircleOutlined, DeleteOutline } from "@mui/icons-material";
-import { EditableField } from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/EditableField";
+import {Box, Button, CardContent, Typography} from "@mui/material";
+import {Morpheme} from "@/app/ui/math/components/Morpheme";
+import {AddBoxOutlined, ChangeCircleOutlined, DeleteOutline} from "@mui/icons-material";
+import {EditableField} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/EditableField";
 import ConfirmationModal from "@/app/ui/math/components/ConfirmationModal";
-import { WordCarousel } from "@/app/store/slices/wordsSliderSlice/wordsSliderSlice";
-import { UpdateField} from "@/app/[locale]/(app)/linguistics/words/(kata)/words.type";
-import { WordFragment} from "@/app/@graphql/@generated/graphql";
+import {WordCarousel} from "@/app/store/slices/wordsSliderSlice/wordsSliderSlice";
+import {UpdateField} from "@/app/[locale]/(app)/linguistics/words/(kata)/words.type";
+import {WordFragment} from "@/app/@graphql/@generated/graphql";
 import useSlider_card from "@/app/ui/math/components/slider/sliderCard/useSlider_card";
-
+import {useSliderHandlers} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/@store/sliderStore";
 
 
 export function Slider_card({
                                 _id,
                                 handleWordChange,
                                 handleWordDelete,
-                                isEditingForm,
                                 morpheme,
                                 icon,
                             }: WordCarousel & {
     handleWordChange: <T extends keyof WordFragment>(value: UpdateField<T>) => void;
     handleWordDelete: (id: string) => void;
-    isEditingForm: (active: boolean) => void;
 }) {
+    const {setCurrentWindow} = useSliderHandlers()
     const {
         openModal,
         inputValue,
@@ -53,20 +52,21 @@ export function Slider_card({
                 <CardContent className="space-y-4">
                     <div className="flex flex-row justify-end items-center gap-1 w-full">
                         <div className="border border-gray-400 p-2 rounded-lg bg-blue-50 dark:bg-opacity-10">
-                            <Button className="text-green-600" onClick={() => isEditingForm(true)}>
-                                <AddBoxOutlined /> Добавить
+                            <Button className="text-green-600" onClick={() => setCurrentWindow("add_word")}>
+                                <AddBoxOutlined/> Добавить
                             </Button>
                             <Button className="text-amber-600" onClick={() => "handleWordDelete(_id)"}>
-                                <ChangeCircleOutlined /> Изменить
+                                <ChangeCircleOutlined/> Изменить
                             </Button>
                             <Button className="text-red-600" onClick={() => setOpenModal(true)}>
-                                <DeleteOutline /> Удалить
+                                <DeleteOutline/> Удалить
                             </Button>
                         </div>
                     </div>
 
                     {/* Заголовок */}
-                    <Typography variant="h5" component="div" className="indent-4 header_h3 flex justify-right align-middle">
+                    <Typography variant="h5" component="div"
+                                className="indent-4 header_h3 flex justify-right align-middle">
                         {icon}
                         <EditableField
                             className="ml-2"

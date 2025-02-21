@@ -23,8 +23,7 @@ type Morpheme = {
 
 // old type
 export type CodexFormValues = Omit<Word, "_id">
-
+export type WordWithoutId  = Omit<Word, "_id">
 
 // new type
-export type WordWithoutId  = Omit<Word, "_id">
 export type UpdateField<T extends keyof WordFragment> = Pick<WordFragment, "_id" | T>;

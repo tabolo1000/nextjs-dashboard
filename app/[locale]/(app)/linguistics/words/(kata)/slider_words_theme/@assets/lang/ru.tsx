@@ -24,13 +24,13 @@ import TopicSelected from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_
 */
 const topicWords: TopicWord[] = [
     {
-        topic: " ", //all_topics
+        topic: "all",
         title: "Слова: Общие темы для обсуждения",
         description: "Всеобъемлющий набор слов для обсуждений на различные темы: от повседневной жизни до сложных философских вопросов.",
         icon: <FaBook />,
         iconColor: "text-blue-500",
     },
-    {
+    /*{
         topic: "conversation_topic_dream",
         title: "Слова: Мечты и вдохновение",
         description: "Слова и выражения, связанные с мечтами, целями и вдохновением. Отлично подходят для обсуждения амбиций и планов на будущее.",
@@ -92,7 +92,7 @@ const topicWords: TopicWord[] = [
         description: "Слова и фразы, связанные с общением, дружбой, любовью и межличностными отношениями. Подходят для личных разговоров.",
         icon: <FaUsers />,
         iconColor: "text-pink-500",
-    },
+    },*/
 ];
 
 export default function Words() {

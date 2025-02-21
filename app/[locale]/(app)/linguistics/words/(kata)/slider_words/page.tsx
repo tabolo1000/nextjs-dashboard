@@ -1,48 +1,24 @@
 "use client";
 
-import React, {useState} from "react";
+import React from "react";
 import { Box, Typography } from "@mui/material";
 import { AnimatePresence } from "framer-motion";
 import { ToastContainer } from "react-toastify";
-import useSlider_words from "@/app/[locale]/(app)/linguistics/words/(kata)/useSlider_words";
-import {useSliderStore} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/@store/sliderStore";
-import {languageMessage} from "@/i18n/languages";
 import {animationVariants} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@assets/animaition";
-import LoadingHandler from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/LoadingHandler";
 import ActionButtons from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/@components/ActionButtons";
-import {
-    getActionButtonsConfig
-} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/getActionButtonsConfig";
 import BlockContent from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/BlockContent";
-import {LoadingStatus} from "@/app/store/slices/wordsSliderSlice/wordsSliderSlice";
+import useSlider_words from "@/app/[locale]/(app)/linguistics/words/(kata)/useSlider_words";
 
 
 /**
  * Page adding and displaying words slider as well as its settings
  */
 export default function Carrousel_Slider() {
-    const { topics, setTopic } = useSliderStore();
-    const { pagination, data, actions } = useSlider_words(topics);
+    debugger
+    const { pagination, data, actions } = useSlider_words();
     const { pageCount, currentPage, handleChangePage } = pagination;
-    const { currentItems, loading, editingFrom } = data;
-    const { handleWordChange, handleWordDelete, isSettingsActive, toggleSettings, handleLoadWords } = actions;
-
-    const [isModalSearchOpen, setIsModalSearchOpen] = useState(false);
-    /**
-     * Handles uploads and errors during uploading
-     */
-    const isLoading = loading.fetchWords.status === LoadingStatus.padding;
-    const hasError = loading.fetchWords.status === LoadingStatus.rejected;
-
-    if (isLoading || hasError) {
-        return (
-            <LoadingHandler
-                status={loading.fetchWords.status}
-                message={loading.fetchWords.message as languageMessage}
-                onRetry={handleLoadWords}
-            />
-        );
-    }
+    const { currentItems} = data;
+    const { handleWordChange, handleWordDelete, handleLoadWords } = actions;
 
     return (
         <>
@@ -54,14 +30,6 @@ export default function Carrousel_Slider() {
                 {/* Control panel which includes(slider settings, back button, word search) */}
                 <div className="absolute translate-x-full right-0 top-0">
                     <ActionButtons
-                        actions={getActionButtonsConfig(
-                            editingFrom,
-                            isSettingsActive,
-                            setTopic,
-                            toggleSettings,
-                            setIsModalSearchOpen,
-                            isModalSearchOpen
-                        )}
                         orientation="vertical"
                         style=""
                     />
@@ -71,11 +39,6 @@ export default function Carrousel_Slider() {
                 <Box className="base-animation-all w-full">
                     <AnimatePresence mode="wait">
                         <BlockContent
-                            setIsModalSearchOpen={setIsModalSearchOpen}
-                            isModalSearchOpen={isModalSearchOpen}
-                            editingFrom={editingFrom}
-                            isSettingsActive={isSettingsActive}
-                            actions={actions}
                             animationVariants={animationVariants}
                             currentItems={currentItems}
                             handleWordChange={handleWordChange}

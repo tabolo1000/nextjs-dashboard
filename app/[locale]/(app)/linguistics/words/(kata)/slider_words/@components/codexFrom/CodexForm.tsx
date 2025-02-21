@@ -19,6 +19,9 @@ import {
 } from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/dynamicArrayFields/DynamicArrayField";
 import useCodexFrom
     from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/useCodexFrom";
+import {
+    useSliderHandlers
+} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/@store/sliderStore";
 
 
 // Initial value for the form
@@ -56,16 +59,11 @@ const placeholder = `{
    "collections": ["conversation_topic_dream"]
 }`; // morpheme.prefix[0]  === "пре" // name of Formik
 
-type CodexFormProps = {
-    editingFrom: boolean;
-    isEditingForm(active: boolean): void;
-}
 
-export const CodexForm: React.FC<CodexFormProps> = memo(function CodexForm({
-                                                                               editingFrom,
-                                                                               isEditingForm,
-                                                                           }) {
+export const CodexForm = memo(function CodexForm() {
     const {loading, handleSubmit} = useCodexFrom()
+    const {setCurrentWindow} = useSliderHandlers()
+
 
 
     return (
@@ -212,7 +210,7 @@ export const CodexForm: React.FC<CodexFormProps> = memo(function CodexForm({
 
                         {/* Back button */}
                         <Button
-                            onClick={() => isEditingForm(!editingFrom)}
+                            onClick={() => setCurrentWindow("reset")}
                             variant="contained"
                             color="success"
                             fullWidth

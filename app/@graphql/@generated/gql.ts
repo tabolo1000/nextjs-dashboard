@@ -18,7 +18,7 @@ type Documents = {
     "\n    fragment WordWithoutID on Word {\n        title,\n        description,\n        morpheme {\n            ...MorphemeWord\n        },\n        quote,\n        joke,\n        annotation,\n        derivatives,\n        collections,\n    }\n": typeof types.WordWithoutIdFragmentDoc,
     "\n    fragment Word on Word {\n        _id,\n        ...WordWithoutID\n    }\n": typeof types.WordFragmentDoc,
     "\n    query searchWords($substring: String!, $limit: Float!) {\n        searchWords(substring: $substring, limit: $limit) {\n            _id\n            title\n            description\n            morpheme {\n                ...MorphemeWord\n\n            }\n        }\n    }\n": typeof types.SearchWordsDocument,
-    "\n    query getWords {\n        words {\n            ...Word\n        }\n    }\n": typeof types.GetWordsDocument,
+    "\n    query getWords($collectionName: String!) {\n        words(collectionName: $collectionName) {\n            ...Word\n        }\n    }\n": typeof types.GetWordsDocument,
     "\n    mutation updateWord($word: UpdateWordInput!) {\n        updateWord(word: $word) {\n            ...Word\n        }\n}": typeof types.UpdateWordDocument,
     "\n    mutation deleteWord($id: String!) {\n        deleteWord(id: $id) {\n            ...Word\n        }\n    }\n": typeof types.DeleteWordDocument,
     "\n    mutation createWord($word: AddWordInput!) {\n        createWord(word: $word) {\n            ...Word\n        }\n    }\n": typeof types.CreateWordDocument,
@@ -28,7 +28,7 @@ const documents: Documents = {
     "\n    fragment WordWithoutID on Word {\n        title,\n        description,\n        morpheme {\n            ...MorphemeWord\n        },\n        quote,\n        joke,\n        annotation,\n        derivatives,\n        collections,\n    }\n": types.WordWithoutIdFragmentDoc,
     "\n    fragment Word on Word {\n        _id,\n        ...WordWithoutID\n    }\n": types.WordFragmentDoc,
     "\n    query searchWords($substring: String!, $limit: Float!) {\n        searchWords(substring: $substring, limit: $limit) {\n            _id\n            title\n            description\n            morpheme {\n                ...MorphemeWord\n\n            }\n        }\n    }\n": types.SearchWordsDocument,
-    "\n    query getWords {\n        words {\n            ...Word\n        }\n    }\n": types.GetWordsDocument,
+    "\n    query getWords($collectionName: String!) {\n        words(collectionName: $collectionName) {\n            ...Word\n        }\n    }\n": types.GetWordsDocument,
     "\n    mutation updateWord($word: UpdateWordInput!) {\n        updateWord(word: $word) {\n            ...Word\n        }\n}": types.UpdateWordDocument,
     "\n    mutation deleteWord($id: String!) {\n        deleteWord(id: $id) {\n            ...Word\n        }\n    }\n": types.DeleteWordDocument,
     "\n    mutation createWord($word: AddWordInput!) {\n        createWord(word: $word) {\n            ...Word\n        }\n    }\n": types.CreateWordDocument,
@@ -67,7 +67,7 @@ export function gql(source: "\n    query searchWords($substring: String!, $limit
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n    query getWords {\n        words {\n            ...Word\n        }\n    }\n"): (typeof documents)["\n    query getWords {\n        words {\n            ...Word\n        }\n    }\n"];
+export function gql(source: "\n    query getWords($collectionName: String!) {\n        words(collectionName: $collectionName) {\n            ...Word\n        }\n    }\n"): (typeof documents)["\n    query getWords($collectionName: String!) {\n        words(collectionName: $collectionName) {\n            ...Word\n        }\n    }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -3,7 +3,6 @@ import React from "react";
 
 export const LessonCard: React.FC<LessonCardProps> = ({ title, description, icon, iconColor, to }) => {
     const isFunction = typeof to === "function";
-
     return (
         isFunction ? (
             <div
