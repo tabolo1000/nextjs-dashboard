@@ -11,7 +11,7 @@ import {
     EffectCube,
 } from "swiper/modules";
 import {Swiper, SwiperSlide} from "swiper/react";
-import {Slider_card} from "@/app/ui/math/components/slider/Slider_card";
+import {Slider_card} from "@/app/ui/math/components/slider/sliderCard/Slider_card";
 import React from "react";
 
 import {useSettingSlider} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/@store/settingStore";
