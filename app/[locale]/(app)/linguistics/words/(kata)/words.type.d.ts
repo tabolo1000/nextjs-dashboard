@@ -13,12 +13,12 @@ export type Word = {
     collections: string[];
 }
  
-type Morpheme = {
+/*type Morpheme = {
     prefix?: string[];
     root: string[];
     suffix?: string[];
     end?: string[];
-}
+}*/
 
 
 // old type

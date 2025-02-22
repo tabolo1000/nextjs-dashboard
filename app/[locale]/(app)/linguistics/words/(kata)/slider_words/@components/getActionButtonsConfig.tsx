@@ -25,7 +25,7 @@ if (isEditingActive) {
         },
         {
             icon: <ExitToAppTwoTone className="text-3xl"/>,
-            onClick: () => setTopic([]),
+            onClick: () => setCurrentWindow("reset"),
             color: "error",
             tooltip: "Выйти",
         },

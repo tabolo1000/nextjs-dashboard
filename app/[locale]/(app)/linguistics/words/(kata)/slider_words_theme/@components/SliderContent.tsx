@@ -5,7 +5,8 @@ import {motion, Variants} from "framer-motion";
 import CustomSwiper from "@/app/ui/math/components/slider/CustomSwiper";
 import CustomPagination from "@/app/ui/math/components/slider/CustomPagination";
 import SearchWords from "@/app/[locale]/(app)/linguistics/words/(kata)/@components/SearchWords";
-import {WordCarousel, WordCarouselUpdate} from "@/app/store/slices/wordsSliderSlice/wordsSliderSlice";
+import {WordCarouselUpdate} from "@/app/store/slices/wordsSliderSlice/wordsSliderSlice";
+import {WordFragment} from "@/app/@graphql/@generated/graphql";
 
 export default memo(function SliderContent ({
                                                 currentItems,
@@ -49,7 +50,7 @@ export default memo(function SliderContent ({
 //---------------------------------------Types------------------------------
 
 interface SliderContentProps {
-    currentItems: WordCarousel[];
+    currentItems: WordFragment[];
     handleWordChange: (word: WordCarouselUpdate) => void;
     handleWordDelete: (id: string) => void;
     pageCount: number;

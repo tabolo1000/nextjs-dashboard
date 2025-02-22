@@ -5,11 +5,11 @@ import SettingsContent
 import SliderContent from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/@components/SliderContent";
 import {Variants} from "framer-motion";
 import React from "react";
-import {WordCarousel, WordCarouselUpdate} from "@/app/store/slices/wordsSliderSlice/wordsSliderSlice";
 import {
     useEditing,
     useSettings,
 } from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/@store/sliderStore";
+import {UpdateWordInput, WordFragment} from "@/app/@graphql/@generated/graphql";
 
 
 const BlockContent = ({
@@ -52,8 +52,8 @@ export default BlockContent
 
 type BlockContentProps = {
     animationVariants: Variants;
-    currentItems: WordCarousel[];
-    handleWordChange: (word: WordCarouselUpdate) => void;
+    currentItems: WordFragment[];
+    handleWordChange: (word: UpdateWordInput) => void;
     handleWordDelete: (id: string) => void;
     pageCount: number;
     currentPage: number;

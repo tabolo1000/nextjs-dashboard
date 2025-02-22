@@ -21,15 +21,18 @@ export interface ActionButton {
 }
 
 interface ActionButtonsProps {
-    orientation?: "horizontal" | "vertical"; // Горизонтальная или вертикальная ориентация
-    gap?: number; // Расстояние между кнопками
+    orientation?: "horizontal" | "vertical";
+    gap?: number;
     style?: string;
 }
 
+/**
+ * Control panel k.p. for each window
+ */
 export default memo(function ActionButtons({
                                                orientation = "horizontal",
                                                gap = 1,
-                                               style
+                                               style = ""
                                            }: ActionButtonsProps) {
     const isSettingsActive = useSettings()
     const isEditingActive = useEditing()

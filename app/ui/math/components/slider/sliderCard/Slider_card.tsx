@@ -1,23 +1,30 @@
 import React from "react";
 import {Box, Button, CardContent, Typography} from "@mui/material";
-import {Morpheme} from "@/app/ui/math/components/Morpheme";
 import {AddBoxOutlined, ChangeCircleOutlined, DeleteOutline} from "@mui/icons-material";
 import {EditableField} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/EditableField";
 import ConfirmationModal from "@/app/ui/math/components/ConfirmationModal";
-import {WordCarousel} from "@/app/store/slices/wordsSliderSlice/wordsSliderSlice";
 import {UpdateField} from "@/app/[locale]/(app)/linguistics/words/(kata)/words.type";
 import {WordFragment} from "@/app/@graphql/@generated/graphql";
 import useSlider_card from "@/app/ui/math/components/slider/sliderCard/useSlider_card";
 import {useSliderHandlers} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/@store/sliderStore";
+import {Morpheme} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/morphemes/Morpheme";
 
-
+/**
+ * One slide of the viewing window
+ * @param _id
+ * @param handleWordChange
+ * @param handleWordDelete
+ * @param morpheme
+ * @param icon
+ * @constructor
+ */
 export function Slider_card({
                                 _id,
                                 handleWordChange,
                                 handleWordDelete,
                                 morpheme,
                                 icon,
-                            }: WordCarousel & {
+                            }: WordFragment & {
     handleWordChange: <T extends keyof WordFragment>(value: UpdateField<T>) => void;
     handleWordDelete: (id: string) => void;
 }) {
@@ -76,6 +83,7 @@ export function Slider_card({
                         />
                     </Typography>
 
+                    {/*Component of morphemic parsing */}
                     <Morpheme {...morpheme} />
 
                     {/* Описание */}

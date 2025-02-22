@@ -17,9 +17,16 @@ import React from "react";
 import {useSettingSlider} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/@store/settingStore";
 import 'swiper/swiper-bundle.css';
 import 'swiper/css/effect-cube';
-import {WordCarousel, WordCarouselUpdate} from "@/app/store/slices/wordsSliderSlice/wordsSliderSlice";
+import {WordCarouselUpdate} from "@/app/store/slices/wordsSliderSlice/wordsSliderSlice";
+import {WordFragment} from "@/app/@graphql/@generated/graphql";
 
-
+/**
+ * The slider built on Swiper is responsible for customization
+ * @param currentItems
+ * @param handleWordChange
+ * @param handleWordDelete
+ * @constructor
+ */
 export default function CustomSwiper({
     currentItems,
     handleWordChange,
@@ -84,7 +91,7 @@ export default function CustomSwiper({
 //------------------------Types---------------------------------------------
 
 interface CustomSwiperProps {
-    currentItems: WordCarousel[],
+    currentItems: WordFragment[],
     handleWordChange: (value: WordCarouselUpdate) => void,
     handleWordDelete: (id: string) => void,
 }

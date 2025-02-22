@@ -11,7 +11,7 @@ import {
 } from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/JsonUploader/JsonUploader";
 import {Base_button} from "@/app/ui/math/components/Base_button";
 import {CodexFormValues} from "@/app/[locale]/(app)/linguistics/words/(kata)/words.type";
-import MorphemeFields from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/MorphemeFields";
+import MorphemeFields from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/morphemes/MorphemeFields";
 import Derivatives
     from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/derivatives/Derivatives";
 import {

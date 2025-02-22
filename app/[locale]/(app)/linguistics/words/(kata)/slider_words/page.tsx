@@ -14,11 +14,10 @@ import useSlider_words from "@/app/[locale]/(app)/linguistics/words/(kata)/useSl
  * Page adding and displaying words slider as well as its settings
  */
 export default function Carrousel_Slider() {
-    debugger
     const { pagination, data, actions } = useSlider_words();
     const { pageCount, currentPage, handleChangePage } = pagination;
     const { currentItems} = data;
-    const { handleWordChange, handleWordDelete, handleLoadWords } = actions;
+    const { handleWordChange, handleWordDelete} = actions;
 
     return (
         <>
@@ -31,7 +30,6 @@ export default function Carrousel_Slider() {
                 <div className="absolute translate-x-full right-0 top-0">
                     <ActionButtons
                         orientation="vertical"
-                        style=""
                     />
                 </div>
 

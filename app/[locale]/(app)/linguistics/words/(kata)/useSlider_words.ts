@@ -35,11 +35,8 @@
 
 "use client";
 
-import {useAppDispatch} from "@/app/store/hooks";
 import React, {useCallback, useState} from "react";
-import {loadWordsForCarousel} from "@/app/store/slices/wordsSliderSlice/wordsSliderSliceThunks";
-import {WordCarousel, WordCarouselUpdate} from "@/app/store/slices/wordsSliderSlice/wordsSliderSlice";
-import {FetchResult, useMutation, useSuspenseQuery} from "@apollo/client";
+import {ApolloError, FetchResult, useMutation, useSuspenseQuery} from "@apollo/client";
 import {
     DeleteWordDocument,
     DeleteWordMutation,
@@ -47,16 +44,15 @@ import {
     GetWordsDocument,
     GetWordsQuery,
     GetWordsQueryVariables,
-    UpdateWordDocument,
+    UpdateWordDocument, UpdateWordInput,
     UpdateWordMutation,
     UpdateWordMutationVariables,
     WordFragment
 } from "@/app/@graphql/@generated/graphql";
-import {UpdateField} from "@/app/[locale]/(app)/linguistics/words/(kata)/words.type";
 import {useTopics} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/@store/sliderStore";
 
 
-export default function useSlider_words() {
+export default function useSlider_words(): ReturnSliderType {
     const topics = useTopics();
 
     const [changeWord] = useMutation<UpdateWordMutation, UpdateWordMutationVariables>(UpdateWordDocument, {
@@ -90,17 +86,12 @@ export default function useSlider_words() {
         }
     })
 
-    const dispatch = useAppDispatch();
-
-    debugger
     // Get the data and push it to the pages.
     const {data, error} = useSuspenseQuery<GetWordsQuery, GetWordsQueryVariables>(GetWordsDocument, {
         variables: {
             collectionName: topics[0],
         },
     });
-
-
     const wordsCarousel = data?.words || []
     // Getting pages
     const itemsPerPage = 20;
@@ -110,13 +101,6 @@ export default function useSlider_words() {
         (currentPage - 1) * itemsPerPage,
         currentPage * itemsPerPage
     );
-
-
-    const handleLoadWords = useCallback(() => {
-        dispatch(loadWordsForCarousel(topics));
-    }, []);
-
-
     /**
      * Conventional deletion by id
      * id-String-ObjectType(String!)
@@ -137,7 +121,7 @@ export default function useSlider_words() {
      *     title - Any field. For example, tittle.
      * }
      */
-    const handleWordChange = useCallback(async <T extends keyof WordFragment>(word: UpdateField<T>) => {
+    const handleWordChange = useCallback(async (word: UpdateWordInput) => {
             debugger
             await changeWord({
                 variables: {
@@ -148,23 +132,6 @@ export default function useSlider_words() {
         [changeWord]
     );
 
-    // Handler displaying the settings window
-    /*const toggleSettings = () => setIsSettingsActive((prev) => !prev);*/
-
-
-    /* old code --------------------------------
-            useEffect(() => {
-            dispatch(loadWordsForCarousel(endPoints));
-            }, [dispatch, endPoints]);
-
-
-            const handleWordDelete = useCallback((id: string) => {
-            dispatch(deleteWordToCarousel(id));
-        },
-        [dispatch]
-    );
-
-     */
     // !DEBUGGER! Page Definition.
     const handleChangePage = useCallback((_: unknown, value: number) => {
         setPage(value);
@@ -181,7 +148,6 @@ export default function useSlider_words() {
             error,
         },
         actions: {
-            handleLoadWords,
             handleWordChange,
             handleWordDelete,
         },
@@ -201,17 +167,16 @@ interface Pagination {
 }
 
 interface Data {
-    currentItems: WordCarousel[];
-    error: string | null;
+    currentItems: WordFragment[];
+    error: ApolloError | undefined ;
 }
 
 export interface Actions {
-    handleWordChange: (value: WordCarouselUpdate) => void;
+    handleWordChange: (value: UpdateWordInput) => void;
     handleWordDelete: (id: string) => void;
-    handleLoadWords: () => void;
 }
 
-interface ReturnType {
+interface ReturnSliderType {
     pagination: Pagination;
     data: Data;
     actions: Actions;

@@ -15,7 +15,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 type Documents = {
     "\n    fragment MorphemeWord on Morpheme {\n        prefix\n        root\n        suffix\n        end\n    }\n": typeof types.MorphemeWordFragmentDoc,
-    "\n    fragment WordWithoutID on Word {\n        title,\n        description,\n        morpheme {\n            ...MorphemeWord\n        },\n        quote,\n        joke,\n        annotation,\n        derivatives,\n        collections,\n    }\n": typeof types.WordWithoutIdFragmentDoc,
+    "\n    fragment WordWithoutID on Word {\n        title,\n        description,\n        morpheme {\n            ...MorphemeWord\n        },\n        quote,\n        joke,\n        annotation,\n        derivatives,\n        collections,\n        icon,\n    }\n": typeof types.WordWithoutIdFragmentDoc,
     "\n    fragment Word on Word {\n        _id,\n        ...WordWithoutID\n    }\n": typeof types.WordFragmentDoc,
     "\n    query searchWords($substring: String!, $limit: Float!) {\n        searchWords(substring: $substring, limit: $limit) {\n            _id\n            title\n            description\n            morpheme {\n                ...MorphemeWord\n\n            }\n        }\n    }\n": typeof types.SearchWordsDocument,
     "\n    query getWords($collectionName: String!) {\n        words(collectionName: $collectionName) {\n            ...Word\n        }\n    }\n": typeof types.GetWordsDocument,
@@ -25,7 +25,7 @@ type Documents = {
 };
 const documents: Documents = {
     "\n    fragment MorphemeWord on Morpheme {\n        prefix\n        root\n        suffix\n        end\n    }\n": types.MorphemeWordFragmentDoc,
-    "\n    fragment WordWithoutID on Word {\n        title,\n        description,\n        morpheme {\n            ...MorphemeWord\n        },\n        quote,\n        joke,\n        annotation,\n        derivatives,\n        collections,\n    }\n": types.WordWithoutIdFragmentDoc,
+    "\n    fragment WordWithoutID on Word {\n        title,\n        description,\n        morpheme {\n            ...MorphemeWord\n        },\n        quote,\n        joke,\n        annotation,\n        derivatives,\n        collections,\n        icon,\n    }\n": types.WordWithoutIdFragmentDoc,
     "\n    fragment Word on Word {\n        _id,\n        ...WordWithoutID\n    }\n": types.WordFragmentDoc,
     "\n    query searchWords($substring: String!, $limit: Float!) {\n        searchWords(substring: $substring, limit: $limit) {\n            _id\n            title\n            description\n            morpheme {\n                ...MorphemeWord\n\n            }\n        }\n    }\n": types.SearchWordsDocument,
     "\n    query getWords($collectionName: String!) {\n        words(collectionName: $collectionName) {\n            ...Word\n        }\n    }\n": types.GetWordsDocument,
@@ -55,7 +55,7 @@ export function gql(source: "\n    fragment MorphemeWord on Morpheme {\n        
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n    fragment WordWithoutID on Word {\n        title,\n        description,\n        morpheme {\n            ...MorphemeWord\n        },\n        quote,\n        joke,\n        annotation,\n        derivatives,\n        collections,\n    }\n"): (typeof documents)["\n    fragment WordWithoutID on Word {\n        title,\n        description,\n        morpheme {\n            ...MorphemeWord\n        },\n        quote,\n        joke,\n        annotation,\n        derivatives,\n        collections,\n    }\n"];
+export function gql(source: "\n    fragment WordWithoutID on Word {\n        title,\n        description,\n        morpheme {\n            ...MorphemeWord\n        },\n        quote,\n        joke,\n        annotation,\n        derivatives,\n        collections,\n        icon,\n    }\n"): (typeof documents)["\n    fragment WordWithoutID on Word {\n        title,\n        description,\n        morpheme {\n            ...MorphemeWord\n        },\n        quote,\n        joke,\n        annotation,\n        derivatives,\n        collections,\n        icon,\n    }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

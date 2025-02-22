@@ -20,6 +20,7 @@ const WordWithoutID = gql`
         annotation,
         derivatives,
         collections,
+        icon,
     }
 `
 
