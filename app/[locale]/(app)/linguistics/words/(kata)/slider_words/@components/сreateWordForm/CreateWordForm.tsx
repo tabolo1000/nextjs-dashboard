@@ -60,7 +60,7 @@ const placeholder = `{
 }`; // morpheme.prefix[0]  === "пре" // name of Formik
 
 
-export const CodexForm = memo(function CodexForm() {
+export const CreateWordForm = memo(function CodexForm() {
     const {loading, handleSubmit} = useCodexFrom()
     const {setCurrentWindow} = useSliderHandlers()
 
