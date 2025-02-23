@@ -34,7 +34,6 @@ export type MenuProps = {
 export default function Menu({ topicWords }: MenuProps) {
     const language = usePathname().split("/")[1];
     const { setTopic } = useSliderHandlers()
-    debugger
 
     const handleSelectTopic = (selectedTopic: string) => {
         setTopic([selectedTopic]);
@@ -44,10 +43,7 @@ export default function Menu({ topicWords }: MenuProps) {
         <>
             <div className="main_block_task">
                 <h1 className="header_h1">
-                    {getLocalizedText(language, {
-                        en: "Words",
-                        ru: "Слова"
-                    })}
+                    {getLocalizedText(language, { en: "Words",ru: "Слова"})}
                 </h1>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
                     {topicWords.map((word, i) => (

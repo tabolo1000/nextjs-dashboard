@@ -1,13 +1,15 @@
-import Language_switcher from "@/app/ui/math/components/Language_switcher";
-import {Aside_panel} from "@/app/[locale]/(app)/Aside_panel";
-import {Logo} from "@/app/ui/math/components/Logo";
-import ThemeToggle from "@/app/ui/math/components/ThemeToggle";
+import {MainBlock} from "@/app/[locale]/(app)/assets/components/MainBlock";
+import {Header} from "@/app/[locale]/(app)/assets/components/Header";
+import {Footer} from "@/app/[locale]/(app)/assets/components/Footer";
+import OperatingPanel from "@/app/[locale]/(app)/assets/components/OperatingPanel";
+import Chat from "@/app/[locale]/(app)/assets/components/Chat";
 
+interface LayoutProps {
+    children: React.ReactNode;
+}
 
-
-export default function Layout({children}:LayoutProps){
-
-    const language = [
+const Layout: React.FC<LayoutProps> = ({children}: LayoutProps) => {
+    const language: Array<Language> = [
         {
             locale: "en",
             content: "English",
@@ -15,56 +17,25 @@ export default function Layout({children}:LayoutProps){
         {
             locale: "ru",
             content: "Русский",
-        }
-    ]
+        },
+    ];
 
-    return (
-        <div className="layout main">
-            {/* Header */}
-            <header className="header flex justify-between fixed w-full max-h-20 z-10">
-                <Logo/>
-                <div className="flex justify-between">
-                    <div className={"mr-1"}>
-                        <Language_switcher name="English" locales={language}/>
-                    </div>
-                        <ThemeToggle/>
-                </div>
-            </header>
-
-            <div className="layout-body flex flex-1 pt-16">
-                {/* Sidebar */}
-
-                <Aside_panel nameLink={{
-                    math: "Mathematics",
-                    biology: "Biology",
-                    physics: "Physics",
-                    words: "linguistics",
-                    logout: "Logout",
-                }}/>
-
-                {/* Main Content */}
-                <div className=" "></div>
-                <main className="main-content ml-[18%] mx-5 my-2 ">
-                    {children} {/* Отображение дочерних элементов */}
-                </main>
-
-            </div>
-
-
-            {/* Footer */}
-            <footer className="footer z-10">
-                <p>&copy; 2024 Your Company. All rights reserved.</p>
-            </footer>
+    return (<div className="relative bg-gray-100 min-h-screen dark:bg-gray-900 base-animation-all overflow-clip">
+            <OperatingPanel/>
+            <Header language={language}/>
+            <MainBlock content={children}/>
+            <Chat/>
+            <Footer/>
         </div>
     );
 };
 
+export default Layout;
 
 
+//---------------------------------types-----------------------
 
-
-//---------------------Types-------------------------------------------------
-
-interface LayoutProps {
-    children: React.ReactNode;
+export interface Language {
+    locale: string,
+    content: string
 }

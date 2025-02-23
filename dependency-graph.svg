@@ -3531,18 +3531,18 @@
 <path fill="none" stroke="#000000" stroke-opacity="0.200000" d="M1054.15,-13809.22C1067.87,-13797.46 1089.77,-13775.87 1098.62,-13751.62 1111.04,-13717.63 1108.95,-8577.8 1109.25,-8541.62 1121.89,-7026.9 1157.85,-5154.04 1161.67,-4957.51"/>
 <polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-opacity="0.200000" points="1163.77,-4957.64 1161.79,-4951.6 1159.57,-4957.55 1163.77,-4957.64"/>
 </g>
-<!-- app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CodexForm.tsx -->
+<!-- app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/сreateWordForm/CreateWordForm.tsx -->
 <g id="node85" class="node">
-<title>app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CodexForm.tsx</title>
-<g id="a_node85"><a xlink:href="app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CodexForm.tsx" xlink:title="CodexForm.tsx">
+<title>app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CreateWordForm.tsx</title>
+<g id="a_node85"><a xlink:href="app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CreateWordForm.tsx" xlink:title="CreateWordForm.tsx">
 <path fill="#bbfeff" stroke="black" d="M884.58,-13607.87C884.58,-13607.87 819.42,-13607.87 819.42,-13607.87 816.33,-13607.87 813.25,-13604.78 813.25,-13601.7 813.25,-13601.7 813.25,-13595.53 813.25,-13595.53 813.25,-13592.45 816.33,-13589.37 819.42,-13589.37 819.42,-13589.37 884.58,-13589.37 884.58,-13589.37 887.67,-13589.37 890.75,-13592.45 890.75,-13595.53 890.75,-13595.53 890.75,-13601.7 890.75,-13601.7 890.75,-13604.78 887.67,-13607.87 884.58,-13607.87"/>
-<text text-anchor="start" x="821.25" y="-13595.32" font-family="Helvetica,sans-Serif" font-size="9.00">CodexForm.tsx</text>
+<text text-anchor="start" x="821.25" y="-13595.32" font-family="Helvetica,sans-Serif" font-size="9.00">CreateWordForm.tsx</text>
 </a>
 </g>
 </g>
-<!-- app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/@components/EditFormContainer.tsx&#45;&gt;app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CodexForm.tsx -->
+<!-- app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/@components/EditFormContainer.tsx&#45;&gt;app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/сreateWordForm/CreateWordForm.tsx -->
 <g id="edge153" class="edge">
-<title>app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/@components/EditFormContainer.tsx&#45;&gt;app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CodexForm.tsx</title>
+<title>app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/@components/EditFormContainer.tsx&#45;&gt;app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CreateWordForm.tsx</title>
 <path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M1027.55,-13808.9C1013.13,-13797.13 990.44,-13775.84 980.38,-13751.62 974.4,-13737.23 983.11,-13622.91 972.38,-13611.62 954.28,-13592.57 925.07,-13589.12 900.08,-13590.54"/>
 <polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="899.92,-13588.44 894.1,-13591.01 900.25,-13592.63 899.92,-13588.44"/>
 </g>
@@ -3789,43 +3789,43 @@
 <path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M900.05,-13571.74C925.36,-13572.68 954.87,-13568.59 972.38,-13548.62 983.46,-13535.97 968.56,-8716.58 980.38,-8704.62 1020.18,-8664.31 1187.42,-8679.96 1275.77,-8691.52"/>
 <polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="1275.36,-8693.58 1281.58,-8692.29 1275.91,-8689.42 1275.36,-8693.58"/>
 </g>
-<!-- app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CodexForm.tsx&#45;&gt;node_modules/.pnpm -->
+<!-- app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/сreateWordForm/CreateWordForm.tsx&#45;&gt;node_modules/.pnpm -->
 <g id="edge132" class="edge">
-<title>app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CodexForm.tsx&#45;&gt;node_modules/.pnpm</title>
+<title>app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CreateWordForm.tsx&#45;&gt;node_modules/.pnpm</title>
 <path fill="none" stroke="#000000" stroke-opacity="0.200000" d="M891.17,-13606.28C918.03,-13609.23 952.59,-13607.64 972.38,-13585.62 985.34,-13571.19 968.58,-8015.01 980.38,-7999.62 1013.5,-7956.4 1065.08,-8010.5 1098.62,-7967.62 1148.15,-7904.29 1160.9,-5195.9 1161.93,-4957.36"/>
 <polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-opacity="0.200000" points="1164.03,-4957.72 1161.95,-4951.71 1159.83,-4957.7 1164.03,-4957.72"/>
 </g>
-<!-- app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CodexForm.tsx&#45;&gt;app/store/hooks.ts -->
+<!-- app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/сreateWordForm/CreateWordForm.tsx&#45;&gt;app/store/hooks.ts -->
 <g id="edge128" class="edge">
-<title>app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CodexForm.tsx&#45;&gt;app/store/hooks.ts</title>
+<title>app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CreateWordForm.tsx&#45;&gt;app/store/hooks.ts</title>
 <path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M891.16,-13606.28C918.02,-13609.23 952.59,-13607.64 972.38,-13585.62 983.33,-13573.42 976.31,-8879.5 980.38,-8863.62 989.56,-8827.74 1013.06,-8790.93 1027.78,-8770.3"/>
 <polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="1029.32,-8771.75 1031.16,-8765.66 1025.93,-8769.27 1029.32,-8771.75"/>
 </g>
-<!-- app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CodexForm.tsx&#45;&gt;app/store/slices/wordsSliderSlice/wordsSliderSlice.ts -->
+<!-- app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/сreateWordForm/CreateWordForm.tsx&#45;&gt;app/store/slices/wordsSliderSlice/wordsSliderSlice.ts -->
 <g id="edge129" class="edge">
-<title>app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CodexForm.tsx&#45;&gt;app/store/slices/wordsSliderSlice/wordsSliderSlice.ts</title>
+<title>app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CreateWordForm.tsx&#45;&gt;app/store/slices/wordsSliderSlice/wordsSliderSlice.ts</title>
 <path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M891.16,-13606.28C918.02,-13609.23 952.59,-13607.64 972.38,-13585.62 994.96,-13560.48 957.11,-8743.13 980.38,-8718.62 990.36,-8708.09 1179.37,-8702.71 1275.63,-8700.65"/>
 <polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="1275.67,-8702.75 1281.63,-8700.52 1275.58,-8698.55 1275.67,-8702.75"/>
 </g>
-<!-- app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CodexForm.tsx&#45;&gt;app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/DynamicArrayField.tsx -->
+<!-- app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/сreateWordForm/CreateWordForm.tsx&#45;&gt;app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/DynamicArrayField.tsx -->
 <g id="edge126" class="edge">
-<title>app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CodexForm.tsx&#45;&gt;app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/DynamicArrayField.tsx</title>
+<title>app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CreateWordForm.tsx&#45;&gt;app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/DynamicArrayField.tsx</title>
 <path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M891.15,-13591.44C917.64,-13588.84 951.76,-13590.66 972.38,-13611.62 985.99,-13625.46 967.62,-13683.98 980.38,-13698.62 980.5,-13698.76 980.63,-13698.91 980.76,-13699.05"/>
 <polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="979.08,-13700.38 985.01,-13702.67 981.8,-13697.18 979.08,-13700.38"/>
 </g>
-<!-- app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CodexForm.tsx&#45;&gt;app/ui/math/components/Base_button.tsx -->
+<!-- app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/сreateWordForm/CreateWordForm.tsx&#45;&gt;app/ui/math/components/Base_button.tsx -->
 <g id="edge131" class="edge">
-<title>app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CodexForm.tsx&#45;&gt;app/ui/math/components/Base_button.tsx</title>
+<title>app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CreateWordForm.tsx&#45;&gt;app/ui/math/components/Base_button.tsx</title>
 <path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M891.17,-13590.95C918.03,-13588 952.6,-13589.59 972.38,-13611.62 979.66,-13619.74 980.08,-26168.71 980.38,-26179.62 1018.84,-27589.83 1145.91,-29328.79 1160.61,-29526.97"/>
 <polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="1158.51,-29527.05 1161.05,-29532.88 1162.7,-29526.74 1158.51,-29527.05"/>
 </g>
-<!-- app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CodexForm.tsx&#45;&gt;app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/JsonUploader/JsonUploader.tsx -->
+<!-- app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/сreateWordForm/CreateWordForm.tsx&#45;&gt;app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/JsonUploader/JsonUploader.tsx -->
 <g id="edge127" class="edge">
-<title>app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CodexForm.tsx&#45;&gt;app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/JsonUploader/JsonUploader.tsx</title>
+<title>app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CreateWordForm.tsx&#45;&gt;app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/JsonUploader/JsonUploader.tsx</title>
 <path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M891.01,-13592.72C916.76,-13590.92 950.03,-13593.16 972.38,-13611.62 981.7,-13619.32 972.06,-13628.84 980.38,-13637.62 983.32,-13640.72 986.74,-13643.39 990.43,-13645.69"/>
 <polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="989.35,-13647.49 995.63,-13648.46 991.33,-13643.79 989.35,-13647.49"/>
 </g>
-<!-- app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/validationSchema.ts -->
+<!-- app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/сreateWordForm/validationSchema.ts -->
 <g id="node86" class="node">
 <title>app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/validationSchema.ts</title>
 <g id="a_node86"><a xlink:href="app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/validationSchema.ts" xlink:title="validationSchema.ts">
@@ -3834,19 +3834,19 @@
 </a>
 </g>
 </g>
-<!-- app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CodexForm.tsx&#45;&gt;app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/validationSchema.ts -->
+<!-- app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/сreateWordForm/CreateWordForm.tsx&#45;&gt;app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/сreateWordForm/validationSchema.ts -->
 <g id="edge125" class="edge">
-<title>app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CodexForm.tsx&#45;&gt;app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/validationSchema.ts</title>
+<title>app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CreateWordForm.tsx&#45;&gt;app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/validationSchema.ts</title>
 <path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M890.92,-13598.62C917.39,-13598.62 953.21,-13598.62 983.14,-13598.62"/>
 <polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="982.79,-13600.72 988.79,-13598.62 982.79,-13596.52 982.79,-13600.72"/>
 </g>
-<!-- app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CodexForm.tsx&#45;&gt;app/store/slices/wordsSliderSlice/wordsSliderSliceThunks.ts -->
+<!-- app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/сreateWordForm/CreateWordForm.tsx&#45;&gt;app/store/slices/wordsSliderSlice/wordsSliderSliceThunks.ts -->
 <g id="edge130" class="edge">
-<title>app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CodexForm.tsx&#45;&gt;app/store/slices/wordsSliderSlice/wordsSliderSliceThunks.ts</title>
+<title>app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CreateWordForm.tsx&#45;&gt;app/store/slices/wordsSliderSlice/wordsSliderSliceThunks.ts</title>
 <path fill="none" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" d="M891.16,-13606.28C918.02,-13609.23 952.59,-13607.64 972.38,-13585.62 983.7,-13573.01 971.7,-8718.18 980.38,-8703.62 1086.77,-8524.96 1273.03,-8415.56 1424.88,-8557.62 1444.39,-8575.88 1416.79,-8656.27 1432.88,-8677.62 1435.12,-8680.6 1437.81,-8683.18 1440.79,-8685.41"/>
 <polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-width="2" stroke-opacity="0.200000" points="1439.42,-8687.03 1445.63,-8688.41 1441.64,-8683.46 1439.42,-8687.03"/>
 </g>
-<!-- app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/validationSchema.ts&#45;&gt;node_modules/.pnpm -->
+<!-- app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/сreateWordForm/validationSchema.ts&#45;&gt;node_modules/.pnpm -->
 <g id="edge133" class="edge">
 <title>app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/validationSchema.ts&#45;&gt;node_modules/.pnpm</title>
 <path fill="none" stroke="#000000" stroke-opacity="0.200000" d="M1091.12,-13592.26C1093.95,-13590.47 1096.5,-13588.28 1098.62,-13585.62 1109.54,-13571.92 1109.1,-8559.13 1109.25,-8541.62 1121.94,-7026.9 1157.85,-5154.04 1161.67,-4957.51"/>
@@ -14705,18 +14705,18 @@
 <path fill="none" stroke="#000000" stroke-opacity="0.200000" d="M1447.71,-8628.99C1441.92,-8625.94 1436.7,-8621.91 1432.88,-8616.62 1422.73,-8602.56 1426.69,-8321.86 1424.88,-8304.62 1380.13,-7880.61 1295.48,-7785.41 1248.75,-7361.62 1193.06,-6856.51 1166.99,-5147.69 1164.24,-4957.81"/>
 <polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-opacity="0.200000" points="1166.34,-4957.84 1164.16,-4951.87 1162.14,-4957.9 1166.34,-4957.84"/>
 </g>
-<!-- app/ui/layouts/CodexForm.tsx -->
+<!-- app/ui/layouts/CreateWordForm.tsx -->
 <g id="node475" class="node">
-<title>app/ui/layouts/CodexForm.tsx</title>
-<g id="a_node475"><a xlink:href="app/ui/layouts/CodexForm.tsx" xlink:title="CodexForm.tsx">
+<title>app/ui/layouts/CreateWordForm.tsx</title>
+<g id="a_node475"><a xlink:href="app/ui/layouts/CreateWordForm.tsx" xlink:title="CreateWordForm.tsx">
 <path fill="#bbfeff" stroke="black" d="M884.58,-29485.87C884.58,-29485.87 819.42,-29485.87 819.42,-29485.87 816.33,-29485.87 813.25,-29482.78 813.25,-29479.7 813.25,-29479.7 813.25,-29473.53 813.25,-29473.53 813.25,-29470.45 816.33,-29467.37 819.42,-29467.37 819.42,-29467.37 884.58,-29467.37 884.58,-29467.37 887.67,-29467.37 890.75,-29470.45 890.75,-29473.53 890.75,-29473.53 890.75,-29479.7 890.75,-29479.7 890.75,-29482.78 887.67,-29485.87 884.58,-29485.87"/>
-<text text-anchor="start" x="821.25" y="-29473.32" font-family="Helvetica,sans-Serif" font-size="9.00">CodexForm.tsx</text>
+<text text-anchor="start" x="821.25" y="-29473.32" font-family="Helvetica,sans-Serif" font-size="9.00">CreateWordForm.tsx</text>
 </a>
 </g>
 </g>
-<!-- app/ui/layouts/CodexForm.tsx&#45;&gt;node_modules/.pnpm -->
+<!-- app/ui/layouts/CreateWordForm.tsx&#45;&gt;node_modules/.pnpm -->
 <g id="edge1337" class="edge">
-<title>app/ui/layouts/CodexForm.tsx&#45;&gt;node_modules/.pnpm</title>
+<title>app/ui/layouts/CreateWordForm.tsx&#45;&gt;node_modules/.pnpm</title>
 <path fill="none" stroke="#000000" stroke-opacity="0.200000" d="M853.2,-29466.9C857.88,-29233.53 945.48,-24841.05 972.38,-21307.62 972.46,-21296.2 973.43,-8164.68 980.38,-8155.62 1013.48,-8112.39 1065.11,-8166.52 1098.62,-8123.62 1150.72,-8056.93 1161.15,-5203.3 1161.95,-4957.47"/>
 <polygon fill="#000000" fill-opacity="0.200000" stroke="#000000" stroke-opacity="0.200000" points="1164.05,-4957.63 1161.97,-4951.62 1159.85,-4957.62 1164.05,-4957.63"/>
 </g>

@@ -1,32 +1,32 @@
 import React, {useEffect, useRef, useState} from "react";
 
 interface DynamicTextWithLineProps {
-    text: string; // Текст, который мы выводим
-    strokeColor?: string; // Цвет линии
-    strokeWidth?: number; // Толщина линии
-    lineHeight?: number; // Высота вертикальной линии
+    text: string; // The text we output
+    strokeColor?: string; // Line color
+    strokeWidth?: number; // Line thickness
+    lineHeight?: number; // Height of vertical line
 }
 
 export const DynamicTextWithLine: React.FC<DynamicTextWithLineProps> = ({
                                                                      text,
-                                                                     strokeColor = "#008000", // Значение по умолчанию для цвета линии
-                                                                     strokeWidth = 4, // Значение по умолчанию для толщины линии
-                                                                     lineHeight = 20, // Высота вертикальной черты
+                                                                     strokeColor = "#008000",
+                                                                     strokeWidth = 4,
+                                                                     lineHeight = 20,
                                                                  }) => {
-    const textRef = useRef<HTMLSpanElement>(null); // Ссылка на элемент текста
+    const textRef = useRef<HTMLSpanElement>(null);
     const [textSize, setTextSize] = useState<{ width: number; height: number }>({
         width: 0,
         height: 0,
-    }); // Состояние для размеров текста
+    });
 
     // Хук для получения размеров текста
     useEffect(() => {
         if (textRef.current) {
             const { width, height } = textRef.current.getBoundingClientRect(); // Получаем ширину и высоту текста
 
-            setTextSize({ width, height }); // Сохраняем размеры в состояние
+            setTextSize({ width, height });
         }
-    }, [text]); // Срабатывает при изменении текста
+    }, [text]);
 
     // Формируем путь: горизонтальная линия + вертикальная черта
     const linePath = `

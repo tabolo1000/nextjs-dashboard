@@ -5,7 +5,7 @@ import {Form, Formik} from "formik";
 import {Box, Button, CircularProgress, Typography,} from "@mui/material";
 import {
     validationSchema
-} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/validationSchema";
+} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/сreateWordForm/validationSchema";
 import {
     JsonUploader
 } from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/JsonUploader/JsonUploader";
@@ -18,7 +18,7 @@ import {
     DynamicArrayField
 } from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/dynamicArrayFields/DynamicArrayField";
 import useCodexFrom
-    from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/useCodexFrom";
+    from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/сreateWordForm/useCodexFrom";
 import {
     useSliderHandlers
 } from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words_theme/@store/sliderStore";

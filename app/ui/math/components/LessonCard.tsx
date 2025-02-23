@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-export const LessonCard: React.FC<LessonCardProps> = ({ title, description, icon, iconColor, to }) => {
+export const LessonCard: React.FC<LessonCardProps> = ({title, description, icon, iconColor, to}) => {
     const isFunction = typeof to === "function";
     return (
         isFunction ? (
@@ -20,7 +20,7 @@ export const LessonCard: React.FC<LessonCardProps> = ({ title, description, icon
             </div>
         ) : (
             <Link
-                href={to || "#"} // Fallback to "#" if `to` is not provided
+                href={to || "#"}
                 className="base-animation-all dark:bg-dark-card bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all hover:scale-105"
             >
                 <div className={`text-4xl mb-4 ${iconColor}`}>{icon}</div>

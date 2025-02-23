@@ -13,8 +13,16 @@ import {
     DynamicTextWithLine
 } from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/morphemes/DynamicTextWithLine";
 
-export function Morpheme({prefix, root, suffix, end}: MorphemeWordFragment){
 
+/**
+ * Trying to pass through the array of elements if I fail, I return an empty string
+ * @param prefix
+ * @param root
+ * @param suffix
+ * @param end
+ * @constructor
+ */
+export function Morpheme({prefix, root, suffix, end}: MorphemeWordFragment){
     return <p className={"m-3 mr-10"}>
         {
             (prefix)

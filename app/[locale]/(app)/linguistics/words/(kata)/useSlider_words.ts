@@ -44,7 +44,8 @@ import {
     GetWordsDocument,
     GetWordsQuery,
     GetWordsQueryVariables,
-    UpdateWordDocument, UpdateWordInput,
+    UpdateWordDocument,
+    UpdateWordInput,
     UpdateWordMutation,
     UpdateWordMutationVariables,
     WordFragment
@@ -55,7 +56,8 @@ import {useTopics} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_wo
 export default function useSlider_words(): ReturnSliderType {
     const topics = useTopics();
 
-    const [changeWord] = useMutation<UpdateWordMutation, UpdateWordMutationVariables>(UpdateWordDocument, {
+
+    const [changeWord, {}] = useMutation<UpdateWordMutation, UpdateWordMutationVariables>(UpdateWordDocument, {
         update(cache, {data}: FetchResult<UpdateWordMutation>) {
             const existingWords = cache.readQuery<GetWordsQuery>({
                 query: GetWordsDocument,
@@ -68,8 +70,9 @@ export default function useSlider_words(): ReturnSliderType {
                     },
                 })
             }
-        }
+        },
     });
+
     const [deleteWord] = useMutation<DeleteWordMutation, DeleteWordMutationVariables>(DeleteWordDocument, {
         update(cache, {data}: FetchResult<DeleteWordMutation>) {
             const existingWords = cache.readQuery<GetWordsQuery>({
@@ -168,7 +171,7 @@ interface Pagination {
 
 interface Data {
     currentItems: WordFragment[];
-    error: ApolloError | undefined ;
+    error: ApolloError | undefined;
 }
 
 export interface Actions {

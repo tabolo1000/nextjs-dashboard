@@ -1,4 +1,3 @@
-/*
 import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { Provider } from "react-redux";
@@ -60,4 +59,4 @@ export const Register: Story = {
         </Provider>
     );
   },
-};*/
+};

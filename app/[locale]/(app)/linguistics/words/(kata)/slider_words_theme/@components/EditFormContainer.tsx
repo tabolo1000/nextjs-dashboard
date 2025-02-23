@@ -2,7 +2,7 @@
 
 import React from "react";
 import {motion, Variants} from "framer-motion";
-import {CodexForm} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/codexFrom/CodexForm";
+import {CreateWordForm} from "@/app/[locale]/(app)/linguistics/words/(kata)/slider_words/@components/сreateWordForm/CreateWordForm";
 import {ErrorBoundary} from "react-error-boundary";
 import {ErrorScreen} from "@/app/[locale]/(app)/@components/ErrorScreen";
 
@@ -26,7 +26,7 @@ const EditFormContainer: React.FC<EditFormContainerProps> = React.memo(function 
         >
             <ErrorBoundary fallback={<ErrorScreen message={{en: "Error", ru: "Ошибка"}} onRetry={() => {
             }}/>}>
-                <CodexForm />
+                <CreateWordForm />
             </ErrorBoundary>
         </motion.div>
     );
