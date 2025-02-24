@@ -1,0 +1,29 @@
+<svg width="200" height="100" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#ff6f61; stop-opacity:1"/>
+            <stop offset="100%" style="stop-color:#d32f2f; stop-opacity:1"/>
+        </linearGradient>
+        <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#3f51b5; stop-opacity:1"/>
+            <stop offset="100%" style="stop-color:#1a237e; stop-opacity:1"/>
+        </linearGradient>
+    </defs>
+    <g>
+        <path fill="url(#grad1)" d="M48 36c0 6.6-5.4 12-12 12H12C5.4 48 0 42.6 0 36v-2h48v2z"/>
+        <path fill="url(#grad2)" d="M0 14h48v8H0z"/>
+        <path fill="#fff" d="M0 22h48v8H0z"/>
+        <path fill="url(#grad2)" d="M48 12V2c0-1.1-.9-2-2-2H2C.9 0 0 .9 0 2v10h48z"/>
+    </g>
+    <g>
+        <circle cx="24" cy="24" r="7" fill="#ffeb3b" stroke="#d32f2f" stroke-width="2"/>
+        <path fill="#fff" d="M0 14h48v20H0z" opacity="0.3"/>
+        <path fill="url(#grad2)" d="M0 14h48v10H0z"/>
+        <path fill="url(#grad1)" d="M0 24h48v10H0z"/>
+    </g>
+    <g>
+        <path fill="#ffeb3b" d="M0 16h48v16H0z" opacity="0.7"/>
+        <path fill="url(#grad1)" d="M0 32h48v16H0z"/>
+        <path fill="url(#grad1)" d="M0 0h48v16H0z"/>
+    </g>
+</svg>

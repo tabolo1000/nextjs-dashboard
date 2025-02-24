@@ -8,7 +8,7 @@ const meta: Meta<typeof Footer> = {
     tags: ['autodocs'], // Автоматическая генерация документации
     argTypes: { // Описание как должен отображаться компонент на панели инструментов
         title: {
-            control: 'color', // тип поля контроля text, boolean, number, select, radio, color
+            control: 'text', // тип поля контроля text, boolean, number, select, radio, color
             description: 'Текст или React-элемент для отображения в футере', // поле Name
             name: 'title', // поле Name
         },
