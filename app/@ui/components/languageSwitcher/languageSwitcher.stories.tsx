@@ -19,7 +19,8 @@ const meta: Meta<typeof LanguageSwitcher> = {
     component: LanguageSwitcher,
     tags: ["autodocs"],
     args: {
-        locales
+        locales,
+        opened: true,
     }
 }
 

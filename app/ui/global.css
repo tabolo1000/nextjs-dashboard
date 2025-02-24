@@ -323,7 +323,7 @@ input[type='number']::-webkit-outer-spin-button {
 }*/
 
 .button_to {
-  @apply text-white flex items-center justify-center py-2  rounded-lg cursor-pointer ;
+  @apply dark:text-white flex items-center justify-center py-2  rounded-lg cursor-pointer ;
 }
 .dark .button_to {
   @apply text-white;

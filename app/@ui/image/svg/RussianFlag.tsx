@@ -11,6 +11,13 @@ const RussianFlag = () => {
             <rect width="48" height="10.666" fill="#fff" />
             <rect y="10.666" width="48" height="10.666" fill="#0039a6" />
             <rect y="21.332" width="48" height="10.666" fill="#d52b1e" />
+            <rect
+                width="48"
+                height="32"
+                fill="none"
+                stroke="black"
+                strokeWidth="1"
+            />
         </svg>
     )
 }

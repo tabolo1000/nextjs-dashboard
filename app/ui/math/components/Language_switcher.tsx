@@ -5,9 +5,7 @@ import {useLocale} from "next-intl";
 import React, {MouseEvent, useCallback, useState} from "react";
 import {Base_button} from "@/app/ui/math/components/Base_button";
 import {Fade, Menu, MenuItem} from "@mui/material";
-import AmericanFlag from "@/app/@ui/image/svg/AmericanFlag";
-import RussianFlag from "@/app/@ui/image/svg/RussianFlag";
-import SpanishFlag from "@/app/@ui/image/svg/SpanishFlag";
+import FlagCountriesIcon from "@/app/@ui/components/flagCountriesIcon/FlagCountriesIcon";
 
 type LanguageSwitcherProps = {
     locales: { locale: string; content: string }[];
@@ -40,7 +38,7 @@ export default React.memo(function LanguageSwitcher({
                     classStyle={"button_to px-2"}
                     id="fade-button"
                 >
-                    {renderFlagIcon(locale)}
+                    <FlagCountriesIcon locale={locale} />
                 </Base_button>
 
                 <Menu
@@ -73,7 +71,7 @@ export default React.memo(function LanguageSwitcher({
                                     role="menuitem"
                                 >
                                     {/* Иконка флага */}
-                                    {renderFlagIcon(item.locale)}
+                                    <FlagCountriesIcon locale={locale} />
                                     {item.content}
                                 </span>
                             </Link>
