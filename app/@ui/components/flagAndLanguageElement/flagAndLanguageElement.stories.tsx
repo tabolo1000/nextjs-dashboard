@@ -1,5 +1,5 @@
 import {Meta, StoryObj} from "@storybook/react";
-import FlagAndLanguageElement from "@/app/@ui/components/FlagAndLanguageElement/FlagAndLanguageElement";
+import FlagAndLanguageElement from "@/app/@ui/components/flagAndLanguageElement/FlagAndLanguageElement";
 import {Language} from "@/i18n/languages";
 
 
@@ -15,7 +15,7 @@ const locales = [
 ];
 
 const meta: Meta<typeof FlagAndLanguageElement> = {
-    title: "Components/FlagAndLanguageElement",
+    title: "Components/flagAndLanguageElement",
     component: FlagAndLanguageElement,
     tags: ["autodocs"],
     args: {

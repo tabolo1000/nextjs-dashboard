@@ -3,6 +3,8 @@ import {store} from '@/app/store';
 import {StoryFn} from "@storybook/react";
 import {NextIntlClientProvider} from "next-intl";
 
+
+
 export const withReduxDecorator = (Story: StoryFn) => (
     <NextIntlClientProvider locale="ru" messages={{messages: ""}}>
         <Provider store={store}>
