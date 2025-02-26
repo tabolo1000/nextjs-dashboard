@@ -1,53 +1,67 @@
 import React, {useCallback, useState} from "react";
 import {useLocale} from "next-intl";
 import {Base_button} from "@/app/ui/math/components/Base_button";
-import {Language} from "@/i18n/languages";
 import {usePathname} from "@/i18n/routing";
 import FlagCountriesIcon from "@/app/@ui/components/flagCountriesIcon/FlagCountriesIcon";
-import {LanguageMenu} from "@/app/@ui/components/languageMenu/LanguageMenu";
+import {Fade, Popover} from "@mui/material";
+import LanguageMenuItems from "@/app/@ui/components/languageMenuItems/LanguageMenuItems";
 
 type LanguageSwitcherProps = {
     locales: { locale: string; content: string }[];
-    opened?: boolean;
 };
 
 export default React.memo(function LanguageSwitcher({
                                                         locales,
-                                                        opened = false,
                                                     }: LanguageSwitcherProps) {
-    // Current path (if usePathname returned undefined, use Language.Ru)
-    const currentPath = usePathname() || Language.Ru;
-
-    // Current locale
+    const pathName = usePathname() || "/";
     const locale = useLocale();
 
-    // Status to control opening/closing of the menu
-    const [anchorEl, setAnchorEl] = useState<boolean>(opened);
-    const open = Boolean(anchorEl);
+    const [internalAnchorEl, setInternalAnchorEl] = useState<HTMLElement | null>(null);
+    const open = Boolean(internalAnchorEl);
 
-    const handleClose = useCallback(() => setAnchorEl(false), []);
-    const handleToggle = useCallback(() => setAnchorEl((prev) => !prev), []);
+    const handleClose = useCallback(() => {
+        setInternalAnchorEl(null);
+    }, []);
+
+    const handleToggle = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
+        setInternalAnchorEl(event.currentTarget);
+    }, []);
 
     return (
         <div className="relative inline-block text-left">
-            {/* Кнопка с флагом */}
             <Base_button
                 onClick={handleToggle}
-                classStyle={"button_to px-2"}
-                id="fade-button"
+                classStyle="button_to px-2"
+                aria-expanded={open}
+                aria-haspopup="menu"
+                aria-label="Select language"
             >
-                <FlagCountriesIcon locale={locale}/>
+                <FlagCountriesIcon locale={locale} />
             </Base_button>
 
-            {/* Меню */}
-            <LanguageMenu
-                anchorEl={anchorEl}
+            <Popover
+                anchorEl={internalAnchorEl}
                 open={open}
                 onClose={handleClose}
-                locales={locales}
-                currentPath={currentPath}
-                currentLanguage={locale}
-            />
+                TransitionComponent={Fade}
+                anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "left",
+                }}
+                transformOrigin={{
+                    vertical: "top",
+                    horizontal: "left",
+                }}
+                disableScrollLock
+                id="language-menu-popover"
+            >
+                <LanguageMenuItems
+                    onClose={handleClose}
+                    locales={locales}
+                    currentPath={pathName}
+                    currentLanguage={locale}
+                />
+            </Popover>
         </div>
     );
 });

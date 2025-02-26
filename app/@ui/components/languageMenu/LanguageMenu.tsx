@@ -1,6 +1,6 @@
 import React from "react";
-import {Box, Fade, MenuItem, Popover, PopoverPosition, PopoverReference} from "@mui/material";
-import FlagAndLanguageElement from "@/app/@ui/components/flagAndLanguageElement/FlagAndLanguageElement";
+import {Box, Fade, Popover} from "@mui/material";
+import LanguageMenuItems from "@/app/@ui/components/languageMenuItems/LanguageMenuItems";
 
 type LanguageMenuProps = {
     open: boolean;
@@ -9,11 +9,6 @@ type LanguageMenuProps = {
     currentPath: string;
     currentLanguage: string;
     anchorEl: HTMLElement | null;
-
-    anchorReference?: PopoverReference;
-    disablePortal?: boolean;
-    anchorPosition?: PopoverPosition;
-    disableAutoFocus?: boolean; // отключает фокус на элементе
 };
 
 export const LanguageMenu = React.memo(function LanguageMenu({
@@ -23,11 +18,6 @@ export const LanguageMenu = React.memo(function LanguageMenu({
                                                                  locales,
                                                                  currentPath,
                                                                  currentLanguage,
-
-                                                                 disablePortal,
-                                                                 anchorReference,
-                                                                 anchorPosition,
-                                                                 disableAutoFocus
                                                              }: LanguageMenuProps) {
     return (
         <Box>
@@ -36,7 +26,6 @@ export const LanguageMenu = React.memo(function LanguageMenu({
                 open={open}
                 onClose={onClose}
                 TransitionComponent={Fade}
-                disableScrollLock={true} // Разрешаем прокрутку страницы
                 anchorOrigin={{
                     vertical: "bottom",
                     horizontal: "left",
@@ -45,28 +34,12 @@ export const LanguageMenu = React.memo(function LanguageMenu({
                     vertical: "top",
                     horizontal: "left",
                 }}
-                transitionDuration={{appear: 100, exit: 200, enter: 500}}
-
-
-                anchorReference={anchorReference}
-                anchorPosition={anchorPosition}
-                disablePortal={disablePortal}
-                disableAutoFocus={disableAutoFocus}
             >
-                {locales.map((localeItem) => (
-                    <MenuItem
-                        selected={localeItem.locale === currentLanguage}
-                        key={localeItem.locale} // Используем locale как ключ
-                        onClick={onClose} // Закрываем меню при выборе
-                    >
-                        <FlagAndLanguageElement
-                            locale={localeItem.locale}
-                            content={localeItem.content}
-                            currentPath={currentPath}
-                            currentLanguage={currentLanguage}
-                        />
-                    </MenuItem>
-                ))}
+                <LanguageMenuItems
+                    onClose={onClose}
+                    locales={locales}
+                    currentPath={currentPath}
+                    currentLanguage={currentLanguage}/>
             </Popover>
         </Box>
 

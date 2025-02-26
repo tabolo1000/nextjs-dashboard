@@ -1,9 +1,7 @@
 import {Meta, StoryObj} from "@storybook/react";
 import LanguageSwitcher from "@/app/@ui/components/languageSwitcher/LanguageSwitcher";
-import {Language} from "@/app/[locale]/(app)/assets/lang/Layout.ru";
 
-
-const locales: Array<Language> = [
+const locales = [
     {
         locale: "en",
         content: "English",
@@ -14,27 +12,25 @@ const locales: Array<Language> = [
     },
 ];
 
+
 const meta: Meta<typeof LanguageSwitcher> = {
     title: "Components/LanguageSwitcher",
     component: LanguageSwitcher,
     tags: ["autodocs"],
     args: {
         locales,
-        opened: true,
-    }
-}
+    },
+};
+
 
 export default meta;
 
-type Story = StoryObj<typeof LanguageSwitcher>
+type Story = StoryObj<typeof LanguageSwitcher>;
 
-
-
-export const Default = {}
-
-
-export const OpenedLanguageSwitcher = {
+export const Default: Story = {
     args: {
-        locales,
-    }
-}
+        locales: locales
+    },
+};
+
+

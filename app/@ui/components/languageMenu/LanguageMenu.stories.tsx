@@ -79,10 +79,6 @@ export const Default: Story = {
             setOpen(false);
         };
 
-        const coordinates = {
-            top: anchorEl ? anchorEl.offsetTop + 40 : 90,
-            left: anchorEl ? anchorEl.offsetLeft : 400,
-        }
 
         return (
             <div>
@@ -105,10 +101,6 @@ export const Default: Story = {
                     anchorEl={anchorEl}
                     open={open}
                     onClose={handleClose}
-
-                    anchorReference={"anchorPosition"}
-                    anchorPosition={coordinates}
-                    disablePortal={true}
                 />
             </div>
         );
@@ -117,44 +109,6 @@ export const Default: Story = {
         locales: locales,
         currentPath: "/",
         currentLanguage: Language.Ru,
-        open: false, // По умолчанию меню закрыто
-    },
-};
-
-// История с открытым меню
-export const OpenMenu: Story = {
-    ...Default,
-    args: {
-        ...Default.args,
-        open: true,
-    },
-};
-
-// История с закрытым меню
-export const ClosedMenu: Story = {
-    ...Default,
-    args: {
-        ...Default.args,
         open: false,
-    },
-};
-
-// История с английской локалью
-export const EnglishLocale: Story = {
-    ...Default,
-    args: {
-        ...Default.args,
-        currentLanguage: Language.En,
-        open: true,
-    },
-};
-
-// История с русской локалью
-export const RussianLocale: Story = {
-    ...Default,
-    args: {
-        ...Default.args,
-        currentLanguage: Language.Ru,
-        open: true,
     },
 };
