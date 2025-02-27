@@ -5,7 +5,7 @@ import React from "react";
 import {Language} from "@/i18n/languages";
 
 
-const FlagCountries = ({locale}: { locale: string }) => {
+const FlagCountriesIcon = ({locale}: { locale: string }) => {
     const countryFlagIcons: Record<string, JSX.Element> = {
         [Language.En]: <AmericanFlag/>,
         [Language.Ru]: <RussianFlag/>,
@@ -14,4 +14,4 @@ const FlagCountries = ({locale}: { locale: string }) => {
     return countryFlagIcons[locale];
 }
 
-export default FlagCountries;
+export default FlagCountriesIcon;

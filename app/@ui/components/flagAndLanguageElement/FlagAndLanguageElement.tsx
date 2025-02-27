@@ -18,7 +18,7 @@ const FlagAndLanguageElement = ({
                                 }: FlagAndLanguageElementProps) => {
 
     return (
-        <Link
+        <Link // ссылка меняет локаль
             href={currentPath}
             locale={currentLanguage}
         >
@@ -30,8 +30,8 @@ const FlagAndLanguageElement = ({
                                     } hover:bg-background_ec_hover text-text_color  `}
                                     role="menuitem"
                                 >
-                                    <FlagCountriesIcon locale={locale}/>
-                                    <p>{content}</p>
+                                    <FlagCountriesIcon locale={locale}/> {/*Иконка флага страны*/}
+                                    <p>{content}</p> {/*Текстовое представление языка*/}
                                 </span>
         </Link>
     )
