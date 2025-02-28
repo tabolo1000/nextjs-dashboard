@@ -43,6 +43,7 @@ export default React.memo(function LanguageSwitcher({
 
                 <Menu
                     id="fade-menu"
+                    className={"dark:bg-gray-800"}
                     MenuListProps={{
                         'aria-labelledby': 'fade-button',
                         className: "dark:bg-gray-800",
@@ -57,6 +58,7 @@ export default React.memo(function LanguageSwitcher({
                         <MenuItem
                             onClick={handleClose}
                             key={index}
+                            className={"dark:bg-gray-800"}
                         >
                             <Link
                                 href={asPath}

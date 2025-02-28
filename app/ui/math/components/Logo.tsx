@@ -1,5 +1,3 @@
-
-
 export function Logo() {
     return (
         <div className="relative flex items-center justify-center  bg-gray-100  rounded-t-md rounded-br-2xl w-36">

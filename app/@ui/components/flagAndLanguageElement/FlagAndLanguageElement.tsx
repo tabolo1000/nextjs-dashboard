@@ -18,12 +18,14 @@ const FlagAndLanguageElement = ({
                                 }: FlagAndLanguageElementProps) => {
 
     return (
-        <Link // ссылка меняет локаль
+        <Link
             href={currentPath}
-            locale={currentLanguage}
+            locale={locale}
         >
                                 <span
-                                    className={`button_to flex items-center px-4 py-2 text-sm 
+                                    className={`
+                                    button_to flex items-center px-4 py-2 text-sm dark:text-dark-text_color
+                                    dark:bg-dark-background_ec dark:hover:bg-dark-background_ec_hover
                                      ${currentLanguage === locale
                                         ? "bg-background_ec"
                                         : ""

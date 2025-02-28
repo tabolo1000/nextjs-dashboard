@@ -17,7 +17,7 @@ const LanguageMenuItems = React.memo(function LanguageMenu({
                                                                  currentLanguage,
                                                              }: LanguageMenuProps) {
     return (
-        <div>
+        <div className={"dark:bg-dark-component_background"}>
             {locales.map((localeItem) => (
                 <MenuItem
                     selected={localeItem.locale === currentLanguage}

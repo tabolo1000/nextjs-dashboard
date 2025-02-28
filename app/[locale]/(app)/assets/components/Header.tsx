@@ -1,7 +1,6 @@
 "use client"
 
 import {Logo} from "@/app/ui/math/components/Logo";
-import Language_switcher from "@/app/ui/math/components/Language_switcher";
 import ThemeToggle from "@/app/ui/math/components/ThemeToggle";
 import {Link} from "@/i18n/routing";
 import {Person2TwoTone} from "@mui/icons-material";
@@ -9,6 +8,7 @@ import React from "react";
 import {Language} from "@/app/[locale]/(app)/assets/lang/Layout.ru";
 import {useAppSelector} from "@/app/store/hooks";
 import { AnimatePresence, motion, MotionConfig} from "framer-motion";
+import LanguageSwitcher from "@/app/@ui/components/languageSwitcher/LanguageSwitcher";
 
 
 export function Header({language}: HeaderProps) {
@@ -58,7 +58,7 @@ export function Header({language}: HeaderProps) {
                             >
                                 <Logo/>
                                 <div className="flex items-center gap-4">
-                                    <Language_switcher name="Русский" locales={language}/>
+                                    <LanguageSwitcher locales={language}/>
                                     <ThemeToggle/>
                                     <Link className="button_to p-2" href="/login"><Person2TwoTone/></Link>
                                 </div>
