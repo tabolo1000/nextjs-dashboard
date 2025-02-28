@@ -2,7 +2,7 @@ import {Meta, StoryObj} from "@storybook/react";
 import Switcher from "@/app/@ui/components/switch/Switcher";
 import {fn} from "@storybook/test";
 import NightsStayIcon from "@mui/icons-material/NightsStay";
-import React from "react";
+import {useState} from "react";
 
 
 
@@ -13,7 +13,7 @@ const meta: Meta<typeof Switcher> = {
     component: Switcher,
     tags: ["autodocs"],
     args: {
-        defaultChecked: false,
+        currentChecked: false,
         onChange,
         ariaLabel: "Toggle theme",
         checkedIcon: "🌑",
@@ -22,12 +22,12 @@ const meta: Meta<typeof Switcher> = {
         disabled: false
     },
     argTypes: {
-        defaultChecked: {
+        currentChecked: {
             name: "defaultChecked",
             type: "boolean",
             description: "Boolean value that shows in what state the switcher is in ",
             control: "radio",
-            options: ["Light theme", "Dark theme"],
+            options: [true, false],
             table: {
                 defaultValue: {
                     summary: "Light theme",
@@ -102,15 +102,31 @@ const meta: Meta<typeof Switcher> = {
 export default meta;
 type Story = StoryObj<typeof Switcher>;
 
-export const Default: Story = {}
+export const Default: Story = {
+    render: (args) => {
+        const [isSwitch, setSwitch] = useState(args.currentChecked);
+        return (
+            <Switcher
+                {...args}
+                currentChecked={isSwitch}
+                onChange={setSwitch}
+            />
+        );
+    },
+    args: {
+        currentChecked: false
+    }
+}
 
 export const DarkThemeActive: Story = {
+    ...Default,
     args: {
-        defaultChecked: true
+        currentChecked: true,
     }
 }
 
 export const CustomIcons: Story = {
+    ...Default,
     args: {
         checkedIcon: <NightsStayIcon className="text-yellow-500"/>,
         uncheckedIcon: <NightsStayIcon className="text-yellow-500"/>
@@ -118,25 +134,29 @@ export const CustomIcons: Story = {
 }
 
 export const Disabled: Story = {
+    ...Default,
     args: {
         disabled: true
     }
 }
 
 export const DisabledChecked: Story = {
+    ...Default,
     args: {
         disabled: true,
-        defaultChecked: true
+        currentChecked: true
     }
 }
 
 export const WithCustomLabel: Story = {
+    ...Default,
     args: {
         ariaLabel: "Switch between dark and light mode"
     }
 }
 
 export const Interactive: Story = {
+    ...Default,
     args: {
         onChange: (isChecked) => {
             console.log(`Switch toggled to: ${isChecked ? 'Dark' : 'Light'} theme`);
