@@ -1,9 +1,8 @@
 "use client"
 
-import { useState, useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import {Base_button} from "@/app/ui/math/components/Base_button";
-import LightModeIcon from '@mui/icons-material/LightMode';
-import NightsStayIcon from '@mui/icons-material/NightsStay';
+import Switcher from "@/app/@ui/components/switch/Switcher";
 
 export default function ThemeToggle() {
     const [theme, setTheme] = useState('light');
@@ -27,9 +26,14 @@ export default function ThemeToggle() {
             classStyle={"button_to px-2 "}
             onClick={toggleTheme}
         >
-            <div >
-                {theme === 'light' ? <LightModeIcon className="text-yellow-500" /> : <NightsStayIcon className="text-yellow-500"/>}
-            </div>
+           {/* <div>
+                {theme === 'light' ? <LightModeIcon className="text-yellow-500"/> :
+                    <NightsStayIcon className="text-yellow-500"/>}
+            </div>*/}
+            <Switcher />
         </Base_button>
     );
 }
+
+
+
