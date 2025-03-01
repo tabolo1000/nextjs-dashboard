@@ -36,7 +36,4 @@ export default Layout;
 
 //---------------------------------types-----------------------
 
-export interface Language {
-    locale: string,
-    content: string
-}
+export type Language = Record<"locale" | "content", string>;

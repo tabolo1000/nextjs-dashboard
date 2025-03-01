@@ -1,20 +1,16 @@
 "use client"
 
 import {Logo} from "@/app/ui/math/components/Logo";
-import ThemeToggle from "@/app/ui/math/components/ThemeToggle";
-import {Link} from "@/i18n/routing";
-import {Person2TwoTone} from "@mui/icons-material";
 import React from "react";
 import {Language} from "@/app/[locale]/(app)/assets/lang/Layout.ru";
 import {useAppSelector} from "@/app/store/hooks";
-import { AnimatePresence, motion, MotionConfig} from "framer-motion";
-import LanguageSwitcher from "@/app/@ui/components/languageSwitcher/LanguageSwitcher";
+import {AnimatePresence, motion, MotionConfig} from "framer-motion";
 
 
 export function Header({language}: HeaderProps) {
-    const isOpenHeaderPanel = useAppSelector((state)=> state.mainSlice.panel.isOpenHeaderPanel)
-    const {isAnimating} = useAppSelector((state)=> state.mainSlice.animation)
-    const animatePresence = isAnimating?({
+    const isOpenHeaderPanel = useAppSelector((state) => state.mainSlice.panel.isOpenHeaderPanel)
+    const {isAnimating} = useAppSelector((state) => state.mainSlice.animation)
+    const animatePresence = isAnimating ? ({
         initial: {opacity: 0, y: -50, x: -500},
         animate: {
             opacity: 1, y: 0, x: 0,
@@ -24,11 +20,11 @@ export function Header({language}: HeaderProps) {
             opacity: 0,
             y: 50,
             x: 500,
-        } ,
-    }): ({
-        initial: { opacity: 1, y: 0, x: 0 },
-        animate: { opacity: 1, y: 0, x: 0 },
-        exit: { opacity: 1, y: 0, x: 0 },
+        },
+    }) : ({
+        initial: {opacity: 1, y: 0, x: 0},
+        animate: {opacity: 1, y: 0, x: 0},
+        exit: {opacity: 1, y: 0, x: 0},
     });
     return <>
         <MotionConfig transition={{
@@ -37,16 +33,16 @@ export function Header({language}: HeaderProps) {
             ease: ["easeOut"],
             repeatDelay: 1,
         }}> {/* для всех в групп */}
-        <AnimatePresence>
-            {(isOpenHeaderPanel) && (
-                <motion.div
-                    key={isAnimating ? "animating" : "static"}
-                    variants={animatePresence}
-                    className={"z-50"}
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                >
+            <AnimatePresence>
+                {(isOpenHeaderPanel) && (
+                    <motion.div
+                        key={isAnimating ? "animating" : "static"}
+                        variants={animatePresence}
+                        className={"z-50"}
+                        initial="initial"
+                        animate="animate"
+                        exit="exit"
+                    >
                         <header
                             className={`
                 fixed p-3 h-15 z-10 w-full
@@ -57,16 +53,12 @@ export function Header({language}: HeaderProps) {
                                 className={"flex justify-between w-[1100px] mx-auto"}
                             >
                                 <Logo/>
-                                <div className="flex items-center gap-4">
-                                    <LanguageSwitcher locales={language}/>
-                                    <ThemeToggle/>
-                                    <Link className="button_to p-2" href="/login"><Person2TwoTone/></Link>
-                                </div>
+
                             </div>
                         </header>
-                </motion.div>
-            )}
-        </AnimatePresence>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </MotionConfig>
     </>
 
@@ -77,6 +69,8 @@ export function Header({language}: HeaderProps) {
 interface HeaderProps {
     language: Array<Language>
 }
+
+
 
 
 /*
@@ -90,8 +84,6 @@ interface HeaderProps {
 
     "anticipate"
 */
-
-
 
 
 /*export const Switch = () => {
