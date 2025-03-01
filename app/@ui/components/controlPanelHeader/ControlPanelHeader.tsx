@@ -10,7 +10,7 @@ type ControlPanelHeaderProps = {
      * Array of language options to display in the language switcher
      * Each language contains a locale code and display content
      */
-    language: Array<Language>
+    languages: Array<Language>
 
     /**
      * Optional custom class name for the container
@@ -21,7 +21,7 @@ type ControlPanelHeaderProps = {
 
 const ControlPanelHeader = React.memo(function ControlPanelHeader(
         {
-            language,
+            languages,
             className = "flex items-center gap-4",
         }: ControlPanelHeaderProps): React.ReactElement {
         return (
@@ -30,7 +30,7 @@ const ControlPanelHeader = React.memo(function ControlPanelHeader(
                 role="navigation"
                 aria-label="User controls"
             >
-                <LanguageSwitcher locales={language}/>
+                <LanguageSwitcher locales={languages}/>
                 <ThemeToggle/>
                 <Link
                     href="/login"
