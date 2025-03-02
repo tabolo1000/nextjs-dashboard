@@ -114,7 +114,7 @@ const customJestConfig = {
      */
     transformIgnorePatterns: [
         '/node_modules/',
-        '^.+\\.module\\.(css|sass|scss)$',
+        '^.+\\.module\\.(css|sass|scss)$'
     ],
     /**
      * Параметр collectCoverageFrom определяет, какие файлы проекта
@@ -162,7 +162,7 @@ const customJestConfig = {
      *  Пресет ts-jest настраивает трансформеры
      * для работы с TypeScript
      */
-    preset: 'ts-jest'
+    preset: 'ts-jest',
 };
 
 module.exports = createJestConfig(customJestConfig);
