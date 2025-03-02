@@ -4,31 +4,30 @@ import React from "react";
 import {AnimatePresence, motion, MotionConfig, Variants} from "framer-motion";
 import {Transition} from "motion";
 
-/**
- * Компонент для анимированного отображения содержимого с настраиваемыми параметрами.
- *
- * @param children - Содержимое, которое будет анимировано
- * @param isVisible - Флаг видимости компонента
- * @param isAnimating - Флаг включения/отключения анимации
- * @param className - Дополнительные CSS-классы для контейнера
- * @param customVariants - Кастомные варианты анимации
- * @param customTransition - Кастомные параметры перехода
- */
+
+type AnimatedContainerProps = {
+    /** The content that will be animated */
+    children: React.ReactNode;
+    /** Component visibility flag */
+    isVisible?: boolean;
+    /** Flag to enable/disable animation */
+    isAnimating?: boolean;
+    /** Additional CSS classes for the container */
+    className?: string;
+    /** Custom animation options  */
+    customVariants?: Variants;
+    /** Custom transition parameters */
+    customTransition?: Transition;
+}
+
 export function AnimatedContainer({
                                       children,
-                                      isVisible,
+                                      isVisible = true,
                                       isAnimating = true,
-                                      className = "z-50",
+                                      className = "z-50 w-full",
                                       customVariants,
                                       customTransition
-                                  }:{
-    children: React.ReactNode;
-    isVisible: boolean;
-    isAnimating: boolean;
-    className?: string;
-    customVariants: Variants;
-    customTransition: Transition;
-}) {
+                                  }: AnimatedContainerProps) {
 
     const defaultVariants = {
         initial: {opacity: 0, y: -50, x: -500},
