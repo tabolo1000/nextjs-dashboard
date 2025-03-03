@@ -1,6 +1,6 @@
 import React from "react";
 import {MenuItem} from "@mui/material";
-import FlagAndLanguageElement from "@/app/@ui/components/flagAndLanguageElement/FlagAndLanguageElement";
+import FlagAndLanguageElement from "@/app/@ui/components/display/flagAndLanguageElement/FlagAndLanguageElement";
 
 type LanguageMenuProps = {
     onClose: () => void;

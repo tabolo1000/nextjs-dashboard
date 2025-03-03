@@ -1,9 +1,9 @@
-import LanguageSwitcher from "@/app/@ui/components/languageSwitcher/LanguageSwitcher";
 import ThemeToggle from "@/app/ui/math/components/ThemeToggle";
 import {Link} from "@/i18n/routing";
 import React from "react";
 import {Language} from "@/app/[locale]/(app)/assets/lang/Layout.ru";
 import {Person2TwoTone} from "@mui/icons-material";
+import LanguageSwitcher from "@/app/@ui/components/navigation/languageSwitcher/LanguageSwitcher";
 
 type ControlPanelHeaderProps = {
     /**

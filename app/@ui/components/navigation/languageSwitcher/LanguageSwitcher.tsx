@@ -2,9 +2,9 @@ import React, {useCallback, useState} from "react";
 import {useLocale} from "next-intl";
 import {Base_button} from "@/app/ui/math/components/Base_button";
 import {usePathname} from "@/i18n/routing";
-import FlagCountriesIcon from "@/app/@ui/components/flagCountriesIcon/FlagCountriesIcon";
 import {Fade, Popover} from "@mui/material";
-import LanguageMenuItems from "@/app/@ui/components/languageMenuItems/LanguageMenuItems";
+import FlagCountriesIcon from "@/app/@ui/components/common/flagCountriesIcon/FlagCountriesIcon";
+import LanguageMenuItems from "@/app/@ui/components/navigation/languageMenuItems/LanguageMenuItems";
 
 type LanguageSwitcherProps = {
     locales: { locale: string; content: string }[];

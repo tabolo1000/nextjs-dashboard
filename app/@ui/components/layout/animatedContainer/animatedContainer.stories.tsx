@@ -1,6 +1,6 @@
 import {Meta, StoryObj} from "@storybook/react";
-import {AnimatedContainer} from "@/app/@ui/components/animatedContainer/AnimatedContainer";
 import {useEffect, useState} from "react";
+import AnimatedContainer from "@/app/@ui/components/layout/animatedContainer/AnimatedContainer";
 
 
 const meta: Meta<typeof AnimatedContainer> = {

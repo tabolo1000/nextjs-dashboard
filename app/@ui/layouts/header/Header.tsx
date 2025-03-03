@@ -1,11 +1,11 @@
 "use client"
 
 import {useAppSelector} from "@/app/store/hooks";
-import AnimatedContainer from "@/app/@ui/components/animatedContainer/AnimatedContainer";
 import {Logo} from "@/app/ui/math/components/Logo";
-import ControlPanelHeader from "@/app/@ui/components/controlPanelHeader/ControlPanelHeader";
 
 import {Language} from "@/app/[locale]/(app)/assets/lang/Layout.ru";
+import ControlPanelHeader from "@/app/@ui/components/layout/controlPanelHeader/ControlPanelHeader";
+import AnimatedContainer from "@/app/@ui/components/layout/animatedContainer/AnimatedContainer";
 
 interface HeaderProps {
     /**

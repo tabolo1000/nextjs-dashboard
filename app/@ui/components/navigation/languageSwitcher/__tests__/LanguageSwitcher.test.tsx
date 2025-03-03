@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-// Добавляем важный импорт расширений Jest DOM
 import '@testing-library/jest-dom';
 import LanguageSwitcher from '../LanguageSwitcher';
 import { useLocale } from 'next-intl';

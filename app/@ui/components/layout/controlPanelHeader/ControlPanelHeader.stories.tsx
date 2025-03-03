@@ -1,7 +1,7 @@
 import React from "react";
-import ControlPanelHeader from "@/app/@ui/components/controlPanelHeader/ControlPanelHeader";
 import {Meta, StoryFn, StoryObj} from "@storybook/react";
 import {Language} from "@/app/[locale]/(app)/assets/lang/Layout.ru";
+import ControlPanelHeader from "@/app/@ui/components/layout/controlPanelHeader/ControlPanelHeader";
 
 
 /**

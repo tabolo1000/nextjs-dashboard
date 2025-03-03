@@ -1,7 +1,7 @@
 import {render} from "@testing-library/react";
-import FlagAndLanguageElement from "@/app/@ui/components/flagAndLanguageElement/FlagAndLanguageElement";
 import {NextIntlClientProvider} from "next-intl";
 import {ReactNode} from "react";
+import FlagAndLanguageElement from "@/app/@ui/components/display/flagAndLanguageElement/FlagAndLanguageElement";
 
 /**
  *  Почему используем мок вместо реального компонента:

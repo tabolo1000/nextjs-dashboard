@@ -1,6 +1,6 @@
 import React from "react";
 import {Box, Fade, Popover} from "@mui/material";
-import LanguageMenuItems from "@/app/@ui/components/languageMenuItems/LanguageMenuItems";
+import LanguageMenuItems from "@/app/@ui/components/navigation/languageMenuItems/LanguageMenuItems";
 
 type LanguageMenuProps = {
     open: boolean;

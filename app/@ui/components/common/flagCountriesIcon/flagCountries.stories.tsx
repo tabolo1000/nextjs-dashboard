@@ -1,7 +1,6 @@
-import {Meta, StoryFn, StoryObj} from "@storybook/react";
-import FlagCountriesIcon from "@/app/@ui/components/flagCountriesIcon/FlagCountriesIcon";
+import {Meta, StoryObj} from "@storybook/react";
 import {Language} from "@/i18n/languages";
-
+import FlagCountriesIcon from "@/app/@ui/components/common/flagCountriesIcon/FlagCountriesIcon";
 
 
 const meta: Meta<typeof FlagCountriesIcon> = {

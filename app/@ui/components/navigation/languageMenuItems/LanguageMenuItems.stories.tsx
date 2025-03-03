@@ -1,7 +1,7 @@
 import {Meta, StoryObj} from "@storybook/react";
-import LanguageMenuItems from "@/app/@ui/components/languageMenuItems/LanguageMenuItems";
 import {Language} from "@/i18n/languages";
 import {fn} from "@storybook/test";
+import LanguageMenuItems from "@/app/@ui/components/navigation/languageMenuItems/LanguageMenuItems";
 
 
 const locales = [

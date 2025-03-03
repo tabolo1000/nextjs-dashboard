@@ -1,9 +1,9 @@
 import {Meta, StoryObj} from "@storybook/react";
-import {LanguageMenu} from "@/app/@ui/components/languageMenu/LanguageMenu";
 import {Language} from "@/i18n/languages";
 import {fn} from "@storybook/test";
 import React from "react";
 import {Button} from "@mui/material";
+import {LanguageMenu} from "@/app/@ui/components/navigation/languageMenu/LanguageMenu";
 
 // Моки для локалей
 const locales = [

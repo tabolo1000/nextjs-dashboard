@@ -1,5 +1,5 @@
 import {Meta, StoryObj} from "@storybook/react";
-import LanguageSwitcher from "@/app/@ui/components/languageSwitcher/LanguageSwitcher";
+import LanguageSwitcher from "@/app/@ui/components/navigation/languageSwitcher/LanguageSwitcher";
 
 const locales = [
     {

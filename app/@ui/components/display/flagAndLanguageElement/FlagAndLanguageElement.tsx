@@ -1,6 +1,6 @@
-import FlagCountriesIcon from "@/app/@ui/components/flagCountriesIcon/FlagCountriesIcon";
 import {Link} from "@/i18n/routing";
 import React from "react";
+import FlagCountriesIcon from "@/app/@ui/components/common/flagCountriesIcon/FlagCountriesIcon";
 
 
 type FlagAndLanguageElementProps = {

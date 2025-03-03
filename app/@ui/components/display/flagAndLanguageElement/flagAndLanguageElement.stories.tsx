@@ -1,6 +1,6 @@
 import {Meta, StoryObj} from "@storybook/react";
-import FlagAndLanguageElement from "@/app/@ui/components/flagAndLanguageElement/FlagAndLanguageElement";
 import {Language} from "@/i18n/languages";
+import FlagAndLanguageElement from "@/app/@ui/components/display/flagAndLanguageElement/FlagAndLanguageElement";
 
 
 const locales = [
