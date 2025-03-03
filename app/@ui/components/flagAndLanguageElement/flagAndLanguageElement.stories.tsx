@@ -15,7 +15,7 @@ const locales = [
 ];
 
 const meta: Meta<typeof FlagAndLanguageElement> = {
-    title: "Components/flagAndLanguageElement",
+    title: "Components/FlagAndLanguageElement",
     component: FlagAndLanguageElement,
     tags: ["autodocs"],
     args: {

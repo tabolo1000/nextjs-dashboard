@@ -1,5 +1,5 @@
 import {MainBlock} from "@/app/[locale]/(app)/assets/components/MainBlock";
-import {Header} from "@/app/[locale]/(app)/assets/components/Header";
+import {Header} from "@/app/@ui/layouts/header/Header";
 import {Footer} from "@/app/[locale]/(app)/assets/components/Footer";
 import OperatingPanel from "@/app/[locale]/(app)/assets/components/OperatingPanel";
 import Chat from "@/app/[locale]/(app)/assets/components/Chat";

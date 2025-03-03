@@ -20,14 +20,14 @@ type AnimatedContainerProps = {
     customTransition?: Transition;
 }
 
-export function AnimatedContainer({
+const AnimatedContainer = ({
                                       children,
                                       isVisible = true,
                                       isAnimating = true,
                                       className = "z-50 w-full",
                                       customVariants,
                                       customTransition
-                                  }: AnimatedContainerProps) {
+                                  }: AnimatedContainerProps) => {
 
     const defaultVariants = {
         initial: {opacity: 0, y: -50, x: -500},
@@ -81,3 +81,5 @@ export function AnimatedContainer({
         </MotionConfig>
     );
 }
+
+export default AnimatedContainer;
